@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogImg/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogImg/favicon.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="13 C++基本语言  13.1 语言特性、工程构成与可移植性 C语言是过程式的语言 C++为面向对象的语言,其与面向过程语言的最大区别是:在基于面向对象的程序设计中,额外应用了继承性和多态技术 面向对象的程序设计的优点:  易维护 易扩展 模块化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13_C++基本语言">
+<meta property="og:url" content="http://jay1060950003.github.io/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="MyCodingStudio">
+<meta property="og:description" content="13 C++基本语言  13.1 语言特性、工程构成与可移植性 C语言是过程式的语言 C++为面向对象的语言,其与面向过程语言的最大区别是:在基于面向对象的程序设计中,额外应用了继承性和多态技术 面向对象的程序设计的优点:  易维护 易扩展 模块化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T01:48:06.000Z">
+<meta property="article:author" content="jay1060950003">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jay1060950003.github.io/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>13_C++基本语言 | MyCodingStudio</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyCodingStudio</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">努力进步</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogImg/user.png">
+      <meta itemprop="name" content="jay1060950003">
+      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyCodingStudio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          13_C++基本语言
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-15T00:00:00+08:00">2021-10-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="13-c基本语言"><a class="markdownIt-Anchor" href="#13-c基本语言"></a> 13 C++基本语言</h1>
+<h1 id="131-语言特性-工程构成与可移植性"><a class="markdownIt-Anchor" href="#131-语言特性-工程构成与可移植性"></a> 13.1 语言特性、工程构成与可移植性</h1>
+<p>C语言是过程式的语言<br>
+C++为面向对象的语言,其与面向过程语言的最大区别是:在基于面向对象的程序设计中,额外应用了<mark>继承性和多态技术</mark></p>
+<p>面向对象的程序设计的优点:</p>
+<ul>
+<li>易维护</li>
+<li>易扩展</li>
+<li>模块化</li>
+</ul>
+<span id="more"></span>
+<p>C++程序的头文件一般以.h居多,此外还有.hpp;<br>
+hpp文件一般来说就是把定义和实现都包含在一个文件中,可以有效的减少编译次数</p>
+<p><mark>C++为编译型语言<br>
+在程序执行前,需要一个专门的编译过程,将程序编译成二进制文件,执行的时候不需要重新编译,直接使用编译结果.</mark></p>
+<!-- more -->
+<h1 id="132-命名空间简介与基本输入输出精解"><a class="markdownIt-Anchor" href="#132-命名空间简介与基本输入输出精解"></a> 13.2 命名空间简介与基本输入输出精解</h1>
+<p>命名空间就是为了防止名字冲突而引入的一种机制.</p>
+<p>定义:</p>
+<blockquote>
+<p>namespace 命名空间名<br>
+{<br>
+其他函数、	<br>
+}</p>
+</blockquote>
+<p>访问:使用“::”作用域运算符</p>
+<blockquote>
+<p>命名空间名::实体名</p>
+</blockquote>
+<ul>
+<li>命名空间定义可以不连续,可以写在不同的位置,甚至可以写在不同的源文件中</li>
+<li>注意不同命名空间中相同的函数在同一个函数中调用,若冲突则:
+<ul>
+<li>要么不声明两个命名空间</li>
+<li>要么不同命名空间中的函数不要同名</li>
+<li>要么调用命名空间中的函数时添加“ 命名空间:: ”表达方式</li>
+</ul>
+</li>
+</ul>
+<h2 id="1322-基本输入输出"><a class="markdownIt-Anchor" href="#1322-基本输入输出"></a> 13.2.2 基本输入输出</h2>
+<p>C++中输入输出的标准库是iostream库(输入/输出流)</p>
+<ul>
+<li>std是标准库中的一个命名空间</li>
+<li>std::cout 是一个对象,为标准输出</li>
+<li>std::cin为基本输入</li>
+<li>&lt;&lt; 向左扎,为输出运算符,与std::cout结合表示将内容扎到cout中,表示将&lt;&lt;右侧的内容写到cout屏幕中</li>
+<li>std::endl 相当于函数指针.其作用为:	1. 输出换行符 2.刷新输出缓冲区,调用flush函数强制输出缓冲区中所有数据,然后把缓冲区中的数据清除</li>
+</ul>
+<p><mark>为什么要有输出缓冲区?<br>
+将数据临时保存到输出缓冲区,当缓冲区满了、或者程序执行到main函数的return正常结束时、或者使用std::endl函数(后面会调用flush()函数)等情况,程序一次性将数据写入磁盘,提升速递,降低内存消耗</mark></p>
+<p>注意&lt;&lt;符号为右结合性</p>
+<h1 id="133-auto-头文件防卫-引用与常量"><a class="markdownIt-Anchor" href="#133-auto-头文件防卫-引用与常量"></a> 13.3 auto、头文件防卫、引用与常量</h1>
+<h2 id="1331-局部变量和初始化"><a class="markdownIt-Anchor" href="#1331-局部变量和初始化"></a> 13.3.1 局部变量和初始化</h2>
+<p><mark>C++中,变量随时定义即可</mark>,不必像C语言中需要在函数开头定义</p>
+<p>在C++新标准中,<mark>可以使用“{}“对变量进行初始化</mark>.</p>
+<ul>
+<li>例如: int abc{5};</li>
+</ul>
+<p>==在C++中的新标准的好处:</p>
+<blockquote>
+<p>int abc = 3.5f;	//编译成功,自动进行截断操作<br>
+int abc{3.5f};	//编译错误,语法报错<br>
+这样做数据不会被截断==</p>
+</blockquote>
+<p>同样也可以使用“()”对变量进行初始化操作</p>
+<h2 id="1332-auto关键字简介"><a class="markdownIt-Anchor" href="#1332-auto关键字简介"></a> 13.3.2 auto关键字简介</h2>
+<p>auto<mark>在C++11</mark>中的全新含义:变量的自动推断<br>
+变量的自动推断发生在编译期,所以在使用时不会造成程序的效率降低</p>
+<h2 id="1333-头文件防卫式声明"><a class="markdownIt-Anchor" href="#1333-头文件防卫式声明"></a> 13.3.3 头文件防卫式声明</h2>
+<p>为了避免重复定义头文件,在声明头文件时,需要添加头文件防卫式声明:</p>
+<blockquote>
+<p>#ifndef <strong>文件名</strong><br>
+#define <strong>文件名</strong><br>
+代码程序<br>
+#endif</p>
+</blockquote>
+<p>在每一个.h文件的#ifdef后面的定义的名字都不一样,不可以重名</p>
+<h2 id="1334-引用"><a class="markdownIt-Anchor" href="#1334-引用"></a> 13.3.4 引用</h2>
+<p>引用是为变量起的另一个名字,一般使用&quot; &amp; &quot;符号, 引用和原变量所占的内存是同一段内存(对初学者来说)<br>
+<mark>定义引用变量时必须进行初始化操作</mark></p>
+<blockquote>
+<p>引用数据类型 &amp; 变量名 = 被引用变量名称;		//==(引用变量必须绑定到变量或者对象上,不能绑定到常量上)</p>
+</blockquote>
+<ul>
+<li>&amp; 在=左侧表示引用</li>
+<li>&amp; 在=右侧表示取地址</li>
+</ul>
+<h2 id="1335-常量"><a class="markdownIt-Anchor" href="#1335-常量"></a> 13.3.5 常量</h2>
+<ol>
+<li>const常量<br>
+定义变量时,在前面添加const关键字,即为常量</li>
+<li>constexpr常量<br>
+在C++11中的新关键字,代表一个常量,表示<mark>在编译时进行求值,可以提升运行时的性能</mark></li>
+</ol>
+<ul>
+<li>在书写constexpr返回类型的函数时,需要格外注意:如
+<ul>
+<li>
+<ol>
+<li>在定义变量时,不可定义未初始化的变量(定义变量必须进行初始化操作)</li>
+</ol>
+</li>
+<li>2.传入constexpr函数的形参对应的实参必须为常量或常量表达式</li>
+<li>
+<ol start="2">
+<li>其中代码需要尽量简单</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>加了constexpr修饰的函数不但能用在常量表达式中,也能用在常规的函数调用中</li>
+</ul>
+<p><mark>常量表达式不可以强制转换得到</mark></p>
+<h1 id="134-范围for-new内存动态分配与nullptr"><a class="markdownIt-Anchor" href="#134-范围for-new内存动态分配与nullptr"></a> 13.4 范围for、new内存动态分配与nullptr</h1>
+<h2 id="1341-范围for语句"><a class="markdownIt-Anchor" href="#1341-范围for语句"></a> 13.4.1 范围for语句</h2>
+<p>范例：</p>
+<blockquote>
+<p>int v[]{12，13，14，15，16}；<br>
+for{auto x:v}			//此为范围for语句<br>
+{<br>
+代码;<br>
+}</p>
+</blockquote>
+<p><mark>此例多了一个复制的动作，可以使用引用避免复制，提高运行效率</mark></p>
+<blockquote>
+<p>for { auto &amp;x : v}</p>
+</blockquote>
+<p><mark>一般来说，一个容器只要内部支持begin和end成员函数用于返回一个迭代器，能够指向容器的第一个元素和末尾元素的后面，这种容器就饿可以支持范围for语句</mark></p>
+<h2 id="1342-动态内存分配问题"><a class="markdownIt-Anchor" href="#1342-动态内存分配问题"></a> 13.4.2 动态内存分配问题</h2>
+<p>C++中内存被分为<mark>5块区域</mark>：</p>
+<ol>
+<li>栈：局部变量创建时存储的位置</li>
+<li>堆：使用malloc/new申请，free/delete释放的区域</li>
+<li>全局/静态存储区</li>
+<li>常量存储区</li>
+<li>程序代码区</li>
+</ol>
+<ul>
+<li>内存分配和释放必须成对出现</li>
+<li>free和delete不可以重复调用</li>
+<li>new相较于malloc，new还进行一些额外的初始化工作；delete相较于free，delete还会进行一些额外的清理工作</li>
+</ul>
+<p><mark>堆和栈的区别：<br>
+栈空间有限，使用便捷；堆空间自由决定分配的内存大小。</mark></p>
+<ol>
+<li>malloc和free<br>
+在C语言中成对出现，用于在堆中分配内存<br>
+一般形式为：</li>
+</ol>
+<blockquote>
+<p>void * malloc(int NumBytes);<br>
+void free(void * Ptr)<br>
+malloc为向系统申请NumBytes字节的内存空间，分配成功返回被分配内存的指针，否则返回NULL空指针<br>
+free为回收指针Ptr对应的内存</p>
+</blockquote>
+<p>strcpy_s:为strcpy的安全版本，能够检测所容纳的元素是否越界。<br>
+2. new和delete<br>
+<mark>new和delete为运算符，不是和malloc和free一样的函数</mark><br>
+在C++中从堆中分配内存<br>
+new的使用方法：</p>
+<blockquote>
+<p>指针变量名 = new 类型标识符；<br>
+指针变量名 = new 类型标识符(初始值);<br>
+指针变量名 = new 类型标识符[内存单元个数];</p>
+</blockquote>
+<h2 id="1343-nullptr"><a class="markdownIt-Anchor" href="#1343-nullptr"></a> 13.4.3 nullptr</h2>
+<p>nullptr为<mark>C++11中引入的新关键字，表示“空指针”</mark></p>
+<p>typeid()函数用于取类型，其中name成员可打印出类型名</p>
+<p>==使用nullptr可以避免在整数和指针之间发生混淆</p>
+<ul>
+<li>NULL 其类型为int类型，其实就是0</li>
+<li>nullptr表示指针类型</li>
+<li><strong>NULL和nullptr会导致调用不同的重载函数</strong></li>
+<li>在实际中，对于<mark>指针的初始化</mark>，能用nullptr尽量使用nullptr</li>
+</ul>
+<h1 id="135-结构-权限修饰符与类简介"><a class="markdownIt-Anchor" href="#135-结构-权限修饰符与类简介"></a> 13.5 结构、权限修饰符与类简介</h1>
+<p>当形参类型使用引用时，在调用函数内所改变的值在主调函数中也会发生相应的改变。实参和形参代表的是同一段内存地址，在传递参数时不存在参数值的复制。</p>
+<p>在C++中，结构不仅可以定义成员变量，还可以定义成员函数（方法），可以使用对象名.成员函数名（实参列表）进行调用。</p>
+<h2 id="1352-public和private权限修饰符"><a class="markdownIt-Anchor" href="#1352-public和private权限修饰符"></a> 13.5.2 public和private权限修饰符</h2>
+<ul>
+<li>public为“公共”的，可以被外部访问，类似类的外部接口</li>
+<li>private为“私有”的，表示只能被该结构或者类内部定义的成员函数使用</li>
+<li>成员函数可以直接访问成员变量（不管成员变量是否为private都可以访问）</li>
+</ul>
+<p><mark>默认情况下，struct定义的结构，其内部的成员变量和成员函数都是public</mark></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> 结构类型名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		成员变量；</span><br><span class="line">		成员函数；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在C++中引入类的概念，<mark>使用class定义</mark><br>
+结构使用struct定义（与C语言一致）</p>
+<p><mark>类的某个变量成为对象，为类的实例化，类中间的成员函数称为方法</mark></p>
+<ul>
+<li>类的内部变量默认为private</li>
+<li>C++中<mark>结构的继承默认为public，而类的继承默认为private</mark></li>
+</ul>
+<h1 id="136-函数新特性-inline内联函数与const详解"><a class="markdownIt-Anchor" href="#136-函数新特性-inline内联函数与const详解"></a> 13.6 函数新特性、inline内联函数与const详解</h1>
+<h2 id="1361-函数回顾与后置返回类型"><a class="markdownIt-Anchor" href="#1361-函数回顾与后置返回类型"></a> 13.6.1 函数回顾与后置返回类型</h2>
+<ul>
+<li>在函数声明中，可以没有形参名</li>
+<li>在函数定义中，需要有形参类型和形参名，但<mark>若该形参不需要使用，可以不添加函数名，但是在调用是必须给出该位置的实参</mark></li>
+</ul>
+<p>后置返回类型：<br>
+在函数声明或定义中，把返回类型写在参数列表之后</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> 函数名(形参列表) -&gt; 函数返回类型;		<span class="comment">//函数声明</span></span><br></pre></td></tr></table></figure>
+<h2 id="1362-inline内联函数"><a class="markdownIt-Anchor" href="#1362-inline内联函数"></a> 13.6.2 inline内联函数</h2>
+<p>为避免函数调用消耗系统资源，解决函数体很小，调用频繁的函数消耗系统性能，使用inline关键字</p>
+<ul>
+<li>系统尝试将调用该函数的动作替换为函数的本体</li>
+<li>内联函数的定义写在头文件中</li>
+<li>inline函数应该尽量简单，避免循环、分支、递归调用等
+<ul>
+<li>可以将constexpr函数看为更加严格的内联函数（constexpr自带inline属性）</li>
+</ul>
+</li>
+</ul>
+<p>函数特殊写法：</p>
+<ul>
+<li>函数只可以被定义一次，但是可以<mark>声明很多次</mark></li>
+<li>在C++中，更加习惯使用<mark>引用类型的形参</mark>来代替使用指针类型的形参</li>
+<li>函数重载时，<mark>const关键字会被同名函数忽略</mark></li>
+</ul>
+<h2 id="1364-区别"><a class="markdownIt-Anchor" href="#1364-区别"></a> 13.6.4 区别</h2>
+<p><mark>const char * 、char const * 与char * const三者的区别</mark></p>
+<ul>
+<li>const char *p<br>
+定义一个常量指针p(p指向的内容不可以通过p来修改)</li>
+<li>char const *p<br>
+等价于const char *p</li>
+<li>char * const p<br>
+定义一个指针常量p(p不可以指向其他内容,但可以修改指向的目标中的内容)</li>
+</ul>
+<h2 id="1365-函数形参中带const"><a class="markdownIt-Anchor" href="#1365-函数形参中带const"></a> 13.6.5 函数形参中带const</h2>
+<p>如果<mark>不希望在函数中修改形参的值,建议形参使用常量引用</mark></p>
+<ul>
+<li>可以防止无意中修改了形参的值导致实参值被改变</li>
+<li>实参类型可以更加灵活<br>
+使用常量引用,不仅仅可以接收<mark>普通引用作为实参</mark>,还可以接收<mark>常量引用作为实参</mark></li>
+</ul>
+<h1 id="137-string类型"><a class="markdownIt-Anchor" href="#137-string类型"></a> 13.7 string类型</h1>
+<p>string<mark>位于std命名空间中,位于string头文件中</mark></p>
+<p>(string为一个对象)<br>
+定义和初始化:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;I love China&quot;</span>;</span><br><span class="line"><span class="function">string <span class="title">s3</span><span class="params">(<span class="string">&quot;I love China&quot;</span>)</span></span>;</span><br><span class="line">string s4 = s2;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">6</span>;</span><br><span class="line"><span class="function">string <span class="title">s5</span><span class="params">(num,<span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>常用操作:</p>
+<ul>
+<li>.empty()方法	:返回布尔量判断是否为空</li>
+<li>.size或.length方法	:返回字节数量</li>
+<li>s[n]	:返回s中的第n个字符</li>
+<li>s1+s2		:字符串连接</li>
+<li>s1=s2	:字符串对象赋值</li>
+<li>s1==s2		:判断两个字符串是否相等</li>
+<li>s1 !=s2		:判断两个字符串是否不相等</li>
+<li>s.c_str()		:返回一个字符串s中的内容指针(==把string对象转换为C中的字符串样式)</li>
+<li>范围for语句	:for(auto&amp; x:s1)</li>
+</ul>
+<h1 id="138-vector类型"><a class="markdownIt-Anchor" href="#138-vector类型"></a> 13.8 vector类型</h1>
+<p>代表一个容器、集合、或者动态数组,可以将一堆相同类型的类对象放到vector容器中</p>
+<p>vector<mark>位于std命名空间中,vector头文件中</mark><br>
+定义:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vector  &lt;类型&gt; 对象名;	</span><br><span class="line"><span class="comment">//vector为类模版,&lt;&gt;是类模版的一个实例化过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//空vector</span></span><br><span class="line">vector &lt;string&gt; mystr;		<span class="comment">//可使用push_back向容器末尾添加数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//vector对象复制</span></span><br><span class="line">vector &lt;string&gt; <span class="built_in">mystr2</span>(mystr1);</span><br><span class="line">vector &lt;string&gt; mystr3 = mystr2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用初始化列表方式初始化</span></span><br><span class="line">vector &lt;string&gt; def = &#123;<span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定数量的元素</span></span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt; <span class="built_in">ijihe</span>(<span class="number">15</span>,<span class="number">-200</span>);	<span class="comment">//创建15个int类型元素的集合,其中每个元素的值都为-200</span></span><br><span class="line"><span class="comment">//有元素数量的概念的初始化操作都使用()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><mark>vector容器不能用来装引用</mark>(引用只是一个别名,并不是一个对象)<br>
+<mark>一般使用()表示与元素数量相关的操作,用{}表示只与元素内容相关的内容</mark></p>
+<h2 id="1383-vector对象上的操作"><a class="markdownIt-Anchor" href="#1383-vector对象上的操作"></a> 13.8.3 vector对象上的操作</h2>
+<ul>
+<li>.empty 		:判断是否为空</li>
+<li>.push_back()		:向vector末尾添加元素</li>
+<li>.size			:返回元素数量</li>
+<li>.clear		:移除所有元素,容器清空</li>
+<li>v[n]</li>
+<li>=,==,!=,</li>
+<li>范围for语句,在范围for语句中,<mark>不要改变vector的容量,增加、删除元素都不可以</mark></li>
+</ul>
+<h1 id="139-迭代器精彩演绎-失效分析及弥补-实战"><a class="markdownIt-Anchor" href="#139-迭代器精彩演绎-失效分析及弥补-实战"></a> 13.9 迭代器精彩演绎、失效分析及弥补、实战</h1>
+<p>在C<ins>中很少通过下标访问string或vector中的元素,通常使用迭代器访问<br>
+通过迭代器,可以读取容器中的元素值,修改容器中某个迭代器代表的元素的值,可以像指针一样使用</ins>,–等运算符进行元素访问</p>
+<p><strong>C++中每种容器都定义了迭代器类型,以vector容器举例:</strong><br>
+定义容器:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector &lt;int&gt; iv = &#123;100,200,300&#125;;</span><br><span class="line">vector &lt;int&gt;::iterator iter;	//定义了一个迭代器iter</span><br></pre></td></tr></table></figure>
+<h2 id="1393-迭代器beginend-反向迭代器rbeginrend操作"><a class="markdownIt-Anchor" href="#1393-迭代器beginend-反向迭代器rbeginrend操作"></a> 13.9.3 迭代器begin,end、反向迭代器rbegin,rend操作</h2>
+<ol>
+<li>迭代器</li>
+</ol>
+<ul>
+<li>begin成员函数:返回一个迭代器类型</li>
+</ul>
+<blockquote>
+<p>iter = iv.begin();	//返回容器的迭代器,指向第一个元素</p>
+</blockquote>
+<ul>
+<li>end成员函数:返回一个迭代器类型</li>
+</ul>
+<blockquote>
+<p>iter = iv.end();	//指向末尾元素的下一个元素<br>
+一般起到一个标志作用,当iter走到了end位置,表示已经遍历完了容器里的所有元素</p>
+</blockquote>
+<ul>
+<li>经典写法:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(vector &lt;int&gt;::iterator iter = iv.begin();iter != iv.end();iter ++)&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>反向迭代器</li>
+</ol>
+<ul>
+<li>rbegin:指向最后一个元素</li>
+<li>rend:指向第一个元素前面的位置</li>
+</ul>
+<h2 id="1394-迭代器运算符"><a class="markdownIt-Anchor" href="#1394-迭代器运算符"></a> 13.9.4 迭代器运算符</h2>
+<ul>
+<li>*iter		//返回迭代器元素的引用</li>
+<li>++iter,–iter</li>
+<li>==,!=</li>
+<li>结构成员变量的引用</li>
+</ul>
+<h2 id="1395-const_iterator迭代器"><a class="markdownIt-Anchor" href="#1395-const_iterator迭代器"></a> 13.9.5 const_iterator迭代器</h2>
+<p>类似一个常量指针,<mark>若容器对象为常量对象,则必须使用const_iterator迭代器</mark><br>
+C++11中引入新的关键字,<mark>cbegin与cend返回常量迭代器(不管容器是否为常量容器)</mark></p>
+<h2 id="1396-迭代器失效"><a class="markdownIt-Anchor" href="#1396-迭代器失效"></a> 13.9.6 迭代器失效</h2>
+<p><mark>如果在一个使用了迭代器的循环中插入元素到容器,当插入元素后应立即跳出循环体,不应该继续使用带迭代器操作容器</mark></p>
+<p>容器清空:</p>
+<ol>
+<li>使用clear方法清除</li>
+<li>使用迭代器一个一个清除</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while(!iv.empty())&#123;</span><br><span class="line">	auto iter = iv.cbegin();</span><br><span class="line">	iv.erase(iter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="1310-类型转化static_cast-reinterpret_cast等"><a class="markdownIt-Anchor" href="#1310-类型转化static_cast-reinterpret_cast等"></a> 13.10 类型转化:static_cast、reinterpret_cast等</h1>
+<p>C风格的强制类型转化:</p>
+<ol>
+<li>(类型)待转换的内容;</li>
+<li>类型 (待转换的内容);</li>
+</ol>
+<p>C++中强制类型转换的<mark>通用形式</mark>:</p>
+<blockquote>
+<p>强制类型转换名 <type>(express);</type></p>
+</blockquote>
+<ol>
+<li>static_cast	:静态转换
+<ul>
+<li>与C语言强制类型转换相似</li>
+<li>派生类转换为基类</li>
+<li>不可用于指针类型之间的转换</li>
+</ul>
+</li>
+<li>dynamic_cast	:在转换时会进行类型识别和检查<br>
+主要用于父类转换为子类</li>
+<li>const_cast: 去除指针或者引用的const属性
+<ul>
+<li>注意只能用于<mark>原先不是常量,后来转换为常量的变量的去除</mark>,(原先是常量的去除为为定义行为)</li>
+<li>const_cast不可以改变表达式的类型</li>
+</ul>
+</li>
+<li>reinterpret_cast		:用来处理无关类型之间的转换
+<ul>
+<li>可以将整型转换为指针、一个类型指针转换为另一个类型的指针</li>
+<li>可以将一个指针转换为整型</li>
+</ul>
+</li>
+</ol>
+<p><mark>static_cast、reinterpret_cast可以替代C语言风格的类型转换</mark></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/14/12_%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" rel="prev" title="12_文件操作">
+      <i class="fa fa-chevron-left"></i> 12_文件操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/16/14_%E7%B1%BB/" rel="next" title="14_类">
+      14_类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#13-c%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 13 C++基本语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#131-%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7-%E5%B7%A5%E7%A8%8B%E6%9E%84%E6%88%90%E4%B8%8E%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text"> 13.1 语言特性、工程构成与可移植性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#132-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%AE%80%E4%BB%8B%E4%B8%8E%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B2%BE%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text"> 13.2 命名空间简介与基本输入输出精解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1322-%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">3.1.</span> <span class="nav-text"> 13.2.2 基本输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#133-auto-%E5%A4%B4%E6%96%87%E4%BB%B6%E9%98%B2%E5%8D%AB-%E5%BC%95%E7%94%A8%E4%B8%8E%E5%B8%B8%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text"> 13.3 auto、头文件防卫、引用与常量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1331-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text"> 13.3.1 局部变量和初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1332-auto%E5%85%B3%E9%94%AE%E5%AD%97%E7%AE%80%E4%BB%8B"><span class="nav-number">4.2.</span> <span class="nav-text"> 13.3.2 auto关键字简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1333-%E5%A4%B4%E6%96%87%E4%BB%B6%E9%98%B2%E5%8D%AB%E5%BC%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">4.3.</span> <span class="nav-text"> 13.3.3 头文件防卫式声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1334-%E5%BC%95%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text"> 13.3.4 引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1335-%E5%B8%B8%E9%87%8F"><span class="nav-number">4.5.</span> <span class="nav-text"> 13.3.5 常量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#134-%E8%8C%83%E5%9B%B4for-new%E5%86%85%E5%AD%98%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E4%B8%8Enullptr"><span class="nav-number">5.</span> <span class="nav-text"> 13.4 范围for、new内存动态分配与nullptr</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1341-%E8%8C%83%E5%9B%B4for%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.1.</span> <span class="nav-text"> 13.4.1 范围for语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1342-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">5.2.</span> <span class="nav-text"> 13.4.2 动态内存分配问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1343-nullptr"><span class="nav-number">5.3.</span> <span class="nav-text"> 13.4.3 nullptr</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#135-%E7%BB%93%E6%9E%84-%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6%E4%B8%8E%E7%B1%BB%E7%AE%80%E4%BB%8B"><span class="nav-number">6.</span> <span class="nav-text"> 13.5 结构、权限修饰符与类简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1352-public%E5%92%8Cprivate%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">6.1.</span> <span class="nav-text"> 13.5.2 public和private权限修饰符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#136-%E5%87%BD%E6%95%B0%E6%96%B0%E7%89%B9%E6%80%A7-inline%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E4%B8%8Econst%E8%AF%A6%E8%A7%A3"><span class="nav-number">7.</span> <span class="nav-text"> 13.6 函数新特性、inline内联函数与const详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1361-%E5%87%BD%E6%95%B0%E5%9B%9E%E9%A1%BE%E4%B8%8E%E5%90%8E%E7%BD%AE%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.1.</span> <span class="nav-text"> 13.6.1 函数回顾与后置返回类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1362-inline%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">7.2.</span> <span class="nav-text"> 13.6.2 inline内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1364-%E5%8C%BA%E5%88%AB"><span class="nav-number">7.3.</span> <span class="nav-text"> 13.6.4 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1365-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%B8%AD%E5%B8%A6const"><span class="nav-number">7.4.</span> <span class="nav-text"> 13.6.5 函数形参中带const</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#137-string%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.</span> <span class="nav-text"> 13.7 string类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#138-vector%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text"> 13.8 vector类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1383-vector%E5%AF%B9%E8%B1%A1%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">9.1.</span> <span class="nav-text"> 13.8.3 vector对象上的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#139-%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B2%BE%E5%BD%A9%E6%BC%94%E7%BB%8E-%E5%A4%B1%E6%95%88%E5%88%86%E6%9E%90%E5%8F%8A%E5%BC%A5%E8%A1%A5-%E5%AE%9E%E6%88%98"><span class="nav-number">10.</span> <span class="nav-text"> 13.9 迭代器精彩演绎、失效分析及弥补、实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1393-%E8%BF%AD%E4%BB%A3%E5%99%A8beginend-%E5%8F%8D%E5%90%91%E8%BF%AD%E4%BB%A3%E5%99%A8rbeginrend%E6%93%8D%E4%BD%9C"><span class="nav-number">10.1.</span> <span class="nav-text"> 13.9.3 迭代器begin,end、反向迭代器rbegin,rend操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1394-%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.</span> <span class="nav-text"> 13.9.4 迭代器运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1395-const_iterator%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">10.3.</span> <span class="nav-text"> 13.9.5 const_iterator迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1396-%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88"><span class="nav-number">10.4.</span> <span class="nav-text"> 13.9.6 迭代器失效</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1310-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96static_cast-reinterpret_cast%E7%AD%89"><span class="nav-number">11.</span> <span class="nav-text"> 13.10 类型转化:static_cast、reinterpret_cast等</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jay1060950003"
+      src="/blogImg/user.png">
+  <p class="site-author-name" itemprop="name">jay1060950003</p>
+  <div class="site-description" itemprop="description">北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jay1060950003" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jay1060950003" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jay1060950003@gmail.com" title="E-Mail → mailto:jay1060950003@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jay1060950003</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

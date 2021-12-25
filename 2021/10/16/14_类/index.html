@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogImg/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogImg/favicon.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="14 类  14.1 成员函数、对象复制与私有成员 设计类思考的角度:  站在设计和实现者的角度考虑,类的数据存储布局、必要的成员变量和成员函数 站在使用者的角度,可以访问的接口、对外开放仅供内部函数使用的接口 设计父类供子类继承时,如何设计父类  类的成员主要包括:成员变量、成员函数等 访问类成员:  使用“对象名.成员名”访问成员 使用指向这个对象的指针访问: 指针名-&gt;成员名  注意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14_类">
+<meta property="og:url" content="http://jay1060950003.github.io/2021/10/16/14_%E7%B1%BB/index.html">
+<meta property="og:site_name" content="MyCodingStudio">
+<meta property="og:description" content="14 类  14.1 成员函数、对象复制与私有成员 设计类思考的角度:  站在设计和实现者的角度考虑,类的数据存储布局、必要的成员变量和成员函数 站在使用者的角度,可以访问的接口、对外开放仅供内部函数使用的接口 设计父类供子类继承时,如何设计父类  类的成员主要包括:成员变量、成员函数等 访问类成员:  使用“对象名.成员名”访问成员 使用指向这个对象的指针访问: 指针名-&gt;成员名  注意">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T01:48:06.000Z">
+<meta property="article:author" content="jay1060950003">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jay1060950003.github.io/2021/10/16/14_%E7%B1%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>14_类 | MyCodingStudio</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyCodingStudio</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">努力进步</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/10/16/14_%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogImg/user.png">
+      <meta itemprop="name" content="jay1060950003">
+      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyCodingStudio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          14_类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-16T00:00:00+08:00">2021-10-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="14-类"><a class="markdownIt-Anchor" href="#14-类"></a> 14 类</h1>
+<h1 id="141-成员函数-对象复制与私有成员"><a class="markdownIt-Anchor" href="#141-成员函数-对象复制与私有成员"></a> 14.1 成员函数、对象复制与私有成员</h1>
+<p>设计<mark>类</mark>思考的角度:</p>
+<ul>
+<li>站在设计和实现者的角度考虑,<mark>类的数据存储布局、必要的成员变量和成员函数</mark></li>
+<li>站在使用者的角度,<mark>可以访问的接口、对外开放仅供内部函数使用的接口</mark></li>
+<li>设计父类供子类继承时,如何设计父类</li>
+</ul>
+<p>类的成员主要包括:成员变量、成员函数等<br>
+访问类成员:</p>
+<ul>
+<li>使用“对象名.成员名”访问成员</li>
+<li>使用指向这个对象的指针访问: 指针名-&gt;成员名</li>
+</ul>
+<p>注意点:</p>
+<ul>
+<li>public修饰的成员可供外部访问,而private修饰的成员不可以被外部访问</li>
+<li><mark>class成员默认为private</mark>,而struct默认为public的</li>
+<li>建议:没有成员函数只有成员变量的数据结构使用struct;而有成员函数的数据结构一般使用class</li>
+</ul>
+<span id="more"></span>
+<h2 id="1413-成员函数"><a class="markdownIt-Anchor" href="#1413-成员函数"></a> 14.1.3 成员函数</h2>
+<p><strong>类可以被定义多次,而全局变量只能被定义一次</strong><br>
+在C++中,若类定义和类实现放在不同文件时,其成员函数需要使用==“类名::成员函数名”==表明该成员函数为该类的成员函数(::为作用域运算符)<br>
+如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Time::initTime(int tmphour, int tmpmin, int tmpsec)</span><br><span class="line">&#123;</span><br><span class="line">	函数代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1414-对象复制"><a class="markdownIt-Anchor" href="#1414-对象复制"></a> 14.1.4 对象复制</h3>
+<p>可以使用==”=“、”()“、”{}“、”={}“==符号实现对象的复制操作</p>
+<h1 id="142-构造函数详解-explicit与初始化列表"><a class="markdownIt-Anchor" href="#142-构造函数详解-explicit与初始化列表"></a> 14.2 构造函数详解、explicit与初始化列表</h1>
+<ul>
+<li>将成员函数的声明和实现都写在<mark>类的内部</mark>,称为成员函数的定义</li>
+<li>将成员函数的声明写在类的内部,外部的成员函数代码称为:“成员函数的实现”</li>
+</ul>
+<p>构造函数:与类名相同,系统会自动调用,<mark>目的就是为了初始化类对象的数据成员(成员变量)</mark></p>
+<ul>
+<li>构造函数<mark>无返回值</mark></li>
+<li>构造函数<mark>不可以手工调用,会发生程序错误</mark>,系统会自动调用</li>
+<li>正常情况下,构造函数<mark>声明为public</mark></li>
+<li>构造函数中含有的参数,在创建对象时需要给定相应的参数</li>
+<li>一个类可以存在多个构造函数，必须为该类对象的创建提供多种方法，多个构造函数需要在<mark>参数数量或者参数类型上有所不同</mark></li>
+</ul>
+<p>对象的复制会调用<mark>拷贝构造函数</mark></p>
+<h2 id="1424-函数默认参数"><a class="markdownIt-Anchor" href="#1424-函数默认参数"></a> 14.2.4 函数默认参数</h2>
+<p><mark>任何函数都可以有默认参数，对于传统函数，默认参数一般放在函数声明中，而不放在函数实现中，除非函数只有定义</mark></p>
+<ul>
+<li>对于类中的成员函数，默认参数写在类的成员函数声明中，一般写在.h文件中</li>
+<li>具有多个参数的函数中指定默认参数，默认参数必须出现在非默认参数的右侧，且默认参数必须给定默认值</li>
+</ul>
+<h2 id="1425-隐式转换和explicit"><a class="markdownIt-Anchor" href="#1425-隐式转换和explicit"></a> 14.2.5 隐式转换和explicit</h2>
+<p>在调用构造函数时，有可能会调用隐式转换。<br>
+可以要求<mark>构造函数不进行隐式转换</mark>，在函数声明中带有explicit（显式），则该构造函数只能用于初始化和显式类型转换</p>
+<blockquote>
+<p>explicit 构造函数名(形参列表);</p>
+</blockquote>
+<ul>
+<li>在类进行实例化<mark>调用explicit多参数构造函数</mark>时，若带有=号，则隐式类型转换失效（含有等号，表示进行了隐式初始化；<mark>省略等号，为显式初始化为直接初始化</mark>）</li>
+<li>调用explicit单参数构造函数，也只可以使用显式转换</li>
+<li><mark>在调用explicit构造函数时，使用{}进行初始化可以避免进行隐式类型转换而出错</mark></li>
+</ul>
+<h2 id="1426-构造函数初始化列表"><a class="markdownIt-Anchor" href="#1426-构造函数初始化列表"></a> 14.2.6 构造函数初始化列表</h2>
+<p>调用构造函数时，可以初始化成员变量的值（为冒号括号逗号式写法），位于构造函数的定义中，（这种写法<mark>只用于构造函数中</mark>）<br>
+例如：</p>
+<blockquote>
+<p>Time::Time(int tmphour, int tmpmin, int tmpsec)<br>
+:Hour(tmphour),Minute(tmpmin)		//构造函数初始化列表</p>
+</blockquote>
+<ul>
+<li>在书写带初始化列表的构造函数时，应避免某个成员变量（Minute）的值依赖某个成员变量的值（Hour），不可写成（Minute（Hour））</li>
+<li>使用构造函数初始化列表可以提升初始化效率（避免了调用成员变量相关类的各种特殊成员函数）</li>
+</ul>
+<h1 id="143-inline-const-mutable-this与static"><a class="markdownIt-Anchor" href="#143-inline-const-mutable-this与static"></a> 14.3 inline、const、mutable、this与static</h1>
+<h2 id="1431-在类定义中实现成员函数inline"><a class="markdownIt-Anchor" href="#1431-在类定义中实现成员函数inline"></a> 14.3.1 在类定义中实现成员函数inline</h2>
+<p>在类的定义中实现的成员函数会被当做inline内联函数处理<br>
+<a href="/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/#1362inline%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0">跳转至该位置</a></p>
+<h2 id="1432-成员函数末尾的const"><a class="markdownIt-Anchor" href="#1432-成员函数末尾的const"></a> 14.3.2 成员函数末尾的const</h2>
+<p>在成员函数的末尾添加const为常量成员函数，表示<mark>该成员函数不会修改该对象内任何成员变量的值</mark>（不可以在该成员函数的实现中修改成员变量的值）<br>
+对于<mark>成员函数和实现代码分开的成员函数，不但要在成员函数的声明中增加const，也要在实现中增加const</mark></p>
+<h2 id="1433-mutable"><a class="markdownIt-Anchor" href="#1433-mutable"></a> 14.3.3 mutable</h2>
+<p><mark>被mutable修饰的成员变量，永远为可变状态，可被const常量成员函数修改</mark></p>
+<h2 id="1434-返回自身对象的引用this"><a class="markdownIt-Anchor" href="#1434-返回自身对象的引用this"></a> 14.3.4 返回自身对象的引用——this</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">声明：</span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line">	<span class="function">Time&amp; <span class="title">rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span>;		<span class="comment">//返回自身的引用</span></span><br><span class="line">	</span><br><span class="line"><span class="function">Time&amp; <span class="title">Time::rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Hour += tmphour;</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>this在成员函数中为一个隐藏的函数参数，表示的时只想本对象的指针，而*this表示该指针指向的对象，即为本对象,*this为调用这个成员函数的对象</p>
+<ul>
+<li>编译器内的实际声明：</li>
+</ul>
+<blockquote>
+<p>Time&amp; Time::rtnhour(Time * const this, int tmphour){…}</p>
+</blockquote>
+<ul>
+<li>编译器内的实际调用：</li>
+</ul>
+<blockquote>
+<p>mytime.rtnhour(&amp;mytime,3);</p>
+</blockquote>
+<p><mark>this为一个指针常量，指向这个对象的本身，不可以再指向其他地方</mark><br>
+<a href="/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/##1364-%E5%8C%BA%E5%88%AB">跳转至该位置</a></p>
+<ul>
+<li>this只可以在成员函数（普通成员函数以及特殊的成员函数中使用），不可以在全局函数、静态函数中使用this指针</li>
+<li>在普通成员函数中，this是一个<mark>非const对象的指针常量</mark></li>
+<li>在const成员函数中，this指针是<mark>指向一个const对象的指针常量</mark></li>
+</ul>
+<h2 id="1435-static成员"><a class="markdownIt-Anchor" href="#1435-static成员"></a> 14.3.5 static成员</h2>
+<p><a href="/2021/10/09/7_%E5%87%BD%E6%95%B0/#765-static%E5%85%B3%E9%94%AE%E5%AD%97%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93">跳转至该位置</a></p>
+<p>static成员变量：不属于某个对象而<mark>属于整个类</mark></p>
+<ul>
+<li>
+<p>通过对象名修改了static成员变量的值，其他类对象中的相应值也发生改变</p>
+</li>
+<li>
+<p>普通成员变量在定义类对象时被分配内存，==静态成员变量在</p>
+</li>
+<li>
+<p>声明：<mark>在类内部声明</mark></p>
+<blockquote>
+<p>static 类型 变量名；<br>
+static 返回类型 函数名(形参列表);</p>
+</blockquote>
+</li>
+<li>
+<p>初始化：(一般写在.cpp文件开头)</p>
+</li>
+</ul>
+<blockquote>
+<p>//[]内内容可以省略，初始化时可不给初值,<mark>且实现时不需要写static关键字</mark><br>
+类型名 类::变量名 [= 值];			<br>
+对象名.变量名 [=值];<br>
+类型名 类::静态成员函数名<br>
+对象名.静态成员函数名</p>
+</blockquote>
+<h1 id="144-类内初始化-默认构造函数-default-delete"><a class="markdownIt-Anchor" href="#144-类内初始化-默认构造函数-default-delete"></a> 14.4 类内初始化、默认构造函数、=default、=delete</h1>
+<h2 id="1441-类相关非成员函数"><a class="markdownIt-Anchor" href="#1441-类相关非成员函数"></a> 14.4.1 类相关非成员函数</h2>
+<p>与类有点关系，但不适合写在类内的函数，这种函数的定义可以放到该类成员函数实现的代码中</p>
+<h2 id="1442-类内初始值"><a class="markdownIt-Anchor" href="#1442-类内初始值"></a> 14.4.2 类内初始值</h2>
+<p>在C++11新标准中，<mark>可以为新成员提供一个类内的初始值，那么在创建成员的时候，这个初始值就会初始化该成员变量</mark>，对于没有初始值的成员变量，系统会默认赋值。<br>
+若在构造函数初始化列表或者在构造函数中赋值，该值会覆盖初始值</p>
+<h2 id="1443-const成员变量的初始化"><a class="markdownIt-Anchor" href="#1443-const成员变量的初始化"></a> 14.4.3 const成员变量的初始化</h2>
+<p>对于类的const成员，只能使用初始化列表进行初始化操作（或者在声明该const变量时进行初始化操作），<mark>不能在构造函数内部进行赋值操作</mark></p>
+<ul>
+<li>构造函数不可以声明为const类型</li>
+<li>在const变量完成初始化之后，该变量才具有const属性</li>
+</ul>
+<h2 id="1444-默认构造函数"><a class="markdownIt-Anchor" href="#1444-默认构造函数"></a> 14.4.4 默认构造函数</h2>
+<ul>
+<li>编译器会为一个类生成默认构造函数；<mark>若声明了一个构造函数，就不会自动生成其他的默认构造函数</mark></li>
+<li>一旦程序员书写了自己的构造函数，那么在创建对象时，<mark>必须提供与书写的构造函数形参相符合的实参</mark>，才能够成功创建对象</li>
+</ul>
+<h2 id="1445-defalue和delete"><a class="markdownIt-Anchor" href="#1445-defalue和delete"></a> 14.4.5 =defalue；和=delete；</h2>
+<ol>
+<li>
+<p>=default<br>
+相当于为<mark>特殊函数</mark>自动生成函数体（等价与空函数体{}）<br>
+包括构造函数、拷贝构造函数等</p>
+</li>
+<li>
+<p>=delete<br>
+显式的禁止某个函数</p>
+</li>
+</ol>
+<h1 id="145-拷贝构造函数"><a class="markdownIt-Anchor" href="#145-拷贝构造函数"></a> 14.5 拷贝构造函数</h1>
+<p><a href="#1414-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6">跳转至该位置</a><br>
+默认情况下：类对象的复制就是每个成员变量的逐个复制<br>
+拷贝拷贝构造函数：用于类对象的复制<br>
+如果一个类的构造函数的第一个参数为所属类的类引用，若有额外的参数，那么这些额外的参数都有默认值，该构造函数的默认参数必须放在函数声明中（除非该构造函数没有函数声明），那么这个构造函数就是拷贝构造函数。</p>
+<blockquote>
+<p>类名::类名(const 类名&amp; 参数名，[其他形参列表]);</p>
+</blockquote>
+<ul>
+<li>const，拷贝构造函数的第一个参数都是带有const的</li>
+<li>explicit，（禁止隐式转换）
+<ul>
+<li>一般来说单参数的构造函数都声明为explicit以避免参数模糊不清的问题</li>
+<li>拷贝构造函数，一般<mark>不声明为explicit</mark></li>
+</ul>
+</li>
+</ul>
+<p>如果一个类没有自己的拷贝构造函数，那么编译器会合成一个拷贝构造函数，参考		<a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a><br>
+拷贝构造函数的成员变量的赋值操作可以成初始化列表进行		<a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a></p>
+<p>调用拷贝构造函数的情况：</p>
+<ul>
+<li>将对象作为实参传递给另一个非引用类型的形参（复制构造，效率低）</li>
+<li>从函数中返回一个对象(系统会将局部对象(临时对象)return出去,会调用拷贝构造函数)</li>
+<li>其他情况</li>
+</ul>
+<h1 id="146-重载运算符-拷贝赋值运算符与析构函数"><a class="markdownIt-Anchor" href="#146-重载运算符-拷贝赋值运算符与析构函数"></a> 14.6 重载运算符、拷贝赋值运算符与析构函数</h1>
+<h2 id="1461-重载运算符"><a class="markdownIt-Anchor" href="#1461-重载运算符"></a> 14.6.1 重载运算符</h2>
+<p><mark>运算符(==,!=,&gt;,&gt;=等)想要应用与类对象，需要对这些运算符进行重载（即以这些运算符为成员函数名定义成员函数实现功能）</mark><br>
+实现方式：operator关键字后面接这个运算符（本质为函数，需要有返回类型和参数列表）<br>
+<strong>赋值运算符编译器会帮助重载</strong></p>
+<ul>
+<li>重载==运算符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Time:<span class="keyword">operator</span>==(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(Hour == t.Hour)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重载=运算符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Time&amp; Time:<span class="keyword">operator</span>=(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//....</span></span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1462-拷贝赋值运算符赋值运算符"><a class="markdownIt-Anchor" href="#1462-拷贝赋值运算符赋值运算符"></a> 14.6.2 拷贝赋值运算符（赋值运算符）</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/15/13_C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80/" rel="prev" title="13_C++基本语言">
+      <i class="fa fa-chevron-left"></i> 13_C++基本语言
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/12/JavaAPI/" rel="next" title="JavaAPI">
+      JavaAPI <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#14-%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text"> 14 类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#141-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="nav-number">2.</span> <span class="nav-text"> 14.1 成员函数、对象复制与私有成员</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1413-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text"> 14.1.3 成员函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1414-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 14.1.4 对象复制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3-explicit%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text"> 14.2 构造函数详解、explicit与初始化列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1424-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text"> 14.2.4 函数默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1425-%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2%E5%92%8Cexplicit"><span class="nav-number">3.2.</span> <span class="nav-text"> 14.2.5 隐式转换和explicit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.3.</span> <span class="nav-text"> 14.2.6 构造函数初始化列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#143-inline-const-mutable-this%E4%B8%8Estatic"><span class="nav-number">4.</span> <span class="nav-text"> 14.3 inline、const、mutable、this与static</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1431-%E5%9C%A8%E7%B1%BB%E5%AE%9A%E4%B9%89%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0inline"><span class="nav-number">4.1.</span> <span class="nav-text"> 14.3.1 在类定义中实现成员函数inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1432-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E6%9C%AB%E5%B0%BE%E7%9A%84const"><span class="nav-number">4.2.</span> <span class="nav-text"> 14.3.2 成员函数末尾的const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1433-mutable"><span class="nav-number">4.3.</span> <span class="nav-text"> 14.3.3 mutable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1434-%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8this"><span class="nav-number">4.4.</span> <span class="nav-text"> 14.3.4 返回自身对象的引用——this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1435-static%E6%88%90%E5%91%98"><span class="nav-number">4.5.</span> <span class="nav-text"> 14.3.5 static成员</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#144-%E7%B1%BB%E5%86%85%E5%88%9D%E5%A7%8B%E5%8C%96-%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-default-delete"><span class="nav-number">5.</span> <span class="nav-text"> 14.4 类内初始化、默认构造函数、&#x3D;default、&#x3D;delete</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1441-%E7%B1%BB%E7%9B%B8%E5%85%B3%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text"> 14.4.1 类相关非成员函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1442-%E7%B1%BB%E5%86%85%E5%88%9D%E5%A7%8B%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text"> 14.4.2 类内初始值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1443-const%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">5.3.</span> <span class="nav-text"> 14.4.3 const成员变量的初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1444-%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">5.4.</span> <span class="nav-text"> 14.4.4 默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1445-defalue%E5%92%8Cdelete"><span class="nav-number">5.5.</span> <span class="nav-text"> 14.4.5 &#x3D;defalue；和&#x3D;delete；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#145-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text"> 14.5 拷贝构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#146-%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6-%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text"> 14.6 重载运算符、拷贝赋值运算符与析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1461-%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.1.</span> <span class="nav-text"> 14.6.1 重载运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1462-%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">7.2.</span> <span class="nav-text"> 14.6.2 拷贝赋值运算符（赋值运算符）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jay1060950003"
+      src="/blogImg/user.png">
+  <p class="site-author-name" itemprop="name">jay1060950003</p>
+  <div class="site-description" itemprop="description">北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jay1060950003" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jay1060950003" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jay1060950003@gmail.com" title="E-Mail → mailto:jay1060950003@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jay1060950003</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

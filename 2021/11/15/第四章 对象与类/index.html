@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogImg/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogImg/favicon.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="4.1.1 类  封装是与对象有关的一个重要概念  从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式 对象中的数据称为实例域，操纵数据的过程称为方法 对于每个特定的类实例(对象)都有一组特定的实例域值。这些值的集合就是这个对象的当前状态 无论何时，只要向对象发送一个消息，它的状态就有可能发生改变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章 对象与类">
+<meta property="og:url" content="http://jay1060950003.github.io/2021/11/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/index.html">
+<meta property="og:site_name" content="MyCodingStudio">
+<meta property="og:description" content="4.1.1 类  封装是与对象有关的一个重要概念  从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式 对象中的数据称为实例域，操纵数据的过程称为方法 对于每个特定的类实例(对象)都有一组特定的实例域值。这些值的集合就是这个对象的当前状态 无论何时，只要向对象发送一个消息，它的状态就有可能发生改变。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T01:48:06.000Z">
+<meta property="article:author" content="jay1060950003">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jay1060950003.github.io/2021/11/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第四章 对象与类 | MyCodingStudio</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyCodingStudio</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">努力进步</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/11/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogImg/user.png">
+      <meta itemprop="name" content="jay1060950003">
+      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyCodingStudio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第四章 对象与类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-15T00:00:00+08:00">2021-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="411-类"><a class="markdownIt-Anchor" href="#411-类"></a> 4.1.1 类</h1>
+<ul>
+<li>封装是与对象有关的一个重要概念
+<ul>
+<li>从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式</li>
+<li><mark>对象中的数据称为实例域，操纵数据的过程称为方法</mark></li>
+<li>对于每个特定的类实例(对象)都有一组特定的实例域值。这些值的集合就是这个对象的当前状态</li>
+<li>无论何时，只要向对象发送一个消息，它的状态就有可能发生改变。</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="412-对象"><a class="markdownIt-Anchor" href="#412-对象"></a> 4.1.2 对象</h2>
+<ul>
+<li><mark>对象状态的改变必须通过调用方法实现</mark></li>
+<li><strong>如果不经过方法调用就可以改变对象状态，只能说明封装性遭到了破坏</strong></li>
+<li>需要注意，作为一个类的实例，每个对象的标识永远是不同的，状态常常也存在着差异</li>
+</ul>
+<h2 id="414-类之间的关系"><a class="markdownIt-Anchor" href="#414-类之间的关系"></a> 4.1.4 类之间的关系</h2>
+<ul>
+<li>依赖：如果一个类的方法操纵另一个类的对象，我们就说一个类依赖于另一个类。</li>
+<li>聚合：意味着类A的对象包含类B的对象。</li>
+<li>继承：是一种用于表示特殊与一般关系的。</li>
+</ul>
+<h1 id="42-使用预定类"><a class="markdownIt-Anchor" href="#42-使用预定类"></a> 4.2 使用预定类</h1>
+<ul>
+<li>Math类只封装了功能，它不需要也不必隐藏数据</li>
+<li>由于没有数据，因此也不必担心生成对象以及初始化实例域</li>
+</ul>
+<h2 id="421-对象与对象变量"><a class="markdownIt-Anchor" href="#421-对象与对象变量"></a> 4.2.1 对象与对象变量</h2>
+<ul>
+<li>在Java程序中，使用构造器构造新实例
+<ul>
+<li>构造器是一种特殊的方法，用来构造并初始化对象</li>
+<li><mark>构造器的名字应该与类名相同</mark></li>
+<li>在构造器前面加上new操作符,<mark>new操作符的返回值是一个引用</mark></li>
+</ul>
+</li>
+<li>定义对象变量后必须初始化对象变量,所有的Java对象都<mark>存储在堆中</mark>
+<ul>
+<li><mark>一个对象变量并没有实际包含一个对象，而仅仅引用一个对象</mark></li>
+<li>任何对象变量的值都是<mark>对存储在另外一个地方的一个对象的引用</mark></li>
+</ul>
+</li>
+<li>如果将一个方法应用于<mark>一个值为null的对象上</mark>，那么就会产生运行时错误</li>
+<li><mark>局部变量不会自动地初始化为null</mark>，而必须<mark>通过调用new或将它们设置为null进行初始化</mark></li>
+<li><mark>当一个对象包含另一个对象变量时，这个变量依然包含着指向另一个堆对象的指针</mark></li>
+<li>在Java中，<mark>必须使用clone方法获得对象的完整拷贝</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Date deadline;  <span class="comment">//定义对象变量</span></span><br><span class="line">deadline = <span class="keyword">new</span> Date();  <span class="comment">//初始化对象变量</span></span><br><span class="line">deadline = birthday;  <span class="comment">//或者引用一个存在的对象</span></span><br><span class="line">Date deadline = <span class="keyword">new</span> Date();  <span class="comment">//定义并初始化对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="422-java类库中的localdate类"><a class="markdownIt-Anchor" href="#422-java类库中的localdate类"></a> 4.2.2 Java类库中的LocalDate类</h2>
+<ul>
+<li>Date类:表示时间点</li>
+<li>LocalDate类:日历表示法
+<ul>
+<li>不要使用构造器来构造LocalDate类的对象</li>
+<li><mark>使用静态工厂方法代表调用构造器</mark></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LocalDate.now(); <span class="comment">//构造新对象，表示构造这个对象时的日期</span></span><br><span class="line">LOcalDate.of(<span class="number">1999</span>, <span class="number">12</span>, <span class="number">31</span>);  <span class="comment">//构造特定日期的对象</span></span><br><span class="line"><span class="comment">//不可以使用构造器方法构造LocalDate对象</span></span><br><span class="line">LocalDate newYearsEve = LocalDate.of(<span class="number">1998</span>, <span class="number">12</span>, <span class="number">31</span>);  <span class="comment">//用静态工厂方法构造对象</span></span><br><span class="line"><span class="keyword">int</span> year = newYearsEve.getYear();    <span class="comment">//返回年</span></span><br><span class="line"><span class="keyword">int</span> month = newYearsEve.getMonthVa1ue();  <span class="comment">//月</span></span><br><span class="line"><span class="keyword">int</span> day = nenYearsEve.getDayOfMonth();   <span class="comment">//日</span></span><br><span class="line"><span class="comment">//返回一个新的LocalDate对象，为距当前对象之情天数的日期</span></span><br><span class="line">LocalDate aThousandDaysLater = newYearsEve.plusDays(<span class="number">1000</span>);  </span><br></pre></td></tr></table></figure>
+<h2 id="423-更改器方法与访问器方法"><a class="markdownIt-Anchor" href="#423-更改器方法与访问器方法"></a> 4.2.3 更改器方法与访问器方法</h2>
+<ul>
+<li><strong>访问器方法</strong>:只访问对象而不修改对象的方法,如LocalDate.getYear()</li>
+<li><strong>更改器方法</strong>:访问对象并修改对象的方法,如GregorianCalendar.add()</li>
+<li>在C++中，带有const后缀的方法是访问器方法;默认为更改器方法</li>
+</ul>
+<h1 id="43-用户自定义类"><a class="markdownIt-Anchor" href="#43-用户自定义类"></a> 4.3 用户自定义类</h1>
+<p>在Java中，最简单的类定义形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"> field1</span><br><span class="line"> field2</span><br><span class="line"> ...</span><br><span class="line"> constructor1</span><br><span class="line"> constructor2</span><br><span class="line"> ...</span><br><span class="line"> method1</span><br><span class="line"> method2</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="432-多个源文件的使用"><a class="markdownIt-Anchor" href="#432-多个源文件的使用"></a> 4.3.2 多个源文件的使用</h2>
+<ul>
+<li>使用通配符调用Java编译器:java Employee*.java</li>
+<li>或编译 java EmployeeTest.java</li>
+</ul>
+<h2 id="433-剖析employee类"><a class="markdownIt-Anchor" href="#433-剖析employee类"></a> 4.3.3 剖析Employee类</h2>
+<ul>
+<li><mark>关键字private确保只有Employee类自身的方法能够访问这些实例域，而其他类的方法不能够读写这些域</mark></li>
+<li>可以用public标记实例域（<mark>一种极为不提倡的做法</mark>）
+<ul>
+<li>public数据域允许程序中的任何方法对其进行读取和修改（<mark>完全破坏了封装</mark>）</li>
+</ul>
+</li>
+</ul>
+<h2 id="434-从构造器开始"><a class="markdownIt-Anchor" href="#434-从构造器开始"></a> 4.3.4 从构造器开始</h2>
+<ul>
+<li>构造器与类同名,可以拥有0个、1个或多个参数，没有返回值</li>
+<li>构造器<mark>总是伴随着new操作符的执行被调用，而不能对一个已经存在的对象调用构造器来达到重新设置实例域的目的</mark></li>
+<li>每个类可以有一个以上的构造器</li>
+<li>不要在构造器中<mark>定义</mark>与实例域重名的局部变量</li>
+<li><mark>必须注意在所有的方法中不要命名与实例域同名的变量</mark></li>
+</ul>
+<h2 id="435-隐式参数与显式参数"><a class="markdownIt-Anchor" href="#435-隐式参数与显式参数"></a> 4.3.5 隐式参数与显式参数</h2>
+<ul>
+<li>在每一个方法中，<mark>关键字this表示隐式参数</mark></li>
+<li>在Java中，<mark>所有的方法都必须在类的内部定义，但并不表示它们是内联方法</mark></li>
+</ul>
+<h2 id="436-封装的优点"><a class="markdownIt-Anchor" href="#436-封装的优点"></a> 4.3.6 封装的优点</h2>
+<ul>
+<li>需要获得或设置实例域的值，应该提供下面三项内容：
+<ul>
+<li>一个私有的数据域</li>
+<li>一个公有的域访问器方法</li>
+<li>一个公有的域更改器方法</li>
+</ul>
+</li>
+<li>更改器方法可以执行错误检查，然而直接对域进行赋值将不会进行这些处理</li>
+<li>注意<mark>不要编写返回引用可变对象的访问器方法</mark>
+<ul>
+<li>如果<mark>需要返回一个可变对象的引用，应该首先对它进行克隆(clone)</mark>
+<ul>
+<li>对象clone是指存放在另一个位置上的对象副本。</li>
+<li>Date类存在更改器方法setTime,因此Date对象是可变的，破坏了封装性</li>
+<li>如需要使用Date类，返回时返回Date类的clone对象（使用clone方法）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="437-基于类的访问权限"><a class="markdownIt-Anchor" href="#437-基于类的访问权限"></a> 4.3.7 基于类的访问权限</h2>
+<ul>
+<li>一个方法可以访问所属类的所有对象的私有数据</li>
+</ul>
+<h2 id="438-私有方法"><a class="markdownIt-Anchor" href="#438-私有方法"></a> 4.3.8 私有方法</h2>
+<ul>
+<li>在Java中，为了实现一个私有的方法，只需将关键字public改为private即可</li>
+<li>对于私有方法，如果改用其他方法实现相应的操作，则不必保留原有的方法</li>
+</ul>
+<h2 id="439-final实例域"><a class="markdownIt-Anchor" href="#439-final实例域"></a> 4.3.9 final实例域</h2>
+<ul>
+<li>将实例域定义为final，<mark>构建对象时必须初始化这样的域</mark>
+<ul>
+<li>即必须确保在每一个构造器执行之后，这个域的值被设置，并且值不能改变</li>
+</ul>
+</li>
+<li>final修饰符大都应用于基本类型域或不可变类的域</li>
+<li>对于<mark>可变的类，使用final修饰符表示对象引用不会指向其他对象，但对象是可以改变的</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;  </span><br><span class="line">    <span class="comment">//instance fields  </span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String name;  </span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//final关键字只是表示存储在evaluations变量中的对象引用不会再指示其他StringBuilder对象</span></span><br><span class="line"><span class="comment">//不过这个对象可以更改</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> StringBuilder evaluations; </span><br><span class="line">evaluations = <span class="keyword">new</span> StringBuilder(); <span class="comment">//构造器中初始化操作</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">giveColdStar</span><span class="params">()</span>  <span class="comment">//但可以修改该对象的值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> evaluations.append(LocalDate.nowO + <span class="string">&quot;: Cold star!\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="44-静态域与静态方法"><a class="markdownIt-Anchor" href="#44-静态域与静态方法"></a> 4.4 静态域与静态方法</h1>
+<h2 id="441-静态域"><a class="markdownIt-Anchor" href="#441-静态域"></a> 4.4.1 静态域</h2>
+<ul>
+<li><mark>如果将域定义为static，每个类中只有一个这样的域</mark></li>
+<li>每一个对象对于所有的实例域却都有自己的一份拷贝</li>
+<li><mark>静态域属于类而不属于任何独立的对象，所有该类的对象共享一个静态域</mark></li>
+</ul>
+<h2 id="442-静态常量"><a class="markdownIt-Anchor" href="#442-静态常量"></a> 4.4.2 静态常量</h2>
+<ul>
+<li>在常量的声明中,添加关键词static表示静态常量
+<ul>
+<li>如Math类，若<mark>关键字static被省略，PI就变成了Math类的一个实例域</mark></li>
+<li>需要通过Math类的对象访问PI，并且每一个Math对象都有它自己的一份PI拷贝</li>
+</ul>
+</li>
+<li>由于<mark>每个类对象都可以对公有域进行修改，所以，最好不要将域设计为public</mark>.然而，公有常量(即final域)却没问题
+<ul>
+<li>静态常量System.out,out被声明为final,故不允许再将其他打印流赋给它</li>
+<li>System类有一个setOut方法可以将System.out设置为不同的流</li>
+<li>==为什么这个方法可以修改final变量的值?
+<ul>
+<li><mark>原因在于，setOut方法是一个</mark>本地方法，而不是用Java语言实现的==,可以绕过Java语言的存取控制机制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="443-静态方法"><a class="markdownIt-Anchor" href="#443-静态方法"></a> 4.4.3 静态方法</h2>
+<ul>
+<li>静态方法是一种<mark>不能向对象实施操作的方法</mark>
+<ul>
+<li><mark>静态方法是没有this参数的方法</mark>(在一个非静态的方法中，this参数表示这个方法的隐式参数</li>
+<li><mark>建议使用类名，而不是对象来调用静态方法</mark>,可以使用对象名进行调用静态方法</li>
+</ul>
+</li>
+</ul>
+<p>在下面两种情况下使用静态方法：</p>
+<ul>
+<li>一个方法不需要访问对象状态，其所需参数都是通过显式参数提供(例如：Math.pow)。</li>
+<li>一个方法只需要访问类的静态域(例如：Employee.getNextId)</li>
+</ul>
+<h2 id="444-工厂方法"><a class="markdownIt-Anchor" href="#444-工厂方法"></a> 4.4.4 工厂方法</h2>
+<ul>
+<li>工厂方法用于生成不同风格的格式化对象(静态方法的另一种用途[静态工厂方法])</li>
+<li>为什么NumberFormat类不利用构造器完成构建对象操作</li>
+<li>原因：
+<ul>
+<li>无法命名构造器。构造器的名字必须与类名相同。但是，这里希望将得到的货币实例和百分比实例采用不用的名字</li>
+<li>当使用构造器时，无法改变所构造的对象类型。而工厂方法将返回一个DecimalFormat类对象，这是NumberFormat的子类</li>
+</ul>
+</li>
+</ul>
+<h2 id="445-main方法"><a class="markdownIt-Anchor" href="#445-main方法"></a> 4.4.5 main方法</h2>
+<ul>
+<li>main方法不对任何对象进行操作
+<ul>
+<li>事实上，在启动程序时还没有任何一个对象。静态的main方法将执行并创建程序所需要的对象。</li>
+</ul>
+</li>
+<li>每一个类可以有一个main方法(<mark>常用于对类进行单元测试</mark>)</li>
+</ul>
+<h1 id="45-方法参数"><a class="markdownIt-Anchor" href="#45-方法参数"></a> 4.5 方法参数</h1>
+<ul>
+<li>Java程序设计语言总是采用<mark>按值调用</mark></li>
+<li>方法得到的是所有参数值的一个拷贝,<mark>方法不能修改传递给它的任何参数变量的内容</mark></li>
+<li>方法可以通过对象引用的拷贝修改所引用的对象状态</li>
+</ul>
+<p>总结一下Java中方法参数的使用情况：</p>
+<ul>
+<li>一个方法<mark>不能修改一个基本数据类型的参数(即数值型或布尔型)</mark></li>
+<li>一个方法<mark>可以改变一个对象参数的状态</mark></li>
+<li>一个方法<mark>不能让对象参数引用一个新的对象</mark></li>
+</ul>
+<h1 id="46-对象构造"><a class="markdownIt-Anchor" href="#46-对象构造"></a> 4.6 对象构造</h1>
+<h2 id="461-重载"><a class="markdownIt-Anchor" href="#461-重载"></a> 4.6.1 重载</h2>
+<ul>
+<li>如果多个方法有相同的名字、不同的参数，便产生了<mark>重载</mark>
+<ul>
+<li>重载解析:编译器必须挑选出具体执行哪个方法，它通过用各个方法给出的参数类型与特定方法调用所使用的值类型进行匹配来挑选出相应的方法;如果编译器找不到匹配的参数，就会产生编译时错误</li>
+</ul>
+</li>
+<li>Java允许重载任何方法(包括构造器方法)</li>
+<li>方法的签名:<mark>方法名以及参数类型</mark></li>
+</ul>
+<h2 id="462-默认域初始化"><a class="markdownIt-Anchor" href="#462-默认域初始化"></a> 4.6.2 默认域初始化</h2>
+<ul>
+<li>如果在构造器中没有显式地给域赋予初值，那么就会被自动地赋为默认值
+<ul>
+<li>数值为0</li>
+<li>布尔值为false</li>
+<li>对象引用为null</li>
+</ul>
+</li>
+</ul>
+<h2 id="463-无参数的构造器"><a class="markdownIt-Anchor" href="#463-无参数的构造器"></a> 4.6.3 无参数的构造器</h2>
+<ul>
+<li>对象由无参数构造函数创建时，其状态会设置为适当的默认值</li>
+<li>如果类<mark>提供了至少一个构造器，但是没有提供无参数构造器</mark>，在构造对象时必须提供参数</li>
+<li><mark>仅当类没有提供任何构造器的时候，系统才会提供一个默认的构造器</mark></li>
+</ul>
+<h2 id="464-显式域初始化"><a class="markdownIt-Anchor" href="#464-显式域初始化"></a> 4.6.4 显式域初始化</h2>
+<ul>
+<li>可以在类定义中，直接将一个值赋给任何域</li>
+<li>初始值不一定是常量值</li>
+</ul>
+<h2 id="465-参数名"><a class="markdownIt-Anchor" href="#465-参数名"></a> 4.6.5 参数名</h2>
+<ul>
+<li><mark>参数变量用同样的名字将实例域屏蔽起来</mark>
+<ul>
+<li>例如，如果将参数命名为salary，salary将引用这个参数，而不是实例域</li>
+<li>但是，可以采用this.salary的形式访问实例域</li>
+</ul>
+</li>
+<li><mark>this指示隐式参数，也就是所构造的对象</mark></li>
+</ul>
+<h2 id="466-调用另一个构造器"><a class="markdownIt-Anchor" href="#466-调用另一个构造器"></a> 4.6.6 调用另一个构造器</h2>
+<ul>
+<li>如果构造器的第一个语句形如this(…)，这个构造器将调用同一个类的另一个构造器。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Employee</span> <span class="params">(<span class="keyword">double</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="comment">// calls Employee(String, double)</span></span><br><span class="line"> <span class="keyword">this</span>(<span class="string">&quot;Employee #&quot;</span> + nextId, s);  <span class="comment">//调用Employee(String, double) 构造器</span></span><br><span class="line"> nextId++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="467-初始化块"><a class="markdownIt-Anchor" href="#467-初始化块"></a> 4.6.7 初始化块</h2>
+<p>初始化数据块的方法：</p>
+<ul>
+<li>在构造器中设置值</li>
+<li>在声明中赋值</li>
+<li>初始化代码块：只要构造类的对象，这些块就会执行</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> nextId;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"> <span class="keyword">private</span> String name;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">double</span> salary;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//初始化代码块</span></span><br><span class="line"> &#123;</span><br><span class="line">  id = nextId;</span><br><span class="line">  nextId++;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">(String n, <span class="keyword">double</span> s)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">  name = n;</span><br><span class="line">  salary = s;</span><br><span class="line"> &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通常会直接将初始化代码放在构造器中</li>
+<li>调用构造器的具体处理步骤：
+<ol>
+<li>所有数据域被初始化为默认值(0、false或null)</li>
+<li>按照在类声明中出现的次序，依次执行所有域初始化语句和初始化块</li>
+<li>如果构造器第一行调用了第二个构造器，则执行第二个构造器主体</li>
+<li>执行这个构造器的主体</li>
+</ol>
+</li>
+</ul>
+<h2 id="468-对象析构与finalize方法"><a class="markdownIt-Anchor" href="#468-对象析构与finalize方法"></a> 4.6.8 对象析构与finalize方法</h2>
+<ul>
+<li>由于Java有自动的垃圾回收器，不需要人工回收内存，所以<mark>Java不支持析构器</mark></li>
+<li>可以为任何一个类添加finalize方法。finalize方法将在垃圾回收器清除对象之前调用。在实际应用中，不要依赖于使用finalize方法回收任何短缺的资源
+<ul>
+<li>有个名为System.runFinalizersOnExit(true)的方法能够确保finalizer方法在Java关闭前被调用。不过，<mark>这个方法并不安全，也不鼓励使用</mark></li>
+<li>有一种代替的方法是使用方法Runtime.addShutdownHook添加“关闭钩”(shutdown hook)</li>
+</ul>
+</li>
+<li><mark>对象用完时，可以应用一个close方法来完成相应的清理操作</mark></li>
+</ul>
+<h1 id="47-包"><a class="markdownIt-Anchor" href="#47-包"></a> 4.7 包</h1>
+<ul>
+<li><mark>使用包的主要原因是确保类名的唯一性</mark></li>
+<li>一个类可以使用所属包中的所有类，以及其他包中的公有类</li>
+<li>访问方法
+<ol>
+<li>在每个类名之前添加完整的包名</li>
+<li>使用import语句：import语句应该位于源文件的顶部(但位于package语句的后面)</li>
+</ol>
+</li>
+<li>import语句不仅可以导入类，还可以导入静态方法和静态域</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要想将一个类放入包中，就必须将包的名字放在源文件的开头，包中定义类的代码之前</span></span><br><span class="line"><span class="keyword">package</span> com.horstmann.corejava;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><mark>编译器对文件(带有文件分隔符和扩展名.java的文件)进行操作</mark></li>
+<li><mark>而Java解释器加载类(带有.分隔符)</mark></li>
+</ul>
+<h1 id="48-类路径"><a class="markdownIt-Anchor" href="#48-类路径"></a> 4.8 类路径</h1>
+<ul>
+<li>类存储在文件系统的子目录中
+<ul>
+<li>类的路径必须与包名匹配</li>
+</ul>
+</li>
+<li>类文件也可以存储在JAR(Java归档)文件中
+<ul>
+<li>在一个JAR文件中，可以包含多个压缩形式的类文件和子目录，这样既可以节省又可以改善性能</li>
+<li>在程序中用到第三方(third-party)的库文件时，通常会给出一个或多个需要包含的JAR文件。</li>
+</ul>
+</li>
+<li>为了使类能够被多个程序共享，需要做到下面几点
+<ol>
+<li>把类放到一个目录中，需要注意，<mark>这个目录是包树状结构的基目录</mark>
+<ul>
+<li>如果希望将com.horstmann.corejava.Employee类添加到其中，这个Employee.class类文件就必须位于子目录/home/user/classdir/com/horstmann/corejava中</li>
+</ul>
+</li>
+<li>将JAR文件放在一个目录中</li>
+<li>设置类路径(类路径是所有包含类文件的路径的集合)</li>
+</ol>
+</li>
+<li>最好采用-classpath(或-cp)选项指定类路径</li>
+</ul>
+<h1 id="49-文档注释"><a class="markdownIt-Anchor" href="#49-文档注释"></a> 4.9 文档注释</h1>
+<ul>
+<li>javadoc实用程序从下面几个特性中抽取信息，并编写注释
+<ul>
+<li>包</li>
+<li>公有类与接口</li>
+<li>公有的和受保护的构造器及方法</li>
+<li>公有的和受保护的域</li>
+</ul>
+</li>
+<li>注释应该放置在所描述特性的前面,以/**开始，并以*/结束</li>
+<li>标记由@开始
+<ul>
+<li>用于强调的＜em＞…＜/em＞</li>
+<li>用于着重强调的＜strong＞…＜/strong＞以及包含图像的＜img…＞</li>
+<li>不过，一定不要使用＜h1＞或＜hr＞，因为它们会与文档的格式产生冲突;<mark>若要键入等宽代码，需使用{@code…}</mark></li>
+</ul>
+</li>
+<li>如果文档中有<mark>到其他文件的链接</mark>，就应该将这些文件放到<mark>子目录doc-files中</mark></li>
+<li>javadoc实用程序<mark>将从源目录拷贝这些目录及其中的文件到文档目录中</mark>。<mark>在链接中需要使用doc-files目录</mark>，例如：＜img src=“doc-files/uml.png”alt=“UML diagram”＞</li>
+</ul>
+<h2 id="493-方法注释"><a class="markdownIt-Anchor" href="#493-方法注释"></a> 4.9.3 方法注释</h2>
+<ul>
+<li>每一个方法注释必须放在所描述的方法之前</li>
+<li>除了通用标记之外，还可以使用下面的标记：
+<ul>
+<li>@param变量描述：这个标记将对当前方法的“param”(参数)部分添加一个条目。这个描述可以占据多行，并可以使用HTML标记。一个方法的所有@param标记必须放在一起。</li>
+<li>@return描述：这个标记将对当前方法添加“return”(返回)部分。这个描述可以跨越多行，并可以使用HTML标记。</li>
+<li>@throws类描述：这个标记将添加一个注释，用于表示这个方法有可能抛出异常。</li>
+</ul>
+</li>
+<li>@version文本：这个标记将产生一个“version”(版本)条目(通用注释)</li>
+</ul>
+<h2 id="496-包与概述注释"><a class="markdownIt-Anchor" href="#496-包与概述注释"></a> 4.9.6 包与概述注释</h2>
+<ul>
+<li>可以直接将类、方法和变量的注释放置在Java源文件中，只要用/**…*/文档注释界定就可以了</li>
+<li><mark>要想产生包注释，就需要在每一个包目录中添加一个单独的文件</mark>
+<ol>
+<li>提供一个以package.html命名的HTML文件: 在标记＜body＞…＜/body＞之间的所有文本都会被抽取出来</li>
+<li>提供一个以package-info.java命名的Java文件: 文件必须包含一个初始的以/**和*/界定的Javadoc注释，跟随在一个包语句之后。它不应该包含更多的代码或注释</li>
+</ol>
+</li>
+</ul>
+<h2 id="497-注释的抽取"><a class="markdownIt-Anchor" href="#497-注释的抽取"></a> 4.9.7 注释的抽取</h2>
+<ul>
+<li>注释的抽取步骤：
+<ol>
+<li>切换到包含想要生成文档的源文件目录
+<ul>
+<li>如果有嵌套的包要生成文档，例如com.horstmann.corejava，就必须切换到包含子目录com的目录(如果存在overview.html文件的话，这也是它的所在目录)</li>
+</ul>
+</li>
+<li>如果是一个包，应该运行命令：javadoc -d docDirectory nameOfPackage;对于多个包生成文档，运行：javadoc -d docDirectory nameOfPackage1 nameOfPackage2 …;如果文件在默认包中，就应该运行：javadoc -d docDirectory *.java</li>
+</ol>
+</li>
+</ul>
+<h1 id="410-类设计技巧"><a class="markdownIt-Anchor" href="#410-类设计技巧"></a> 4.10 类设计技巧</h1>
+<ol>
+<li>一定要保证数据私有</li>
+<li>一定要对数据初始化</li>
+<li>不要在类中使用过多的基本类型</li>
+<li>不是所有的域都需要独立的域访问器和域更改器</li>
+<li>将职责过多的类进行分解</li>
+<li>类名和方法名要能够体现它们的职责</li>
+<li>优先使用不可变的类</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/14/%E7%AC%AC%E4%B8%89%E7%AB%A0%20Java%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%BB%93%E6%9E%84/" rel="prev" title="第三章 Java的基本程序设计结构">
+      <i class="fa fa-chevron-left"></i> 第三章 Java的基本程序设计结构
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/16/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%BB%A7%E6%89%BF/" rel="next" title="第五章 继承">
+      第五章 继承 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#411-%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text"> 4.1.1 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#412-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text"> 4.1.2 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#414-%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.</span> <span class="nav-text"> 4.1.4 类之间的关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-%E4%BD%BF%E7%94%A8%E9%A2%84%E5%AE%9A%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text"> 4.2 使用预定类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#421-%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text"> 4.2.1 对象与对象变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#422-java%E7%B1%BB%E5%BA%93%E4%B8%AD%E7%9A%84localdate%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text"> 4.2.2 Java类库中的LocalDate类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#423-%E6%9B%B4%E6%94%B9%E5%99%A8%E6%96%B9%E6%B3%95%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%99%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text"> 4.2.3 更改器方法与访问器方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#43-%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text"> 4.3 用户自定义类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#432-%E5%A4%9A%E4%B8%AA%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text"> 4.3.2 多个源文件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#433-%E5%89%96%E6%9E%90employee%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text"> 4.3.3 剖析Employee类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#434-%E4%BB%8E%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%80%E5%A7%8B"><span class="nav-number">3.3.</span> <span class="nav-text"> 4.3.4 从构造器开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#435-%E9%9A%90%E5%BC%8F%E5%8F%82%E6%95%B0%E4%B8%8E%E6%98%BE%E5%BC%8F%E5%8F%82%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text"> 4.3.5 隐式参数与显式参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#436-%E5%B0%81%E8%A3%85%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">3.5.</span> <span class="nav-text"> 4.3.6 封装的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#437-%E5%9F%BA%E4%BA%8E%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-number">3.6.</span> <span class="nav-text"> 4.3.7 基于类的访问权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#438-%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">3.7.</span> <span class="nav-text"> 4.3.8 私有方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#439-final%E5%AE%9E%E4%BE%8B%E5%9F%9F"><span class="nav-number">3.8.</span> <span class="nav-text"> 4.3.9 final实例域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-%E9%9D%99%E6%80%81%E5%9F%9F%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 4.4 静态域与静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#441-%E9%9D%99%E6%80%81%E5%9F%9F"><span class="nav-number">4.1.</span> <span class="nav-text"> 4.4.1 静态域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#442-%E9%9D%99%E6%80%81%E5%B8%B8%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text"> 4.4.2 静态常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#443-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text"> 4.4.3 静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#444-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">4.4.</span> <span class="nav-text"> 4.4.4 工厂方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#445-main%E6%96%B9%E6%B3%95"><span class="nav-number">4.5.</span> <span class="nav-text"> 4.4.5 main方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#45-%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text"> 4.5 方法参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#46-%E5%AF%B9%E8%B1%A1%E6%9E%84%E9%80%A0"><span class="nav-number">6.</span> <span class="nav-text"> 4.6 对象构造</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#461-%E9%87%8D%E8%BD%BD"><span class="nav-number">6.1.</span> <span class="nav-text"> 4.6.1 重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#462-%E9%BB%98%E8%AE%A4%E5%9F%9F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">6.2.</span> <span class="nav-text"> 4.6.2 默认域初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#463-%E6%97%A0%E5%8F%82%E6%95%B0%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">6.3.</span> <span class="nav-text"> 4.6.3 无参数的构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#464-%E6%98%BE%E5%BC%8F%E5%9F%9F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">6.4.</span> <span class="nav-text"> 4.6.4 显式域初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#465-%E5%8F%82%E6%95%B0%E5%90%8D"><span class="nav-number">6.5.</span> <span class="nav-text"> 4.6.5 参数名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#466-%E8%B0%83%E7%94%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">6.6.</span> <span class="nav-text"> 4.6.6 调用另一个构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#467-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">6.7.</span> <span class="nav-text"> 4.6.7 初始化块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#468-%E5%AF%B9%E8%B1%A1%E6%9E%90%E6%9E%84%E4%B8%8Efinalize%E6%96%B9%E6%B3%95"><span class="nav-number">6.8.</span> <span class="nav-text"> 4.6.8 对象析构与finalize方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#47-%E5%8C%85"><span class="nav-number">7.</span> <span class="nav-text"> 4.7 包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#48-%E7%B1%BB%E8%B7%AF%E5%BE%84"><span class="nav-number">8.</span> <span class="nav-text"> 4.8 类路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#49-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="nav-number">9.</span> <span class="nav-text"> 4.9 文档注释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#493-%E6%96%B9%E6%B3%95%E6%B3%A8%E9%87%8A"><span class="nav-number">9.1.</span> <span class="nav-text"> 4.9.3 方法注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#496-%E5%8C%85%E4%B8%8E%E6%A6%82%E8%BF%B0%E6%B3%A8%E9%87%8A"><span class="nav-number">9.2.</span> <span class="nav-text"> 4.9.6 包与概述注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#497-%E6%B3%A8%E9%87%8A%E7%9A%84%E6%8A%BD%E5%8F%96"><span class="nav-number">9.3.</span> <span class="nav-text"> 4.9.7 注释的抽取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#410-%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7"><span class="nav-number">10.</span> <span class="nav-text"> 4.10 类设计技巧</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jay1060950003"
+      src="/blogImg/user.png">
+  <p class="site-author-name" itemprop="name">jay1060950003</p>
+  <div class="site-description" itemprop="description">北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jay1060950003" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jay1060950003" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jay1060950003@gmail.com" title="E-Mail → mailto:jay1060950003@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jay1060950003</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>

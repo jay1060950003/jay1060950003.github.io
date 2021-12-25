@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogImg/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogImg/favicon.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="10 结构体与共用体  10.1 结构体变量定义、引用与初始化  10.1.1 结构体类型定义  struct 结构体名 { 成员列表 }">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10_结构体与共用体">
+<meta property="og:url" content="http://jay1060950003.github.io/2021/10/12/10_%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93/index.html">
+<meta property="og:site_name" content="MyCodingStudio">
+<meta property="og:description" content="10 结构体与共用体  10.1 结构体变量定义、引用与初始化  10.1.1 结构体类型定义  struct 结构体名 { 成员列表 }">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T01:48:06.000Z">
+<meta property="article:author" content="jay1060950003">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jay1060950003.github.io/2021/10/12/10_%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>10_结构体与共用体 | MyCodingStudio</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyCodingStudio</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">努力进步</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/10/12/10_%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogImg/user.png">
+      <meta itemprop="name" content="jay1060950003">
+      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyCodingStudio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10_结构体与共用体
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-12T00:00:00+08:00">2021-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="10-结构体与共用体"><a class="markdownIt-Anchor" href="#10-结构体与共用体"></a> 10 结构体与共用体</h1>
+<h1 id="101-结构体变量定义-引用与初始化"><a class="markdownIt-Anchor" href="#101-结构体变量定义-引用与初始化"></a> 10.1 结构体变量定义、引用与初始化</h1>
+<h2 id="1011-结构体类型定义"><a class="markdownIt-Anchor" href="#1011-结构体类型定义"></a> 10.1.1 结构体类型定义</h2>
+<blockquote>
+<p>struct 结构体名<br>
+{<br>
+成员列表<br>
+}</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1012-结构变量的定义方法"><a class="markdownIt-Anchor" href="#1012-结构变量的定义方法"></a> 10.1.2 结构变量的定义方法</h2>
+<ul>
+<li>形式1:定义完结构类型后定义变量</li>
+</ul>
+<blockquote>
+<p>struct 结构体名 变量列表;</p>
+</blockquote>
+<ul>
+<li>形式2:定义结构类型时定义变量</li>
+</ul>
+<blockquote>
+<p>struct 结构体名<br>
+{<br>
+成员列表<br>
+}变量名列表;</p>
+</blockquote>
+<ul>
+<li>形式3:直接定义结构变量</li>
+</ul>
+<blockquote>
+<p>struct<br>
+{<br>
+成员列表<br>
+}变量名列表;</p>
+</blockquote>
+<p>说明:</p>
+<ul>
+<li>使用结构体,一般需要定义一个结构体类型,在定义结构变量</li>
+<li>结构体内可以套结构</li>
+<li>结构体内成员名可以和程序中的变量名相同</li>
+</ul>
+<h2 id="1013-结构体类型变量的引用"><a class="markdownIt-Anchor" href="#1013-结构体类型变量的引用"></a> 10.1.3 结构体类型变量的引用</h2>
+<p>引用方式:<br>
+1.</p>
+<blockquote>
+<p>结构体变量.成员名</p>
+</blockquote>
+<ol start="2">
+<li></li>
+</ol>
+<blockquote>
+<p>使用指针引用成员<br>
+类型名 *指针名 = &amp;结构体变量.成员名</p>
+</blockquote>
+<h1 id="102-结构体数组和结构体指针"><a class="markdownIt-Anchor" href="#102-结构体数组和结构体指针"></a> 10.2 结构体数组和结构体指针</h1>
+<h2 id="1022-结构体指针"><a class="markdownIt-Anchor" href="#1022-结构体指针"></a> 10.2.2 结构体指针</h2>
+<p>定义:</p>
+<blockquote>
+<p>struct 结构体类型名 * 指针名;</p>
+</blockquote>
+<p>赋值:<br>
+<mark>只能指向一个结构体类型的变量,或者结构体类型数组中的某一个元素,不可以指向其中的具体成员</mark></p>
+<p>访问结构体变量成员</p>
+<ul>
+<li>使用结构体成员运算符“.”</li>
+<li>使用结构体成员运算符&quot;-&gt;&quot;</li>
+</ul>
+<p>如:</p>
+<blockquote>
+<p>struct students stu;<br>
+struct students *p;<br>
+p = &amp;stu;<br>
+(*ps).num = 1;	<mark>(*的优先级比“.”低)</mark><br>
+ps -&gt; num =1;</p>
+</blockquote>
+<p><strong>可以使用指向结构体的指针作为函数参数</strong></p>
+<h1 id="103-共用体-枚举类型与typedef"><a class="markdownIt-Anchor" href="#103-共用体-枚举类型与typedef"></a> 10.3 共用体、枚举类型与typedef</h1>
+<h2 id="1031-共用体"><a class="markdownIt-Anchor" href="#1031-共用体"></a> 10.3.1 共用体</h2>
+<p><mark>共用体和结构体的区别?<br>
+共用体的成员会占用同一段内存,而结构体中的成员会占用不同的内存</mark></p>
+<p>定义:</p>
+<blockquote>
+<p>union 共用体名<br>
+{<br>
+成员列表<br>
+}变量列表;</p>
+</blockquote>
+<p><mark>共用体类型的定义和共用体变量的定义与结构体的定义和结构体变量的定义相似</mark><br>
+<mark>共用体成员共占一段内存,所以占用内存的大小等于所占用内存最大的成员的大小</mark><br>
+<mark>每个瞬间只有一个成员起作用,其他成员不起作用</mark></p>
+<h2 id="1032-枚举类型"><a class="markdownIt-Anchor" href="#1032-枚举类型"></a> 10.3.2 枚举类型</h2>
+<p>定义枚举类型:</p>
+<blockquote>
+<p>enum 枚举类型名<br>
+{<br>
+值<br>
+}变量列表;</p>
+</blockquote>
+<ul>
+<li>C语言会自动按照定义时的顺序规定它们的值,并且值是从0开始的.</li>
+<li>可以手动在定义枚举类型的时候设置默认的<mark>枚举常量的值</mark>,后面的枚举常量的值为前一个的值+1</li>
+<li>不可以将整数直接赋值给枚举变量,但使用强制类型转换是可以的(enum 枚举类型名);</li>
+</ul>
+<h2 id="1033-用typedef定义类型"><a class="markdownIt-Anchor" href="#1033-用typedef定义类型"></a> 10.3.3 用typedef定义类型</h2>
+<p>typedef是用于<mark>定义类型名</mark>的</p>
+<blockquote>
+<p>typedef 原类型名 新类型名;<br>
+习惯上,用typedef定义的类型名用大写字母表示</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/11/9_%E6%8C%87%E9%92%88/" rel="prev" title="9_指针">
+      <i class="fa fa-chevron-left"></i> 9_指针
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/13/11_%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="next" title="11_位运算">
+      11_位运算 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93"><span class="nav-number">1.</span> <span class="nav-text"> 10 结构体与共用体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#101-%E7%BB%93%E6%9E%84%E4%BD%93%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89-%E5%BC%95%E7%94%A8%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text"> 10.1 结构体变量定义、引用与初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1011-%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text"> 10.1.1 结构体类型定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1012-%E7%BB%93%E6%9E%84%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 10.1.2 结构变量的定义方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1013-%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text"> 10.1.3 结构体类型变量的引用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#102-%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E6%8C%87%E9%92%88"><span class="nav-number">3.</span> <span class="nav-text"> 10.2 结构体数组和结构体指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1022-%E7%BB%93%E6%9E%84%E4%BD%93%E6%8C%87%E9%92%88"><span class="nav-number">3.1.</span> <span class="nav-text"> 10.2.2 结构体指针</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#103-%E5%85%B1%E7%94%A8%E4%BD%93-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E4%B8%8Etypedef"><span class="nav-number">4.</span> <span class="nav-text"> 10.3 共用体、枚举类型与typedef</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1031-%E5%85%B1%E7%94%A8%E4%BD%93"><span class="nav-number">4.1.</span> <span class="nav-text"> 10.3.1 共用体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1032-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text"> 10.3.2 枚举类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1033-%E7%94%A8typedef%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text"> 10.3.3 用typedef定义类型</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jay1060950003"
+      src="/blogImg/user.png">
+  <p class="site-author-name" itemprop="name">jay1060950003</p>
+  <div class="site-description" itemprop="description">北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jay1060950003" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jay1060950003" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jay1060950003@gmail.com" title="E-Mail → mailto:jay1060950003@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jay1060950003</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
