@@ -225,7 +225,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+                <time title="修改时间：2022-01-20 10:37:50" itemprop="dateModified" datetime="2022-01-20T10:37:50+08:00">2022-01-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -353,93 +353,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/11/12/Hexo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/11/12/JavaAPI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blogImg/user.png">
-      <meta itemprop="name" content="jay1060950003">
-      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyCodingStudio">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/12/JavaAPI/" class="post-title-link" itemprop="url">JavaAPI</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-12T00:00:00+08:00">2021-11-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="java-api"><a class="markdownIt-Anchor" href="#java-api"></a> JAVA API</h1>
-<h2 id="367-string"><a class="markdownIt-Anchor" href="#367-string"></a> 3.6.7 String</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">java.lang.string <span class="number">1.0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回给定位置的代码单元。除非对底层的代码单元感兴趣，否则不需要调用这个方法。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">codePointAt</span><span class="params">(<span class="keyword">int</span> index)</span>5.0</span></span><br><span class="line"><span class="function"><span class="comment">//返回从给定位置开始的码点。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">offsetByCodePoints</span><span class="params">(<span class="keyword">int</span> startIndex，<span class="keyword">int</span> cpCount)</span>5.0</span></span><br><span class="line"><span class="function"><span class="comment">//返回从startIndex代码点开始，位移cpCount后的码点索引。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String other)</span></span></span><br><span class="line"><span class="function"><span class="comment">//按照字典顺序，如果字符串位于other之前，返回一个负数；如果字符串位于other之后，返回一个正数；如果两个字符串相等，返回0。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">IntStream <span class="title">codePoints</span><span class="params">()</span>8</span></span><br><span class="line"><span class="function"><span class="comment">//将这个字符串的码点作为一个流返回。调用toArray将它们放在一个数组中。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">new <span class="title">String</span><span class="params">(<span class="keyword">int</span>[]codePoints，<span class="keyword">int</span> offset，<span class="keyword">int</span> count)</span>5.0</span></span><br><span class="line"><span class="function"><span class="comment">//用数组中从offset开始的count个码点构造一个字符串。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object other)</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果字符串与other相等，返回true。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equalsIgnoreCase</span><span class="params">(String other)</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果字符串与other相等(忽略大小写)，返回true。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">endsWith</span><span class="params">(String suffix)</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果字符串以suffix开头或结尾，则返回true。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">index0f</span><span class="params">(String str)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">index0f</span><span class="params">(String str，<span class="keyword">int</span> fromIndex)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">index0f</span><span class="params">(<span class="keyword">int</span> cp)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">index0f</span><span class="params">(<span class="keyword">int</span> cp，<span class="keyword">int</span> fromIndex)</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回与字符串str或代码点cp匹配的第一个子串的开始位置。这个位置从索引0或fromIndex开始计算。如果在原始串中不存在str，返回-1。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndex0f</span><span class="params">(String str)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndex0f</span><span class="params">(String str，<span class="keyword">int</span> fromIndex)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastindex0f</span><span class="params">(<span class="keyword">int</span> cp)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastindex0f</span><span class="params">(<span class="keyword">int</span> cp，<span class="keyword">int</span> fromIndex)</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回与字符串str或代码点cp匹配的最后一个子串的开始位置。这个位置从原始串尾端或fromIndex开始计算。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回字符串的长度。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">codePointCount</span><span class="params">(<span class="keyword">int</span> startIndex，<span class="keyword">int</span> endIndex)</span>5.0</span></span><br><span class="line"><span class="function"><span class="comment">//返回startIndex和endIndex-1之间的代码点数量。没有配成对的代用字符将计入代码点。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">String <span class="title">replace</span><span class="params">(CharSequence oldString，CharSequence newString)</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回一个新字符串。这个字符串用newString代替原始字符串中所有的oldString。可以用String或StringBuilder对象作为CharSequence参数。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex)</span></span></span><br><span class="line"><span class="function">String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex，<span class="keyword">int</span> endIndex)</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回一个新字符串。这个字符串包含原始字符串中从beginIndex到串尾或endIndex–1的所有代码单元。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">String <span class="title">toLowerCase</span><span class="params">()</span></span></span><br><span class="line"><span class="function">String <span class="title">toUpperCase</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回一个新字符串。这个字符串将原始字符串中的大写字母改为小写，或者将原始字符串中的所有小写字母改成了大写字母。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">String <span class="title">trim</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回一个新字符串。这个字符串将删除了原始字符串头部和尾部的空格。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">String <span class="title">join</span><span class="params">(CharSequence delimiter，CharSequence...elements)</span>8</span></span><br><span class="line"><span class="function"><span class="comment">//返回一个新字符串，用给定的定界符连接所有元素。</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//注释：在API注释中，有一些CharSequence类型的参数。这是一种接口类型，所有字符串都属于这个接口。</span></span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/12/JavaAPI/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1110,6 +1023,98 @@ C++为面向对象的语言,其与面向过程语言的最大区别是:在基于
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/10/11/9_%E6%8C%87%E9%92%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogImg/user.png">
+      <meta itemprop="name" content="jay1060950003">
+      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyCodingStudio">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/9_%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">9_指针</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-11T00:00:00+08:00">2021-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-18 19:18:35" itemprop="dateModified" datetime="2021-12-18T19:18:35+08:00">2021-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="9-指针"><a class="markdownIt-Anchor" href="#9-指针"></a> 9 指针</h1>
+<p><mark>在常见的X86、X64平台下,int类型占4字节,char占1字节,float占4字节,double占8字节</mark><br>
+<strong>在x86平台下,整型指针变量占用4字节地址,而x64平台下,整型指针变量占用8字节地址</strong></p>
+<ul>
+<li>指针变量:用于存储另一个变量的地址</li>
+<li>指针变量的值:为另一个变量的地址</li>
+<li><mark>指针就是一个地址,指针变量就是存储其他变量地址的量</mark></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/11/9_%E6%8C%87%E9%92%88/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1180,7 +1185,7 @@ C++为面向对象的语言,其与面向过程语言的最大区别是:在基于
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1191,7 +1196,7 @@ C++为面向对象的语言,其与面向过程语言的最大区别是:在基于
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
