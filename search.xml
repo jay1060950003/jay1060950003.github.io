@@ -1,134 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>12_文件操作</title>
-    <url>/2021/10/14/12_%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h1 id="12-文件操作"><a class="markdownIt-Anchor" href="#12-文件操作"></a> 12 文件操作</h1>
-<p>文本文件中,<mark>每个字节存放一个ASCII码,代表一个字符</mark></p>
-<p><strong>大端存储与小端存储?</strong></p>
-<ul>
-<li>
-<p>大端存储:低字节存储在高地址,高字节存储在低地址</p>
-</li>
-<li>
-<p>小端存储:低字节存储在低地址,高字节存储在高地址</p>
-</li>
-<li>
-<p>如果在文本文件中,以16进制保存数字,保存比较节省空间,但需要<mark>人工阅读</mark></p>
-</li>
-</ul>
-<span id="more"></span>
-<h1 id="122-文件的打开-关闭-读写"><a class="markdownIt-Anchor" href="#122-文件的打开-关闭-读写"></a> 12.2 文件的打开、关闭、读写</h1>
-<p>文件在进行读写操作之前,必须先打开,在读写结束后,必须关闭文件</p>
-<p>文件打开:</p>
-<blockquote>
-<p>FILE * fp; //FILE为一个结构体,fp是指向结构体的指针(文件指针)<br>
-fp = fopen(文件名,文件使用方式);</p>
-</blockquote>
-<p>文件使用方式:</p>
-<ul>
-<li>
-<p>r 只读</p>
-</li>
-<li>
-<p>w 只写(文件存在,则清空重写,否则创建文件)</p>
-</li>
-<li>
-<p>a 追加(末尾追加)</p>
-</li>
-<li>
-<p>rb 只读(打开二进制文件)</p>
-</li>
-<li>
-<p>wb 只写(二进制文件)</p>
-</li>
-<li>
-<p>ab 追加(二进制文件)</p>
-</li>
-<li>
-<p>r+ 读写(打开文本文件)</p>
-</li>
-<li>
-<p>w+ 读写(创建文本文件)</p>
-</li>
-<li>
-<p>文件打开后,会返回一个位置指针(*char),代表当前从文件的哪个位置开始读写.</p>
-</li>
-<li>
-<p>文件不存在时<mark>fopen函数</mark>会返回<mark>空(NULL)</mark></p>
-</li>
-</ul>
-<p>文件关闭:</p>
-<blockquote>
-<p>fclose(文件指针);</p>
-</blockquote>
-<p><mark>文件关闭时,会将缓冲区的数据立即写到磁盘上</mark></p>
-<p>文件读写:</p>
-<ul>
-<li>fputc(ch,fp);	//将ch写入磁盘文件中</li>
-<li>fgetc(fp);	//从磁盘文件中读取一个字符</li>
-<li>feof(fp);		//判断文件是否结束(结束返回1,否则返回0)</li>
-</ul>
-<h2 id="123-将结构体写入二进制文件再读出"><a class="markdownIt-Anchor" href="#123-将结构体写入二进制文件再读出"></a> 12.3 将结构体写入二进制文件再读出</h2>
-<blockquote>
-<p>fwrite(butter, size, count, fp);<br>
-向文件写入数据<br>
-butter:指针或者地址(将要写入的数据)<br>
-size:写入文件的字节数<br>
-count:要写入多少size的数据项<br>
-fp:文件指针<br>
-返回值,如果fwrite失败,返回0,否则返回count值</p>
-</blockquote>
-<ul>
-<li>对于要写入的结构体,结构体成员中不要出现指针型成员(因为指针类型成员地址可能失效)</li>
-<li>可以使用==#pragma pack(1)设置代码对齐方式为1字节对齐,即不要对齐==,可以避免程序在Linux平台读数据出错</li>
-</ul>
-<blockquote>
-<p>fread(buffer,size,count,fp);<br>
-向文件读出数据<br>
-butter:指针或者地址(将要写入的数据)<br>
-size:写入文件的字节数<br>
-count:要写入多少size的数据项<br>
-fp:文件指针<br>
-返回值,如果fwrite失败,返回0,否则返回count值</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>11_位运算</title>
-    <url>/2021/10/13/11_%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-    <content><![CDATA[<h1 id="11-位运算"><a class="markdownIt-Anchor" href="#11-位运算"></a> 11 位运算</h1>
-<p><strong>1个字节是由8个二进制位组成的</strong></p>
-<ul>
-<li>&amp; 按位与</li>
-<li>| 按位或</li>
-<li>^ 按位异或:<mark>两个位相同,返回0,不同为1</mark></li>
-<li>~ 取反</li>
-<li>&lt;&lt; 左移</li>
-<li>&gt;&gt; 右移</li>
-</ul>
-<span id="more"></span>
-<p><mark>可以使用该代码定义位操作</mark></p>
-<blockquote>
-<p>#define BIT(X) (1&lt;&lt;(X))	带参数的宏定义</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>10_结构体与共用体</title>
     <url>/2021/10/12/10_%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93/</url>
     <content><![CDATA[<h1 id="10-结构体与共用体"><a class="markdownIt-Anchor" href="#10-结构体与共用体"></a> 10 结构体与共用体</h1>
@@ -239,6 +111,134 @@ ps -&gt; num =1;</p>
 <blockquote>
 <p>typedef 原类型名 新类型名;<br>
 习惯上,用typedef定义的类型名用大写字母表示</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>11_位运算</title>
+    <url>/2021/10/13/11_%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<h1 id="11-位运算"><a class="markdownIt-Anchor" href="#11-位运算"></a> 11 位运算</h1>
+<p><strong>1个字节是由8个二进制位组成的</strong></p>
+<ul>
+<li>&amp; 按位与</li>
+<li>| 按位或</li>
+<li>^ 按位异或:<mark>两个位相同,返回0,不同为1</mark></li>
+<li>~ 取反</li>
+<li>&lt;&lt; 左移</li>
+<li>&gt;&gt; 右移</li>
+</ul>
+<span id="more"></span>
+<p><mark>可以使用该代码定义位操作</mark></p>
+<blockquote>
+<p>#define BIT(X) (1&lt;&lt;(X))	带参数的宏定义</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>12_文件操作</title>
+    <url>/2021/10/14/12_%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h1 id="12-文件操作"><a class="markdownIt-Anchor" href="#12-文件操作"></a> 12 文件操作</h1>
+<p>文本文件中,<mark>每个字节存放一个ASCII码,代表一个字符</mark></p>
+<p><strong>大端存储与小端存储?</strong></p>
+<ul>
+<li>
+<p>大端存储:低字节存储在高地址,高字节存储在低地址</p>
+</li>
+<li>
+<p>小端存储:低字节存储在低地址,高字节存储在高地址</p>
+</li>
+<li>
+<p>如果在文本文件中,以16进制保存数字,保存比较节省空间,但需要<mark>人工阅读</mark></p>
+</li>
+</ul>
+<span id="more"></span>
+<h1 id="122-文件的打开-关闭-读写"><a class="markdownIt-Anchor" href="#122-文件的打开-关闭-读写"></a> 12.2 文件的打开、关闭、读写</h1>
+<p>文件在进行读写操作之前,必须先打开,在读写结束后,必须关闭文件</p>
+<p>文件打开:</p>
+<blockquote>
+<p>FILE * fp; //FILE为一个结构体,fp是指向结构体的指针(文件指针)<br>
+fp = fopen(文件名,文件使用方式);</p>
+</blockquote>
+<p>文件使用方式:</p>
+<ul>
+<li>
+<p>r 只读</p>
+</li>
+<li>
+<p>w 只写(文件存在,则清空重写,否则创建文件)</p>
+</li>
+<li>
+<p>a 追加(末尾追加)</p>
+</li>
+<li>
+<p>rb 只读(打开二进制文件)</p>
+</li>
+<li>
+<p>wb 只写(二进制文件)</p>
+</li>
+<li>
+<p>ab 追加(二进制文件)</p>
+</li>
+<li>
+<p>r+ 读写(打开文本文件)</p>
+</li>
+<li>
+<p>w+ 读写(创建文本文件)</p>
+</li>
+<li>
+<p>文件打开后,会返回一个位置指针(*char),代表当前从文件的哪个位置开始读写.</p>
+</li>
+<li>
+<p>文件不存在时<mark>fopen函数</mark>会返回<mark>空(NULL)</mark></p>
+</li>
+</ul>
+<p>文件关闭:</p>
+<blockquote>
+<p>fclose(文件指针);</p>
+</blockquote>
+<p><mark>文件关闭时,会将缓冲区的数据立即写到磁盘上</mark></p>
+<p>文件读写:</p>
+<ul>
+<li>fputc(ch,fp);	//将ch写入磁盘文件中</li>
+<li>fgetc(fp);	//从磁盘文件中读取一个字符</li>
+<li>feof(fp);		//判断文件是否结束(结束返回1,否则返回0)</li>
+</ul>
+<h2 id="123-将结构体写入二进制文件再读出"><a class="markdownIt-Anchor" href="#123-将结构体写入二进制文件再读出"></a> 12.3 将结构体写入二进制文件再读出</h2>
+<blockquote>
+<p>fwrite(butter, size, count, fp);<br>
+向文件写入数据<br>
+butter:指针或者地址(将要写入的数据)<br>
+size:写入文件的字节数<br>
+count:要写入多少size的数据项<br>
+fp:文件指针<br>
+返回值,如果fwrite失败,返回0,否则返回count值</p>
+</blockquote>
+<ul>
+<li>对于要写入的结构体,结构体成员中不要出现指针型成员(因为指针类型成员地址可能失效)</li>
+<li>可以使用==#pragma pack(1)设置代码对齐方式为1字节对齐,即不要对齐==,可以避免程序在Linux平台读数据出错</li>
+</ul>
+<blockquote>
+<p>fread(buffer,size,count,fp);<br>
+向文件读出数据<br>
+butter:指针或者地址(将要写入的数据)<br>
+size:写入文件的字节数<br>
+count:要写入多少size的数据项<br>
+fp:文件指针<br>
+返回值,如果fwrite失败,返回0,否则返回count值</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -4198,65 +4198,6 @@ s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class=
       </tags>
   </entry>
   <entry>
-    <title>3_程序的基本结构和语句</title>
-    <url>/2021/10/05/3_%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[<h1 id="3-程序的基本结构和语句"><a class="markdownIt-Anchor" href="#3-程序的基本结构和语句"></a> 3 程序的基本结构和语句</h1>
-<h1 id="31-c语言的语句和程序的基本结构"><a class="markdownIt-Anchor" href="#31-c语言的语句和程序的基本结构"></a> 3.1 C语言的语句和程序的基本结构</h1>
-<blockquote>
-<p>continue		结束本次循环,开始下次循环是否执行的判断<br>
-break			 终止循环的执行或者跳出switch语句</p>
-</blockquote>
-<span id="more"></span>
-<h2 id="312-程序的三种基本结构"><a class="markdownIt-Anchor" href="#312-程序的三种基本结构"></a> 3.1.2 程序的三种基本结构</h2>
-<ul>
-<li>顺序结构</li>
-<li>选择结构</li>
-<li>循环结构
-<ul>
-<li>当型循环:先判断再执行</li>
-<li>直到型循环:先执行再判断</li>
-</ul>
-</li>
-</ul>
-<h1 id="32-数据的输出与输入"><a class="markdownIt-Anchor" href="#32-数据的输出与输入"></a> 3.2 数据的输出与输入</h1>
-<ul>
-<li><mark>当使用尖括号&lt;&gt;包括头文件时,表示在系统目录中寻找头文件</mark></li>
-<li><mark>当使用双引号&quot;&quot;包括头文件时,表示在源代码所在目录中搜索头文件,再到系统目录中搜索头文件</mark></li>
-</ul>
-<p><strong>printf()函数</strong></p>
-<blockquote>
-<p>printf(格式控制字符串,输出表列)<br>
-%d:表示以十进制输出数字<br>
-%o:表示以八进制输出数字<br>
-%x:表示以十六进制输出数字<br>
-%u:以十进制输出无符号数字<br>
-%c:表示输出一个字符<br>
-%s:表示输出一个字符串.<strong>字符串末尾有一个系统自动加入的’\0’作为字符串结束标记,但输出显示不显示该字符</strong>.<br>
-%f:输出一个小数.<mark>%x.yf表示以x宽度输出y位小数的数字</mark></p>
-</blockquote>
-<p>百分号的输出方法:</p>
-<ol>
-<li>使用两个百分号输出</li>
-<li>使用%c输出‘%’</li>
-<li>使用%s输出“%”</li>
-</ol>
-<h2 id="322-数据的输入"><a class="markdownIt-Anchor" href="#322-数据的输入"></a> 3.2.2 数据的输入</h2>
-<p>在程序中,最好只使用一个getchar()输入,避免结束输入时,第二个getchar()函数读取回车符号,影响程序的正常预期.</p>
-<p><strong>scanf(格式控制字符串,地址表列);</strong></p>
-<ul>
-<li>第二个参数为地址表列,使用的是地址,不要忘记 &amp; 符号对变量取地址</li>
-<li>要注意输入与格式控制字符串形式相同</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2_数据类型_运算符与表达式</title>
     <url>/2021/10/04/2_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B_%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="2-数据类型-运算符与表达式"><a class="markdownIt-Anchor" href="#2-数据类型-运算符与表达式"></a> 2 数据类型、运算符与表达式</h1>
@@ -4338,6 +4279,65 @@ i–;	先使用再减一</p>
 <h1 id="23-赋值运算符"><a class="markdownIt-Anchor" href="#23-赋值运算符"></a> 2.3 赋值运算符</h1>
 <p>赋值的原则:赋值符号的左右两边的数据类型应该相同,类型不同时可以使用强制转换符进行转换.<br>
 **逗号运算符的求解规则:先求解表达式1,再求解表达式2.</p>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3_程序的基本结构和语句</title>
+    <url>/2021/10/05/3_%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<h1 id="3-程序的基本结构和语句"><a class="markdownIt-Anchor" href="#3-程序的基本结构和语句"></a> 3 程序的基本结构和语句</h1>
+<h1 id="31-c语言的语句和程序的基本结构"><a class="markdownIt-Anchor" href="#31-c语言的语句和程序的基本结构"></a> 3.1 C语言的语句和程序的基本结构</h1>
+<blockquote>
+<p>continue		结束本次循环,开始下次循环是否执行的判断<br>
+break			 终止循环的执行或者跳出switch语句</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="312-程序的三种基本结构"><a class="markdownIt-Anchor" href="#312-程序的三种基本结构"></a> 3.1.2 程序的三种基本结构</h2>
+<ul>
+<li>顺序结构</li>
+<li>选择结构</li>
+<li>循环结构
+<ul>
+<li>当型循环:先判断再执行</li>
+<li>直到型循环:先执行再判断</li>
+</ul>
+</li>
+</ul>
+<h1 id="32-数据的输出与输入"><a class="markdownIt-Anchor" href="#32-数据的输出与输入"></a> 3.2 数据的输出与输入</h1>
+<ul>
+<li><mark>当使用尖括号&lt;&gt;包括头文件时,表示在系统目录中寻找头文件</mark></li>
+<li><mark>当使用双引号&quot;&quot;包括头文件时,表示在源代码所在目录中搜索头文件,再到系统目录中搜索头文件</mark></li>
+</ul>
+<p><strong>printf()函数</strong></p>
+<blockquote>
+<p>printf(格式控制字符串,输出表列)<br>
+%d:表示以十进制输出数字<br>
+%o:表示以八进制输出数字<br>
+%x:表示以十六进制输出数字<br>
+%u:以十进制输出无符号数字<br>
+%c:表示输出一个字符<br>
+%s:表示输出一个字符串.<strong>字符串末尾有一个系统自动加入的’\0’作为字符串结束标记,但输出显示不显示该字符</strong>.<br>
+%f:输出一个小数.<mark>%x.yf表示以x宽度输出y位小数的数字</mark></p>
+</blockquote>
+<p>百分号的输出方法:</p>
+<ol>
+<li>使用两个百分号输出</li>
+<li>使用%c输出‘%’</li>
+<li>使用%s输出“%”</li>
+</ol>
+<h2 id="322-数据的输入"><a class="markdownIt-Anchor" href="#322-数据的输入"></a> 3.2.2 数据的输入</h2>
+<p>在程序中,最好只使用一个getchar()输入,避免结束输入时,第二个getchar()函数读取回车符号,影响程序的正常预期.</p>
+<p><strong>scanf(格式控制字符串,地址表列);</strong></p>
+<ul>
+<li>第二个参数为地址表列,使用的是地址,不要忘记 &amp; 符号对变量取地址</li>
+<li>要注意输入与格式控制字符串形式相同</li>
+</ul>
 ]]></content>
       <categories>
         <category>Coding</category>
@@ -4537,6 +4537,53 @@ return result;<br>
       </tags>
   </entry>
   <entry>
+    <title>6_数组</title>
+    <url>/2021/10/08/6_%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="6-数组"><a class="markdownIt-Anchor" href="#6-数组"></a> 6 数组</h1>
+<h1 id="61-一维数组"><a class="markdownIt-Anchor" href="#61-一维数组"></a> 6.1 一维数组</h1>
+<p>定义:</p>
+<blockquote>
+<p>类型说明 数组名[常量表达式]</p>
+</blockquote>
+<p>引用:</p>
+<blockquote>
+<p>数组名[下标]</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="62-二维数组"><a class="markdownIt-Anchor" href="#62-二维数组"></a> 6.2 二维数组</h1>
+<p>在C语言中,二维数组的元素存放顺序为:按<strong>行</strong>存放<br>
+多维数组在内存中排列顺序:第一维下标变化最慢,最右边维度变化最快</p>
+<h1 id="63-字符数组"><a class="markdownIt-Anchor" href="#63-字符数组"></a> 6.3 字符数组</h1>
+<h2 id="633-字符串和字符串结束标记"><a class="markdownIt-Anchor" href="#633-字符串和字符串结束标记"></a> 6.3.3 字符串和字符串结束标记</h2>
+<p><mark>C语言中规定了一个字符串结束标记,用’\0’代表,如果一个字符串的第十个字符为‘\0’,则该字符串的长度为9个,即遇到‘\0’表示字符串结束,该字符前面的字符构成字符串.可见10个可见字符的字符串,其可见字符若每个占用一个字节,则整个字符串在内存中占用11个字节</mark><br>
+<strong>注意:设置字符串变量的时候需要考虑–字符串结束标记–,则需要可见字符串长度加一设置大小</strong><br>
+<mark>对于双引号包含的字符串,系统会自动往末尾添加一个’\0’,若人工添加也是可以的,若没有字符串结束标记也是可以的</mark></p>
+<h2 id="635-字符串处理函数"><a class="markdownIt-Anchor" href="#635-字符串处理函数"></a> 6.3.5 字符串处理函数</h2>
+<p>strcat(字符数组1,字符数组2);<br>
+把字符数组2连接到字符数组1的后面,存放在字符数组1中.<br>
+说明:</p>
+<ul>
+<li>字符数组必须足够大,能够容纳连接后的新字符串.</li>
+<li>连接前两个字符数组都包括字符结束标记,但连接时会自动删除字符数组1的字符结束标记</li>
+<li>连接后字符数组2没有变化</li>
+</ul>
+<p>strcpy(字符数组1,字符数组2);<br>
+把字符数组2复制到字符数组1中.<br>
+<mark>不能使用赋值语句对字符数组直接赋值,只能对单个字符进行赋值</mark></p>
+<p>strcmp(字符数组1,字符数组2);<br>
+字符串比较,若字符数组1&gt;字符数组2,使用的是ASCII码进行比较,返回一个正整数,相等返回0.</p>
+<p>strlen(字符数组);<br>
+返回字符串的长度,<mark>不包括字符结束标记</mark>.</p>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>8_编译预处理</title>
     <url>/2021/10/10/8_%E7%BC%96%E8%AF%91%E9%A2%84%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<h1 id="8-编译预处理"><a class="markdownIt-Anchor" href="#8-编译预处理"></a> 8 编译预处理</h1>
@@ -4620,53 +4667,6 @@ return result;<br>
 程序段3<br>
 #endif</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>6_数组</title>
-    <url>/2021/10/08/6_%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h1 id="6-数组"><a class="markdownIt-Anchor" href="#6-数组"></a> 6 数组</h1>
-<h1 id="61-一维数组"><a class="markdownIt-Anchor" href="#61-一维数组"></a> 6.1 一维数组</h1>
-<p>定义:</p>
-<blockquote>
-<p>类型说明 数组名[常量表达式]</p>
-</blockquote>
-<p>引用:</p>
-<blockquote>
-<p>数组名[下标]</p>
-</blockquote>
-<span id="more"></span>
-<h1 id="62-二维数组"><a class="markdownIt-Anchor" href="#62-二维数组"></a> 6.2 二维数组</h1>
-<p>在C语言中,二维数组的元素存放顺序为:按<strong>行</strong>存放<br>
-多维数组在内存中排列顺序:第一维下标变化最慢,最右边维度变化最快</p>
-<h1 id="63-字符数组"><a class="markdownIt-Anchor" href="#63-字符数组"></a> 6.3 字符数组</h1>
-<h2 id="633-字符串和字符串结束标记"><a class="markdownIt-Anchor" href="#633-字符串和字符串结束标记"></a> 6.3.3 字符串和字符串结束标记</h2>
-<p><mark>C语言中规定了一个字符串结束标记,用’\0’代表,如果一个字符串的第十个字符为‘\0’,则该字符串的长度为9个,即遇到‘\0’表示字符串结束,该字符前面的字符构成字符串.可见10个可见字符的字符串,其可见字符若每个占用一个字节,则整个字符串在内存中占用11个字节</mark><br>
-<strong>注意:设置字符串变量的时候需要考虑–字符串结束标记–,则需要可见字符串长度加一设置大小</strong><br>
-<mark>对于双引号包含的字符串,系统会自动往末尾添加一个’\0’,若人工添加也是可以的,若没有字符串结束标记也是可以的</mark></p>
-<h2 id="635-字符串处理函数"><a class="markdownIt-Anchor" href="#635-字符串处理函数"></a> 6.3.5 字符串处理函数</h2>
-<p>strcat(字符数组1,字符数组2);<br>
-把字符数组2连接到字符数组1的后面,存放在字符数组1中.<br>
-说明:</p>
-<ul>
-<li>字符数组必须足够大,能够容纳连接后的新字符串.</li>
-<li>连接前两个字符数组都包括字符结束标记,但连接时会自动删除字符数组1的字符结束标记</li>
-<li>连接后字符数组2没有变化</li>
-</ul>
-<p>strcpy(字符数组1,字符数组2);<br>
-把字符数组2复制到字符数组1中.<br>
-<mark>不能使用赋值语句对字符数组直接赋值,只能对单个字符进行赋值</mark></p>
-<p>strcmp(字符数组1,字符数组2);<br>
-字符串比较,若字符数组1&gt;字符数组2,使用的是ASCII码进行比较,返回一个正整数,相等返回0.</p>
-<p>strlen(字符数组);<br>
-返回字符串的长度,<mark>不包括字符结束标记</mark>.</p>
 ]]></content>
       <categories>
         <category>Coding</category>
@@ -4833,7 +4833,7 @@ int (*p)[10];<br>
 <li>狂神说JAVA</li>
 <li>JavaSE阶段回顾总结</li>
 </ul>
-<!---more--->
+<span id="more"></span>
 <h1 id="1-java语言"><a class="markdownIt-Anchor" href="#1-java语言"></a> 1 Java语言</h1>
 <ul>
 <li>编译型语言,解释型语言</li>
@@ -5591,6 +5591,456 @@ int (*p)[10];<br>
 <li>Stream流</li>
 <li>Forkjoin</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一章 JAVA程序设计概论</title>
+    <url>/2021/11/13/%E7%AC%AC%E4%B8%80%E7%AB%A0%20JAVA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%AE%BA/</url>
+    <content><![CDATA[<h1 id="12-java白皮书的关键术语"><a class="markdownIt-Anchor" href="#12-java白皮书的关键术语"></a> 1.2 Java“白皮书”的关键术语</h1>
+<p>11个关键术语：</p>
+<ol>
+<li>简单性</li>
+<li>面向对象</li>
+<li>分布式</li>
+<li><strong>健壮性</strong>：</li>
+</ol>
+<ul>
+<li>Java的设计目标之一在于使得Java编写的程序具有多方面的可靠性</li>
+<li>Java和C++最大的不同在于Java采用的指针模型可以消除重写内存和损坏数据的可能性</li>
+</ul>
+<span id="more"></span>
+<ol start="5">
+<li><strong>安全性</strong>：</li>
+</ol>
+<ul>
+<li>Java代码不论来自哪里，都不能脱离<mark>沙箱</mark></li>
+<li>编译器生成一个体系结构中立的目标文件格式，这是一种编译过的代码，这些编译后的代码可以在许多处理器上运行</li>
+<li>解释虚拟机指令肯定会比全速运行机器指令慢很多</li>
+<li><mark>即时编译</mark>：虚拟机的一个选项，可以<mark>将执行最频繁的字节码序列翻译成机器码</mark></li>
+</ul>
+<ol start="7">
+<li><strong>可移植性</strong>：</li>
+</ol>
+<ul>
+<li>数据类型具有固定的大小</li>
+<li>消除了代码移植时的问题</li>
+<li>二进制数据以固定的格式进行存储和传输，消除了字节顺序的困扰</li>
+<li>字符串是用标准的Unicode格式存储的</li>
+<li>除了与用户界面有关的部分外，所有其他Java库都能很好地支持平台独立性。可以处理文件、正则表达式、XML、日期和时间、数据库、网络连接、线程等，而不用操心底层操作系统。<mark>不仅程序是可移植的，Java API往往也比原生API质量更高</mark></li>
+</ul>
+<ol start="8">
+<li>解释型</li>
+<li>高性能</li>
+<li>多线程</li>
+<li>动态性</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第七章 异常_断言和日志</title>
+    <url>/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h1 id="7-异常_断言和日志"><a class="markdownIt-Anchor" href="#7-异常_断言和日志"></a> 7 异常_断言和日志</h1>
+<hr>
+<h1 id="71-处理错误"><a class="markdownIt-Anchor" href="#71-处理错误"></a> 7.1 处理错误</h1>
+<h2 id="711-异常分类"><a class="markdownIt-Anchor" href="#711-异常分类"></a> 7.1.1 异常分类</h2>
+<p><img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-22-15-41-48.png" alt="Java中的异常层次结构"></p>
+<ul>
+<li>异常对象都是派生于Throwable类的一个实例
+<ul>
+<li>所有的异常都是Throwable继承下而来的,但分解为<mark>Error和Exception</mark>
+<ul>
+<li>Error类层次结构描述了Java运行时系统的内部错误和资源耗尽错误(应用程序不应该抛出这种类型的对象)</li>
+<li><strong>需要关注Exception层次</strong>该层次结构又分解为两个分支：一个分支派生于RuntimeException;另一个分支包含其他异常</li>
+<li>划分两个分支的规则是：
+<ul>
+<li>程序错误导致的异常属于RuntimeException</li>
+<li>程序本身没有问题,但由于像I/O错误这类问题导致的异常属于其他异常</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java语言规范将<mark>派生于Error类或RuntimeException类的所有异常称为非受查异常</mark>，所有其他的异常称为受查异常
+<ul>
+<li>编译器将核查是否为所有的受查异常提供了异常处理器</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="712-声明受查异常"><a class="markdownIt-Anchor" href="#712-声明受查异常"></a> 7.1.2 声明受查异常</h2>
+<ul>
+<li>方法应该在其<mark>首部声明所有可能抛出的异常</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//例</span></span><br><span class="line"><span class="comment">//标准类库中提供的FileInputStream类的一个构造器的声明</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span> <span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundExpection</span></span><br><span class="line"><span class="function"><span class="comment">//这个声明表示这个构造器将根据给定的String参数产生一个FileInputStream对象，但也有可能抛出一个FileNotFoundException异常</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//对于那些可能被他人使用的Java方法</span></span></span><br><span class="line"><span class="function"><span class="comment">//应该根据异常规范，在方法的首部声明这个方法可能抛出的异常</span></span></span><br><span class="line"><span class="function">class MyAnimation</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Image <span class="title">loadImage</span><span class="params">(String s)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个方法有可能抛出多个受查异常类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAnimation</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Image <span class="title">loadImage</span><span class="params">(String s)</span> <span class="keyword">throws</span> FileNotFoundException,EOFException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>在自己写的方法中.需要抛出异常的4种情况：</p>
+<ol>
+<li>调用一个抛出受查异常的方法，例如，FileInputStream构造器</li>
+<li>程序运行过程中发现错误，并且利用throw语句抛出一个受查异常</li>
+<li>程序出现错误，例如，a[–1]=0会抛出一个ArrayIndexOutOfBoundsException这样的非受查异常</li>
+<li>Java虚拟机和运行时库出现的内部错误</li>
+</ol>
+</li>
+<li>
+<p><mark>不需要声明Java的内部错误，即从Error继承的错误</mark></p>
+</li>
+<li>
+<p>一个方法必须声明所有可能抛出的受查异常，而非受查异常要么不可控制(Error)，要么就应该避免发生(RuntimeException)</p>
+</li>
+<li>
+<p>如果在子类中覆盖了超类的一个方法，<mark>子类方法中声明的受查异常不能比超类方法中声明的异常更通用</mark></p>
+<ul>
+<li>也就是说，子类方法中可以抛出更特定的异常，或者根本不抛出任何异常</li>
+</ul>
+</li>
+<li>
+<p><mark>如果超类方法没有抛出任何受查异常，子类也不能抛出任何受查异常</mark></p>
+</li>
+<li>
+<p>如果类中的一个方法声明将会抛出一个异常，而这个异常是某个特定类的实例时，则这个方法就<mark>可能抛出一个这个类的异常，或者这个类的任意一个子类的异常</mark></p>
+</li>
+</ul>
+<h2 id="713-如何抛出异常"><a class="markdownIt-Anchor" href="#713-如何抛出异常"></a> 7.1.3 如何抛出异常</h2>
+<ul>
+<li>对于一个<mark>已经存在的异常类</mark>,抛出方法：
+<ul>
+<li>找到一个合适的异常类</li>
+<li>创建这个类的一个对象</li>
+<li>将对象抛出</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//EOFException异常描述的是“在输入过程中遇到了一个未预期的EOF后的信号”</span></span><br><span class="line"><span class="comment">//抛出异常的语句</span></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> EOFException();</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">EOFException e = <span class="keyword">new</span> EOFException();</span><br><span class="line"><span class="keyword">throw</span> e;</span><br><span class="line"></span><br><span class="line"><span class="comment">//EOFException类还有一个含有一个字符串型参数的构造器</span></span><br><span class="line"><span class="comment">//这个构造器可以更加细致的描述异常出现的情况</span></span><br><span class="line">String gripe = <span class="string">&quot;Content Length: &quot;</span> + len + <span class="string">&quot;, Received: &quot;</span> + n;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> EOFException(gripe);</span><br></pre></td></tr></table></figure>
+<h2 id="714-创建异常类"><a class="markdownIt-Anchor" href="#714-创建异常类"></a> 7.1.4 创建异常类</h2>
+<ul>
+<li><mark>需要做的只是定义一个派生于Exception的类，或者派生于Exception子类的类</mark>
+<ul>
+<li>例如，定义一个派生于IOException的类</li>
+<li>习惯上，定义的类应该包含两个构造器
+<ul>
+<li>一个是默认的构造器</li>
+<li>另一个是带有详细描述信息的构造器(超类Throwable的toString方法将会打印出这些详细信息，这在调试中非常有用)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义自己的异常类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileFormatException</span> <span class="keyword">extends</span> <span class="title">IOException</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileFormatException</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileFormatException</span><span class="params">(String gripe)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(gripe);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//抛出</span></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> FileFormatException();</span><br></pre></td></tr></table></figure>
+<h1 id="72-捕获异常"><a class="markdownIt-Anchor" href="#72-捕获异常"></a> 7.2 捕获异常</h1>
+<h2 id="721-捕获异常"><a class="markdownIt-Anchor" href="#721-捕获异常"></a> 7.2.1 捕获异常</h2>
+<ul>
+<li><mark>要想捕获一个异常，必须设置try/catch语句块</mark>
+<ul>
+<li>如果在try语句块中的任何代码抛出了一个在catch子句中说明的异常类
+<ul>
+<li>程序将跳过try语句块的其余代码</li>
+<li>程序将执行catch子句中的处理器代码</li>
+</ul>
+</li>
+<li>如果在try语句块中的代码没有抛出任何异常，那么程序将跳过catch子句</li>
+<li>如果方法中的任何代码抛出了一个在catch子句中没有声明的异常类型，那么这个方法就会立刻退出</li>
+</ul>
+</li>
+<li><mark>如果编写一个覆盖超类的方法，而这个方法又没有抛出异常，那么这个方法就必须捕获方法代码中出现的每一个受查异常</mark>
+<ul>
+<li>不允许在子类的throws说明符中出现超过超类方法所列出的异常类范围</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//try/catch语句</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (ExceptionType e) &#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="722-捕获多个异常"><a class="markdownIt-Anchor" href="#722-捕获多个异常"></a> 7.2.2 捕获多个异常</h2>
+<ul>
+<li><mark>捕获多个异常时，异常变量隐含为final变量</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//捕获多个异常类型，并对不同类型的异常做出不同的处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (FileNotFoundException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (UnknownHostException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得异常对象的更多信息</span></span><br><span class="line">e.getMessage();</span><br><span class="line"><span class="comment">//获得更详细的错误信息</span></span><br><span class="line">e.getClass().getName();</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Java SE 7中，同一个catch子句中可以捕获多个异常类型</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (FileNotFoundException | UnknownHostException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="723-再次抛出异常与异常链"><a class="markdownIt-Anchor" href="#723-再次抛出异常与异常链"></a> 7.2.3 再次抛出异常与异常链</h2>
+<ul>
+<li>在catch子句中可以抛出一个异常，这样做的目的是<mark>改变异常的类型</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//捕获异常并将它再次抛出的基本方法</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">&quot;database error: &quot;</span> + e.getMessage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//更好的处理方式，并且将原始异常设置为新异常的原因</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    Throwable se = <span class="keyword">new</span> ServletException(<span class="string">&quot;database erroe:&quot;</span>);</span><br><span class="line">    se.initCause(e);</span><br><span class="line">    <span class="keyword">throw</span> se;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//当捕获到异常时，就可以使用下面这条语句重新得到原始异常</span></span><br><span class="line">Throwable e = se.getCause();</span><br><span class="line"></span><br><span class="line"><span class="comment">//只想记录一个异常，再将它重新抛出，而不做任何改变</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    logger.log(level,message, e);</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="724-finally子句"><a class="markdownIt-Anchor" href="#724-finally子句"></a> 7.2.4 finally子句</h2>
+<ul>
+<li><strong>如果方法获得了一些本地资源，并且只有这个方法自己知道，又如果这些资源在退出方法之前必须被回收，那么就会产生资源回收问题</strong>
+<ul>
+<li>一种解决方案是捕获并重新抛出所有的异常(需要在正常的代码中和异常代码中清除所分配的资源)</li>
+<li>一种更好的解决方案，<mark>finally子句</mark>
+<ul>
+<li><mark>不管是否有异常被捕获，finally子句中的代码都被执行</mark></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><mark>finally中的代码总会执行</mark></li>
+<li>当finally子句<mark>包含return语句时，将会出现错误的结果</mark>
+<ul>
+<li>假设利用return语句从try语句块中退出</li>
+<li>在方法返回前，finally子句的内容将被执行</li>
+<li>如果finally子句中也有一个return语句，这个返回值将会覆盖原始的返回值</li>
+</ul>
+</li>
+<li><mark>清理资源的方法也有可能抛出异常</mark>
+<ul>
+<li>close方法本身也有可能抛出IOException异常。当出现这种情况时，原始的异常将会丢失，转而抛出close方法的异常</li>
+<li><mark>可以使用带资源的try语句解决</mark></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//try语句可以只有finally子句,而没有catch子句</span></span><br><span class="line"></span><br><span class="line">InputStream in = <span class="keyword">new</span> FileInputStream(...)</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    &#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">      in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">//show error message</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//内层的try语句块只有一个职责，就是确保关闭输入流</span></span><br><span class="line"><span class="comment">//外层的try语句块也只有一个职责，就是确保报告出现的错误</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> r = n * n;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;   <span class="keyword">finally</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">2</span>)   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果调用f(2)，那么try语句块的计算结果为r=4，并执行return语句</span></span><br><span class="line"><span class="comment">//然而，在方法真正返回前，还要执行finally子句。finally子句将使得方法返回0，这个返回值覆盖了原始的返回值4</span></span><br></pre></td></tr></table></figure>
+<h2 id="725-带资源的try语句"><a class="markdownIt-Anchor" href="#725-带资源的try语句"></a> 7.2.5 带资源的try语句</h2>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//带资源的try语句的简单形式</span></span><br><span class="line"><span class="keyword">try</span> (Resource res = ...) &#123;</span><br><span class="line">    <span class="comment">//work with res    </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//try块退出时，会自动调用res.close()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以指定多个资源</span></span><br><span class="line"><span class="keyword">try</span> (Scanner in = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;user/share/dict/words&quot;</span>),<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="string">&quot;out.txt&quot;</span>)) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(in.hasNext())</span><br><span class="line">        out.println(in.next().toUpperCase());    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><mark>带资源的try语句可以很好地处理:try块抛出一个异常，而且close方法也抛出一个异常</mark>
+<ul>
+<li>原来的异常会重新抛出，而close方法抛出的异常会“被抑制”</li>
+<li>这些异常将自动捕获，并由addSuppressed方法增加到原来的异常</li>
+<li>如果对这些异常感兴趣，可以调用getSuppressed方法，它会得到从close方法抛出并被抑制的异常列表</li>
+</ul>
+</li>
+<li><mark>只要需要关闭资源,就要尽可能使用带资源的try语句</mark>
+<ul>
+<li>带资源的try语句的<mark>catch子句和一个finally子句在关闭资源之后执行</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="726-分析堆栈轨迹元素"><a class="markdownIt-Anchor" href="#726-分析堆栈轨迹元素"></a> 7.2.6 分析堆栈轨迹元素</h2>
+<ul>
+<li>堆栈轨迹是一个<mark>方法调用过程的列表，它包含了程序执行过程中方法调用的特定位置</mark></li>
+<li>可以调用<mark>Throwable类的printStackTrace方法</mark>访问堆栈轨迹的文本描述信息
+<ul>
+<li><mark>使用getStackTrace方法得到StackTraceElement对象的一个数组，可以在程序中分析这个对象数组</mark>
+<ul>
+<li>StackTraceElement类含有能够获得文件名和当前执行的代码行号的方法;同时,还含有能够获得类名和方法名的方法</li>
+<li>使用toString方法将产生一个格式化的字符串，其中包含所获得的信息</li>
+</ul>
+</li>
+<li>静态的Thread.getAllStackTrace方法可以产生所有线程的堆栈轨迹</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Throwable t = <span class="keyword">new</span> Throwable();</span><br><span class="line">StringWriter out = <span class="keyword">new</span> StringWriter();</span><br><span class="line">t.printStackTrace(<span class="keyword">new</span> PrintWriter(out));</span><br><span class="line">String description = out.toString();</span><br><span class="line"></span><br><span class="line">StackTraceElement[] frams = t.getStackTrace();</span><br><span class="line"><span class="keyword">for</span> (StackTraceElement frame : frames)</span><br><span class="line">    <span class="comment">//analyze frame</span></span><br><span class="line"></span><br><span class="line">Map&lt;Tread, StackTraceElement[]&gt; map = Tread.getAllStackTrace();</span><br><span class="line"><span class="keyword">for</span> (Tread t :map.keySet())</span><br><span class="line">&#123;</span><br><span class="line">    StackTraceElement[] frames = map.get(t);</span><br><span class="line">    <span class="comment">//analyze frames</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="73-使用异常的技巧"><a class="markdownIt-Anchor" href="#73-使用异常的技巧"></a> 7.3 使用异常的技巧</h1>
+<ol>
+<li>异常处理不能代替简单的测试：只在异常情况下使用异常机制</li>
+<li>不要过分地细化异常</li>
+<li>利用异常层次结构
+<ol>
+<li>不要只抛出RuntimeException异常。应该寻找更加适当的子类或创建自己的异常类</li>
+<li>不要只捕获Thowable异常，否则，会使程序代码更难读、更难维护</li>
+</ol>
+</li>
+<li>不要压制异常</li>
+<li>在检测错误时，“苛刻”要比放任更好</li>
+<li>不要羞于传递异常</li>
+</ol>
+<h1 id="74-使用断言"><a class="markdownIt-Anchor" href="#74-使用断言"></a> 7.4 使用断言</h1>
+<h2 id="741-断言的概念"><a class="markdownIt-Anchor" href="#741-断言的概念"></a> 7.4.1 断言的概念</h2>
+<ul>
+<li>断言机制允许在测试期间向代码中插入一些检查语句
+<ul>
+<li>当代码发布时，这些插入的检测语句将会被自动地移走</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//两种形式:</span></span><br><span class="line"><span class="keyword">assert</span> 条件</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line"><span class="keyword">assert</span> 条件:表达式;</span><br><span class="line"><span class="comment">//这两种形式都会对条件进行检测，如果结果为false，则抛出一个AssertionError异常</span></span><br><span class="line"><span class="comment">//在第二种形式中，表达式将被传入AssertionError的构造器，并转换成一个消息字符串</span></span><br></pre></td></tr></table></figure>
+<h2 id="742-启用和禁用断言"><a class="markdownIt-Anchor" href="#742-启用和禁用断言"></a> 7.4.2 启用和禁用断言</h2>
+<ul>
+<li>默认情况下，断言被禁用
+<ul>
+<li>可以在运行程序时用-enableassertions或-ea选项启用</li>
+<li>在启用或禁用断言时不必重新编译程序
+<ul>
+<li>启用或禁用断言是类加载器的功能。当断言被禁用时，类加载器将跳过断言代码，因此，不会降低程序运行的速度</li>
+</ul>
+</li>
+<li>可以用选项-disableassertions或-da禁用某个特定类和包的断言</li>
+</ul>
+</li>
+<li>启用和禁用所有断言的-ea和-da开关不能应用到那些没有类加载器的“系统类”上
+<ul>
+<li>对于这些系统类来说，需要使用-enablesystemassertions/-esa开关启用断言</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//启用断言</span></span><br><span class="line">java -enableassertions MyApp</span><br><span class="line"><span class="comment">//在某个类或整个包中使用断言</span></span><br><span class="line">java -ea:MyClass -ea:com.mycompany.mylib...MyApp</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用断言</span></span><br><span class="line">java -ea:... -da:MyClass MyApp</span><br></pre></td></tr></table></figure>
+<h2 id="743-使用断言完成参数检查"><a class="markdownIt-Anchor" href="#743-使用断言完成参数检查"></a> 7.4.3 使用断言完成参数检查</h2>
+<p>使用断言的情况：</p>
+<ul>
+<li>断言失败是致命的、不可恢复的错误</li>
+<li>断言检查只用于开发和测阶段</li>
+</ul>
+<h1 id="75-记录日志"><a class="markdownIt-Anchor" href="#75-记录日志"></a> 7.5 记录日志</h1>
+<ul>
+<li>记录日志API的优点:
+<ul>
+<li>可以很容易地取消全部日志记录,或者仅仅取消某个级别的日志,而且打开和关闭这个操作也很容易</li>
+<li>可以很简单地禁止日志记录的输出</li>
+<li>日志记录可以被定向到不同的处理器.用于在控制台中显示,用于存储在文件中等</li>
+<li>日志记录器和处理器都可以对记录进行过滤.过滤器可以根据过滤实现器制定的标准丢弃那些无用的记录项</li>
+<li>日志记录可以采用不同的方式格式化</li>
+<li>应用程序可以使用多个日志记录器，它们使用类似包名的这种具有层次结构的名字</li>
+<li>在默认情况下，日志系统的配置由配置文件控制</li>
+</ul>
+</li>
+</ul>
+<h2 id="751-基本日志"><a class="markdownIt-Anchor" href="#751-基本日志"></a> 7.5.1 基本日志</h2>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用全局日志记录器并调用其info方法,可以生成简单的日志记录</span></span><br><span class="line">Logger.getGlobal().info(<span class="string">&quot;File-&gt;Open menu item selected&quot;</span>);</span><br><span class="line"><span class="comment">//在适当的地方调用将会取消所有的日志</span></span><br><span class="line">Logger.getGlobal().setLevel(Level.OFF);</span><br></pre></td></tr></table></figure>
+<h2 id="752-高级日志"><a class="markdownIt-Anchor" href="#752-高级日志"></a> 7.5.2 高级日志</h2>
+<ul>
+<li>使用getLOgger方法创建或获取记录器
+<ul>
+<li><mark>未被任何变量引用的日志记录可能会被垃圾回收,需要用静态变量存储日志记录器的一个引用</mark></li>
+</ul>
+</li>
+<li>日志的七个等级：
+<ul>
+<li>SEVERE</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>CONFIG</li>
+<li>FINE</li>
+<li>FINER</li>
+<li>FINEST</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建或获取记录器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger myLogger = Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置日记等级只记录前三个等级</span></span><br><span class="line">Logger.setLevel(Level.FINE);</span><br><span class="line"><span class="comment">//可以使用Level.ALL开启所有级别的记录</span></span><br><span class="line">Logger.setLevel(Level.ALL);</span><br><span class="line"><span class="comment">//使用Level.OFF关闭所有级别的记录</span></span><br><span class="line">Logger.setLevel(Level.OFF);</span><br><span class="line"><span class="comment">//对于所有的级别有下面几种记录方法</span></span><br><span class="line">logger.warning(message);</span><br><span class="line">logger.fine(message);</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用logger指定等级</span></span><br><span class="line">logger.log(Level.FINE, message);</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认的日志记录将显示包含日志调用的类名和方法名,如同堆栈所显示的那样</span></span><br><span class="line"><span class="comment">//如果虚拟机对执行过程进行了优化，就得不到准确的调用信息</span></span><br><span class="line"><span class="comment">//此时,可以调用logp方法获得调用类和方法的确切位置,这个方法的签名:</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logp</span><span class="params">(Level <span class="number">1</span>, String className, String methodName, String message)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//用来跟踪流程执行的方法</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String ClassName, String methodName)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String className, String methodName, 0bject param)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String className, String methodName, Object[] params)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exiting</span><span class="params">(String className, String methodName)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exiting</span><span class="params">(String classNare, String methodName, 0bject result)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//未来，带Object[]参数的日志记录方法可能会被重写，以便支持变量参数列表(“varargs”)</span></span></span><br><span class="line"><span class="function"><span class="comment">//此后就可以用logger.entering(“com.mycompany.mylib.Reader”，“read”，file，pattern)格式调用这个方法了</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//记录日志的常见用途是记录那些不可预料的异常</span></span></span><br><span class="line"><span class="function"><span class="comment">//可以使用下面两个方法提供日志记录中包含的异常描述内容</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">throwing</span><span class="params">(String classNare, String methodName, Throwable t)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">log</span><span class="params">(Level <span class="number">1</span>, String message, Throwable t)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//典型用途</span></span></span><br><span class="line"><span class="function"><span class="title">if</span> <span class="params">(...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  IOException exception = <span class="keyword">new</span> IOException(<span class="string">&quot;...&quot;</span>);</span><br><span class="line">  logger.throwing(<span class="string">&#x27;com.mycompany.mylib.Reader&#x27;</span>, <span class="string">&quot;read&quot;</span>, exception);</span><br><span class="line">  <span class="keyword">throw</span> exception;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//or</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>).log(Level.WARNING, <span class="string">&quot;Reading image&quot;</span>, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用throwing可以记录一条FINER级别的记录和一条以THROW开始的信息</span></span><br></pre></td></tr></table></figure>
+<h2 id="753-修改日志管理器配置"><a class="markdownIt-Anchor" href="#753-修改日志管理器配置"></a> 7.5.3 修改日志管理器配置</h2>
+<ul>
+<li>可以通过编辑配置文件来修改日志系统的各种属性</li>
+<li>要想使用另一个配置文件，就要将java.util.logging.config.file特性设置为配置文件的存储位置</li>
+<li>日志管理器在VM启动过程中初始化，在main执行之前完成
+<ul>
+<li>如果在main中调用System.setProperty(“java.util.logging.config.file”,file)</li>
+<li>也会调用LogManager.readConfiguration()来重新初始化日志管理器</li>
+</ul>
+</li>
+<li>修改默认的日志记录级别
+<ul>
+<li>编辑配置文件，并修改**.LEVEL=INFO**</li>
+</ul>
+</li>
+<li>日志记录并不将消息发送到控制台上，这是处理器的任务,且处理器也有级别
+<ul>
+<li>java.util.logging.ConsoleHandler.level=FINE (在控制台上看到FINE级别的消息)</li>
+<li>在日志管理器配置的属性设置不是系统属性，因此，用-Dcom.mycompany.myapp.level=FINE启动应用程序不会对日志记录器产生任何影响</li>
+</ul>
+</li>
+<li>日志属性文件由java.util.logging.LogManager类处理
+<ul>
+<li>可以通过将java.util.logging.manager系统属性设置为某个子类的名字来指定一个不同的日志管理器
+<ul>
+<li>另外，在保存标准日志管理器的同时，还可以从日志属性文件跳过初始化</li>
+</ul>
+</li>
+<li>还有一种方式是将java.util.logging.config.class系统属性设置为某个类名，该类再通过其他方式设定日志管理器属性</li>
+</ul>
+</li>
+<li>在运行的程序中，使用jconsole程序也可以改变日志记录的级别</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认情况下配置文件路径</span></span><br><span class="line">jre/lib/1ogging.properties</span><br><span class="line"><span class="comment">//使用其他配置文件</span></span><br><span class="line">java -Djava.util.logging.config.fi1e=configFile MainClass</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定自己的日志记录级别(在日志记录器名后面添加后缀.level)</span></span><br><span class="line">com.mycompany.myapp.level = FINE</span><br><span class="line"></span><br><span class="line"><span class="comment">//在控制台上看到FINE级别的消息，就需要进行下列设置</span></span><br><span class="line">java.util.logging.ConsoleHandler.level=FINE</span><br></pre></td></tr></table></figure>
+<h2 id="754-本地化"><a class="markdownIt-Anchor" href="#754-本地化"></a> 7.5.4 本地化</h2>
+<ul>
+<li>本地化的应用程序包含资源包中的本地特定信息</li>
+<li>一个程序可以包含多个资源包，一个用于菜单;其他用于日志消息</li>
+<li>要想将映射添加到一个资源包中，需要为每个地区创建一个文件
+<ul>
+<li>英文消息映射位于com/mycompany/logmessages_en.properties文件中</li>
+<li>德文消息映射位于com/mycompany/logmessages_de.properties文件中</li>
+</ul>
+</li>
+<li>通常需要在本地化的消息中增加一些参数，因此，消息应该包括占位符{0}、{1}等</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//请求日志记录器，指定资源包</span></span><br><span class="line">Logger logger = Lgger.getlogger(loggerName，<span class="string">&quot;com.mycompany.logmessages&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//为日志消息指定资源包的关键字，而不是实际的日志消息字符串</span></span><br><span class="line">logger.info(<span class="string">&quot;readingFile&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在日志消息中包含文件名，就应该用下列方式包括占位符</span></span><br><span class="line">Reading file: &#123;<span class="number">0</span>&#125;.</span><br><span class="line">Achtung! Datei &#123;<span class="number">0</span>&#125; wird eingelesen.</span><br><span class="line"><span class="comment">//然后通过调用下面的一个方法向占位符传递具体的值</span></span><br><span class="line">logger.log(Level.INFO, <span class="string">&quot;readingFile&quot;</span>, fileName);</span><br><span class="line">lagger.log(Level.INF0, <span class="string">&quot;renamingFile&quot;</span>, <span class="keyword">new</span> 0bject[] &#123;oldNane, newName&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="755-处理器"><a class="markdownIt-Anchor" href="#755-处理器"></a> 7.5.5 处理器</h2>
+<ul>
+<li>在默认情况下，日志记录器<mark>将记录发送到ConsoleHandler中，并由它输出到System.err流中</mark></li>
+<li>特别是，<mark>日志记录器还会将记录发送到父处理器中，而最终的处理器有一个ConsoleHandler</mark></li>
+<li><mark>处理器也有日志记录级别</mark>
+<ul>
+<li><mark>对于一个要被记录的日志记录，它的日志记录级别必须高于日志记录器和处理器的阈值</mark></li>
+</ul>
+</li>
+<li>修改文件处理器的默认行为<br>
+<img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-24-19-39-43.png" alt="文件处理器配置参数"></li>
+<li>日志记录文件名：例如%h/myapp.log<br>
+<img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-24-19-41-31.png" alt="日志记录文件模式变量"></li>
+<li>如果多个应用程序(或者同一个应用程序的多个副本)使用同一个日志文件，就应该<mark>开启append标志</mark></li>
+<li><strong>另外，应该在文件名模式中使用%u，以便每个应用程序创建日志的唯一副本</strong></li>
+<li>可以使用<strong>文件循环功能</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//日志管理器默认配置文件设置的默认控制台处理器的日志记录级别</span></span><br><span class="line">java.util.logging.ConsoleHandler.level = INFO</span><br><span class="line"></span><br><span class="line"><span class="comment">//绕过配置文件,安装自己的处理器</span></span><br><span class="line">Logger logger = Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>);</span><br><span class="line">logger.setLevel(Level.FINE);</span><br><span class="line">loger.setUseParentHandlers(<span class="keyword">false</span>);</span><br><span class="line">Handler handler = <span class="keyword">new</span> ConsoleHandler();</span><br><span class="line">handler.setLevel(Level.FINE);</span><br><span class="line">logger.addHandler(handler);</span><br><span class="line">  <span class="comment">//默认情况下，日志记录器将记录发送到自己的处理器和父处理器</span></span><br><span class="line">  <span class="comment">//我们的日志记录器是原始日志记录器(命名为“”)的子类，而原始日志记录器将会把所有等于或高于INFO级别的记录发送到控制台</span></span><br><span class="line">  <span class="comment">//然而，并不想两次看到这些记录,故将useParentHandlers属性设置为false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//要想将日志记录发送到其他地方,就要添加其他的处理器</span></span><br><span class="line"><span class="comment">//日志API为此提供了两个很有用的处理器</span></span><br><span class="line"><span class="comment">//一个是FileHandler;另一个是SocketHandler(SocketHandler将记录发送到特定的主机和端口)</span></span><br><span class="line">FileHandler handler = <span class="keyword">new</span> FileHandler();</span><br><span class="line">logger.addHander(handler);</span><br></pre></td></tr></table></figure>
+<h2 id="756-过滤器"><a class="markdownIt-Anchor" href="#756-过滤器"></a> 7.5.6 过滤器</h2>
+<ul>
+<li>在默认情况下，过滤器根据日志记录的级别进行过滤</li>
+<li>每个日志记录器和处理器都可以有一个可选的过滤器来完成附加的过滤
+<ul>
+<li>另外，可以通过实现Filter接口并定义下列方法来自定义过滤器</li>
+</ul>
+</li>
+<li>要想将一个过滤器安装到一个日志记录器或处理器中，只需要调用setFilter方法就可以了
+<ul>
+<li><mark>同一时刻,最多只能有一个过滤器</mark></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//实现Filter接口并定义自定义过滤器</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isLoggable</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在这个方法中，可以利用自己喜欢的标准，对日志记录进行分析，返回true表示这些记录应该包含在日志中</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="757-格式化器"><a class="markdownIt-Anchor" href="#757-格式化器"></a> 7.5.7 格式化器</h2>
+<ul>
+<li>ConsoleHandler类和FileHandler类可以生成文本和XML格式的日志记录</li>
+<li><mark>扩展Formatter类可以实现自定义格式</mark></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//扩展Formatter类并覆盖方法</span></span><br><span class="line"><span class="function">String <span class="title">format</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在format方法中,formatMessage方法对记录中的部分消息进行格式化、参数替换和本地化应用操作</span></span></span><br><span class="line"><span class="function">String <span class="title">formatMessage</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//很多文件格式(如XML)需要在已格式化的记录的前后加上一个头部和尾部</span></span></span><br><span class="line"><span class="function"><span class="comment">//在已格式化的记录前后增加头部和尾部的覆盖方法</span></span></span><br><span class="line"><span class="function">String <span class="title">getHead</span><span class="params">(Handler h)</span></span></span><br><span class="line"><span class="function">String <span class="title">getTail</span><span class="params">(Handler h)</span></span></span><br><span class="line"><span class="function"><span class="comment">//最后，调用setFormatter方法将格式化器安装到处理器中</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="758-日志记录说明"><a class="markdownIt-Anchor" href="#758-日志记录说明"></a> 7.5.8 日志记录说明</h2>
+<ol>
+<li>为一个简单的应用程序，选择一个日志记录器，并把日志记录器命名为与主应用程序包一样的名字
+<ul>
+<li>为了方便起见，可能希望利用一些日志操作将静态域添加到类中</li>
+</ul>
+</li>
+<li>默认的日志配置将级别等于或高于INFO级别的所有消息记录到控制台
+<ul>
+<li>用户可以覆盖默认的配置文件(最好在应用程序中安装一个更加适宜的默认配置)</li>
+</ul>
+</li>
+<li>可以记录自己想要的内容
+<ul>
+<li>所有级别为INFO、WARNING和SEVERE的消息都将显示到控制台上</li>
+<li><mark>最好只将对程序用户有意义的消息设置为这几个级别(设定为FINE是一个很好的选择)</mark></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//下列代码确保将所有的消息记录到应用程序特定的文件中</span></span><br><span class="line"><span class="comment">//可以将这段代码放置在应用程序的main方法中</span></span><br><span class="line"><span class="keyword">if</span> (System.getPropery(<span class="string">&quot;java.util.logging.config.class&quot;</span>) == <span class="keyword">null</span></span><br><span class="line">&amp;&amp; System.getProperty(<span class="string">&quot;java.util.logging.confg.fine&quot;</span>) == <span class="keyword">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">try</span></span><br><span class="line">   &#123;</span><br><span class="line">     Logger.getLogger(<span class="string">&quot;&quot;</span>).setlevel(Level.ALl);</span><br><span class="line">     <span class="keyword">final</span> <span class="keyword">int</span> LOG_ROTATION_COUNT = <span class="number">10</span>;</span><br><span class="line">     Handler handler = <span class="keyword">new</span> FileHandler(<span class="string">&quot;%h/myapp.log&quot;</span>, <span class="number">0</span>, LOG_ROTATION_COUNT);</span><br><span class="line">     Logger.getLoggr(<span class="string">&quot;&quot;</span>).addHandler(handler);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e)</span><br><span class="line">   logger.log(Level.SEVERE, <span class="string">&quot;Can&#x27;t create log file handler&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="76-调试技巧"><a class="markdownIt-Anchor" href="#76-调试技巧"></a> 7.6 调试技巧</h1>
+<ol>
+<li>可以用方法打印或记录任意变量的值</li>
+<li>一个不太为人所知但却非常有效的技巧是在每一个类中放置一个单独的main方法</li>
+<li>日志代理(logging proxy)是一个子类的对象，它可以截获方法调用，并进行日志记录，然后调用超类中的方法</li>
+<li>利用Throwable类提供的printStackTrace方法，可以从任何一个异常对象中获得堆栈情况</li>
+<li>一般来说，堆栈轨迹显示在System.err上。也可以利用printStackTrace(PrintWriter s)方法将它发送到一个文件中。如果想记录或显示堆栈轨迹，可以将它捕获到一个字符串中</li>
+<li>通常，将一个程序中的错误信息保存在一个文件中是非常有用的。然而，错误信息被发送到System.err中，而不是System.out中。</li>
+<li>让非捕获异常的堆栈轨迹出现在System.err中并不是一个很理想的方法。如果在客户端偶然看到这些消息，则会感到迷惑，并且在需要的时候也无法实现诊断目的。比较好的方式是将这些内容记录到一个文件中。可以调用静态的Thread.setDefaultUncaughtExceptionHandler方法改变非捕获异常的处理器</li>
+<li>要想观察类的加载过程，可以用-verbose标志启动Java虚拟机</li>
+<li>-Xlint选项告诉编译器对一些普遍容易出现的代码问题进行检查</li>
+<li>Java虚拟机增加了对Java应用程序进行监控(monitoring)和管理(management)的支持;它允许利用虚拟机中的代理装置跟踪内存消耗、线程使用、类加载等情况</li>
+<li>可以使用jmap实用工具获得一个堆的转储，其中显示了堆中的每个对象</li>
+<li>如果使用-Xprof标志运行Java虚拟机，就会运行一个基本的剖析器来跟踪那些代码中经常被调用的方法;剖析信息将发送给System.out。输出结果中还会显示哪些方法是由即时编译器编译的</li>
+</ol>
 ]]></content>
       <categories>
         <category>Coding</category>
@@ -6747,46 +7197,164 @@ int (*p)[10];<br>
       </tags>
   </entry>
   <entry>
-    <title>第一章 JAVA程序设计概论</title>
-    <url>/2021/11/13/%E7%AC%AC%E4%B8%80%E7%AB%A0%20JAVA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%AE%BA/</url>
-    <content><![CDATA[<h1 id="12-java白皮书的关键术语"><a class="markdownIt-Anchor" href="#12-java白皮书的关键术语"></a> 1.2 Java“白皮书”的关键术语</h1>
-<p>11个关键术语：</p>
-<ol>
-<li>简单性</li>
-<li>面向对象</li>
-<li>分布式</li>
-<li><strong>健壮性</strong>：</li>
-</ol>
+    <title>第十三章 部署Java应用程序</title>
+    <url>/2021/12/01/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E9%83%A8%E7%BD%B2Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="13-部署java应用程序"><a class="markdownIt-Anchor" href="#13-部署java应用程序"></a> 13 部署Java应用程序</h1>
 <ul>
-<li>Java的设计目标之一在于使得Java编写的程序具有多方面的可靠性</li>
-<li>Java和C++最大的不同在于Java采用的指针模型可以消除重写内存和损坏数据的可能性</li>
+<li>首先介绍打包应用的指令</li>
+<li>然后展示应用如何存储配置信息和用户首选项</li>
+<li>另外还会学习如何使用ServiceLoader类在应用中加载插件</li>
+<li>讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略)</li>
+<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序</li>
 </ul>
+<hr>
 <span id="more"></span>
-<ol start="5">
-<li><strong>安全性</strong>：</li>
-</ol>
+<h1 id="131-jar文件"><a class="markdownIt-Anchor" href="#131-jar文件"></a> 13.1 JAR文件</h1>
 <ul>
-<li>Java代码不论来自哪里，都不能脱离<mark>沙箱</mark></li>
-<li>编译器生成一个体系结构中立的目标文件格式，这是一种编译过的代码，这些编译后的代码可以在许多处理器上运行</li>
-<li>解释虚拟机指令肯定会比全速运行机器指令慢很多</li>
-<li><mark>即时编译</mark>：虚拟机的一个选项，可以<mark>将执行最频繁的字节码序列翻译成机器码</mark></li>
-</ul>
-<ol start="7">
-<li><strong>可移植性</strong>：</li>
-</ol>
+<li>一个JAR文件既可以包含类文件,也可以包含诸如图像和声音这些其他类型的文件</li>
+<li>此外,JAR文件是压缩的,它使用了大家熟悉的ZIP压缩格式
 <ul>
-<li>数据类型具有固定的大小</li>
-<li>消除了代码移植时的问题</li>
-<li>二进制数据以固定的格式进行存储和传输，消除了字节顺序的困扰</li>
-<li>字符串是用标准的Unicode格式存储的</li>
-<li>除了与用户界面有关的部分外，所有其他Java库都能很好地支持平台独立性。可以处理文件、正则表达式、XML、日期和时间、数据库、网络连接、线程等，而不用操心底层操作系统。<mark>不仅程序是可移植的，Java API往往也比原生API质量更高</mark></li>
+<li>pack200是一种较通常的ZIP压缩算法更加有效的压缩类文件的方式</li>
 </ul>
-<ol start="8">
-<li>解释型</li>
-<li>高性能</li>
-<li>多线程</li>
-<li>动态性</li>
+</li>
+</ul>
+<h2 id="1311-创建jar文件"><a class="markdownIt-Anchor" href="#1311-创建jar文件"></a> 13.1.1 创建JAR文件</h2>
+<ul>
+<li>可以使用jar工具制作JAR文件(在默认的JDK安装中,位于jdk/bin目录下)</li>
+<li>可以将应用程序、程序组件以及代码库打包在JAR文件中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个新的JAR文件应该使用的常见命令格式为</span></span><br><span class="line">jar cvf JARFileName File1 File2...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cvf CalculatorClasses.jar *.class icon.gif</span><br></pre></td></tr></table></figure>
+<h2 id="1312-清单文件"><a class="markdownIt-Anchor" href="#1312-清单文件"></a> 13.1.2 清单文件</h2>
+<ul>
+<li>除了类文件、图像和其他资源外,每个JAR文件还包含一个用于描述归档特征的清单文件</li>
+<li>清单文件被命名为MANIFEST.MF,它位于JAR文件的一个特殊METANF子目录中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个包含清单文件的Jar文件</span></span><br><span class="line">jar cfm JARFileName ManifestFileName...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cfm MyArchive.jar manifest.mf com/mycompany/mypkg<span class="comment">/*.class</span></span><br><span class="line"><span class="comment">//要想更新一个已有的JAR文件的清单,则需要将增加的部分放置到一个文本文件中,然后执行下列命令</span></span><br><span class="line"><span class="comment">jar ufm MyArcnive.jar manifest-additions.mf</span></span><br></pre></td></tr></table></figure>
+<h2 id="1313-可执行jar文件"><a class="markdownIt-Anchor" href="#1313-可执行jar文件"></a> 13.1.3 可执行JAR文件</h2>
+<ul>
+<li>可以使用jar命令中的e选项指定程序的入口点,即通常需要在调用java程序加载器时指定的类</li>
+<li>或者,可以在清单中指定应用程序的主类
+<ul>
+<li>不要将扩展名.class添加到主类名中</li>
+<li>清单文件的最后一行必须以换行符结束.否则,清单文件将无法被正确地读取</li>
+<li>常见的错误是创建了一个只包含Main-Class而没有行结束符的文本文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="1314-资源"><a class="markdownIt-Anchor" href="#1314-资源"></a> 13.1.4 资源</h2>
+<ul>
+<li>利用资源机制,对于非类文件也可以同样方便地进行操作.下面是必要的步骤
+<ul>
+<li>获得具有资源的Class对象,例如,AboutPanel.class</li>
+<li>如果资源是一个图像或声音文件,那么就需要调用getresource(filename)获得作为URL的资源位置,然后利用getImage或getAudioClip方法进行读取</li>
+<li>与图像或声音文件不同,其他资源可以使用getResourceAsStream方法读取文件中的数据.</li>
+</ul>
+</li>
+<li>重点在于类加载器可以记住如何定位类,然后在同一位置查找关联的资源</li>
+</ul>
+<h2 id="1315-密封"><a class="markdownIt-Anchor" href="#1315-密封"></a> 13.1.5 密封</h2>
+<ul>
+<li>可以将Java包密封(seal)以保证不会有其他的类加入到其中
+<ul>
+<li>如果在代码中使用了包可见的类、方法和域,就可能希望密封包</li>
+<li>如果不密封,其他类就有可能放在这个包中,进而访问包可见的特性</li>
+</ul>
+</li>
+</ul>
+<h1 id="132-应用首选项的存储"><a class="markdownIt-Anchor" href="#132-应用首选项的存储"></a> 13.2 应用首选项的存储</h1>
+<ul>
+<li>应用用户通常希望能保存他们的首选项和定制信息,以后再次启动应用时再恢复这些配置</li>
+</ul>
+<h2 id="1321-属性映射"><a class="markdownIt-Anchor" href="#1321-属性映射"></a> 13.2.1 属性映射</h2>
+<ul>
+<li>属性映射是一种存储键/值对的数据结构
+<ul>
+<li>属性映射通常用来存储配置信息,它有3个特性：
+<ul>
+<li>键和值是字符串</li>
+<li>映射可以很容易地存入文件以及从文件加载</li>
+<li>有一个二级表保存默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现属性映射的Java类名为Properties
+<ul>
+<li>属性映射对于指定程序的配置选项很有用</li>
+<li>可以使用store方法将属性映射列表保存到一个文件中</li>
+</ul>
+</li>
+<li>习惯上,会把程序属性存储在用户主目录的一个子目录中
+<ul>
+<li>目录名通常以一个点号开头(在UNIX系统中),这个约定说明这是一个对用户隐藏的系统目录</li>
+</ul>
+</li>
+<li>要找出用户的主目录,可以调用System.getProperties方法,它恰好也使用一个Properties对象描述系统信息
+<ul>
+<li>主目录包含键“user.home”</li>
+</ul>
+</li>
+</ul>
+<h2 id="1322-首选项api"><a class="markdownIt-Anchor" href="#1322-首选项api"></a> 13.2.2 首选项API</h2>
+<ul>
+<li>使用属性文件有以下缺点：
+<ul>
+<li>有些操作系统没有主目录的概念,所以很难找到一个统一的配置文件位置</li>
+<li>关于配置文件的命名没有标准约定,用户安装多个Java应用时,就更容易发生命名冲突</li>
+</ul>
+</li>
+</ul>
+<h1 id="133-服务加载器"><a class="markdownIt-Anchor" href="#133-服务加载器"></a> 13.3 服务加载器</h1>
+<ul>
+<li>通常,提供一个插件时,程序希望插件设计者能有一些自由来确定如何实现插件的特性</li>
+<li>另外还可以有多个实现以供选择.利用ServiceLoader类可以很容易地加载符合一个公共接口的插件</li>
+</ul>
+<h1 id="135-java-web-start"><a class="markdownIt-Anchor" href="#135-java-web-start"></a> 13.5 Java Web Start</h1>
+<ul>
+<li>Java Web Start应用程序包含下列主要特性：
+<ul>
+<li>应用程序一般通过浏览器发布.只要Java Web Start应用程序下载到本地就可以启动它,而不需要浏览器</li>
+<li>应用程序并不在浏览器窗口内.它将显示在浏览器外的一个属于自己的框架中</li>
+<li>应用程序不使用浏览器的Java实现.浏览器只是在加载Java Web Start应用程序描述符时启动一个外部应用程序</li>
+<li>数字签名应用程序可以被赋予访问本地机器的任意权限.未签名的应用程序只能运行在“沙箱”中,它可以阻止具有潜在危险的操作</li>
+</ul>
+</li>
+</ul>
+<h2 id="1351-发布java-web-start应用"><a class="markdownIt-Anchor" href="#1351-发布java-web-start应用"></a> 13.5.1 发布Java Web Start应用</h2>
+<ul>
+<li>要想准备一个通过Java Web Start发布的应用程序,应该将其打包到一个或多个JAR文件中</li>
+<li>然后创建一个Java Network Launch Protocol(JNLP)格式的描述符文件.将这些文件放置在Web服务器上</li>
+<li>还需要确保Web服务器对扩展名为.jnlp的文件报告一个application/x-java-jnlp-file的MIME类型(浏览器利用MIME类型确定启动哪一种辅助应用程序)</li>
+<li>步骤：
+<ol>
+<li>编译程序</li>
+<li>创建JAR文件：</li>
+<li>准备启动文件Calculator.jnlp</li>
+<li>如果使用Tomcat则在Tomcat安装的根目录上创建一个目录tomcat/webapps/calculator.创建子目录tomcat/webapps/calculator/WEBNF,并且将最小的web.xml文件放置在WEBNF子目录下</li>
+<li>将JAR文件和启动文件放入tomcat/webapps/calculator目录</li>
+<li>在Java控制面板中将URL增加到可信站点列表.或者,可以为JAR文件签名.</li>
+<li>在tomcat/bin目录执行启动脚本来启动Tomcat.</li>
+<li>将浏览器指向JNLP文件.如果你的浏览器不知道如何处理JNLP文件,可能会提供一个选项将它们与一个应用关联.如果是这样,请选择jdk/bin/javaws.否则,明确如何将MIME类型application/x-java-jnlp-file与javaws应用关联.还可以试着重新安装可以做到这一点的JDK.</li>
+<li>稍后,计算器就会出现,所带的边框表明这是一个Java应用程序</li>
+<li>当再次访问JNLP文件时,应用程序将从缓存中取出.可以利用Java插件控制面板查看缓存内容.在Windows系统的Windows控制面板中可以看到Java插件控制面板.在Linux下,可以运行jdk/jre/bin/ControlPanel</li>
 </ol>
+</li>
+</ul>
+<h2 id="1352-jnlp-api"><a class="markdownIt-Anchor" href="#1352-jnlp-api"></a> 13.5.2 JNLP API</h2>
+<ul>
+<li>JNLP API允许未签名的应用程序在沙箱中运行,同时通过一种安全的途径访问本地资源</li>
+<li>API提供了下面的服务：
+<ul>
+<li>加载和保存文件</li>
+<li>访问剪贴板</li>
+<li>打印</li>
+<li>下载文件</li>
+<li>在默认的浏览器中显示一个文档</li>
+<li>保存和获取持久性配置信息</li>
+<li>确信只运行一个应用程序的实例</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Coding</category>
@@ -7363,406 +7931,6 @@ int (*p)[10];<br>
       </tags>
   </entry>
   <entry>
-    <title>第七章 异常_断言和日志</title>
-    <url>/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h1 id="7-异常_断言和日志"><a class="markdownIt-Anchor" href="#7-异常_断言和日志"></a> 7 异常_断言和日志</h1>
-<hr>
-<h1 id="71-处理错误"><a class="markdownIt-Anchor" href="#71-处理错误"></a> 7.1 处理错误</h1>
-<h2 id="711-异常分类"><a class="markdownIt-Anchor" href="#711-异常分类"></a> 7.1.1 异常分类</h2>
-<p><img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-22-15-41-48.png" alt="Java中的异常层次结构"></p>
-<ul>
-<li>异常对象都是派生于Throwable类的一个实例
-<ul>
-<li>所有的异常都是Throwable继承下而来的,但分解为<mark>Error和Exception</mark>
-<ul>
-<li>Error类层次结构描述了Java运行时系统的内部错误和资源耗尽错误(应用程序不应该抛出这种类型的对象)</li>
-<li><strong>需要关注Exception层次</strong>该层次结构又分解为两个分支：一个分支派生于RuntimeException;另一个分支包含其他异常</li>
-<li>划分两个分支的规则是：
-<ul>
-<li>程序错误导致的异常属于RuntimeException</li>
-<li>程序本身没有问题,但由于像I/O错误这类问题导致的异常属于其他异常</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Java语言规范将<mark>派生于Error类或RuntimeException类的所有异常称为非受查异常</mark>，所有其他的异常称为受查异常
-<ul>
-<li>编译器将核查是否为所有的受查异常提供了异常处理器</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-<h2 id="712-声明受查异常"><a class="markdownIt-Anchor" href="#712-声明受查异常"></a> 7.1.2 声明受查异常</h2>
-<ul>
-<li>方法应该在其<mark>首部声明所有可能抛出的异常</mark></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//例</span></span><br><span class="line"><span class="comment">//标准类库中提供的FileInputStream类的一个构造器的声明</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span> <span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundExpection</span></span><br><span class="line"><span class="function"><span class="comment">//这个声明表示这个构造器将根据给定的String参数产生一个FileInputStream对象，但也有可能抛出一个FileNotFoundException异常</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//对于那些可能被他人使用的Java方法</span></span></span><br><span class="line"><span class="function"><span class="comment">//应该根据异常规范，在方法的首部声明这个方法可能抛出的异常</span></span></span><br><span class="line"><span class="function">class MyAnimation</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Image <span class="title">loadImage</span><span class="params">(String s)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个方法有可能抛出多个受查异常类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAnimation</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Image <span class="title">loadImage</span><span class="params">(String s)</span> <span class="keyword">throws</span> FileNotFoundException,EOFException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p>在自己写的方法中.需要抛出异常的4种情况：</p>
-<ol>
-<li>调用一个抛出受查异常的方法，例如，FileInputStream构造器</li>
-<li>程序运行过程中发现错误，并且利用throw语句抛出一个受查异常</li>
-<li>程序出现错误，例如，a[–1]=0会抛出一个ArrayIndexOutOfBoundsException这样的非受查异常</li>
-<li>Java虚拟机和运行时库出现的内部错误</li>
-</ol>
-</li>
-<li>
-<p><mark>不需要声明Java的内部错误，即从Error继承的错误</mark></p>
-</li>
-<li>
-<p>一个方法必须声明所有可能抛出的受查异常，而非受查异常要么不可控制(Error)，要么就应该避免发生(RuntimeException)</p>
-</li>
-<li>
-<p>如果在子类中覆盖了超类的一个方法，<mark>子类方法中声明的受查异常不能比超类方法中声明的异常更通用</mark></p>
-<ul>
-<li>也就是说，子类方法中可以抛出更特定的异常，或者根本不抛出任何异常</li>
-</ul>
-</li>
-<li>
-<p><mark>如果超类方法没有抛出任何受查异常，子类也不能抛出任何受查异常</mark></p>
-</li>
-<li>
-<p>如果类中的一个方法声明将会抛出一个异常，而这个异常是某个特定类的实例时，则这个方法就<mark>可能抛出一个这个类的异常，或者这个类的任意一个子类的异常</mark></p>
-</li>
-</ul>
-<h2 id="713-如何抛出异常"><a class="markdownIt-Anchor" href="#713-如何抛出异常"></a> 7.1.3 如何抛出异常</h2>
-<ul>
-<li>对于一个<mark>已经存在的异常类</mark>,抛出方法：
-<ul>
-<li>找到一个合适的异常类</li>
-<li>创建这个类的一个对象</li>
-<li>将对象抛出</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//EOFException异常描述的是“在输入过程中遇到了一个未预期的EOF后的信号”</span></span><br><span class="line"><span class="comment">//抛出异常的语句</span></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> EOFException();</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">EOFException e = <span class="keyword">new</span> EOFException();</span><br><span class="line"><span class="keyword">throw</span> e;</span><br><span class="line"></span><br><span class="line"><span class="comment">//EOFException类还有一个含有一个字符串型参数的构造器</span></span><br><span class="line"><span class="comment">//这个构造器可以更加细致的描述异常出现的情况</span></span><br><span class="line">String gripe = <span class="string">&quot;Content Length: &quot;</span> + len + <span class="string">&quot;, Received: &quot;</span> + n;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> EOFException(gripe);</span><br></pre></td></tr></table></figure>
-<h2 id="714-创建异常类"><a class="markdownIt-Anchor" href="#714-创建异常类"></a> 7.1.4 创建异常类</h2>
-<ul>
-<li><mark>需要做的只是定义一个派生于Exception的类，或者派生于Exception子类的类</mark>
-<ul>
-<li>例如，定义一个派生于IOException的类</li>
-<li>习惯上，定义的类应该包含两个构造器
-<ul>
-<li>一个是默认的构造器</li>
-<li>另一个是带有详细描述信息的构造器(超类Throwable的toString方法将会打印出这些详细信息，这在调试中非常有用)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义自己的异常类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileFormatException</span> <span class="keyword">extends</span> <span class="title">IOException</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileFormatException</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileFormatException</span><span class="params">(String gripe)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(gripe);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//抛出</span></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> FileFormatException();</span><br></pre></td></tr></table></figure>
-<h1 id="72-捕获异常"><a class="markdownIt-Anchor" href="#72-捕获异常"></a> 7.2 捕获异常</h1>
-<h2 id="721-捕获异常"><a class="markdownIt-Anchor" href="#721-捕获异常"></a> 7.2.1 捕获异常</h2>
-<ul>
-<li><mark>要想捕获一个异常，必须设置try/catch语句块</mark>
-<ul>
-<li>如果在try语句块中的任何代码抛出了一个在catch子句中说明的异常类
-<ul>
-<li>程序将跳过try语句块的其余代码</li>
-<li>程序将执行catch子句中的处理器代码</li>
-</ul>
-</li>
-<li>如果在try语句块中的代码没有抛出任何异常，那么程序将跳过catch子句</li>
-<li>如果方法中的任何代码抛出了一个在catch子句中没有声明的异常类型，那么这个方法就会立刻退出</li>
-</ul>
-</li>
-<li><mark>如果编写一个覆盖超类的方法，而这个方法又没有抛出异常，那么这个方法就必须捕获方法代码中出现的每一个受查异常</mark>
-<ul>
-<li>不允许在子类的throws说明符中出现超过超类方法所列出的异常类范围</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//try/catch语句</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (ExceptionType e) &#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="722-捕获多个异常"><a class="markdownIt-Anchor" href="#722-捕获多个异常"></a> 7.2.2 捕获多个异常</h2>
-<ul>
-<li><mark>捕获多个异常时，异常变量隐含为final变量</mark></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//捕获多个异常类型，并对不同类型的异常做出不同的处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (FileNotFoundException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (UnknownHostException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得异常对象的更多信息</span></span><br><span class="line">e.getMessage();</span><br><span class="line"><span class="comment">//获得更详细的错误信息</span></span><br><span class="line">e.getClass().getName();</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Java SE 7中，同一个catch子句中可以捕获多个异常类型</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (FileNotFoundException | UnknownHostException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="723-再次抛出异常与异常链"><a class="markdownIt-Anchor" href="#723-再次抛出异常与异常链"></a> 7.2.3 再次抛出异常与异常链</h2>
-<ul>
-<li>在catch子句中可以抛出一个异常，这样做的目的是<mark>改变异常的类型</mark></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//捕获异常并将它再次抛出的基本方法</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">&quot;database error: &quot;</span> + e.getMessage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//更好的处理方式，并且将原始异常设置为新异常的原因</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    Throwable se = <span class="keyword">new</span> ServletException(<span class="string">&quot;database erroe:&quot;</span>);</span><br><span class="line">    se.initCause(e);</span><br><span class="line">    <span class="keyword">throw</span> se;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//当捕获到异常时，就可以使用下面这条语句重新得到原始异常</span></span><br><span class="line">Throwable e = se.getCause();</span><br><span class="line"></span><br><span class="line"><span class="comment">//只想记录一个异常，再将它重新抛出，而不做任何改变</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    code</span><br><span class="line">    morecode</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    logger.log(level,message, e);</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="724-finally子句"><a class="markdownIt-Anchor" href="#724-finally子句"></a> 7.2.4 finally子句</h2>
-<ul>
-<li><strong>如果方法获得了一些本地资源，并且只有这个方法自己知道，又如果这些资源在退出方法之前必须被回收，那么就会产生资源回收问题</strong>
-<ul>
-<li>一种解决方案是捕获并重新抛出所有的异常(需要在正常的代码中和异常代码中清除所分配的资源)</li>
-<li>一种更好的解决方案，<mark>finally子句</mark>
-<ul>
-<li><mark>不管是否有异常被捕获，finally子句中的代码都被执行</mark></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><mark>finally中的代码总会执行</mark></li>
-<li>当finally子句<mark>包含return语句时，将会出现错误的结果</mark>
-<ul>
-<li>假设利用return语句从try语句块中退出</li>
-<li>在方法返回前，finally子句的内容将被执行</li>
-<li>如果finally子句中也有一个return语句，这个返回值将会覆盖原始的返回值</li>
-</ul>
-</li>
-<li><mark>清理资源的方法也有可能抛出异常</mark>
-<ul>
-<li>close方法本身也有可能抛出IOException异常。当出现这种情况时，原始的异常将会丢失，转而抛出close方法的异常</li>
-<li><mark>可以使用带资源的try语句解决</mark></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//try语句可以只有finally子句,而没有catch子句</span></span><br><span class="line"></span><br><span class="line">InputStream in = <span class="keyword">new</span> FileInputStream(...)</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    &#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">      in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    <span class="comment">//show error message</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//内层的try语句块只有一个职责，就是确保关闭输入流</span></span><br><span class="line"><span class="comment">//外层的try语句块也只有一个职责，就是确保报告出现的错误</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> r = n * n;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;   <span class="keyword">finally</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">2</span>)   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果调用f(2)，那么try语句块的计算结果为r=4，并执行return语句</span></span><br><span class="line"><span class="comment">//然而，在方法真正返回前，还要执行finally子句。finally子句将使得方法返回0，这个返回值覆盖了原始的返回值4</span></span><br></pre></td></tr></table></figure>
-<h2 id="725-带资源的try语句"><a class="markdownIt-Anchor" href="#725-带资源的try语句"></a> 7.2.5 带资源的try语句</h2>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//带资源的try语句的简单形式</span></span><br><span class="line"><span class="keyword">try</span> (Resource res = ...) &#123;</span><br><span class="line">    <span class="comment">//work with res    </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//try块退出时，会自动调用res.close()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以指定多个资源</span></span><br><span class="line"><span class="keyword">try</span> (Scanner in = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;user/share/dict/words&quot;</span>),<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="string">&quot;out.txt&quot;</span>)) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(in.hasNext())</span><br><span class="line">        out.println(in.next().toUpperCase());    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><mark>带资源的try语句可以很好地处理:try块抛出一个异常，而且close方法也抛出一个异常</mark>
-<ul>
-<li>原来的异常会重新抛出，而close方法抛出的异常会“被抑制”</li>
-<li>这些异常将自动捕获，并由addSuppressed方法增加到原来的异常</li>
-<li>如果对这些异常感兴趣，可以调用getSuppressed方法，它会得到从close方法抛出并被抑制的异常列表</li>
-</ul>
-</li>
-<li><mark>只要需要关闭资源,就要尽可能使用带资源的try语句</mark>
-<ul>
-<li>带资源的try语句的<mark>catch子句和一个finally子句在关闭资源之后执行</mark></li>
-</ul>
-</li>
-</ul>
-<h2 id="726-分析堆栈轨迹元素"><a class="markdownIt-Anchor" href="#726-分析堆栈轨迹元素"></a> 7.2.6 分析堆栈轨迹元素</h2>
-<ul>
-<li>堆栈轨迹是一个<mark>方法调用过程的列表，它包含了程序执行过程中方法调用的特定位置</mark></li>
-<li>可以调用<mark>Throwable类的printStackTrace方法</mark>访问堆栈轨迹的文本描述信息
-<ul>
-<li><mark>使用getStackTrace方法得到StackTraceElement对象的一个数组，可以在程序中分析这个对象数组</mark>
-<ul>
-<li>StackTraceElement类含有能够获得文件名和当前执行的代码行号的方法;同时,还含有能够获得类名和方法名的方法</li>
-<li>使用toString方法将产生一个格式化的字符串，其中包含所获得的信息</li>
-</ul>
-</li>
-<li>静态的Thread.getAllStackTrace方法可以产生所有线程的堆栈轨迹</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Throwable t = <span class="keyword">new</span> Throwable();</span><br><span class="line">StringWriter out = <span class="keyword">new</span> StringWriter();</span><br><span class="line">t.printStackTrace(<span class="keyword">new</span> PrintWriter(out));</span><br><span class="line">String description = out.toString();</span><br><span class="line"></span><br><span class="line">StackTraceElement[] frams = t.getStackTrace();</span><br><span class="line"><span class="keyword">for</span> (StackTraceElement frame : frames)</span><br><span class="line">    <span class="comment">//analyze frame</span></span><br><span class="line"></span><br><span class="line">Map&lt;Tread, StackTraceElement[]&gt; map = Tread.getAllStackTrace();</span><br><span class="line"><span class="keyword">for</span> (Tread t :map.keySet())</span><br><span class="line">&#123;</span><br><span class="line">    StackTraceElement[] frames = map.get(t);</span><br><span class="line">    <span class="comment">//analyze frames</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="73-使用异常的技巧"><a class="markdownIt-Anchor" href="#73-使用异常的技巧"></a> 7.3 使用异常的技巧</h1>
-<ol>
-<li>异常处理不能代替简单的测试：只在异常情况下使用异常机制</li>
-<li>不要过分地细化异常</li>
-<li>利用异常层次结构
-<ol>
-<li>不要只抛出RuntimeException异常。应该寻找更加适当的子类或创建自己的异常类</li>
-<li>不要只捕获Thowable异常，否则，会使程序代码更难读、更难维护</li>
-</ol>
-</li>
-<li>不要压制异常</li>
-<li>在检测错误时，“苛刻”要比放任更好</li>
-<li>不要羞于传递异常</li>
-</ol>
-<h1 id="74-使用断言"><a class="markdownIt-Anchor" href="#74-使用断言"></a> 7.4 使用断言</h1>
-<h2 id="741-断言的概念"><a class="markdownIt-Anchor" href="#741-断言的概念"></a> 7.4.1 断言的概念</h2>
-<ul>
-<li>断言机制允许在测试期间向代码中插入一些检查语句
-<ul>
-<li>当代码发布时，这些插入的检测语句将会被自动地移走</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//两种形式:</span></span><br><span class="line"><span class="keyword">assert</span> 条件</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line"><span class="keyword">assert</span> 条件:表达式;</span><br><span class="line"><span class="comment">//这两种形式都会对条件进行检测，如果结果为false，则抛出一个AssertionError异常</span></span><br><span class="line"><span class="comment">//在第二种形式中，表达式将被传入AssertionError的构造器，并转换成一个消息字符串</span></span><br></pre></td></tr></table></figure>
-<h2 id="742-启用和禁用断言"><a class="markdownIt-Anchor" href="#742-启用和禁用断言"></a> 7.4.2 启用和禁用断言</h2>
-<ul>
-<li>默认情况下，断言被禁用
-<ul>
-<li>可以在运行程序时用-enableassertions或-ea选项启用</li>
-<li>在启用或禁用断言时不必重新编译程序
-<ul>
-<li>启用或禁用断言是类加载器的功能。当断言被禁用时，类加载器将跳过断言代码，因此，不会降低程序运行的速度</li>
-</ul>
-</li>
-<li>可以用选项-disableassertions或-da禁用某个特定类和包的断言</li>
-</ul>
-</li>
-<li>启用和禁用所有断言的-ea和-da开关不能应用到那些没有类加载器的“系统类”上
-<ul>
-<li>对于这些系统类来说，需要使用-enablesystemassertions/-esa开关启用断言</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//启用断言</span></span><br><span class="line">java -enableassertions MyApp</span><br><span class="line"><span class="comment">//在某个类或整个包中使用断言</span></span><br><span class="line">java -ea:MyClass -ea:com.mycompany.mylib...MyApp</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用断言</span></span><br><span class="line">java -ea:... -da:MyClass MyApp</span><br></pre></td></tr></table></figure>
-<h2 id="743-使用断言完成参数检查"><a class="markdownIt-Anchor" href="#743-使用断言完成参数检查"></a> 7.4.3 使用断言完成参数检查</h2>
-<p>使用断言的情况：</p>
-<ul>
-<li>断言失败是致命的、不可恢复的错误</li>
-<li>断言检查只用于开发和测阶段</li>
-</ul>
-<h1 id="75-记录日志"><a class="markdownIt-Anchor" href="#75-记录日志"></a> 7.5 记录日志</h1>
-<ul>
-<li>记录日志API的优点:
-<ul>
-<li>可以很容易地取消全部日志记录,或者仅仅取消某个级别的日志,而且打开和关闭这个操作也很容易</li>
-<li>可以很简单地禁止日志记录的输出</li>
-<li>日志记录可以被定向到不同的处理器.用于在控制台中显示,用于存储在文件中等</li>
-<li>日志记录器和处理器都可以对记录进行过滤.过滤器可以根据过滤实现器制定的标准丢弃那些无用的记录项</li>
-<li>日志记录可以采用不同的方式格式化</li>
-<li>应用程序可以使用多个日志记录器，它们使用类似包名的这种具有层次结构的名字</li>
-<li>在默认情况下，日志系统的配置由配置文件控制</li>
-</ul>
-</li>
-</ul>
-<h2 id="751-基本日志"><a class="markdownIt-Anchor" href="#751-基本日志"></a> 7.5.1 基本日志</h2>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用全局日志记录器并调用其info方法,可以生成简单的日志记录</span></span><br><span class="line">Logger.getGlobal().info(<span class="string">&quot;File-&gt;Open menu item selected&quot;</span>);</span><br><span class="line"><span class="comment">//在适当的地方调用将会取消所有的日志</span></span><br><span class="line">Logger.getGlobal().setLevel(Level.OFF);</span><br></pre></td></tr></table></figure>
-<h2 id="752-高级日志"><a class="markdownIt-Anchor" href="#752-高级日志"></a> 7.5.2 高级日志</h2>
-<ul>
-<li>使用getLOgger方法创建或获取记录器
-<ul>
-<li><mark>未被任何变量引用的日志记录可能会被垃圾回收,需要用静态变量存储日志记录器的一个引用</mark></li>
-</ul>
-</li>
-<li>日志的七个等级：
-<ul>
-<li>SEVERE</li>
-<li>WARNING</li>
-<li>INFO</li>
-<li>CONFIG</li>
-<li>FINE</li>
-<li>FINER</li>
-<li>FINEST</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建或获取记录器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger myLogger = Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置日记等级只记录前三个等级</span></span><br><span class="line">Logger.setLevel(Level.FINE);</span><br><span class="line"><span class="comment">//可以使用Level.ALL开启所有级别的记录</span></span><br><span class="line">Logger.setLevel(Level.ALL);</span><br><span class="line"><span class="comment">//使用Level.OFF关闭所有级别的记录</span></span><br><span class="line">Logger.setLevel(Level.OFF);</span><br><span class="line"><span class="comment">//对于所有的级别有下面几种记录方法</span></span><br><span class="line">logger.warning(message);</span><br><span class="line">logger.fine(message);</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用logger指定等级</span></span><br><span class="line">logger.log(Level.FINE, message);</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认的日志记录将显示包含日志调用的类名和方法名,如同堆栈所显示的那样</span></span><br><span class="line"><span class="comment">//如果虚拟机对执行过程进行了优化，就得不到准确的调用信息</span></span><br><span class="line"><span class="comment">//此时,可以调用logp方法获得调用类和方法的确切位置,这个方法的签名:</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logp</span><span class="params">(Level <span class="number">1</span>, String className, String methodName, String message)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//用来跟踪流程执行的方法</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String ClassName, String methodName)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String className, String methodName, 0bject param)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entering</span><span class="params">(String className, String methodName, Object[] params)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exiting</span><span class="params">(String className, String methodName)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exiting</span><span class="params">(String classNare, String methodName, 0bject result)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//未来，带Object[]参数的日志记录方法可能会被重写，以便支持变量参数列表(“varargs”)</span></span></span><br><span class="line"><span class="function"><span class="comment">//此后就可以用logger.entering(“com.mycompany.mylib.Reader”，“read”，file，pattern)格式调用这个方法了</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//记录日志的常见用途是记录那些不可预料的异常</span></span></span><br><span class="line"><span class="function"><span class="comment">//可以使用下面两个方法提供日志记录中包含的异常描述内容</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">throwing</span><span class="params">(String classNare, String methodName, Throwable t)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">log</span><span class="params">(Level <span class="number">1</span>, String message, Throwable t)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//典型用途</span></span></span><br><span class="line"><span class="function"><span class="title">if</span> <span class="params">(...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  IOException exception = <span class="keyword">new</span> IOException(<span class="string">&quot;...&quot;</span>);</span><br><span class="line">  logger.throwing(<span class="string">&#x27;com.mycompany.mylib.Reader&#x27;</span>, <span class="string">&quot;read&quot;</span>, exception);</span><br><span class="line">  <span class="keyword">throw</span> exception;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//or</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>).log(Level.WARNING, <span class="string">&quot;Reading image&quot;</span>, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用throwing可以记录一条FINER级别的记录和一条以THROW开始的信息</span></span><br></pre></td></tr></table></figure>
-<h2 id="753-修改日志管理器配置"><a class="markdownIt-Anchor" href="#753-修改日志管理器配置"></a> 7.5.3 修改日志管理器配置</h2>
-<ul>
-<li>可以通过编辑配置文件来修改日志系统的各种属性</li>
-<li>要想使用另一个配置文件，就要将java.util.logging.config.file特性设置为配置文件的存储位置</li>
-<li>日志管理器在VM启动过程中初始化，在main执行之前完成
-<ul>
-<li>如果在main中调用System.setProperty(“java.util.logging.config.file”,file)</li>
-<li>也会调用LogManager.readConfiguration()来重新初始化日志管理器</li>
-</ul>
-</li>
-<li>修改默认的日志记录级别
-<ul>
-<li>编辑配置文件，并修改**.LEVEL=INFO**</li>
-</ul>
-</li>
-<li>日志记录并不将消息发送到控制台上，这是处理器的任务,且处理器也有级别
-<ul>
-<li>java.util.logging.ConsoleHandler.level=FINE (在控制台上看到FINE级别的消息)</li>
-<li>在日志管理器配置的属性设置不是系统属性，因此，用-Dcom.mycompany.myapp.level=FINE启动应用程序不会对日志记录器产生任何影响</li>
-</ul>
-</li>
-<li>日志属性文件由java.util.logging.LogManager类处理
-<ul>
-<li>可以通过将java.util.logging.manager系统属性设置为某个子类的名字来指定一个不同的日志管理器
-<ul>
-<li>另外，在保存标准日志管理器的同时，还可以从日志属性文件跳过初始化</li>
-</ul>
-</li>
-<li>还有一种方式是将java.util.logging.config.class系统属性设置为某个类名，该类再通过其他方式设定日志管理器属性</li>
-</ul>
-</li>
-<li>在运行的程序中，使用jconsole程序也可以改变日志记录的级别</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认情况下配置文件路径</span></span><br><span class="line">jre/lib/1ogging.properties</span><br><span class="line"><span class="comment">//使用其他配置文件</span></span><br><span class="line">java -Djava.util.logging.config.fi1e=configFile MainClass</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定自己的日志记录级别(在日志记录器名后面添加后缀.level)</span></span><br><span class="line">com.mycompany.myapp.level = FINE</span><br><span class="line"></span><br><span class="line"><span class="comment">//在控制台上看到FINE级别的消息，就需要进行下列设置</span></span><br><span class="line">java.util.logging.ConsoleHandler.level=FINE</span><br></pre></td></tr></table></figure>
-<h2 id="754-本地化"><a class="markdownIt-Anchor" href="#754-本地化"></a> 7.5.4 本地化</h2>
-<ul>
-<li>本地化的应用程序包含资源包中的本地特定信息</li>
-<li>一个程序可以包含多个资源包，一个用于菜单;其他用于日志消息</li>
-<li>要想将映射添加到一个资源包中，需要为每个地区创建一个文件
-<ul>
-<li>英文消息映射位于com/mycompany/logmessages_en.properties文件中</li>
-<li>德文消息映射位于com/mycompany/logmessages_de.properties文件中</li>
-</ul>
-</li>
-<li>通常需要在本地化的消息中增加一些参数，因此，消息应该包括占位符{0}、{1}等</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//请求日志记录器，指定资源包</span></span><br><span class="line">Logger logger = Lgger.getlogger(loggerName，<span class="string">&quot;com.mycompany.logmessages&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//为日志消息指定资源包的关键字，而不是实际的日志消息字符串</span></span><br><span class="line">logger.info(<span class="string">&quot;readingFile&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在日志消息中包含文件名，就应该用下列方式包括占位符</span></span><br><span class="line">Reading file: &#123;<span class="number">0</span>&#125;.</span><br><span class="line">Achtung! Datei &#123;<span class="number">0</span>&#125; wird eingelesen.</span><br><span class="line"><span class="comment">//然后通过调用下面的一个方法向占位符传递具体的值</span></span><br><span class="line">logger.log(Level.INFO, <span class="string">&quot;readingFile&quot;</span>, fileName);</span><br><span class="line">lagger.log(Level.INF0, <span class="string">&quot;renamingFile&quot;</span>, <span class="keyword">new</span> 0bject[] &#123;oldNane, newName&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="755-处理器"><a class="markdownIt-Anchor" href="#755-处理器"></a> 7.5.5 处理器</h2>
-<ul>
-<li>在默认情况下，日志记录器<mark>将记录发送到ConsoleHandler中，并由它输出到System.err流中</mark></li>
-<li>特别是，<mark>日志记录器还会将记录发送到父处理器中，而最终的处理器有一个ConsoleHandler</mark></li>
-<li><mark>处理器也有日志记录级别</mark>
-<ul>
-<li><mark>对于一个要被记录的日志记录，它的日志记录级别必须高于日志记录器和处理器的阈值</mark></li>
-</ul>
-</li>
-<li>修改文件处理器的默认行为<br>
-<img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-24-19-39-43.png" alt="文件处理器配置参数"></li>
-<li>日志记录文件名：例如%h/myapp.log<br>
-<img src="/2021/11/22/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%BC%82%E5%B8%B8_%E6%96%AD%E8%A8%80%E5%92%8C%E6%97%A5%E5%BF%97/2021-11-24-19-41-31.png" alt="日志记录文件模式变量"></li>
-<li>如果多个应用程序(或者同一个应用程序的多个副本)使用同一个日志文件，就应该<mark>开启append标志</mark></li>
-<li><strong>另外，应该在文件名模式中使用%u，以便每个应用程序创建日志的唯一副本</strong></li>
-<li>可以使用<strong>文件循环功能</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//日志管理器默认配置文件设置的默认控制台处理器的日志记录级别</span></span><br><span class="line">java.util.logging.ConsoleHandler.level = INFO</span><br><span class="line"></span><br><span class="line"><span class="comment">//绕过配置文件,安装自己的处理器</span></span><br><span class="line">Logger logger = Logger.getLogger(<span class="string">&quot;com.mycompany.myapp&quot;</span>);</span><br><span class="line">logger.setLevel(Level.FINE);</span><br><span class="line">loger.setUseParentHandlers(<span class="keyword">false</span>);</span><br><span class="line">Handler handler = <span class="keyword">new</span> ConsoleHandler();</span><br><span class="line">handler.setLevel(Level.FINE);</span><br><span class="line">logger.addHandler(handler);</span><br><span class="line">  <span class="comment">//默认情况下，日志记录器将记录发送到自己的处理器和父处理器</span></span><br><span class="line">  <span class="comment">//我们的日志记录器是原始日志记录器(命名为“”)的子类，而原始日志记录器将会把所有等于或高于INFO级别的记录发送到控制台</span></span><br><span class="line">  <span class="comment">//然而，并不想两次看到这些记录,故将useParentHandlers属性设置为false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//要想将日志记录发送到其他地方,就要添加其他的处理器</span></span><br><span class="line"><span class="comment">//日志API为此提供了两个很有用的处理器</span></span><br><span class="line"><span class="comment">//一个是FileHandler;另一个是SocketHandler(SocketHandler将记录发送到特定的主机和端口)</span></span><br><span class="line">FileHandler handler = <span class="keyword">new</span> FileHandler();</span><br><span class="line">logger.addHander(handler);</span><br></pre></td></tr></table></figure>
-<h2 id="756-过滤器"><a class="markdownIt-Anchor" href="#756-过滤器"></a> 7.5.6 过滤器</h2>
-<ul>
-<li>在默认情况下，过滤器根据日志记录的级别进行过滤</li>
-<li>每个日志记录器和处理器都可以有一个可选的过滤器来完成附加的过滤
-<ul>
-<li>另外，可以通过实现Filter接口并定义下列方法来自定义过滤器</li>
-</ul>
-</li>
-<li>要想将一个过滤器安装到一个日志记录器或处理器中，只需要调用setFilter方法就可以了
-<ul>
-<li><mark>同一时刻,最多只能有一个过滤器</mark></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//实现Filter接口并定义自定义过滤器</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isLoggable</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在这个方法中，可以利用自己喜欢的标准，对日志记录进行分析，返回true表示这些记录应该包含在日志中</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="757-格式化器"><a class="markdownIt-Anchor" href="#757-格式化器"></a> 7.5.7 格式化器</h2>
-<ul>
-<li>ConsoleHandler类和FileHandler类可以生成文本和XML格式的日志记录</li>
-<li><mark>扩展Formatter类可以实现自定义格式</mark></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//扩展Formatter类并覆盖方法</span></span><br><span class="line"><span class="function">String <span class="title">format</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在format方法中,formatMessage方法对记录中的部分消息进行格式化、参数替换和本地化应用操作</span></span></span><br><span class="line"><span class="function">String <span class="title">formatMessage</span><span class="params">(LogRecord record)</span></span></span><br><span class="line"><span class="function"><span class="comment">//很多文件格式(如XML)需要在已格式化的记录的前后加上一个头部和尾部</span></span></span><br><span class="line"><span class="function"><span class="comment">//在已格式化的记录前后增加头部和尾部的覆盖方法</span></span></span><br><span class="line"><span class="function">String <span class="title">getHead</span><span class="params">(Handler h)</span></span></span><br><span class="line"><span class="function">String <span class="title">getTail</span><span class="params">(Handler h)</span></span></span><br><span class="line"><span class="function"><span class="comment">//最后，调用setFormatter方法将格式化器安装到处理器中</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="758-日志记录说明"><a class="markdownIt-Anchor" href="#758-日志记录说明"></a> 7.5.8 日志记录说明</h2>
-<ol>
-<li>为一个简单的应用程序，选择一个日志记录器，并把日志记录器命名为与主应用程序包一样的名字
-<ul>
-<li>为了方便起见，可能希望利用一些日志操作将静态域添加到类中</li>
-</ul>
-</li>
-<li>默认的日志配置将级别等于或高于INFO级别的所有消息记录到控制台
-<ul>
-<li>用户可以覆盖默认的配置文件(最好在应用程序中安装一个更加适宜的默认配置)</li>
-</ul>
-</li>
-<li>可以记录自己想要的内容
-<ul>
-<li>所有级别为INFO、WARNING和SEVERE的消息都将显示到控制台上</li>
-<li><mark>最好只将对程序用户有意义的消息设置为这几个级别(设定为FINE是一个很好的选择)</mark></li>
-</ul>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//下列代码确保将所有的消息记录到应用程序特定的文件中</span></span><br><span class="line"><span class="comment">//可以将这段代码放置在应用程序的main方法中</span></span><br><span class="line"><span class="keyword">if</span> (System.getPropery(<span class="string">&quot;java.util.logging.config.class&quot;</span>) == <span class="keyword">null</span></span><br><span class="line">&amp;&amp; System.getProperty(<span class="string">&quot;java.util.logging.confg.fine&quot;</span>) == <span class="keyword">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">try</span></span><br><span class="line">   &#123;</span><br><span class="line">     Logger.getLogger(<span class="string">&quot;&quot;</span>).setlevel(Level.ALl);</span><br><span class="line">     <span class="keyword">final</span> <span class="keyword">int</span> LOG_ROTATION_COUNT = <span class="number">10</span>;</span><br><span class="line">     Handler handler = <span class="keyword">new</span> FileHandler(<span class="string">&quot;%h/myapp.log&quot;</span>, <span class="number">0</span>, LOG_ROTATION_COUNT);</span><br><span class="line">     Logger.getLoggr(<span class="string">&quot;&quot;</span>).addHandler(handler);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IOException e)</span><br><span class="line">   logger.log(Level.SEVERE, <span class="string">&quot;Can&#x27;t create log file handler&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="76-调试技巧"><a class="markdownIt-Anchor" href="#76-调试技巧"></a> 7.6 调试技巧</h1>
-<ol>
-<li>可以用方法打印或记录任意变量的值</li>
-<li>一个不太为人所知但却非常有效的技巧是在每一个类中放置一个单独的main方法</li>
-<li>日志代理(logging proxy)是一个子类的对象，它可以截获方法调用，并进行日志记录，然后调用超类中的方法</li>
-<li>利用Throwable类提供的printStackTrace方法，可以从任何一个异常对象中获得堆栈情况</li>
-<li>一般来说，堆栈轨迹显示在System.err上。也可以利用printStackTrace(PrintWriter s)方法将它发送到一个文件中。如果想记录或显示堆栈轨迹，可以将它捕获到一个字符串中</li>
-<li>通常，将一个程序中的错误信息保存在一个文件中是非常有用的。然而，错误信息被发送到System.err中，而不是System.out中。</li>
-<li>让非捕获异常的堆栈轨迹出现在System.err中并不是一个很理想的方法。如果在客户端偶然看到这些消息，则会感到迷惑，并且在需要的时候也无法实现诊断目的。比较好的方式是将这些内容记录到一个文件中。可以调用静态的Thread.setDefaultUncaughtExceptionHandler方法改变非捕获异常的处理器</li>
-<li>要想观察类的加载过程，可以用-verbose标志启动Java虚拟机</li>
-<li>-Xlint选项告诉编译器对一些普遍容易出现的代码问题进行检查</li>
-<li>Java虚拟机增加了对Java应用程序进行监控(monitoring)和管理(management)的支持;它允许利用虚拟机中的代理装置跟踪内存消耗、线程使用、类加载等情况</li>
-<li>可以使用jmap实用工具获得一个堆的转储，其中显示了堆中的每个对象</li>
-<li>如果使用-Xprof标志运行Java虚拟机，就会运行一个基本的剖析器来跟踪那些代码中经常被调用的方法;剖析信息将发送给System.out。输出结果中还会显示哪些方法是由即时编译器编译的</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第八章 泛型程序设计</title>
     <url>/2021/11/24/%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E6%B3%9B%E5%9E%8B%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<h1 id="第八章-泛型程序设计"><a class="markdownIt-Anchor" href="#第八章-泛型程序设计"></a> 第八章 泛型程序设计</h1>
@@ -8069,174 +8237,6 @@ int (*p)[10];<br>
 <ul>
 <li>Java泛型的卓越特性之一是<mark>在虚拟机中泛型类型的擦除</mark></li>
 <li>但<mark>擦除的类仍然保留一些泛型祖先的微弱记忆</mark></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第十三章 部署Java应用程序</title>
-    <url>/2021/12/01/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E9%83%A8%E7%BD%B2Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="13-部署java应用程序"><a class="markdownIt-Anchor" href="#13-部署java应用程序"></a> 13 部署Java应用程序</h1>
-<ul>
-<li>首先介绍打包应用的指令</li>
-<li>然后展示应用如何存储配置信息和用户首选项</li>
-<li>另外还会学习如何使用ServiceLoader类在应用中加载插件</li>
-<li>讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略)</li>
-<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序</li>
-</ul>
-<hr>
-<span id="more"></span>
-<h1 id="131-jar文件"><a class="markdownIt-Anchor" href="#131-jar文件"></a> 13.1 JAR文件</h1>
-<ul>
-<li>一个JAR文件既可以包含类文件,也可以包含诸如图像和声音这些其他类型的文件</li>
-<li>此外,JAR文件是压缩的,它使用了大家熟悉的ZIP压缩格式
-<ul>
-<li>pack200是一种较通常的ZIP压缩算法更加有效的压缩类文件的方式</li>
-</ul>
-</li>
-</ul>
-<h2 id="1311-创建jar文件"><a class="markdownIt-Anchor" href="#1311-创建jar文件"></a> 13.1.1 创建JAR文件</h2>
-<ul>
-<li>可以使用jar工具制作JAR文件(在默认的JDK安装中,位于jdk/bin目录下)</li>
-<li>可以将应用程序、程序组件以及代码库打包在JAR文件中</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个新的JAR文件应该使用的常见命令格式为</span></span><br><span class="line">jar cvf JARFileName File1 File2...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cvf CalculatorClasses.jar *.class icon.gif</span><br></pre></td></tr></table></figure>
-<h2 id="1312-清单文件"><a class="markdownIt-Anchor" href="#1312-清单文件"></a> 13.1.2 清单文件</h2>
-<ul>
-<li>除了类文件、图像和其他资源外,每个JAR文件还包含一个用于描述归档特征的清单文件</li>
-<li>清单文件被命名为MANIFEST.MF,它位于JAR文件的一个特殊METANF子目录中</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个包含清单文件的Jar文件</span></span><br><span class="line">jar cfm JARFileName ManifestFileName...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cfm MyArchive.jar manifest.mf com/mycompany/mypkg<span class="comment">/*.class</span></span><br><span class="line"><span class="comment">//要想更新一个已有的JAR文件的清单,则需要将增加的部分放置到一个文本文件中,然后执行下列命令</span></span><br><span class="line"><span class="comment">jar ufm MyArcnive.jar manifest-additions.mf</span></span><br></pre></td></tr></table></figure>
-<h2 id="1313-可执行jar文件"><a class="markdownIt-Anchor" href="#1313-可执行jar文件"></a> 13.1.3 可执行JAR文件</h2>
-<ul>
-<li>可以使用jar命令中的e选项指定程序的入口点,即通常需要在调用java程序加载器时指定的类</li>
-<li>或者,可以在清单中指定应用程序的主类
-<ul>
-<li>不要将扩展名.class添加到主类名中</li>
-<li>清单文件的最后一行必须以换行符结束.否则,清单文件将无法被正确地读取</li>
-<li>常见的错误是创建了一个只包含Main-Class而没有行结束符的文本文件</li>
-</ul>
-</li>
-</ul>
-<h2 id="1314-资源"><a class="markdownIt-Anchor" href="#1314-资源"></a> 13.1.4 资源</h2>
-<ul>
-<li>利用资源机制,对于非类文件也可以同样方便地进行操作.下面是必要的步骤
-<ul>
-<li>获得具有资源的Class对象,例如,AboutPanel.class</li>
-<li>如果资源是一个图像或声音文件,那么就需要调用getresource(filename)获得作为URL的资源位置,然后利用getImage或getAudioClip方法进行读取</li>
-<li>与图像或声音文件不同,其他资源可以使用getResourceAsStream方法读取文件中的数据.</li>
-</ul>
-</li>
-<li>重点在于类加载器可以记住如何定位类,然后在同一位置查找关联的资源</li>
-</ul>
-<h2 id="1315-密封"><a class="markdownIt-Anchor" href="#1315-密封"></a> 13.1.5 密封</h2>
-<ul>
-<li>可以将Java包密封(seal)以保证不会有其他的类加入到其中
-<ul>
-<li>如果在代码中使用了包可见的类、方法和域,就可能希望密封包</li>
-<li>如果不密封,其他类就有可能放在这个包中,进而访问包可见的特性</li>
-</ul>
-</li>
-</ul>
-<h1 id="132-应用首选项的存储"><a class="markdownIt-Anchor" href="#132-应用首选项的存储"></a> 13.2 应用首选项的存储</h1>
-<ul>
-<li>应用用户通常希望能保存他们的首选项和定制信息,以后再次启动应用时再恢复这些配置</li>
-</ul>
-<h2 id="1321-属性映射"><a class="markdownIt-Anchor" href="#1321-属性映射"></a> 13.2.1 属性映射</h2>
-<ul>
-<li>属性映射是一种存储键/值对的数据结构
-<ul>
-<li>属性映射通常用来存储配置信息,它有3个特性：
-<ul>
-<li>键和值是字符串</li>
-<li>映射可以很容易地存入文件以及从文件加载</li>
-<li>有一个二级表保存默认值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实现属性映射的Java类名为Properties
-<ul>
-<li>属性映射对于指定程序的配置选项很有用</li>
-<li>可以使用store方法将属性映射列表保存到一个文件中</li>
-</ul>
-</li>
-<li>习惯上,会把程序属性存储在用户主目录的一个子目录中
-<ul>
-<li>目录名通常以一个点号开头(在UNIX系统中),这个约定说明这是一个对用户隐藏的系统目录</li>
-</ul>
-</li>
-<li>要找出用户的主目录,可以调用System.getProperties方法,它恰好也使用一个Properties对象描述系统信息
-<ul>
-<li>主目录包含键“user.home”</li>
-</ul>
-</li>
-</ul>
-<h2 id="1322-首选项api"><a class="markdownIt-Anchor" href="#1322-首选项api"></a> 13.2.2 首选项API</h2>
-<ul>
-<li>使用属性文件有以下缺点：
-<ul>
-<li>有些操作系统没有主目录的概念,所以很难找到一个统一的配置文件位置</li>
-<li>关于配置文件的命名没有标准约定,用户安装多个Java应用时,就更容易发生命名冲突</li>
-</ul>
-</li>
-</ul>
-<h1 id="133-服务加载器"><a class="markdownIt-Anchor" href="#133-服务加载器"></a> 13.3 服务加载器</h1>
-<ul>
-<li>通常,提供一个插件时,程序希望插件设计者能有一些自由来确定如何实现插件的特性</li>
-<li>另外还可以有多个实现以供选择.利用ServiceLoader类可以很容易地加载符合一个公共接口的插件</li>
-</ul>
-<h1 id="135-java-web-start"><a class="markdownIt-Anchor" href="#135-java-web-start"></a> 13.5 Java Web Start</h1>
-<ul>
-<li>Java Web Start应用程序包含下列主要特性：
-<ul>
-<li>应用程序一般通过浏览器发布.只要Java Web Start应用程序下载到本地就可以启动它,而不需要浏览器</li>
-<li>应用程序并不在浏览器窗口内.它将显示在浏览器外的一个属于自己的框架中</li>
-<li>应用程序不使用浏览器的Java实现.浏览器只是在加载Java Web Start应用程序描述符时启动一个外部应用程序</li>
-<li>数字签名应用程序可以被赋予访问本地机器的任意权限.未签名的应用程序只能运行在“沙箱”中,它可以阻止具有潜在危险的操作</li>
-</ul>
-</li>
-</ul>
-<h2 id="1351-发布java-web-start应用"><a class="markdownIt-Anchor" href="#1351-发布java-web-start应用"></a> 13.5.1 发布Java Web Start应用</h2>
-<ul>
-<li>要想准备一个通过Java Web Start发布的应用程序,应该将其打包到一个或多个JAR文件中</li>
-<li>然后创建一个Java Network Launch Protocol(JNLP)格式的描述符文件.将这些文件放置在Web服务器上</li>
-<li>还需要确保Web服务器对扩展名为.jnlp的文件报告一个application/x-java-jnlp-file的MIME类型(浏览器利用MIME类型确定启动哪一种辅助应用程序)</li>
-<li>步骤：
-<ol>
-<li>编译程序</li>
-<li>创建JAR文件：</li>
-<li>准备启动文件Calculator.jnlp</li>
-<li>如果使用Tomcat则在Tomcat安装的根目录上创建一个目录tomcat/webapps/calculator.创建子目录tomcat/webapps/calculator/WEBNF,并且将最小的web.xml文件放置在WEBNF子目录下</li>
-<li>将JAR文件和启动文件放入tomcat/webapps/calculator目录</li>
-<li>在Java控制面板中将URL增加到可信站点列表.或者,可以为JAR文件签名.</li>
-<li>在tomcat/bin目录执行启动脚本来启动Tomcat.</li>
-<li>将浏览器指向JNLP文件.如果你的浏览器不知道如何处理JNLP文件,可能会提供一个选项将它们与一个应用关联.如果是这样,请选择jdk/bin/javaws.否则,明确如何将MIME类型application/x-java-jnlp-file与javaws应用关联.还可以试着重新安装可以做到这一点的JDK.</li>
-<li>稍后,计算器就会出现,所带的边框表明这是一个Java应用程序</li>
-<li>当再次访问JNLP文件时,应用程序将从缓存中取出.可以利用Java插件控制面板查看缓存内容.在Windows系统的Windows控制面板中可以看到Java插件控制面板.在Linux下,可以运行jdk/jre/bin/ControlPanel</li>
-</ol>
-</li>
-</ul>
-<h2 id="1352-jnlp-api"><a class="markdownIt-Anchor" href="#1352-jnlp-api"></a> 13.5.2 JNLP API</h2>
-<ul>
-<li>JNLP API允许未签名的应用程序在沙箱中运行,同时通过一种安全的途径访问本地资源</li>
-<li>API提供了下面的服务：
-<ul>
-<li>加载和保存文件</li>
-<li>访问剪贴板</li>
-<li>打印</li>
-<li>下载文件</li>
-<li>在默认的浏览器中显示一个文档</li>
-<li>保存和获取持久性配置信息</li>
-<li>确信只运行一个应用程序的实例</li>
-</ul>
-</li>
 </ul>
 ]]></content>
       <categories>
