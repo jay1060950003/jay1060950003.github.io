@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2021/12/07/20211207%E9%9A%8F%E7%AC%94/">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2022/01/15/JAVASE%E9%98%B6%E6%AE%B5%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogImg/user.png">
@@ -208,7 +208,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/12/07/20211207%E9%9A%8F%E7%AC%94/" class="post-title-link" itemprop="url">20211207随笔</a>
+            <a href="/2022/01/15/JAVASE%E9%98%B6%E6%AE%B5%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">JAVASE阶段回顾总结</a>
         </h2>
 
         <div class="post-meta">
@@ -218,14 +218,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-12-07 18:12:40" itemprop="dateCreated datePublished" datetime="2021-12-07T18:12:40+08:00">2021-12-07</time>
+              <time title="创建时间：2022-01-15 15:21:26" itemprop="dateCreated datePublished" datetime="2022-01-15T15:21:26+08:00">2022-01-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+                <time title="修改时间：2022-01-20 09:46:55" itemprop="dateModified" datetime="2022-01-20T09:46:55+08:00">2022-01-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,11 +252,769 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-final与static关键字的总结"><a class="markdownIt-Anchor" href="#1-final与static关键字的总结"></a> 1 final与static关键字的总结</h2>
-<h2 id="2-class类的常用方法总结"><a class="markdownIt-Anchor" href="#2-class类的常用方法总结"></a> 2 Class类的常用方法总结</h2>
-<h2 id="3-lambda表达式的相关练习与思考"><a class="markdownIt-Anchor" href="#3-lambda表达式的相关练习与思考"></a> 3 lambda表达式的相关练习与思考</h2>
-<h2 id="4-方法引用和构造器引用的练习与思考"><a class="markdownIt-Anchor" href="#4-方法引用和构造器引用的练习与思考"></a> 4 方法引用和构造器引用的练习与思考</h2>
-<h2 id="5-内部类相关的练习与思考"><a class="markdownIt-Anchor" href="#5-内部类相关的练习与思考"></a> 5 内部类相关的练习与思考</h2>
+          <h1 id="javase阶段回顾总结"><a class="markdownIt-Anchor" href="#javase阶段回顾总结"></a> JAVASE阶段回顾总结</h1>
+<ul>
+<li>狂神说JAVA</li>
+<li>JavaSE阶段回顾总结</li>
+</ul>
+<!---more--->
+<h1 id="1-java语言"><a class="markdownIt-Anchor" href="#1-java语言"></a> 1 Java语言</h1>
+<ul>
+<li>编译型语言,解释型语言</li>
+<li>JRE:运行环境</li>
+<li>JDK:开发工具包</li>
+</ul>
+<h1 id="2-基础语法"><a class="markdownIt-Anchor" href="#2-基础语法"></a> 2 基础语法</h1>
+<ul>
+<li>注释:
+<ul>
+<li>行内注释://</li>
+<li>多行注释:/*…*/</li>
+<li>文档注释:/** */
+<ul>
+<li>javadoc生成帮助文档</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>java关键字:
+<ul>
+<li>abstract:抽象属性
+<ul>
+<li>抽象类可以扩展增加子类,但不能实例化
+<ul>
+<li>当抽象类的子类实现所有的抽象方法时,可以实例化抽象类的子类(具体类)</li>
+</ul>
+</li>
+<li>抽象方法不在声明它的类中实现,但必须在某个子类中重写</li>
+<li>采用抽象方法的类是抽象类,该类必须声明为abstract</li>
+<li>抽象属性不能使用static,private或final方法
+<ul>
+<li>这些方法不能被重写,不能在子类中实现,且final类不能有子类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>assert:断言,程序调试使用</li>
+<li>boolean:基本数据类型,布尔量</li>
+<li>break:提前跳出一个块</li>
+<li>byte:基本数据类型,字节类型</li>
+<li>case:在switch语句中的一个分支</li>
+<li>catch:异常处理时,捕获异常</li>
+<li>char:基本数据类型,字符类型</li>
+<li>class:声明一个类</li>
+<li><mark>const:保留关键字</mark></li>
+<li>continue:回到一个块的开始处</li>
+<li>default:在switch语句中的默认分支;Java8中的接口函数的默认实现</li>
+<li>do:在do-while结构中</li>
+<li>double:基本数据类型.双精度浮点数</li>
+<li>else:条件语句,条件不成立的分支</li>
+<li>enum:枚举类型</li>
+<li><mark>extends:表明一个类是另一个类的子类,或另一个接口(继承关系)</mark>
+<ul>
+<li>用在class或interface声明中,指示所声明的类或接口为子类</li>
+</ul>
+</li>
+<li><mark>final:最终属性,表明一个类不能派生子类,或成员方法不能被覆盖,或成员域的值不能被修改</mark>
+<ul>
+<li>一个类或方法,不能同时为final或abstract的,<mark>可扩展与不能重写的冲突</mark></li>
+</ul>
+</li>
+<li><mark>finally:处理异常时,肯定会被执行的语句块</mark>
+<ul>
+<li>通常包含清理代码</li>
+</ul>
+</li>
+<li>float:基本数据类型,单精度浮点数</li>
+<li>for:循环</li>
+<li>if:条件语句</li>
+<li><mark>implements:表明一个类实现了给定的接口</mark></li>
+<li>import:访问指定的类或包</li>
+<li>instanceof:测试一个对象是否是指定类型的实例对象</li>
+<li>int:基本数据类型,整型</li>
+<li><mark>interface:接口</mark>
+<ul>
+<li>声明新的Java接口,接口是方法的集合</li>
+<li>一个类可以实现多个接口</li>
+</ul>
+</li>
+<li>long:基本数据类型,长整数</li>
+<li>native:本地方法</li>
+<li>new:创建新实例对象</li>
+<li>null:表示无值</li>
+<li>package:包</li>
+<li>private:私有模式,访问控制,类可见</li>
+<li>protected:保护模式,访问控制,包可见</li>
+<li>public:共用模式,访问控制</li>
+<li>return:从成员方法中返回数据</li>
+<li><s>strictfp</s></li>
+<li>short:基本数据类型,短整数</li>
+<li><mark>static:静态属性</mark>
+<ul>
+<li>内部类,内部方法或字段</li>
+<li>意味着在声明该实体的类的任何特定实例外部可用</li>
+<li>内部类可以被其他类实例化和引用</li>
+</ul>
+</li>
+<li>super:当前对象的父类引用,或父类构造方法</li>
+<li>switch:分支语句</li>
+<li><strong>synchronized:代码同步执行</strong></li>
+<li>this:当前实例对象的引用</li>
+<li>throw:抛出一个异常</li>
+<li>throws:声明在当前定义的成员方法中所有要抛出的异常</li>
+<li><strong>transient:声明不用序列化的成员域</strong></li>
+<li>try:尝试一个可能抛出异常的程序块</li>
+<li>void:成员方法没有返回值</li>
+<li><strong>volatile:表明两个或多个变量必须同步产生变化</strong></li>
+<li>while:循环</li>
+</ul>
+</li>
+<li>数据类型
+<ul>
+<li>基本数据类型:
+<ul>
+<li>整数:byte(1字节),short(2字节),<strong>int(4字节)</strong>,long(8字节)
+<ul>
+<li>二进制0b开头,十六进制0x开头,八进制0开头</li>
+</ul>
+</li>
+<li>浮点数:float(4字节),<strong>double(8字节)</strong>
+<ul>
+<li>BigDecimal大数据类型用于金融计算,精确计算</li>
+</ul>
+</li>
+<li>字符:char(2字节)
+<ul>
+<li>编码:ASCII(中文1字节),UTF-8(中文3字节),Unicode(中文2字节)
+<ul>
+<li>转义字符:\n,\b,\r,\t,’,&quot;,\\</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>布尔值:boolean(1位)</li>
+</ul>
+</li>
+<li>引用数据类型:
+<ul>
+<li>类</li>
+<li>接口</li>
+<li>数组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>类型转化
+<ul>
+<li>自动类型转换:低转高</li>
+<li>强制类型转换:高转低</li>
+</ul>
+</li>
+<li>变量和常量
+<ul>
+<li>变量定义</li>
+<li>作用域:
+<ul>
+<li>类变量:static变量</li>
+<li>实例变量</li>
+<li>成员变量(局部变量):方法内变量</li>
+</ul>
+</li>
+<li>常量:final变量</li>
+<li>命名规范:
+<ul>
+<li>驼峰命名(变量,方法)</li>
+<li>类命名(首字母大写,驼峰命名)</li>
+<li>常量(大写+下划线)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>运算符:
+<ul>
+<li>算数运算符:+ - * / % ++ –</li>
+<li>赋值运算符:=</li>
+<li>关系运算符:&gt; &lt; &gt;= &lt;= == != instanceof</li>
+<li>逻辑运算符:&amp;&amp; || !</li>
+<li>位运算符:&amp; | ^(异或) ~ &gt;&gt; &lt;&lt; &gt;&gt;&gt;</li>
+<li><mark>条件运算符:? :</mark></li>
+<li>扩展运算符: += -+ *= /=</li>
+</ul>
+</li>
+<li>包机制
+<ul>
+<li>域名倒写</li>
+<li>防止命名冲突</li>
+<li>package</li>
+<li>import</li>
+</ul>
+</li>
+<li>JavaDoc
+<ul>
+<li>Java帮助文档</li>
+<li>javadoc
+<ul>
+<li>@author</li>
+<li>@Version</li>
+<li>@Since</li>
+<li>@param</li>
+<li>@return</li>
+<li>@throws</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-流程控制"><a class="markdownIt-Anchor" href="#3-流程控制"></a> 3 流程控制</h1>
+<ul>
+<li>Scanner
+<ul>
+<li><a target="_blank" rel="noopener" href="http://xn--System-hh8ixe029pou1b.in">用户交互System.in</a></li>
+</ul>
+</li>
+<li>顺序结构:自上而下</li>
+<li>选择结构:
+<ul>
+<li>if</li>
+<li>if-else</li>
+<li>if- else if-else</li>
+<li>switch
+<ul>
+<li>jdk7支持String类型</li>
+<li>case穿透属性</li>
+<li>default</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>循环结构
+<ul>
+<li>while</li>
+<li>do-while</li>
+<li>for</li>
+<li>for-each(增强for循环)</li>
+</ul>
+</li>
+<li>break与continue
+<ul>
+<li>break:跳出循环</li>
+<li>continue:终止当前循环
+<ul>
+<li>带标签的continue</li>
+</ul>
+</li>
+<li>return:结束方法的运行</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-方法"><a class="markdownIt-Anchor" href="#4-方法"></a> 4 方法</h1>
+<ul>
+<li>什么是方法</li>
+<li>方法的定义:修饰符 返回值 方法名(参数名){…return 返回值;}</li>
+<li>方法的调用:
+<ul>
+<li>类型.方法</li>
+<li>对象.方法</li>
+</ul>
+</li>
+<li>方法重载:名字相同,参数列表不同</li>
+<li>命令行传参:给main方法传递参数</li>
+<li>可变长参数
+<ul>
+<li>…</li>
+<li>必须放在最后一个</li>
+</ul>
+</li>
+<li>递归</li>
+</ul>
+<h1 id="5-数组"><a class="markdownIt-Anchor" href="#5-数组"></a> 5 数组</h1>
+<ul>
+<li>数组的定义:
+<ul>
+<li>必须是同一个类型</li>
+</ul>
+</li>
+<li>数组的使用:
+<ul>
+<li>通过下标</li>
+<li>ArrayIndexoutofBounds</li>
+<li>通过for循环遍历</li>
+</ul>
+</li>
+<li>二维数组</li>
+<li>Arrays工具类</li>
+<li>排序算法
+<ul>
+<li>冒泡排序</li>
+<li>选择排序</li>
+<li>插入排序</li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
+<li>基数排序</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-面向对象"><a class="markdownIt-Anchor" href="#6-面向对象"></a> 6 面向对象</h1>
+<ul>
+<li>什么是面向对象</li>
+<li>类与对象:
+<ul>
+<li>类是对象的抽象:模板Class</li>
+<li>对象是类的具体</li>
+</ul>
+</li>
+<li>构造方法:
+<ul>
+<li>默认的无参构造
+<ul>
+<li>如果手动定义了有参构造必须手动添加无参构造</li>
+<li><s>单例模式,需要构造器私有</s></li>
+</ul>
+</li>
+<li>构造的重载</li>
+</ul>
+</li>
+<li>new对象
+<ul>
+<li>栈存放引用</li>
+<li>堆存放具体的对象</li>
+</ul>
+</li>
+<li>封装
+<ul>
+<li>属性私有,get方法,set方法</li>
+</ul>
+</li>
+<li>继承
+<ul>
+<li>extends</li>
+<li>Object</li>
+<li>子类拥有父类的全部特性</li>
+<li>方法重写</li>
+<li>this</li>
+<li>super</li>
+</ul>
+</li>
+<li>多态
+<ul>
+<li>父类的引用指向子类的对象:Person person = new students();</li>
+<li>instanceof:如果匹配可以进行类型之间的转化</li>
+</ul>
+</li>
+<li>修饰符:
+<ul>
+<li>public</li>
+<li>protected</li>
+<li>private</li>
+<li>static</li>
+<li>final</li>
+<li>abstract</li>
+</ul>
+</li>
+<li>接口:
+<ul>
+<li>interface</li>
+<li>约束,只能定义方法名</li>
+<li>子类实现接口,必须重写其中的方法</li>
+<li>只有一个方法的接口叫做函数式接口,可以使用lambda表达式简化</li>
+<li>接口比抽象类更抽象</li>
+<li>一个类可以实现多个接口</li>
+</ul>
+</li>
+<li>内部类
+<ul>
+<li>局部内部类</li>
+<li>静态内部类</li>
+<li>匿名内部类(重点)</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-异常"><a class="markdownIt-Anchor" href="#7-异常"></a> 7 异常</h1>
+<ul>
+<li>Throwable接口
+<ul>
+<li>Exception
+<ul>
+<li>运行时异常
+<ul>
+<li>I/O</li>
+<li>ClassNotFound</li>
+<li>NullPoint</li>
+<li>UnKnowType</li>
+<li>下表越界异常</li>
+</ul>
+</li>
+<li>检查型异常</li>
+</ul>
+</li>
+<li>Error
+<ul>
+<li>AWT错误</li>
+<li>JVM错误
+<ul>
+<li>StackOverFlow</li>
+<li>OutofMemory</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>五个关键字处理异常
+<ul>
+<li>try</li>
+<li>catch</li>
+<li>finally()</li>
+<li>throw   手动抛出异常</li>
+<li>throws  方法抛出异常</li>
+</ul>
+</li>
+<li>自定义异常
+<ul>
+<li>继承Exception类即可</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-常用类"><a class="markdownIt-Anchor" href="#8-常用类"></a> 8 常用类</h1>
+<ul>
+<li>Object类
+<ul>
+<li>hashcode()</li>
+<li>toString()</li>
+<li>clone()</li>
+<li>equals()</li>
+<li>getClass()</li>
+<li>notify()</li>
+<li>wait()</li>
+</ul>
+</li>
+<li>Math类
+<ul>
+<li>常见数学运算</li>
+</ul>
+</li>
+<li>Random类
+<ul>
+<li>生成随机数:UUID</li>
+</ul>
+</li>
+<li>File类
+<ul>
+<li>创建文件</li>
+<li>查看文件</li>
+<li>修改文件</li>
+<li>删除文件</li>
+</ul>
+</li>
+<li>包装类
+<ul>
+<li><mark>自动装箱和拆箱</mark></li>
+</ul>
+</li>
+<li>Date类
+<ul>
+<li>Date</li>
+<li>SimpleDateFormat:yyyy-MM-dd HH:mm:ss</li>
+<li>Calendar(建议使用)</li>
+</ul>
+</li>
+<li>String类
+<ul>
+<li><mark>不可变性final</mark></li>
+</ul>
+</li>
+<li>StringBuffer:
+<ul>
+<li>可变长</li>
+<li>append()</li>
+<li>多线程数据量较大,效率低,安全</li>
+</ul>
+</li>
+<li>StringBuilder
+<ul>
+<li>可变长</li>
+<li>单线程,效率高,不安全</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-集合框架"><a class="markdownIt-Anchor" href="#9-集合框架"></a> 9 集合框架</h1>
+<ul>
+<li>Iterator:迭代器</li>
+<li>Collection
+<ul>
+<li>List(有序可重复)
+<ul>
+<li>ArrayList(常用)
+<ul>
+<li>add</li>
+<li>remove</li>
+<li>contains</li>
+<li>size</li>
+</ul>
+</li>
+<li>LinkedList(常用)
+<ul>
+<li>getFirst()</li>
+<li>getLast()</li>
+<li>removeFirst()</li>
+<li>addFirst()</li>
+<li>…</li>
+</ul>
+</li>
+<li>Vector</li>
+<li>Stack</li>
+</ul>
+</li>
+<li>Set(无序不可重复)
+<ul>
+<li>HashSet(常用)</li>
+<li>TreeSet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map
+<ul>
+<li><strong>HashMap(重点)</strong>
+<ul>
+<li>JDK1.7:数组+链表</li>
+<li>JDK1.8:数组+链表+红黑树
+<ul>
+<li><strong>使用红黑树的原因:效率问题</strong></li>
+<li>链表长度大于等于8时转换为红黑树</li>
+<li>为什么数组长度必须是2的指数次幂?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TreeMap</li>
+</ul>
+</li>
+<li>Collections工具类</li>
+<li>泛型&lt;&gt;约束,避免类型转换之间的问题</li>
+</ul>
+<h1 id="10-io流"><a class="markdownIt-Anchor" href="#10-io流"></a> 10 IO流</h1>
+<ul>
+<li><strong>字节流:</strong>
+<ul>
+<li>输出流:OutputStream</li>
+<li>输入流InputStream</li>
+</ul>
+</li>
+<li><strong>字符流:</strong>
+<ul>
+<li>Reader</li>
+<li>Writer</li>
+</ul>
+</li>
+<li>节点流
+<ul>
+<li>charArrayReader,writer,inputStream,OutputStream</li>
+<li>StringReader,Writer</li>
+<li>pipe(管道流)</li>
+<li><strong>File(, , , )</strong></li>
+</ul>
+</li>
+<li>处理流:
+<ul>
+<li>buffer
+<ul>
+<li>bufferInputStream</li>
+<li>bufferOutputStream</li>
+<li>bufferReader</li>
+<li>bufferWriter</li>
+</ul>
+</li>
+<li><strong>序列化:</strong>
+<ul>
+<li>反序列化,</li>
+<li>Serializable</li>
+<li>transient:(透明的)</li>
+</ul>
+</li>
+<li>data
+<ul>
+<li>DataInputStream</li>
+<li>DateOutputStream</li>
+</ul>
+</li>
+<li>转换流
+<ul>
+<li>InputstreamReader</li>
+<li>OUtputStreamWriter</li>
+</ul>
+</li>
+<li>Filter
+<ul>
+<li>四个</li>
+</ul>
+</li>
+<li>print
+<ul>
+<li>PrintWriter</li>
+<li>PrintStream</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="11-多线程"><a class="markdownIt-Anchor" href="#11-多线程"></a> 11 多线程</h1>
+<ul>
+<li>进程和线程</li>
+<li>run(),Start()方法的区别</li>
+<li>线程创建的方式:
+<ul>
+<li>Thread
+<ul>
+<li>start0(本地方法,java无权调用,交给底层的c处理)</li>
+<li>private native void start0()</li>
+</ul>
+</li>
+<li>Runnable
+<ul>
+<li>函数式接口:lambda</li>
+</ul>
+</li>
+<li>Callbale
+<ul>
+<li>可以有返回值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>静态代理:
+<ul>
+<li>new Thread(Runnable).start();</li>
+</ul>
+</li>
+<li>Lambda表达式:
+<ul>
+<li>函数式编程</li>
+<li>避免内部类定义过多</li>
+<li>()-&gt;System.out.println()</li>
+<li>手动推导内部lambda表达式</li>
+</ul>
+</li>
+<li>线程的状态:
+<ul>
+<li>新建</li>
+<li>就绪</li>
+<li>运行</li>
+<li>阻塞</li>
+<li>死亡</li>
+</ul>
+</li>
+<li>常用的方法
+<ul>
+<li>sleep()</li>
+<li>join()</li>
+<li>yield()</li>
+<li>isLive()</li>
+<li>start()</li>
+<li>setPriority()</li>
+<li>interrupt()</li>
+</ul>
+</li>
+<li>线程同步:
+<ul>
+<li>多个对象操作同一个资源:并发问题</li>
+<li>前提:队列+锁</li>
+<li>Synchronized
+<ul>
+<li>同步方法(弊端:锁太多)</li>
+<li>同步代码块(常用!)</li>
+<li>第一个线程进来拿到锁,知道这个人释放锁,后面拿到锁才能进去</li>
+<li>死锁:两个人都抱着自己的锁
+<ul>
+<li>互斥</li>
+<li>请求与保持</li>
+<li>不剥夺条件</li>
+<li>循环等待条件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lock锁(优先级高):
+<ul>
+<li>ReentrantLock
+<ul>
+<li>lock</li>
+<li>trylock</li>
+<li>unlock</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程通信
+<ul>
+<li>缓冲区:消息队列</li>
+<li>标志位:红绿灯</li>
+<li>Object的方法:
+<ul>
+<li>wait()</li>
+<li>notifyAll()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程池:
+<ul>
+<li>池化计数</li>
+<li>池的大小</li>
+<li>最大连接数</li>
+<li>连接时间</li>
+<li>保持时间</li>
+</ul>
+</li>
+</ul>
+<h1 id="12-注解和反射"><a class="markdownIt-Anchor" href="#12-注解和反射"></a> 12 注解和反射</h1>
+<ul>
+<li>注解
+<ul>
+<li>元注解</li>
+<li>内置注解</li>
+<li>自定义注解</li>
+<li>反射读取注解</li>
+</ul>
+</li>
+<li>反射
+<ul>
+<li>Class newInstance()</li>
+<li>类加载机制</li>
+<li>Method
+<ul>
+<li>invoke()</li>
+<li>存在重载,需要重写</li>
+</ul>
+</li>
+<li>Field set()</li>
+<li>Construct
+<ul>
+<li>newInstance</li>
+<li>获取的时候需要传递参数的class类型</li>
+</ul>
+</li>
+<li>破坏私有关键字
+<ul>
+<li>setAccessible(true)</li>
+</ul>
+</li>
+<li>性能分析
+<ul>
+<li>正常&gt;检测关闭的反射&gt;默认的反射</li>
+</ul>
+</li>
+<li>反射获得注解,泛型</li>
+</ul>
+</li>
+<li>单例模式的探究</li>
+<li>Stream流</li>
+<li>Forkjoin</li>
+</ul>
 
       
     </div>
@@ -397,7 +1155,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+                <time title="修改时间：2022-01-14 23:14:32" itemprop="dateModified" datetime="2022-01-14T23:14:32+08:00">2022-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -429,8 +1187,8 @@
 <li>首先介绍打包应用的指令</li>
 <li>然后展示应用如何存储配置信息和用户首选项</li>
 <li>另外还会学习如何使用ServiceLoader类在应用中加载插件</li>
-<li>讨论applet，介绍创建或维护applet时需要了解的有关知识(已过时，忽略)</li>
-<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法，很多方面都与applet很类似，不过更适合不在Web页面中的程序</li>
+<li>讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略)</li>
+<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序</li>
 </ul>
 <hr>
           <!--noindex-->
@@ -490,7 +1248,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+                <time title="修改时间：2022-01-15 12:32:43" itemprop="dateModified" datetime="2022-01-15T12:32:43+08:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -517,8 +1275,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="9-集合"><a class="markdownIt-Anchor" href="#9-集合"></a> 9 集合</h1>
-<p>使用标准库中的集合类</p>
+          <h1 id="91-java集合框架"><a class="markdownIt-Anchor" href="#91-java集合框架"></a> 9.1 Java集合框架</h1>
+<ul>
+<li>使用标准库中的集合类</li>
+<li>Java最初版本只为最常用的数据结构提供了一组类：Vector、Stack、Hashtable、BitSet与Enumeration接口
+<ul>
+<li>其中的Enumeration接口提供了一种用于访问任意容器中各个元素的抽象机制</li>
+</ul>
+</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/11/27/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E9%9B%86%E5%90%88/#more" rel="contents">

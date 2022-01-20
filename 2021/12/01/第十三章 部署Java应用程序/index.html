@@ -30,15 +30,15 @@
     var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="13 部署Java应用程序  首先介绍打包应用的指令 然后展示应用如何存储配置信息和用户首选项 另外还会学习如何使用ServiceLoader类在应用中加载插件 讨论applet，介绍创建或维护applet时需要了解的有关知识(已过时，忽略) 讨论Java Web Start机制——这是一种基于Internet的应用发布方法，很多方面都与applet很类似，不过更适合不在Web页面中的程序">
+  <meta name="description" content="13 部署Java应用程序  首先介绍打包应用的指令 然后展示应用如何存储配置信息和用户首选项 另外还会学习如何使用ServiceLoader类在应用中加载插件 讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略) 讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十三章 部署Java应用程序">
 <meta property="og:url" content="http://jay1060950003.github.io/2021/12/01/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E9%83%A8%E7%BD%B2Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="MyCodingStudio">
-<meta property="og:description" content="13 部署Java应用程序  首先介绍打包应用的指令 然后展示应用如何存储配置信息和用户首选项 另外还会学习如何使用ServiceLoader类在应用中加载插件 讨论applet，介绍创建或维护applet时需要了解的有关知识(已过时，忽略) 讨论Java Web Start机制——这是一种基于Internet的应用发布方法，很多方面都与applet很类似，不过更适合不在Web页面中的程序">
+<meta property="og:description" content="13 部署Java应用程序  首先介绍打包应用的指令 然后展示应用如何存储配置信息和用户首选项 另外还会学习如何使用ServiceLoader类在应用中加载插件 讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略) 讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-01T11:29:09.000Z">
-<meta property="article:modified_time" content="2021-12-08T01:48:06.000Z">
+<meta property="article:modified_time" content="2022-01-14T15:14:32.813Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-08 09:48:06" itemprop="dateModified" datetime="2021-12-08T09:48:06+08:00">2021-12-08</time>
+                <time title="修改时间：2022-01-14 23:14:32" itemprop="dateModified" datetime="2022-01-14T23:14:32+08:00">2022-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,15 +259,15 @@
 <li>首先介绍打包应用的指令</li>
 <li>然后展示应用如何存储配置信息和用户首选项</li>
 <li>另外还会学习如何使用ServiceLoader类在应用中加载插件</li>
-<li>讨论applet，介绍创建或维护applet时需要了解的有关知识(已过时，忽略)</li>
-<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法，很多方面都与applet很类似，不过更适合不在Web页面中的程序</li>
+<li>讨论applet,介绍创建或维护applet时需要了解的有关知识(已过时,忽略)</li>
+<li>讨论Java Web Start机制——这是一种基于Internet的应用发布方法,很多方面都与applet很类似,不过更适合不在Web页面中的程序</li>
 </ul>
 <hr>
 <span id="more"></span>
 <h1 id="131-jar文件"><a class="markdownIt-Anchor" href="#131-jar文件"></a> 13.1 JAR文件</h1>
 <ul>
-<li>一个JAR文件既可以包含类文件，也可以包含诸如图像和声音这些其他类型的文件</li>
-<li>此外，JAR文件是压缩的，它使用了大家熟悉的ZIP压缩格式
+<li>一个JAR文件既可以包含类文件,也可以包含诸如图像和声音这些其他类型的文件</li>
+<li>此外,JAR文件是压缩的,它使用了大家熟悉的ZIP压缩格式
 <ul>
 <li>pack200是一种较通常的ZIP压缩算法更加有效的压缩类文件的方式</li>
 </ul>
@@ -275,56 +275,56 @@
 </ul>
 <h2 id="1311-创建jar文件"><a class="markdownIt-Anchor" href="#1311-创建jar文件"></a> 13.1.1 创建JAR文件</h2>
 <ul>
-<li>可以使用jar工具制作JAR文件(在默认的JDK安装中，位于jdk/bin目录下)</li>
+<li>可以使用jar工具制作JAR文件(在默认的JDK安装中,位于jdk/bin目录下)</li>
 <li>可以将应用程序、程序组件以及代码库打包在JAR文件中</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个新的JAR文件应该使用的常见命令格式为</span></span><br><span class="line">jar cvf JARFileName File1 File2...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cvf CalculatorClasses.jar *.class icon.gif</span><br></pre></td></tr></table></figure>
 <h2 id="1312-清单文件"><a class="markdownIt-Anchor" href="#1312-清单文件"></a> 13.1.2 清单文件</h2>
 <ul>
-<li>除了类文件、图像和其他资源外，每个JAR文件还包含一个用于描述归档特征的清单文件</li>
-<li>清单文件被命名为MANIFEST.MF，它位于JAR文件的一个特殊METANF子目录中</li>
+<li>除了类文件、图像和其他资源外,每个JAR文件还包含一个用于描述归档特征的清单文件</li>
+<li>清单文件被命名为MANIFEST.MF,它位于JAR文件的一个特殊METANF子目录中</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个包含清单文件的Jar文件</span></span><br><span class="line">jar cfm JARFileName ManifestFileName...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cfm MyArchive.jar manifest.mf com/mycompany/mypkg<span class="comment">/*.class</span></span><br><span class="line"><span class="comment">//要想更新一个已有的JAR文件的清单，则需要将增加的部分放置到一个文本文件中，然后执行下列命令</span></span><br><span class="line"><span class="comment">jar ufm MyArcnive.jar manifest-additions.mf</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个包含清单文件的Jar文件</span></span><br><span class="line">jar cfm JARFileName ManifestFileName...</span><br><span class="line"><span class="comment">//例如</span></span><br><span class="line">jar cfm MyArchive.jar manifest.mf com/mycompany/mypkg<span class="comment">/*.class</span></span><br><span class="line"><span class="comment">//要想更新一个已有的JAR文件的清单,则需要将增加的部分放置到一个文本文件中,然后执行下列命令</span></span><br><span class="line"><span class="comment">jar ufm MyArcnive.jar manifest-additions.mf</span></span><br></pre></td></tr></table></figure>
 <h2 id="1313-可执行jar文件"><a class="markdownIt-Anchor" href="#1313-可执行jar文件"></a> 13.1.3 可执行JAR文件</h2>
 <ul>
-<li>可以使用jar命令中的e选项指定程序的入口点，即通常需要在调用java程序加载器时指定的类</li>
-<li>或者，可以在清单中指定应用程序的主类
+<li>可以使用jar命令中的e选项指定程序的入口点,即通常需要在调用java程序加载器时指定的类</li>
+<li>或者,可以在清单中指定应用程序的主类
 <ul>
 <li>不要将扩展名.class添加到主类名中</li>
-<li>清单文件的最后一行必须以换行符结束。否则，清单文件将无法被正确地读取</li>
+<li>清单文件的最后一行必须以换行符结束.否则,清单文件将无法被正确地读取</li>
 <li>常见的错误是创建了一个只包含Main-Class而没有行结束符的文本文件</li>
 </ul>
 </li>
 </ul>
 <h2 id="1314-资源"><a class="markdownIt-Anchor" href="#1314-资源"></a> 13.1.4 资源</h2>
 <ul>
-<li>利用资源机制，对于非类文件也可以同样方便地进行操作。下面是必要的步骤
+<li>利用资源机制,对于非类文件也可以同样方便地进行操作.下面是必要的步骤
 <ul>
-<li>获得具有资源的Class对象，例如，AboutPanel.class</li>
-<li>如果资源是一个图像或声音文件，那么就需要调用getresource(filename)获得作为URL的资源位置，然后利用getImage或getAudioClip方法进行读取</li>
-<li>与图像或声音文件不同，其他资源可以使用getResourceAsStream方法读取文件中的数据。</li>
+<li>获得具有资源的Class对象,例如,AboutPanel.class</li>
+<li>如果资源是一个图像或声音文件,那么就需要调用getresource(filename)获得作为URL的资源位置,然后利用getImage或getAudioClip方法进行读取</li>
+<li>与图像或声音文件不同,其他资源可以使用getResourceAsStream方法读取文件中的数据.</li>
 </ul>
 </li>
-<li>重点在于类加载器可以记住如何定位类，然后在同一位置查找关联的资源</li>
+<li>重点在于类加载器可以记住如何定位类,然后在同一位置查找关联的资源</li>
 </ul>
 <h2 id="1315-密封"><a class="markdownIt-Anchor" href="#1315-密封"></a> 13.1.5 密封</h2>
 <ul>
 <li>可以将Java包密封(seal)以保证不会有其他的类加入到其中
 <ul>
-<li>如果在代码中使用了包可见的类、方法和域，就可能希望密封包</li>
-<li>如果不密封，其他类就有可能放在这个包中，进而访问包可见的特性</li>
+<li>如果在代码中使用了包可见的类、方法和域,就可能希望密封包</li>
+<li>如果不密封,其他类就有可能放在这个包中,进而访问包可见的特性</li>
 </ul>
 </li>
 </ul>
 <h1 id="132-应用首选项的存储"><a class="markdownIt-Anchor" href="#132-应用首选项的存储"></a> 13.2 应用首选项的存储</h1>
 <ul>
-<li>应用用户通常希望能保存他们的首选项和定制信息，以后再次启动应用时再恢复这些配置</li>
+<li>应用用户通常希望能保存他们的首选项和定制信息,以后再次启动应用时再恢复这些配置</li>
 </ul>
 <h2 id="1321-属性映射"><a class="markdownIt-Anchor" href="#1321-属性映射"></a> 13.2.1 属性映射</h2>
 <ul>
 <li>属性映射是一种存储键/值对的数据结构
 <ul>
-<li>属性映射通常用来存储配置信息，它有3个特性：
+<li>属性映射通常用来存储配置信息,它有3个特性：
 <ul>
 <li>键和值是字符串</li>
 <li>映射可以很容易地存入文件以及从文件加载</li>
@@ -339,12 +339,12 @@
 <li>可以使用store方法将属性映射列表保存到一个文件中</li>
 </ul>
 </li>
-<li>习惯上，会把程序属性存储在用户主目录的一个子目录中
+<li>习惯上,会把程序属性存储在用户主目录的一个子目录中
 <ul>
-<li>目录名通常以一个点号开头(在UNIX系统中)，这个约定说明这是一个对用户隐藏的系统目录</li>
+<li>目录名通常以一个点号开头(在UNIX系统中),这个约定说明这是一个对用户隐藏的系统目录</li>
 </ul>
 </li>
-<li>要找出用户的主目录，可以调用System.getProperties方法，它恰好也使用一个Properties对象描述系统信息
+<li>要找出用户的主目录,可以调用System.getProperties方法,它恰好也使用一个Properties对象描述系统信息
 <ul>
 <li>主目录包含键“user.home”</li>
 </ul>
@@ -354,51 +354,50 @@
 <ul>
 <li>使用属性文件有以下缺点：
 <ul>
-<li>有些操作系统没有主目录的概念，所以很难找到一个统一的配置文件位置</li>
-<li>关于配置文件的命名没有标准约定，用户安装多个Java应用时，就更容易发生命名冲突</li>
+<li>有些操作系统没有主目录的概念,所以很难找到一个统一的配置文件位置</li>
+<li>关于配置文件的命名没有标准约定,用户安装多个Java应用时,就更容易发生命名冲突</li>
 </ul>
 </li>
 </ul>
 <h1 id="133-服务加载器"><a class="markdownIt-Anchor" href="#133-服务加载器"></a> 13.3 服务加载器</h1>
 <ul>
-<li>通常，提供一个插件时，程序希望插件设计者能有一些自由来确定如何实现插件的特性</li>
-<li>另外还可以有多个实现以供选择。利用ServiceLoader类可以很容易地加载符合一个公共接口的插件</li>
+<li>通常,提供一个插件时,程序希望插件设计者能有一些自由来确定如何实现插件的特性</li>
+<li>另外还可以有多个实现以供选择.利用ServiceLoader类可以很容易地加载符合一个公共接口的插件</li>
 </ul>
 <h1 id="135-java-web-start"><a class="markdownIt-Anchor" href="#135-java-web-start"></a> 13.5 Java Web Start</h1>
 <ul>
 <li>Java Web Start应用程序包含下列主要特性：
 <ul>
-<li>应用程序一般通过浏览器发布。只要Java Web Start应用程序下载到本地就可以启动它，而不需要浏览器</li>
-<li>应用程序并不在浏览器窗口内。它将显示在浏览器外的一个属于自己的框架中</li>
-<li>应用程序不使用浏览器的Java实现。浏览器只是在加载Java Web Start应用程序描述符时启动一个外部应用程序</li>
-<li>数字签名应用程序可以被赋予访问本地机器的任意权限。未签名的应用程序只能运行在“沙箱”中，它可以阻止具有潜在危险的操作</li>
+<li>应用程序一般通过浏览器发布.只要Java Web Start应用程序下载到本地就可以启动它,而不需要浏览器</li>
+<li>应用程序并不在浏览器窗口内.它将显示在浏览器外的一个属于自己的框架中</li>
+<li>应用程序不使用浏览器的Java实现.浏览器只是在加载Java Web Start应用程序描述符时启动一个外部应用程序</li>
+<li>数字签名应用程序可以被赋予访问本地机器的任意权限.未签名的应用程序只能运行在“沙箱”中,它可以阻止具有潜在危险的操作</li>
 </ul>
 </li>
 </ul>
 <h2 id="1351-发布java-web-start应用"><a class="markdownIt-Anchor" href="#1351-发布java-web-start应用"></a> 13.5.1 发布Java Web Start应用</h2>
 <ul>
-<li>要想准备一个通过Java Web Start发布的应用程序，应该将其打包到一个或多个JAR文件中</li>
-<li>然后创建一个Java Network Launch Protocol(JNLP)格式的描述符文件。将这些文件放置在Web服务器上</li>
+<li>要想准备一个通过Java Web Start发布的应用程序,应该将其打包到一个或多个JAR文件中</li>
+<li>然后创建一个Java Network Launch Protocol(JNLP)格式的描述符文件.将这些文件放置在Web服务器上</li>
 <li>还需要确保Web服务器对扩展名为.jnlp的文件报告一个application/x-java-jnlp-file的MIME类型(浏览器利用MIME类型确定启动哪一种辅助应用程序)</li>
 <li>步骤：
 <ol>
-<li>编译程序。</li>
-<li>使用下列命令创建一个JAR文件：</li>
-<li>使用下列内容准备启动文件Calculator.jnlp：<br>
-注意，版本号必须是1.6.0，而不是6.0</li>
-<li>如果使用Tomcat，则在Tomcat安装的根目录上创建一个目录tomcat/webapps/calculator。创建子目录tomcat/webapps/calculator/WEBNF，并且将最小的web.xml文件放置在WEBNF子目录下：</li>
-<li>将JAR文件和启动文件放入tomcat/webapps/calculator目录。</li>
-<li>在Java控制面板中将URL增加到可信站点列表。或者，可以为JAR文件签名。</li>
-<li>在tomcat/bin目录执行启动脚本来启动Tomcat。</li>
-<li>将浏览器指向JNLP文件。如果你的浏览器不知道如何处理JNLP文件，可能会提供一个选项将它们与一个应用关联。如果是这样，请选择jdk/bin/javaws。否则，明确如何将MIME类型application/x-java-jnlp-file与javaws应用关联。还可以试着重新安装可以做到这一点的JDK。</li>
-<li>稍后，计算器就会出现，所带的边框表明这是一个Java应用程序</li>
-<li>当再次访问JNLP文件时，应用程序将从缓存中取出。可以利用Java插件控制面板查看缓存内容。在Windows系统的Windows控制面板中可以看到Java插件控制面板。在Linux下，可以运行jdk/jre/bin/ControlPanel</li>
+<li>编译程序</li>
+<li>创建JAR文件：</li>
+<li>准备启动文件Calculator.jnlp</li>
+<li>如果使用Tomcat则在Tomcat安装的根目录上创建一个目录tomcat/webapps/calculator.创建子目录tomcat/webapps/calculator/WEBNF,并且将最小的web.xml文件放置在WEBNF子目录下</li>
+<li>将JAR文件和启动文件放入tomcat/webapps/calculator目录</li>
+<li>在Java控制面板中将URL增加到可信站点列表.或者,可以为JAR文件签名.</li>
+<li>在tomcat/bin目录执行启动脚本来启动Tomcat.</li>
+<li>将浏览器指向JNLP文件.如果你的浏览器不知道如何处理JNLP文件,可能会提供一个选项将它们与一个应用关联.如果是这样,请选择jdk/bin/javaws.否则,明确如何将MIME类型application/x-java-jnlp-file与javaws应用关联.还可以试着重新安装可以做到这一点的JDK.</li>
+<li>稍后,计算器就会出现,所带的边框表明这是一个Java应用程序</li>
+<li>当再次访问JNLP文件时,应用程序将从缓存中取出.可以利用Java插件控制面板查看缓存内容.在Windows系统的Windows控制面板中可以看到Java插件控制面板.在Linux下,可以运行jdk/jre/bin/ControlPanel</li>
 </ol>
 </li>
 </ul>
 <h2 id="1352-jnlp-api"><a class="markdownIt-Anchor" href="#1352-jnlp-api"></a> 13.5.2 JNLP API</h2>
 <ul>
-<li>JNLP API允许未签名的应用程序在沙箱中运行，同时通过一种安全的途径访问本地资源</li>
+<li>JNLP API允许未签名的应用程序在沙箱中运行,同时通过一种安全的途径访问本地资源</li>
 <li>API提供了下面的服务：
 <ul>
 <li>加载和保存文件</li>
