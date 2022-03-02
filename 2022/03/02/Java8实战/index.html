@@ -30,22 +30,20 @@
     var CONFIG = {"hostname":"jay1060950003.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="2 输入与输出  2.1 输入&#x2F;输出  在JavaAPI中，可以从其中读入一个字节序列的对象称为输入流 可以向其中写入一个字节序列的对象称为输出流 抽象类InputStream和OutputStream构成了输入输出类层次结构的基础  这些类的读入和写出操作以基于二字节的char值(Unicode码元)为基础     2.1.1 读写字节  InputStream类  抽象方法: abstra">
+  <meta name="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件流">
-<meta property="og:url" content="http://jay1060950003.github.io/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/index.html">
+<meta property="og:title" content="Java8实战">
+<meta property="og:url" content="http://jay1060950003.github.io/2022/03/02/Java8%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="MyCodingStudio">
-<meta property="og:description" content="2 输入与输出  2.1 输入&#x2F;输出  在JavaAPI中，可以从其中读入一个字节序列的对象称为输入流 可以向其中写入一个字节序列的对象称为输出流 抽象类InputStream和OutputStream构成了输入输出类层次结构的基础  这些类的读入和写出操作以基于二字节的char值(Unicode码元)为基础     2.1.1 读写字节  InputStream类  抽象方法: abstra">
+<meta property="og:description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://jay1060950003.github.io/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/2022-03-02-15-59-36.png">
-<meta property="article:published_time" content="2022-03-02T07:13:39.000Z">
-<meta property="article:modified_time" content="2022-03-02T08:55:56.766Z">
+<meta property="article:published_time" content="2022-03-02T11:14:00.000Z">
+<meta property="article:modified_time" content="2022-03-02T11:17:02.338Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://jay1060950003.github.io/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/2022-03-02-15-59-36.png">
 
-<link rel="canonical" href="http://jay1060950003.github.io/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/">
+<link rel="canonical" href="http://jay1060950003.github.io/2022/03/02/Java8%E5%AE%9E%E6%88%98/">
 
 
 <script id="page-configurations">
@@ -58,7 +56,7 @@
   };
 </script>
 
-  <title>文件流 | MyCodingStudio</title>
+  <title>Java8实战 | MyCodingStudio</title>
   
 
 
@@ -199,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/">
+    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2022/03/02/Java8%E5%AE%9E%E6%88%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogImg/user.png">
@@ -212,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          文件流
+          Java8实战
         </h1>
 
         <div class="post-meta">
@@ -223,7 +221,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-03-02 15:13:39 / 修改时间：16:55:56" itemprop="dateCreated datePublished" datetime="2022-03-02T15:13:39+08:00">2022-03-02</time>
+              <time title="创建时间：2022-03-02 19:14:00 / 修改时间：19:17:02" itemprop="dateCreated datePublished" datetime="2022-03-02T19:14:00+08:00">2022-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,77 +248,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h1 id="2-输入与输出"><a class="markdownIt-Anchor" href="#2-输入与输出"></a> 2 输入与输出</h1>
-<h2 id="21-输入输出"><a class="markdownIt-Anchor" href="#21-输入输出"></a> 2.1 输入/输出</h2>
-<ul>
-<li>在JavaAPI中，可以从其中读入一个字节序列的对象称为输入流</li>
-<li>可以向其中写入一个字节序列的对象称为输出流</li>
-<li><mark>抽象类InputStream和OutputStream构成了输入输出类层次结构的基础</mark>
-<ul>
-<li>这些类的读入和写出操作以基于二字节的char值(Unicode码元)为基础</li>
-</ul>
-</li>
-</ul>
-<h3 id="211-读写字节"><a class="markdownIt-Anchor" href="#211-读写字节"></a> 2.1.1 读写字节</h3>
-<ul>
-<li>InputStream类
-<ul>
-<li>抽象方法: abstract int read()
-<ul>
-<li>读入一个字节,并返回读入的字节或者在遇到输入源结尾时返回-1</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>OutputStream类
-<ul>
-<li>抽象方法：abstract void write(int b)
-<ul>
-<li>从某个位置输出一个字节</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><mark>read和write在执行时江北阻塞，直至字节确实被读入或写出</mark></li>
-<li>available()方法——检查当前可读入的字节数量</li>
-<li>close()方法——完成对输入/输出流的读写时，关闭流释放操作系统资源</li>
-</ul>
-<h3 id="212-完整的流家族"><a class="markdownIt-Anchor" href="#212-完整的流家族"></a> 2.1.2 完整的流家族</h3>
-<ul>
-<li>InputStream和OutputStream流构成层次结构的基础
-<ul>
-<li>读写单个字节或字节数组</li>
-<li>子类包含很多有用的输入和输出流</li>
-</ul>
-</li>
-<li>抽象类Reader和Writer子类,处理Unicode文本,基本方法为read()与write()方法</li>
-<li>四个附加接口: Closeable Flushable Readable 和 Appendable
-<ul>
-<li>Closeable Flushable分别拥有close() flush()方法</li>
-<li>Appendable接口有两个用于添加单个字符和字符序列的方法 append(char c) append(CharSequence s)</li>
-<li>InputStream OutputStream Reader Writer 都实现了Closeable接口</li>
-<li>OutputStream和Writer实现了Flushable接口<br>
-<img src="/2022/03/02/%E6%96%87%E4%BB%B6%E6%B5%81/2022-03-02-15-59-36.png" alt="流家族的接口"></li>
-</ul>
-</li>
-</ul>
-<h3 id="213-组合输入输出流过滤器"><a class="markdownIt-Anchor" href="#213-组合输入输出流过滤器"></a> 2.1.3 组合输入/输出流过滤器</h3>
-<ul>
-<li>FileInputStream和FileOutputStream可以提供附着在一个磁盘文件上的输入流和输出流,只需向构造器提供文件名或文件的完整路径名
-<ul>
-<li>只支持在字节级别上的读写</li>
-</ul>
-</li>
-<li>某些输入流(FileInputStream)可以从文件和其他外部位置获取字节;而其他的输入流(DataInputStream)可以将字节组装到更有用的数据类型中,<mark>对两者进行组合操作</mark></li>
-<li><mark>输入流在默认情况下是不被缓冲区缓存的</mark>
-<ul>
-<li>每个对read的调用都会请求操作系统再分发一个字节，<strong>请求一个数据块，并将其置于缓冲区中会更加高效</strong></li>
-</ul>
-</li>
-<li>当多个输入流链接在一起，跟踪个各个中介输入流</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为了从文件中读入数字</span></span><br><span class="line"><span class="comment">//首先需要创建一个FileInputStream</span></span><br><span class="line"><span class="comment">//然后将其创建给DataInputStream的构造器</span></span><br><span class="line">FileInputStream fin = <span class="keyword">new</span> FileInputStream(<span class="string">&quot;employee.dat&quot;</span>);</span><br><span class="line">DataInputStream din = <span class="keyword">new</span> DataInputStream(fin);</span><br><span class="line"><span class="keyword">double</span> x = din.readDouble();</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用缓冲机制</span></span><br><span class="line">DataInputStream din = <span class="keyword">new</span> DataInputStream(</span><br><span class="line">    <span class="keyword">new</span> BufferedInputStream(</span><br><span class="line">        <span class="keyword">new</span> FileInputStream(<span class="string">&quot;employee.data)</span></span><br><span class="line"><span class="string">    )</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+        
     </div>
 
     
@@ -341,10 +269,7 @@
     <a href="/2022/01/15/JavaSE%E9%98%B6%E6%AE%B5%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" rel="prev" title="JavaSE阶段回顾总结">
       <i class="fa fa-chevron-left"></i> JavaSE阶段回顾总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/03/02/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/" rel="next" title="Java核心技术">
-      Java核心技术 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -403,7 +328,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text"> 2 输入与输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.</span> <span class="nav-text"> 2.1 输入&#x2F;输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#211-%E8%AF%BB%E5%86%99%E5%AD%97%E8%8A%82"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 2.1.1 读写字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#212-%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E5%AE%B6%E6%97%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 2.1.2 完整的流家族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#213-%E7%BB%84%E5%90%88%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 2.1.3 组合输入&#x2F;输出流过滤器</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
