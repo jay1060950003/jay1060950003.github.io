@@ -1,6 +1,1234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++新经典</title>
+    <url>/2021/11/20/C++%E6%96%B0%E7%BB%8F%E5%85%B8/</url>
+    <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<ul>
+<li>王建伟老师的《C++新经典》的学习笔记</li>
+</ul>
+<span id="more"></span>
+<hr>
+<h1 id="2-数据类型-运算符与表达式"><a class="markdownIt-Anchor" href="#2-数据类型-运算符与表达式"></a> 2 数据类型、运算符与表达式</h1>
+<h2 id="21-常量-变量-整型-实型和字符串"><a class="markdownIt-Anchor" href="#21-常量-变量-整型-实型和字符串"></a> 2.1 常量、变量、整型、实型和字符串</h2>
+<p>项目要先 <strong><mark>编译、链接、生成可执行程序</mark></strong> ，然后才能运行。</p>
+<h3 id="212-c语言的数据类型"><a class="markdownIt-Anchor" href="#212-c语言的数据类型"></a> 2.1.2 C语言的数据类型</h3>
+<p>其中包括：</p>
+<ul>
+<li>基础类型：数值类型（整型、浮点型）、字符类型</li>
+<li>构造类型：数组、结构体(struct)、共用体(union)、枚举类型(enum)</li>
+<li>指针类型</li>
+<li>void空类型</li>
+</ul>
+<p>其中在64位系统中，<mark>int、float类型为4字节，double、long、long long类型为8字节，一个字节为8位二进制数</mark></p>
+<h3 id="213-常量和变量"><a class="markdownIt-Anchor" href="#213-常量和变量"></a> 2.1.3 常量和变量</h3>
+<blockquote>
+<p>变量定义：<br>
+类型名 变量名[ = 变量初始值]<br>
+<em>使用[]包括的内容可以省略</em></p>
+</blockquote>
+<p><mark>变量必须先定义才可以使用</mark><br>
+<strong>变量命名方法：推荐第一个字符表示类型，用几个单词的组合表示含义，每个单词的第一个字符大写</strong></p>
+<h3 id="214-整型数据"><a class="markdownIt-Anchor" href="#214-整型数据"></a> 2.1.4 整型数据</h3>
+<ul>
+<li>八进制数：以0开头的数字</li>
+<li>十六进制：以0x开头的数字</li>
+</ul>
+<p>整型变量主要包括基本型int类型、长整型long int（简写为long）类型、无符号类型（unsigned），可以使用<mark>sizeof（）函数</mark>获取变量所占字节数。</p>
+<ul>
+<li>常量的类型的<strong>特殊写法</strong></li>
+<li>常数后加<mark>U或u</mark>，表示<mark>无符号整型类型存储</mark>，相当于unsigned int</li>
+<li>常数后加<mark>L或l</mark>，表示<mark>长整型</mark>存储，相当于long</li>
+<li>常数后加<mark>F或f</mark>，表示以<mark>浮点</mark>存储，相当于float</li>
+</ul>
+<h3 id="215-实型数据"><a class="markdownIt-Anchor" href="#215-实型数据"></a> 2.1.5 实型数据</h3>
+<p>实型数据是指实数，也称为<mark>浮点数</mark>，浮点数在内存中都是以<mark>指数形式</mark>存储。</p>
+<p><strong>如何区分float和double两种浮点数？</strong><br>
+精度不同，float在内存中一般占4字节，而double在内存中一般占8字节，float提供7位有效数字，而double提供15-16位有效数字。</p>
+<p><mark>给浮点数赋值0.51，但显示为0.509999990的原因？<br>
+Ans：计算机中，会把十进制数转换为二进制数保存，在查看时在转换为十进制数显示，在这中间存在着一些出发操作，会导致在二进制转换为十进制的过程中丢失精度</mark></p>
+<h3 id="216-字符型数据"><a class="markdownIt-Anchor" href="#216-字符型数据"></a> 2.1.6 字符型数据</h3>
+<p><strong>推荐单引号内只能放一个字符的规定</strong> ^3eb832</p>
+<p>字符变量<br>
+<mark>将一个字符常量放在字符变量中，实际上是以字符对应的ASCII码存储在内存中</mark><br>
+ACSII码，空格字符对应32、数字0对应48、A对应65、a对应97</p>
+<h3 id="217-字符串变量"><a class="markdownIt-Anchor" href="#217-字符串变量"></a> 2.1.7 字符串变量</h3>
+<p><a href="#216-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%95%B0%E6%8D%AE">跳转至该位置</a><br>
+规定，单引号包含单个字符串。<br>
+<strong>字符串变量为双引号包含一串字符</strong><br>
+<mark>'a’与&quot;a&quot;的区别？<br>
+'a’表示单个字符变量，在内存中只占一个字节，而&quot;a&quot;表示字符串变量，在内存中占两个字节</mark></p>
+<h3 id="219-数值型数据之间的混合运算"><a class="markdownIt-Anchor" href="#219-数值型数据之间的混合运算"></a> 2.1.9 数值型数据之间的混合运算</h3>
+<p>不同类型的数值型数据进行混合运算时，系统会尝试进行变量类型统一，然后再进行计算。<br>
+<mark>转换规则：</mark></p>
+<ul>
+<li>int转为unsigned转为long转为double，当类型不同时进行转换。</li>
+<li>char和short转换为int，float转换为double，<mark>强制转换，在该类型进行运算时，必须转为int或double类型，再进行计算</mark></li>
+</ul>
+<h2 id="22-算数运算符和表达式"><a class="markdownIt-Anchor" href="#22-算数运算符和表达式"></a> 2.2 算数运算符和表达式</h2>
+<h3 id="221-c语言的运算符"><a class="markdownIt-Anchor" href="#221-c语言的运算符"></a> 2.2.1 C语言的运算符</h3>
+<p>共13个大类，包括算数运算符、关系运算符、逻辑运算符、位运算符、赋值运算符、条件运算符、逗号运算符、指针运算符、求字节运算符、强制类型转换运算符、成员变量运算符、下标运算符、其他。</p>
+<h3 id="223-运算符优先级问题"><a class="markdownIt-Anchor" href="#223-运算符优先级问题"></a> 2.2.3 运算符优先级问题</h3>
+<p>单目运算符&gt;双目运算符&gt;三目运算符&gt;赋值运算符</p>
+<p>单目运算符、条件运算符、赋值运算符为从右到左结合，其他的为从左到右结合。</p>
+<h3 id="224-强制类型转换运算符"><a class="markdownIt-Anchor" href="#224-强制类型转换运算符"></a> 2.2.4 强制类型转换运算符</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&gt;表达式一般形式</span><br><span class="line">&gt;(类型名) (表达式名)</span><br></pre></td></tr></table></figure>
+<h3 id="225-自增和自减运算符"><a class="markdownIt-Anchor" href="#225-自增和自减运算符"></a> 2.2.5 自增和自减运算符</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">++i;  先加一再使用</span><br><span class="line">i++; 先使用再加一</span><br><span class="line">--i; 先减一再使用</span><br><span class="line">i--; 先使用再减一</span><br></pre></td></tr></table></figure>
+<p><mark>-i++ 表示-(i++);i+<ins>j表示(i</ins>) +j</mark></p>
+<h2 id="23-赋值运算符"><a class="markdownIt-Anchor" href="#23-赋值运算符"></a> 2.3 赋值运算符</h2>
+<p>赋值的原则:赋值符号的左右两边的数据类型应该相同,类型不同时可以使用强制转换符进行转换.<br>
+**逗号运算符的求解规则:先求解表达式1,再求解表达式2.</p>
+<hr>
+<h1 id="3-程序的基本结构和语句"><a class="markdownIt-Anchor" href="#3-程序的基本结构和语句"></a> 3 程序的基本结构和语句</h1>
+<h2 id="31-c语言的语句和程序的基本结构"><a class="markdownIt-Anchor" href="#31-c语言的语句和程序的基本结构"></a> 3.1 C语言的语句和程序的基本结构</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">continue</span>  结束本次循环,开始下次循环是否执行的判断</span><br><span class="line"><span class="keyword">break</span>    终止循环的执行或者跳出<span class="keyword">switch</span>语句</span><br></pre></td></tr></table></figure>
+<h3 id="312-程序的三种基本结构"><a class="markdownIt-Anchor" href="#312-程序的三种基本结构"></a> 3.1.2 程序的三种基本结构</h3>
+<ul>
+<li>顺序结构</li>
+<li>选择结构</li>
+<li>循环结构
+<ul>
+<li>当型循环:先判断再执行</li>
+<li>直到型循环:先执行再判断</li>
+</ul>
+</li>
+</ul>
+<h2 id="32-数据的输出与输入"><a class="markdownIt-Anchor" href="#32-数据的输出与输入"></a> 3.2 数据的输出与输入</h2>
+<ul>
+<li><mark>当使用尖括号&lt;&gt;包括头文件时,表示在系统目录中寻找头文件</mark></li>
+<li><mark>当使用双引号&quot;&quot;包括头文件时,表示在源代码所在目录中搜索头文件,再到系统目录中搜索头文件</mark></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>()函数</span><br><span class="line"><span class="built_in">printf</span>(格式控制字符串,输出表列)</span><br><span class="line">%d:表示以十进制输出数字</span><br><span class="line">%o:表示以八进制输出数字</span><br><span class="line">%x:表示以十六进制输出数字</span><br><span class="line">%u:以十进制输出无符号数字</span><br><span class="line">%c:表示输出一个字符</span><br><span class="line">%s:表示输出一个字符串.**字符串末尾有一个系统自动加入的’\<span class="number">0&#x27;</span>作为字符串结束标记,但输出显示不显示该字符**.</span><br><span class="line">%f:输出一个小数.==%x.yf表示以x宽度输出y位小数的数字==</span><br></pre></td></tr></table></figure>
+<p>百分号的输出方法:</p>
+<ol>
+<li>使用两个百分号输出</li>
+<li>使用%c输出‘%’</li>
+<li>使用%s输出“%”</li>
+</ol>
+<h3 id="322-数据的输入"><a class="markdownIt-Anchor" href="#322-数据的输入"></a> 3.2.2 数据的输入</h3>
+<p>在程序中,最好只使用一个getchar()输入,避免结束输入时,第二个getchar()函数读取回车符号,影响程序的正常预期.</p>
+<p><strong>scanf(格式控制字符串,地址表列);</strong></p>
+<ul>
+<li>第二个参数为地址表列,使用的是地址,不要忘记 &amp; 符号对变量取地址</li>
+<li>要注意输入与格式控制字符串形式相同</li>
+</ul>
+<hr>
+<h1 id="4-逻辑运算和判断选择"><a class="markdownIt-Anchor" href="#4-逻辑运算和判断选择"></a> 4 逻辑运算和判断选择</h1>
+<p><a href="#223-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E9%97%AE%E9%A2%98">跳转至该位置</a></p>
+<ul>
+<li>优先级顺序:算术运算符&gt;关系运算符&gt;赋值运算符</li>
+</ul>
+<p>逻辑运算符:</p>
+<ul>
+<li>&amp;&amp; 与运算符:同真为真,有假出假</li>
+<li>|| 或运算符:有真出真,同假为假</li>
+<li>! 非运算符:反转</li>
+</ul>
+<p>if()语句:</p>
+<ul>
+<li>if(判断表达式)语句;</li>
+<li>if(判断表达式)语句1; else 语句2;</li>
+<li>if(判断表达式1) 语句1; else if(判断表达式2) 语句2;······</li>
+</ul>
+<p>switch()语句:<br>
+注意<mark>break语句为跳出switch()结构终止该结构的运行,注意其使用的技巧</mark></p>
+<hr>
+<h1 id="5-循环控制"><a class="markdownIt-Anchor" href="#5-循环控制"></a> 5 循环控制</h1>
+<h2 id="51-goto语句"><a class="markdownIt-Anchor" href="#51-goto语句"></a> 5.1 goto语句</h2>
+<p>goto语句需要搭配==语句标号:==语句一起使用,goto 语句标号;为使用方式.</p>
+<p>主要用途:</p>
+<ul>
+<li>与if语句一起使用构成循环</li>
+<li>从循环体内跳转到循环体外(<strong>不建议使用</strong>)</li>
+<li><mark>goto语句不能跨函数使用</mark></li>
+</ul>
+<h2 id="52-while表达式-要执行的语句"><a class="markdownIt-Anchor" href="#52-while表达式-要执行的语句"></a> 5.2 while(表达式) 要执行的语句</h2>
+<h2 id="53-do-要执行的语句-while表达式"><a class="markdownIt-Anchor" href="#53-do-要执行的语句-while表达式"></a> 5.3 do 要执行的语句 while(表达式)</h2>
+<h2 id="54-for语句"><a class="markdownIt-Anchor" href="#54-for语句"></a> 5.4 for语句</h2>
+<p>for(表达式1(初始值);表达式2(结束条件);表达式3(变化量)) 内嵌的语句;</p>
+<ul>
+<li>表达式1省略,循环外需要初始化变量</li>
+<li>表达式2省略,需要使用break语句终止循环</li>
+<li>表达式3省略,需要在循环内改变循环量</li>
+<li>三个表达式都可以省略,但都需要对应的操作</li>
+<li>三个表达式都省略,且不加对应的操作,for(;😉{}相当于while(1){}</li>
+<li>表达式1可以设置其他变量初始化</li>
+<li>表达式3执行很多次,但表达式1只执行1次</li>
+</ul>
+<p><mark>break语句和continue语句的区别?<br>
+continue只结束本次循环,而不是结束整个循环,而break是结束整个循环</mark></p>
+<hr>
+<h1 id="6-数组"><a class="markdownIt-Anchor" href="#6-数组"></a> 6 数组</h1>
+<h2 id="61-一维数组"><a class="markdownIt-Anchor" href="#61-一维数组"></a> 6.1 一维数组</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">定义:</span><br><span class="line">类型说明 数组名\[常量表达式\]</span><br><span class="line"></span><br><span class="line">引用:</span><br><span class="line">数组名\[下标\]</span><br></pre></td></tr></table></figure>
+<h2 id="62-二维数组"><a class="markdownIt-Anchor" href="#62-二维数组"></a> 6.2 二维数组</h2>
+<p>在C语言中,二维数组的元素存放顺序为:按<strong>行</strong>存放<br>
+多维数组在内存中排列顺序:第一维下标变化最慢,最右边维度变化最快</p>
+<h2 id="63-字符数组"><a class="markdownIt-Anchor" href="#63-字符数组"></a> 6.3 字符数组</h2>
+<h3 id="633-字符串和字符串结束标记"><a class="markdownIt-Anchor" href="#633-字符串和字符串结束标记"></a> 6.3.3 字符串和字符串结束标记</h3>
+<p><mark>C语言中规定了一个字符串结束标记,用’\0’代表,如果一个字符串的第十个字符为‘\0’,则该字符串的长度为9个,即遇到‘\0’表示字符串结束,该字符前面的字符构成字符串.可见10个可见字符的字符串,其可见字符若每个占用一个字节,则整个字符串在内存中占用11个字节</mark><br>
+<strong>注意:设置字符串变量的时候需要考虑–字符串结束标记–,则需要可见字符串长度加一设置大小</strong><br>
+<mark>对于双引号包含的字符串,系统会自动往末尾添加一个’\0’,若人工添加也是可以的,若没有字符串结束标记也是可以的</mark></p>
+<h3 id="635-字符串处理函数"><a class="markdownIt-Anchor" href="#635-字符串处理函数"></a> 6.3.5 字符串处理函数</h3>
+<p>strcat(字符数组1,字符数组2);<br>
+把字符数组2连接到字符数组1的后面,存放在字符数组1中.<br>
+说明:</p>
+<ul>
+<li>字符数组必须足够大,能够容纳连接后的新字符串.</li>
+<li>连接前两个字符数组都包括字符结束标记,但连接时会自动删除字符数组1的字符结束标记</li>
+<li>连接后字符数组2没有变化</li>
+</ul>
+<p>strcpy(字符数组1,字符数组2);<br>
+把字符数组2复制到字符数组1中.<br>
+<mark>不能使用赋值语句对字符数组直接赋值,只能对单个字符进行赋值</mark></p>
+<p>strcmp(字符数组1,字符数组2);<br>
+字符串比较,若字符数组1&gt;字符数组2,使用的是ASCII码进行比较,返回一个正整数,相等返回0.</p>
+<p>strlen(字符数组);<br>
+返回字符串的长度,<mark>不包括字符结束标记</mark>.</p>
+<hr>
+<h1 id="7-函数"><a class="markdownIt-Anchor" href="#7-函数"></a> 7 函数</h1>
+<h2 id="71-函数的基本概念和定义"><a class="markdownIt-Anchor" href="#71-函数的基本概念和定义"></a> 7.1 函数的基本概念和定义</h2>
+<h3 id="712-函数的定义和返回值"><a class="markdownIt-Anchor" href="#712-函数的定义和返回值"></a> 7.1.2 函数的定义和返回值</h3>
+<p><strong>如果函数的实参和形参为数组名(数组名代表的是数组的首地址),则传递的是数组的首地址.</strong></p>
+<h2 id="72-函数调用的一般形式"><a class="markdownIt-Anchor" href="#72-函数调用的一般形式"></a> 7.2 函数调用的一般形式</h2>
+<p>函数声明的一般形式:</p>
+<blockquote>
+<p>返回类型 函数名(形参列表);</p>
+</blockquote>
+<ul>
+<li>==函数定义和函数声明的区别?
+<ul>
+<li>函数定义里面包含函数体,函数体中的代码确定了函数需要执行的功能,而函数声明,只是对一定义的函数进行说明,不包括函数体.函数声明可以提前指明该函数的参数类型、返回值类型等,让函数的调用者明确的知道这些信息.==</li>
+</ul>
+</li>
+<li><strong>C语言不允许嵌套定义函数,但可以嵌套调用函数</strong></li>
+<li>函数的递归调用:执行递归函数将反复调用其自身,每调用一次就进入新的一层,<strong>递归函数必须有结束条件</strong></li>
+</ul>
+<h3 id="723-递归调用的出口"><a class="markdownIt-Anchor" href="#723-递归调用的出口"></a> 7.2.3 递归调用的出口</h3>
+<p>利用递归调用计算阶乘例程:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dg_jiecheng</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">int</span> result;</span><br><span class="line"> <span class="keyword">if</span>(n = <span class="number">1</span>)</span><br><span class="line"> &#123;</span><br><span class="line">  result = <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line"> &#123;</span><br><span class="line">  result = dg_jiecheng(n<span class="number">-1</span>)*n;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="733-递归调用的优缺点以及是否必须用递归"><a class="markdownIt-Anchor" href="#733-递归调用的优缺点以及是否必须用递归"></a> 7.3.3 递归调用的优缺点以及是否必须用递归</h3>
+<p>优点:代码简洁<br>
+缺点:</p>
+<ul>
+<li>理解起来困难</li>
+<li>若调用层次太深,调用栈可能会溢出</li>
+<li>效率和性能不高</li>
+</ul>
+<p><mark>汉诺塔问题:<br>
+大梵天创造世界时造了三根金钢石柱子，其中一根柱子自底向上叠着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。</mark><br>
+解决方法:</p>
+<ul>
+<li>使用递归调用方法.(将前n-1个盘子看成一个整体,递归调用函数,不断对可调动的盘子调动)</li>
+<li>TODO: 使用其他方法(之后详解).</li>
+</ul>
+<h2 id="74-数组作为函数参数"><a class="markdownIt-Anchor" href="#74-数组作为函数参数"></a> 7.4 数组作为函数参数</h2>
+<h3 id="742-数组名作为函数实参"><a class="markdownIt-Anchor" href="#742-数组名作为函数实参"></a> 7.4.2 数组名作为函数实参</h3>
+<ul>
+<li><strong>将数组名作为函数实参进行传递时,传递的是数组的首地址,此时函数中的形参也应该使用数组名(或者数组指针)</strong></li>
+<li><mark>称为地址传递,形参数组中的各个元素的值如果发生变化,等价于数组中的元素的值发生了相应的改变</mark></li>
+<li>实参为数组名,形参也应该为数组名</li>
+<li>实参数组与形参数组类型必须一致</li>
+<li>形参数组的大小可以不指定,即使指定也可以与实参数组大小不一致</li>
+</ul>
+<h3 id="743-用多维数组作为函数实参"><a class="markdownIt-Anchor" href="#743-用多维数组作为函数实参"></a> 7.4.3 用多维数组作为函数实参</h3>
+<p>形参数组在定义时,<mark>可以省略第一维的大小,但不可以省略第二维的大小</mark>.实参是多少行多少列,形参应该尽量和实参大小一致.</p>
+<h2 id="75-局部变量和全局变量"><a class="markdownIt-Anchor" href="#75-局部变量和全局变量"></a> 7.5 局部变量和全局变量</h2>
+<h3 id="751-局部变量"><a class="markdownIt-Anchor" href="#751-局部变量"></a> 7.5.1 局部变量</h3>
+<ul>
+<li>形参也是局部变量</li>
+<li>不同函数内部可以使用相同的变量名,之间互不干扰</li>
+<li>复合语句(用括号{}包括的语句),其中定义的参数为局部变量,生命周期只在定义的范围内生效</li>
+</ul>
+<h3 id="752-全局变量"><a class="markdownIt-Anchor" href="#752-全局变量"></a> 7.5.2 全局变量</h3>
+<ul>
+<li><strong>如果某个函数想引用在它后面定义的全局变量,可以使用<mark>extern</mark>做外部变量说明.<mark>在进行外部变量说明时,不可以进行赋值操作.</mark></strong></li>
+<li>严格区分外部变量和全局变量说明:
+<ul>
+<li>全局变量定义只能有一次,位于所有函数之外,定义时即分配内存.</li>
+<li>外部变量,可以在一个文件中可以声明很多次.</li>
+</ul>
+</li>
+<li>同一个源文件中,局部变量和全局变量同名,则在局部变量的作用范围内,全局变量不生效.</li>
+<li>如果在一个源程序文件中定义的全局变量想在项目其他源文件中使用,则需要在其他需要使用的源文件中添加extern关键字做外部变量声明即可使用.</li>
+</ul>
+<h2 id="76-变量的存储和引用与内部和外部函数"><a class="markdownIt-Anchor" href="#76-变量的存储和引用与内部和外部函数"></a> 7.6 变量的存储和引用与内部和外部函数</h2>
+<p>程序在内存中的存储空间分为程序代码区、静态存储区、动态存储区</p>
+<ul>
+<li>全局变量存储在静态存储区</li>
+<li>函数形参、局部变量、函数调用时的现场数据和返回地址存储在动态存储区</li>
+</ul>
+<h3 id="762-局部变量的存储方式"><a class="markdownIt-Anchor" href="#762-局部变量的存储方式"></a> 7.6.2 局部变量的存储方式</h3>
+<p>局部变量声明为<mark>局部静态变量</mark>时,需要添加<mark>static</mark>关键字,则在函数调用结束后,该局部变量<mark>不会被释放</mark>.</p>
+<ul>
+<li>在静态存储区中分配内存,程序在整个运行期间不会释放</li>
+<li>局部静态变量在编译时<mark>赋初值</mark>,且<mark>只赋一次初值.之后调用函数时,不再进行赋初值操作,只是保留上一次运行结束的值</mark></li>
+<li>定义局部静态变量时,如果不赋初值,则==编译时,自动赋初值为0.</li>
+<li>虽然局部静态变量在函数调用结束后依然存在,但在其他函数中不能引用</li>
+<li>局部静态变量长期占用内存</li>
+<li><strong>如非必要,不要过多使用局部静态变量</strong></li>
+</ul>
+<h3 id="763-全局变量跨文件使用"><a class="markdownIt-Anchor" href="#763-全局变量跨文件使用"></a> 7.6.3 全局变量跨文件使用</h3>
+<p><a href="#752-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F">跳转至该位置</a><br>
+跨文件使用的全局变量extern用法,<mark>一般放在程序的开头部分</mark></p>
+<p>若需要全局变量,只能<mark>在本文件中使用</mark>,则需要在该全局变量声明时,添加==static<br>
+==关键字声明为静态全局变量</p>
+<h3 id="764-函数跨文件使用"><a class="markdownIt-Anchor" href="#764-函数跨文件使用"></a> 7.6.4 函数跨文件使用</h3>
+<p>内部函数定义:只能在本文件中使用(需要添加<mark>static</mark>关键字)</p>
+<blockquote>
+<p>static 返回类型 函数名 (形参列表){…}</p>
+</blockquote>
+<h3 id="765-static关键字用法总结"><a class="markdownIt-Anchor" href="#765-static关键字用法总结"></a> 7.6.5 static关键字用法总结</h3>
+<ul>
+<li>局部变量  <a href="#762-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F">跳转至该位置</a></li>
+<li>全局变量,只在本文件中使用   <a href="#763-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E8%B7%A8%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8">跳转至该位置</a></li>
+<li>内部函数   <a href="#764-%E5%87%BD%E6%95%B0%E8%B7%A8%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8">跳转至该位置</a></li>
+</ul>
+<hr>
+<h1 id="8-编译预处理"><a class="markdownIt-Anchor" href="#8-编译预处理"></a> 8 编译预处理</h1>
+<p>C语言提供的三种预处理操作:</p>
+<ul>
+<li>宏定义</li>
+<li>文件包含</li>
+<li>条件编译</li>
+</ul>
+<h2 id="81-宏定义"><a class="markdownIt-Anchor" href="#81-宏定义"></a> 8.1 宏定义</h2>
+<ul>
+<li>宏名一般使用<mark>大写字母</mark>表示</li>
+<li>#define的有效范围到程序文件结束的部分,不可跨文件使用</li>
+<li>可以使用\undef结束宏定义的作用域</li>
+</ul>
+<h3 id="812-带参数的宏定义"><a class="markdownIt-Anchor" href="#812-带参数的宏定义"></a> 8.1.2 带参数的宏定义</h3>
+<p>一般形式:</p>
+<blockquote>
+<p>#define 宏名(参数表) 被替换的内容<br>
+作用:用右边的“被替换的内容”代替“宏名(参数表)”</p>
+</blockquote>
+<ul>
+<li>
+<p>对一般形式中提到的“被替换的内容”,要从左到右处理</p>
+</li>
+<li>
+<p>如果“被替换的内容”中有“宏名”后列出的形参,则程序代码中相应的实参代替形参.</p>
+</li>
+<li>
+<p>如果“被替换的内容”的项并不是“宏名”后列出的形参,则保留.</p>
+</li>
+<li>
+<p>一般在形参外面加一个括号</p>
+</li>
+<li>
+<p>宏定义时,宏名和带参数的括号之间不能加空格</p>
+</li>
+<li>
+<p>函数调用是先求实参表达式的值,然后传递给形参;带参数的宏只进行简单的替换,展开时不求值</p>
+</li>
+<li>
+<p>宏展开只占用编译时间,不占用运行时间;函数调用占用运行时间,不占用编译时间.</p>
+</li>
+</ul>
+<h2 id="82-文件包含和条件编译"><a class="markdownIt-Anchor" href="#82-文件包含和条件编译"></a> 8.2 文件包含和条件编译</h2>
+<h3 id="821-文件包含"><a class="markdownIt-Anchor" href="#821-文件包含"></a> 8.2.1 文件包含</h3>
+<p>常把一些宏定义,函数说明,甚至一些公共的#include命令、外部变量说明(extern)等,都可以写到一个.h文件中,然后在源程序中#include这个头文件即可<br>
+#include头文件允许<mark>文件嵌套</mark>使用</p>
+<h3 id="822-条件编译"><a class="markdownIt-Anchor" href="#822-条件编译"></a> 8.2.2 条件编译</h3>
+<blockquote>
+<p>#ifdef 标示符<br>
+程序段1<br>
+#else<br>
+程序段2<br>
+#endif</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>#ifndef 标示符<br>
+程序段1<br>
+#else<br>
+程序段2<br>
+#endif</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>#if 表达式<br>
+程序段1<br>
+#else<br>
+程序段2<br>
+#endif</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>#if 表达式1<br>
+程序段1<br>
+#elif 表达式2<br>
+程序段2<br>
+#else<br>
+程序段3<br>
+#endif</p>
+</blockquote>
+<hr>
+<h1 id="9-指针"><a class="markdownIt-Anchor" href="#9-指针"></a> 9 指针</h1>
+<p><mark>在常见的X86、X64平台下,int类型占4字节,char占1字节,float占4字节,double占8字节</mark><br>
+<strong>在x86平台下,整型指针变量占用4字节地址,而x64平台下,整型指针变量占用8字节地址</strong></p>
+<ul>
+<li>指针变量:用于存储另一个变量的地址</li>
+<li>指针变量的值:为另一个变量的地址</li>
+<li><mark>指针就是一个地址,指针变量就是存储其他变量地址的量</mark></li>
+</ul>
+<!-- more -->
+<h2 id="92-变量的指针和指向变量的指针变量"><a class="markdownIt-Anchor" href="#92-变量的指针和指向变量的指针变量"></a> 9.2 变量的指针和指向变量的指针变量</h2>
+<p>定义指针变量:</p>
+<blockquote>
+<p>类型标识符 * 标识符;</p>
+</blockquote>
+<ul>
+<li>在定义指针变量时,指针变量前面具有*,表示正在定义一个指针变量,但在使用该指针变量时,指针前面的*是没有的</li>
+<li>一个指针变量只能指向同一个类型的变量</li>
+</ul>
+<p>引用指针变量:</p>
+<ul>
+<li>&amp; 取地址运算符</li>
+<li>* 指针运算符(间接访问运算符)</li>
+</ul>
+<p>==*p1++ 从右到左结合,等价于*(p1++)</p>
+<ul>
+<li>要注意将指针作为函数参数传入函数后,操作指针<mark>可能会导致指针指向发生变化,但实际指向的变量并没有发生变化</mark>(例教材P139)</li>
+<li>可以间接在函数中改变指针变量所指向的变量的值,从而实现<mark>在调用函数内改变外部变量的值</mark></li>
+</ul>
+<h2 id="93-数组的指针和指向数组的指针变量"><a class="markdownIt-Anchor" href="#93-数组的指针和指向数组的指针变量"></a> 9.3 数组的指针和指向数组的指针变量</h2>
+<p><strong>数组名等于数组首地址(数组第一个元素的地址),所以数组名a等效于&amp;a[0]</strong><br>
+指向数组的指针变量,<mark>可以带下标</mark>,如p[i]与*(p +i)等效,等效于数组a的a[i]变量</p>
+<p><mark>*(p++)与*(++p)的区别?<br>
+++在变量p的后面,表示先用再加,<ins>在变量p的前面表示先加再用;<br>
+若p指向a[0],则*(p</ins>)表示先用后加,则使用时,p指向a[0],当使用结束后p指向a[1]</mark></p>
+<h3 id="935-指向多维数组的指针和指针变量探究"><a class="markdownIt-Anchor" href="#935-指向多维数组的指针和指针变量探究"></a> 9.3.5 指向多维数组的指针和指针变量探究</h3>
+<p>二维数组:</p>
+<ul>
+<li>a 为二维数组名,数组首地址,第0行首地址</li>
+<li>a + 1,表示第1行首地址</li>
+<li>a[0],&amp;a[0][0],<em>a,</em>(a+0),&amp;a[0] 表示第0行首<mark>地址</mark>(第0行第0列元素地址)</li>
+<li>a[0]+1,&amp;a[0][1],*a+1 表示第0行第1列元素<mark>地址</mark></li>
+<li><em>(a[0] +1),a[0][1],</em>(*a +1) 表示第0行第1列<mark>元素值</mark></li>
+</ul>
+<h3 id="936-指针数组和数组指针"><a class="markdownIt-Anchor" href="#936-指针数组和数组指针"></a> 9.3.6 指针数组和数组指针</h3>
+<ol>
+<li>指针数组<br>
+int * p[10]<br>
+表示数组,但是数组的元素都是指针.</li>
+<li>数组指针<br>
+int <a href="10">*p</a>;<br>
+<mark>数组指针是指向数组地址的指针，其本质为指针；<br>
+指针变量,名称为p,表示这个指针变量用来指向含有10个元素的一维数组</mark></li>
+</ol>
+<p><strong>指向一维数组的指针变量</strong><br>
+设一维数组为a[n],<br>
+<strong>定义方法：*指针变量名 (即*P</strong>)</p>
+<p><strong>指向二维数组的指针变量</strong><br>
+设二维数组为a[m][n],<br>
+<strong>定义方法：<a href="%E9%95%BF%E5%BA%A6">*指针变量名</a> (即（*P）[n]</strong>)<br>
+<strong>“长度”表示二维数组分解为多个一维数组时，一维数组的长度，也就是二维数组的列数。</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//数组指针:</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>, <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>&#125;;</span><br><span class="line"><span class="built_in"><span class="keyword">int</span></span> (*p) [<span class="number">4</span>];</span><br><span class="line">p= (<span class="built_in"><span class="keyword">int</span></span>(*) [<span class="number">4</span>])a;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++) <span class="built_in">printf</span>(<span class="string">&quot;&amp;d&quot;</span>,p[i][j]); <span class="comment">//或者*(* (p+i) +j)或者* (p[li]+j)</span></span><br><span class="line">      <span class="built_in">printf</span> (<span class="string">&quot;\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//指针数组:</span></span><br><span class="line"><span class="keyword">int</span> ix=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>, <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>);</span><br><span class="line"><span class="keyword">int</span> *p[<span class="number">3</span>] ;</span><br><span class="line"><span class="keyword">for</span> (ix;ix&lt;<span class="number">3</span>;ix++) p[ix]-a[ix];</span><br><span class="line"><span class="keyword">for</span> (i;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)<span class="comment">//注意这里的j要赋值等于0，要不然只能输出第一-行1234, 达不到预期的效果</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="built_in">printf</span> (<span class="string">&quot;8d&quot;</span>,p[i][j]); <span class="comment">//或者 * (* (p+i) +j)或者* (p[i]+j)</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="937-多维数组的指针作为函数参数"><a class="markdownIt-Anchor" href="#937-多维数组的指针作为函数参数"></a> 9.3.7 多维数组的指针作为函数参数</h3>
+<p>一维数组的地址可以作为函数参数传递,多维数组的地址也可以作为函数参数传递<br>
+<strong>C语言中,对于字符串常量会在内存中开辟一块专门的地址用来存放字符串常量,这段内存是只读的,不可以进行修改</strong></p>
+<h2 id="95-函数指针和返回指针值的函数"><a class="markdownIt-Anchor" href="#95-函数指针和返回指针值的函数"></a> 9.5 函数指针和返回指针值的函数</h2>
+<p>指针变量指向函数,从而可以通过指针来调用所指向的函数</p>
+<p>定义:</p>
+<blockquote>
+<p>数据类型标识符 ( * 指针变量名) (形参列表);<br>
+指针变量名 = 函数名;  //进行赋值,将函数的地址赋值给指针</p>
+</blockquote>
+<ul>
+<li>int *p(int x, int y);  表示这个函数的返回值是指向整型变量的指针,表示定义返回整型指针的函数</li>
+<li>int (* p)(int x, int y);  表示p指针指向函数,表示函数指针</li>
+</ul>
+<h3 id="952-把指向函数的指针变量作为函数参数"><a class="markdownIt-Anchor" href="#952-把指向函数的指针变量作为函数参数"></a> 9.5.2 把指向函数的指针变量作为函数参数</h3>
+<p><strong>指向函数的指针变量可以作为参数,从而实现函数地址的传递,也就是将函数地址传递给形参.</strong><br>
+用函数指针变量作为形参和实参可以方便的实现调用函数的切换,增强程序的灵活性和扩展性.</p>
+<h3 id="953-返回指针值的函数"><a class="markdownIt-Anchor" href="#953-返回指针值的函数"></a> 9.5.3 返回指针值的函数</h3>
+<p>一般定义形式:</p>
+<blockquote>
+<p>数据类型 * 函数名(参数列表){…}</p>
+</blockquote>
+<p><mark>在构造子函数时,需要注意局部变量的生命周期,避免因为局部变量被系统回收而造成程序崩溃(特别需要注意返回变量的引用)</mark></p>
+<h2 id="96-指针数组-指针的指针与main函数参数"><a class="markdownIt-Anchor" href="#96-指针数组-指针的指针与main函数参数"></a> 9.6 指针数组、指针的指针与main函数参数</h2>
+<p>指针数组定义:<br>
+<a href="#936-%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88">跳转至该位置</a></p>
+<blockquote>
+<p>类型标识符 * 数组名[长度]</p>
+</blockquote>
+<h3 id="963-指针数组作为main函数参数"><a class="markdownIt-Anchor" href="#963-指针数组作为main函数参数"></a> 9.6.3 指针数组作为main函数参数</h3>
+<p>main函数需要改造一下才可以接受系统传递进来的参数:</p>
+<blockquote>
+<p>int main(int argc, char * argv[])</p>
+</blockquote>
+<p>main函数接受两个参数:</p>
+<ul>
+<li>第一个参数是整型数据</li>
+<li>第二个参数是指针数组(作为函数形参)</li>
+</ul>
+<h2 id="97-本章小结"><a class="markdownIt-Anchor" href="#97-本章小结"></a> 9.7 本章小结</h2>
+<ul>
+<li>指针变量可以指向NULL(空),表示不指向任何有效内容</li>
+<li>void * 指针,为万能指针,可以指向任意数据类型</li>
+</ul>
+<hr>
+<h1 id="10-结构体与共用体"><a class="markdownIt-Anchor" href="#10-结构体与共用体"></a> 10 结构体与共用体</h1>
+<h2 id="101-结构体变量定义-引用与初始化"><a class="markdownIt-Anchor" href="#101-结构体变量定义-引用与初始化"></a> 10.1 结构体变量定义、引用与初始化</h2>
+<h3 id="1011-结构体类型定义"><a class="markdownIt-Anchor" href="#1011-结构体类型定义"></a> 10.1.1 结构体类型定义</h3>
+<blockquote>
+<p>struct 结构体名<br>
+{<br>
+成员列表<br>
+}</p>
+</blockquote>
+<h3 id="1012-结构变量的定义方法"><a class="markdownIt-Anchor" href="#1012-结构变量的定义方法"></a> 10.1.2 结构变量的定义方法</h3>
+<ul>
+<li>形式1:定义完结构类型后定义变量</li>
+</ul>
+<blockquote>
+<p>struct 结构体名 变量列表;</p>
+</blockquote>
+<ul>
+<li>形式2:定义结构类型时定义变量</li>
+</ul>
+<blockquote>
+<p>struct 结构体名<br>
+{<br>
+成员列表<br>
+}变量名列表;</p>
+</blockquote>
+<ul>
+<li>形式3:直接定义结构变量</li>
+</ul>
+<blockquote>
+<p>struct<br>
+{<br>
+成员列表<br>
+}变量名列表;</p>
+</blockquote>
+<p>说明:</p>
+<ul>
+<li>使用结构体,一般需要定义一个结构体类型,在定义结构变量</li>
+<li>结构体内可以套结构</li>
+<li>结构体内成员名可以和程序中的变量名相同</li>
+</ul>
+<h3 id="1013-结构体类型变量的引用"><a class="markdownIt-Anchor" href="#1013-结构体类型变量的引用"></a> 10.1.3 结构体类型变量的引用</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引用方式:</span></span><br><span class="line">结构体变量.成员名</span><br><span class="line"></span><br><span class="line">使用指针引用成员</span><br><span class="line">类型名 \*指针名 = &amp;结构体变量.成员名</span><br></pre></td></tr></table></figure>
+<h2 id="102-结构体数组和结构体指针"><a class="markdownIt-Anchor" href="#102-结构体数组和结构体指针"></a> 10.2 结构体数组和结构体指针</h2>
+<h3 id="1022-结构体指针"><a class="markdownIt-Anchor" href="#1022-结构体指针"></a> 10.2.2 结构体指针</h3>
+<p>定义:</p>
+<blockquote>
+<p>struct 结构体类型名 * 指针名;</p>
+</blockquote>
+<p>赋值:<br>
+<mark>只能指向一个结构体类型的变量,或者结构体类型数组中的某一个元素,不可以指向其中的具体成员</mark></p>
+<p>访问结构体变量成员</p>
+<ul>
+<li>使用结构体成员运算符“.”</li>
+<li>使用结构体成员运算符&quot;-&gt;&quot;</li>
+</ul>
+<p>如:</p>
+<blockquote>
+<p>struct students stu;<br>
+struct students *p;<br>
+p = &amp;stu;<br>
+(*ps).num = 1; <mark>(*的优先级比“.”低)</mark><br>
+ps -&gt; num =1;</p>
+</blockquote>
+<ul>
+<li><strong>可以使用指向结构体的指针作为函数参数</strong></li>
+</ul>
+<h2 id="103-共用体-枚举类型与typedef"><a class="markdownIt-Anchor" href="#103-共用体-枚举类型与typedef"></a> 10.3 共用体、枚举类型与typedef</h2>
+<h3 id="1031-共用体"><a class="markdownIt-Anchor" href="#1031-共用体"></a> 10.3.1 共用体</h3>
+<p><mark>共用体和结构体的区别?<br>
+共用体的成员会占用同一段内存,而结构体中的成员会占用不同的内存</mark></p>
+<p>定义:</p>
+<blockquote>
+<p>union 共用体名<br>
+{<br>
+成员列表<br>
+}变量列表;</p>
+</blockquote>
+<p><mark>共用体类型的定义和共用体变量的定义与结构体的定义和结构体变量的定义相似</mark><br>
+<mark>共用体成员共占一段内存,所以占用内存的大小等于所占用内存最大的成员的大小</mark><br>
+<mark>每个瞬间只有一个成员起作用,其他成员不起作用</mark></p>
+<h3 id="1032-枚举类型"><a class="markdownIt-Anchor" href="#1032-枚举类型"></a> 10.3.2 枚举类型</h3>
+<p>定义枚举类型:</p>
+<blockquote>
+<p>enum 枚举类型名<br>
+{<br>
+值<br>
+}变量列表;</p>
+</blockquote>
+<ul>
+<li>C语言会自动按照定义时的顺序规定它们的值,并且值是从0开始的.</li>
+<li>可以手动在定义枚举类型的时候设置默认的<mark>枚举常量的值</mark>,后面的枚举常量的值为前一个的值+1</li>
+<li>不可以将整数直接赋值给枚举变量,但使用强制类型转换是可以的(enum 枚举类型名);</li>
+</ul>
+<h3 id="1033-用typedef定义类型"><a class="markdownIt-Anchor" href="#1033-用typedef定义类型"></a> 10.3.3 用typedef定义类型</h3>
+<p>typedef是用于<mark>定义类型名</mark>的</p>
+<blockquote>
+<p>typedef 原类型名 新类型名;<br>
+习惯上,用typedef定义的类型名用大写字母表示</p>
+</blockquote>
+<hr>
+<h1 id="11-位运算"><a class="markdownIt-Anchor" href="#11-位运算"></a> 11 位运算</h1>
+<ul>
+<li><strong>1个字节是由8个二进制位组成的</strong></li>
+<li>&amp; 按位与</li>
+<li>| 按位或</li>
+<li>^ 按位异或:<mark>两个位相同,返回0,不同为1</mark></li>
+<li>~ 取反</li>
+<li>&lt;&lt; 左移</li>
+<li>&gt;&gt; 右移</li>
+</ul>
+<!-- more -->
+<p><mark>可以使用该代码定义位操作</mark></p>
+<blockquote>
+<p>#define BIT(X) (1&lt;&lt;(X)) 带参数的宏定义</p>
+</blockquote>
+<hr>
+<h1 id="12-文件操作"><a class="markdownIt-Anchor" href="#12-文件操作"></a> 12 文件操作</h1>
+<p>文本文件中,<mark>每个字节存放一个ASCII码,代表一个字符</mark></p>
+<p><strong>大端存储与小端存储?</strong></p>
+<ul>
+<li>
+<p>大端存储:低字节存储在高地址,高字节存储在低地址</p>
+</li>
+<li>
+<p>小端存储:低字节存储在低地址,高字节存储在高地址</p>
+</li>
+<li>
+<p>如果在文本文件中,以16进制保存数字,保存比较节省空间,但需要<mark>人工阅读</mark></p>
+</li>
+</ul>
+<h2 id="122-文件的打开-关闭-读写"><a class="markdownIt-Anchor" href="#122-文件的打开-关闭-读写"></a> 12.2 文件的打开、关闭、读写</h2>
+<p>文件在进行读写操作之前,必须先打开,在读写结束后,必须关闭文件</p>
+<p>文件打开:</p>
+<blockquote>
+<p>FILE * fp; //FILE为一个结构体,fp是指向结构体的指针(文件指针)<br>
+fp = fopen(文件名,文件使用方式);</p>
+</blockquote>
+<p>文件使用方式:</p>
+<ul>
+<li>
+<p>r 只读</p>
+</li>
+<li>
+<p>w 只写(文件存在,则清空重写,否则创建文件)</p>
+</li>
+<li>
+<p>a 追加(末尾追加)</p>
+</li>
+<li>
+<p>rb 只读(打开二进制文件)</p>
+</li>
+<li>
+<p>wb 只写(二进制文件)</p>
+</li>
+<li>
+<p>ab 追加(二进制文件)</p>
+</li>
+<li>
+<p>r+ 读写(打开文本文件)</p>
+</li>
+<li>
+<p>w+ 读写(创建文本文件)</p>
+</li>
+<li>
+<p>文件打开后,会返回一个位置指针(*char),代表当前从文件的哪个位置开始读写.</p>
+</li>
+<li>
+<p>文件不存在时<mark>fopen函数</mark>会返回<mark>空(NULL)</mark></p>
+</li>
+</ul>
+<p>文件关闭:</p>
+<blockquote>
+<p>fclose(文件指针);</p>
+</blockquote>
+<p><mark>文件关闭时,会将缓冲区的数据立即写到磁盘上</mark></p>
+<p>文件读写:</p>
+<ul>
+<li>fputc(ch,fp); //将ch写入磁盘文件中</li>
+<li>fgetc(fp); //从磁盘文件中读取一个字符</li>
+<li>feof(fp);  //判断文件是否结束(结束返回1,否则返回0)</li>
+</ul>
+<h2 id="123-将结构体写入二进制文件再读出"><a class="markdownIt-Anchor" href="#123-将结构体写入二进制文件再读出"></a> 12.3 将结构体写入二进制文件再读出</h2>
+<blockquote>
+<p>fwrite(butter, size, count, fp);<br>
+向文件写入数据<br>
+butter:指针或者地址(将要写入的数据)<br>
+size:写入文件的字节数<br>
+count:要写入多少size的数据项<br>
+fp:文件指针<br>
+返回值,如果fwrite失败,返回0,否则返回count值</p>
+</blockquote>
+<ul>
+<li>对于要写入的结构体,结构体成员中不要出现指针型成员(因为指针类型成员地址可能失效)</li>
+<li>可以使用==#pragma pack(1)设置代码对齐方式为1字节对齐,即不要对齐==,可以避免程序在Linux平台读数据出错</li>
+</ul>
+<blockquote>
+<p>fread(buffer,size,count,fp);<br>
+向文件读出数据<br>
+butter:指针或者地址(将要写入的数据)<br>
+size:写入文件的字节数<br>
+count:要写入多少size的数据项<br>
+fp:文件指针<br>
+返回值,如果fwrite失败,返回0,否则返回count值</p>
+</blockquote>
+<hr>
+<h1 id="13-c基本语言"><a class="markdownIt-Anchor" href="#13-c基本语言"></a> 13 C++基本语言</h1>
+<h2 id="131-语言特性-工程构成与可移植性"><a class="markdownIt-Anchor" href="#131-语言特性-工程构成与可移植性"></a> 13.1 语言特性、工程构成与可移植性</h2>
+<p>C语言是过程式的语言<br>
+C++为面向对象的语言,其与面向过程语言的最大区别是:在基于面向对象的程序设计中,额外应用了<mark>继承性和多态技术</mark></p>
+<p>面向对象的程序设计的优点:</p>
+<ul>
+<li>易维护</li>
+<li>易扩展</li>
+<li>模块化</li>
+</ul>
+<p>C++程序的头文件一般以.h居多,此外还有.hpp;<br>
+hpp文件一般来说就是把定义和实现都包含在一个文件中,可以有效的减少编译次数</p>
+<p><mark>C++为编译型语言<br>
+在程序执行前,需要一个专门的编译过程,将程序编译成二进制文件,执行的时候不需要重新编译,直接使用编译结果.</mark></p>
+<h2 id="132-命名空间简介与基本输入输出精解"><a class="markdownIt-Anchor" href="#132-命名空间简介与基本输入输出精解"></a> 13.2 命名空间简介与基本输入输出精解</h2>
+<p>命名空间就是为了防止名字冲突而引入的一种机制.</p>
+<p>定义:</p>
+<blockquote>
+<p>namespace 命名空间名<br>
+{<br>
+其他函数、<br>
+}</p>
+</blockquote>
+<p>访问:使用“::”作用域运算符</p>
+<blockquote>
+<p>命名空间名::实体名</p>
+</blockquote>
+<ul>
+<li>命名空间定义可以不连续,可以写在不同的位置,甚至可以写在不同的源文件中</li>
+<li>注意不同命名空间中相同的函数在同一个函数中调用,若冲突则:
+<ul>
+<li>要么不声明两个命名空间</li>
+<li>要么不同命名空间中的函数不要同名</li>
+<li>要么调用命名空间中的函数时添加“ 命名空间:: ”表达方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="1322-基本输入输出"><a class="markdownIt-Anchor" href="#1322-基本输入输出"></a> 13.2.2 基本输入输出</h3>
+<p>C++中输入输出的标准库是iostream库(输入/输出流)</p>
+<ul>
+<li>std是标准库中的一个命名空间</li>
+<li>std::cout 是一个对象,为标准输出</li>
+<li>std::cin为基本输入</li>
+<li>&lt;&lt; 向左扎,为输出运算符,与std::cout结合表示将内容扎到cout中,表示将&lt;&lt;右侧的内容写到cout屏幕中</li>
+<li>std::endl 相当于函数指针.其作用为: 1. 输出换行符 2.刷新输出缓冲区,调用flush函数强制输出缓冲区中所有数据,然后把缓冲区中的数据清除</li>
+</ul>
+<p><mark>为什么要有输出缓冲区?<br>
+将数据临时保存到输出缓冲区,当缓冲区满了、或者程序执行到main函数的return正常结束时、或者使用std::endl函数(后面会调用flush()函数)等情况,程序一次性将数据写入磁盘,提升速递,降低内存消耗</mark></p>
+<p>注意&lt;&lt;符号为右结合性</p>
+<h2 id="133-auto-头文件防卫-引用与常量"><a class="markdownIt-Anchor" href="#133-auto-头文件防卫-引用与常量"></a> 13.3 auto、头文件防卫、引用与常量</h2>
+<h3 id="1331-局部变量和初始化"><a class="markdownIt-Anchor" href="#1331-局部变量和初始化"></a> 13.3.1 局部变量和初始化</h3>
+<p><mark>C++中,变量随时定义即可</mark>,不必像C语言中需要在函数开头定义</p>
+<p>在C++新标准中,<mark>可以使用“{}“对变量进行初始化</mark>.</p>
+<ul>
+<li>例如: int abc{5};</li>
+</ul>
+<p>==在C++中的新标准的好处:</p>
+<blockquote>
+<p>int abc = 3.5f; //编译成功,自动进行截断操作<br>
+int abc{3.5f}; //编译错误,语法报错<br>
+这样做数据不会被截断==</p>
+</blockquote>
+<p>同样也可以使用“()”对变量进行初始化操作</p>
+<h3 id="1332-auto关键字简介"><a class="markdownIt-Anchor" href="#1332-auto关键字简介"></a> 13.3.2 auto关键字简介</h3>
+<p>auto<mark>在C++11</mark>中的全新含义:变量的自动推断<br>
+变量的自动推断发生在编译期,所以在使用时不会造成程序的效率降低</p>
+<h3 id="1333-头文件防卫式声明"><a class="markdownIt-Anchor" href="#1333-头文件防卫式声明"></a> 13.3.3 头文件防卫式声明</h3>
+<p>为了避免重复定义头文件,在声明头文件时,需要添加头文件防卫式声明:</p>
+<blockquote>
+<p>#ifndef <strong>文件名</strong><br>
+#define <strong>文件名</strong><br>
+代码程序<br>
+#endif</p>
+</blockquote>
+<p>在每一个.h文件的#ifdef后面的定义的名字都不一样,不可以重名</p>
+<h3 id="1334-引用"><a class="markdownIt-Anchor" href="#1334-引用"></a> 13.3.4 引用</h3>
+<p>引用是为变量起的另一个名字,一般使用&quot; &amp; &quot;符号, 引用和原变量所占的内存是同一段内存(对初学者来说)<br>
+<mark>定义引用变量时必须进行初始化操作</mark></p>
+<blockquote>
+<p>引用数据类型 &amp; 变量名 = 被引用变量名称;  //==(引用变量必须绑定到变量或者对象上,不能绑定到常量上)</p>
+</blockquote>
+<ul>
+<li>&amp; 在=左侧表示引用</li>
+<li>&amp; 在=右侧表示取地址</li>
+</ul>
+<h3 id="1335-常量"><a class="markdownIt-Anchor" href="#1335-常量"></a> 13.3.5 常量</h3>
+<ol>
+<li>const常量<br>
+定义变量时,在前面添加const关键字,即为常量</li>
+<li>constexpr常量<br>
+在C++11中的新关键字,代表一个常量,表示<mark>在编译时进行求值,可以提升运行时的性能</mark></li>
+</ol>
+<ul>
+<li>在书写constexpr返回类型的函数时,需要格外注意:如
+<ul>
+<li>
+<ol>
+<li>在定义变量时,不可定义未初始化的变量(定义变量必须进行初始化操作)</li>
+</ol>
+</li>
+<li>2.传入constexpr函数的形参对应的实参必须为常量或常量表达式</li>
+<li>
+<ol start="2">
+<li>其中代码需要尽量简单</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>加了constexpr修饰的函数不但能用在常量表达式中,也能用在常规的函数调用中</li>
+</ul>
+<p><mark>常量表达式不可以强制转换得到</mark></p>
+<h2 id="134-范围for-new内存动态分配与nullptr"><a class="markdownIt-Anchor" href="#134-范围for-new内存动态分配与nullptr"></a> 13.4 范围for、new内存动态分配与nullptr</h2>
+<h3 id="1341-范围for语句"><a class="markdownIt-Anchor" href="#1341-范围for语句"></a> 13.4.1 范围for语句</h3>
+<p>范例：</p>
+<blockquote>
+<p>int v[]{12，13，14，15，16}；<br>
+for{auto x:v}   //此为范围for语句<br>
+{<br>
+代码;<br>
+}</p>
+</blockquote>
+<p><mark>此例多了一个复制的动作，可以使用引用避免复制，提高运行效率</mark></p>
+<blockquote>
+<p>for { auto &amp;x : v}</p>
+</blockquote>
+<p><mark>一般来说，一个容器只要内部支持begin和end成员函数用于返回一个迭代器，能够指向容器的第一个元素和末尾元素的后面，这种容器就饿可以支持范围for语句</mark></p>
+<h3 id="1342-动态内存分配问题"><a class="markdownIt-Anchor" href="#1342-动态内存分配问题"></a> 13.4.2 动态内存分配问题</h3>
+<p>C++中内存被分为<mark>5块区域</mark>：</p>
+<ol>
+<li>栈：局部变量创建时存储的位置</li>
+<li>堆：使用malloc/new申请，free/delete释放的区域</li>
+<li>全局/静态存储区</li>
+<li>常量存储区</li>
+<li>程序代码区</li>
+</ol>
+<ul>
+<li>内存分配和释放必须成对出现</li>
+<li>free和delete不可以重复调用</li>
+<li>new相较于malloc，new还进行一些额外的初始化工作；delete相较于free，delete还会进行一些额外的清理工作</li>
+</ul>
+<p><mark>堆和栈的区别：<br>
+栈空间有限，使用便捷；堆空间自由决定分配的内存大小。</mark></p>
+<ol>
+<li>malloc和free<br>
+在C语言中成对出现，用于在堆中分配内存<br>
+一般形式为：</li>
+</ol>
+<blockquote>
+<p>void * malloc(int NumBytes);<br>
+void free(void * Ptr)<br>
+malloc为向系统申请NumBytes字节的内存空间，分配成功返回被分配内存的指针，否则返回NULL空指针<br>
+free为回收指针Ptr对应的内存</p>
+</blockquote>
+<p>strcpy_s:为strcpy的安全版本，能够检测所容纳的元素是否越界。<br>
+2. new和delete<br>
+<mark>new和delete为运算符，不是和malloc和free一样的函数</mark><br>
+在C++中从堆中分配内存<br>
+new的使用方法：</p>
+<blockquote>
+<p>指针变量名 = new 类型标识符；<br>
+指针变量名 = new 类型标识符(初始值);<br>
+指针变量名 = new 类型标识符[内存单元个数];</p>
+</blockquote>
+<h3 id="1343-nullptr"><a class="markdownIt-Anchor" href="#1343-nullptr"></a> 13.4.3 nullptr</h3>
+<p>nullptr为<mark>C++11中引入的新关键字，表示“空指针”</mark></p>
+<p>typeid()函数用于取类型，其中name成员可打印出类型名</p>
+<p>==使用nullptr可以避免在整数和指针之间发生混淆</p>
+<ul>
+<li>NULL 其类型为int类型，其实就是0</li>
+<li>nullptr表示指针类型</li>
+<li><strong>NULL和nullptr会导致调用不同的重载函数</strong></li>
+<li>在实际中，对于<mark>指针的初始化</mark>，能用nullptr尽量使用nullptr</li>
+</ul>
+<h2 id="135-结构-权限修饰符与类简介"><a class="markdownIt-Anchor" href="#135-结构-权限修饰符与类简介"></a> 13.5 结构、权限修饰符与类简介</h2>
+<p>当形参类型使用引用时，在调用函数内所改变的值在主调函数中也会发生相应的改变。实参和形参代表的是同一段内存地址，在传递参数时不存在参数值的复制。</p>
+<p>在C++中，结构不仅可以定义成员变量，还可以定义成员函数（方法），可以使用对象名.成员函数名（实参列表）进行调用。</p>
+<h3 id="1352-public和private权限修饰符"><a class="markdownIt-Anchor" href="#1352-public和private权限修饰符"></a> 13.5.2 public和private权限修饰符</h3>
+<ul>
+<li>public为“公共”的，可以被外部访问，类似类的外部接口</li>
+<li>private为“私有”的，表示只能被该结构或者类内部定义的成员函数使用</li>
+<li>成员函数可以直接访问成员变量（不管成员变量是否为private都可以访问）</li>
+</ul>
+<p><mark>默认情况下，struct定义的结构，其内部的成员变量和成员函数都是public</mark></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> 结构类型名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  成员变量；</span><br><span class="line">  成员函数；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在C++中引入类的概念，<mark>使用class定义</mark><br>
+结构使用struct定义（与C语言一致）</p>
+<p><mark>类的某个变量成为对象，为类的实例化，类中间的成员函数称为方法</mark></p>
+<ul>
+<li>类的内部变量默认为private</li>
+<li>C++中<mark>结构的继承默认为public，而类的继承默认为private</mark></li>
+</ul>
+<h2 id="136-函数新特性-inline内联函数与const详解"><a class="markdownIt-Anchor" href="#136-函数新特性-inline内联函数与const详解"></a> 13.6 函数新特性、inline内联函数与const详解</h2>
+<h3 id="1361-函数回顾与后置返回类型"><a class="markdownIt-Anchor" href="#1361-函数回顾与后置返回类型"></a> 13.6.1 函数回顾与后置返回类型</h3>
+<ul>
+<li>在函数声明中，可以没有形参名</li>
+<li>在函数定义中，需要有形参类型和形参名，但<mark>若该形参不需要使用，可以不添加函数名，但是在调用是必须给出该位置的实参</mark></li>
+</ul>
+<p>后置返回类型：<br>
+在函数声明或定义中，把返回类型写在参数列表之后</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> 函数名(形参列表) -&gt; 函数返回类型;  <span class="comment">//函数声明</span></span><br></pre></td></tr></table></figure>
+<h3 id="1362-inline内联函数"><a class="markdownIt-Anchor" href="#1362-inline内联函数"></a> 13.6.2 inline内联函数</h3>
+<p>为避免函数调用消耗系统资源，解决函数体很小，调用频繁的函数消耗系统性能，使用inline关键字</p>
+<ul>
+<li>系统尝试将调用该函数的动作替换为函数的本体</li>
+<li>内联函数的定义写在头文件中</li>
+<li>inline函数应该尽量简单，避免循环、分支、递归调用等
+<ul>
+<li>可以将constexpr函数看为更加严格的内联函数（constexpr自带inline属性）</li>
+</ul>
+</li>
+</ul>
+<p>函数特殊写法：</p>
+<ul>
+<li>函数只可以被定义一次，但是可以<mark>声明很多次</mark></li>
+<li>在C++中，更加习惯使用<mark>引用类型的形参</mark>来代替使用指针类型的形参</li>
+<li>函数重载时，<mark>const关键字会被同名函数忽略</mark></li>
+</ul>
+<h3 id="1364-区别"><a class="markdownIt-Anchor" href="#1364-区别"></a> 13.6.4 区别</h3>
+<p><mark>const char * 、char const * 与char * const三者的区别</mark></p>
+<ul>
+<li>const char *p<br>
+定义一个常量指针p(p指向的内容不可以通过p来修改)</li>
+<li>char const *p<br>
+等价于const char *p</li>
+<li>char * const p<br>
+定义一个指针常量p(p不可以指向其他内容,但可以修改指向的目标中的内容)</li>
+</ul>
+<h3 id="1365-函数形参中带const"><a class="markdownIt-Anchor" href="#1365-函数形参中带const"></a> 13.6.5 函数形参中带const</h3>
+<p>如果<mark>不希望在函数中修改形参的值,建议形参使用常量引用</mark></p>
+<ul>
+<li>可以防止无意中修改了形参的值导致实参值被改变</li>
+<li>实参类型可以更加灵活<br>
+使用常量引用,不仅仅可以接收<mark>普通引用作为实参</mark>,还可以接收<mark>常量引用作为实参</mark></li>
+</ul>
+<h2 id="137-string类型"><a class="markdownIt-Anchor" href="#137-string类型"></a> 13.7 string类型</h2>
+<p>string<mark>位于std命名空间中,位于string头文件中</mark></p>
+<p>(string为一个对象)<br>
+定义和初始化:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;I love China&quot;</span>;</span><br><span class="line"><span class="function">string <span class="title">s3</span><span class="params">(<span class="string">&quot;I love China&quot;</span>)</span></span>;</span><br><span class="line">string s4 = s2;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">6</span>;</span><br><span class="line"><span class="function">string <span class="title">s5</span><span class="params">(num,<span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>常用操作:</p>
+<ul>
+<li>.empty()方法 :返回布尔量判断是否为空</li>
+<li>.size或.length方法 :返回字节数量</li>
+<li>s[n] :返回s中的第n个字符</li>
+<li>s1+s2  :字符串连接</li>
+<li>s1=s2 :字符串对象赋值</li>
+<li>s1==s2  :判断两个字符串是否相等</li>
+<li>s1 !=s2  :判断两个字符串是否不相等</li>
+<li>s.c_str()  :返回一个字符串s中的内容指针(==把string对象转换为C中的字符串样式)</li>
+<li>范围for语句 :for(auto&amp; x:s1)</li>
+</ul>
+<h2 id="138-vector类型"><a class="markdownIt-Anchor" href="#138-vector类型"></a> 13.8 vector类型</h2>
+<p>代表一个容器、集合、或者动态数组,可以将一堆相同类型的类对象放到vector容器中</p>
+<p>vector<mark>位于std命名空间中,vector头文件中</mark><br>
+定义:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector  &lt;类型&gt; 对象名; </span><br><span class="line"><span class="comment">//vector为类模版,&lt;&gt;是类模版的一个实例化过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//空vector</span></span><br><span class="line">vector &lt;string&gt; mystr;  <span class="comment">//可使用push_back向容器末尾添加数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//vector对象复制</span></span><br><span class="line">vector &lt;string&gt; <span class="built_in">mystr2</span>(mystr1);</span><br><span class="line">vector &lt;string&gt; mystr3 = mystr2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用初始化列表方式初始化</span></span><br><span class="line">vector &lt;string&gt; def = &#123;<span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定数量的元素</span></span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt; <span class="built_in">ijihe</span>(<span class="number">15</span>,<span class="number">-200</span>); <span class="comment">//创建15个int类型元素的集合,其中每个元素的值都为-200</span></span><br><span class="line"><span class="comment">//有元素数量的概念的初始化操作都使用()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><mark>vector容器不能用来装引用</mark>(引用只是一个别名,并不是一个对象)<br>
+<mark>一般使用()表示与元素数量相关的操作,用{}表示只与元素内容相关的内容</mark></p>
+<h3 id="1383-vector对象上的操作"><a class="markdownIt-Anchor" href="#1383-vector对象上的操作"></a> 13.8.3 vector对象上的操作</h3>
+<ul>
+<li>.empty   :判断是否为空</li>
+<li>.push_back()  :向vector末尾添加元素</li>
+<li>.size   :返回元素数量</li>
+<li>.clear  :移除所有元素,容器清空</li>
+<li>v[n]</li>
+<li>=,==,!=,</li>
+<li>范围for语句,在范围for语句中,<mark>不要改变vector的容量,增加、删除元素都不可以</mark></li>
+</ul>
+<h2 id="139-迭代器精彩演绎-失效分析及弥补-实战"><a class="markdownIt-Anchor" href="#139-迭代器精彩演绎-失效分析及弥补-实战"></a> 13.9 迭代器精彩演绎、失效分析及弥补、实战</h2>
+<p>在C<ins>中很少通过下标访问string或vector中的元素,通常使用迭代器访问<br>
+通过迭代器,可以读取容器中的元素值,修改容器中某个迭代器代表的元素的值,可以像指针一样使用</ins>,–等运算符进行元素访问</p>
+<p><strong>C++中每种容器都定义了迭代器类型,以vector容器举例:</strong><br>
+定义容器:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector &lt;<span class="keyword">int</span>&gt; iv = &#123;<span class="number">100</span>,<span class="number">200</span>,<span class="number">300</span>&#125;;</span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt;::iterator iter; <span class="comment">//定义了一个迭代器iter</span></span><br></pre></td></tr></table></figure>
+<h3 id="1393-迭代器beginend-反向迭代器rbeginrend操作"><a class="markdownIt-Anchor" href="#1393-迭代器beginend-反向迭代器rbeginrend操作"></a> 13.9.3 迭代器begin,end、反向迭代器rbegin,rend操作</h3>
+<ol>
+<li>迭代器</li>
+<li>反向迭代器
+<ul>
+<li>rbegin:指向最后一个元素</li>
+<li>rend:指向第一个元素前面的位置</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// begin成员函数:返回一个迭代器类型</span></span><br><span class="line">iter = iv.<span class="built_in">begin</span>(); <span class="comment">//返回容器的迭代器,指向第一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// end成员函数:返回一个迭代器类型</span></span><br><span class="line"><span class="comment">// 一般起到一个标志作用,当iter走到了end位置,表示已经遍历完了容器里的所有元素</span></span><br><span class="line">iter = iv.<span class="built_in">end</span>(); <span class="comment">//指向末尾元素的下一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 经典写法:</span></span><br><span class="line"><span class="keyword">for</span>(vector &lt;<span class="keyword">int</span>&gt;::iterator iter = iv.<span class="built_in">begin</span>();iter != iv.<span class="built_in">end</span>();iter ++)&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1394-迭代器运算符"><a class="markdownIt-Anchor" href="#1394-迭代器运算符"></a> 13.9.4 迭代器运算符</h3>
+<ul>
+<li>*iter  //返回迭代器元素的引用</li>
+<li>++iter,–iter</li>
+<li>==,!=</li>
+<li>结构成员变量的引用</li>
+</ul>
+<h3 id="1395-const_iterator迭代器"><a class="markdownIt-Anchor" href="#1395-const_iterator迭代器"></a> 13.9.5 const_iterator迭代器</h3>
+<p>类似一个常量指针,<mark>若容器对象为常量对象,则必须使用const_iterator迭代器</mark><br>
+C++11中引入新的关键字,<mark>cbegin与cend返回常量迭代器(不管容器是否为常量容器)</mark></p>
+<h3 id="1396-迭代器失效"><a class="markdownIt-Anchor" href="#1396-迭代器失效"></a> 13.9.6 迭代器失效</h3>
+<p><mark>如果在一个使用了迭代器的循环中插入元素到容器,当插入元素后应立即跳出循环体,不应该继续使用带迭代器操作容器</mark></p>
+<p>容器清空:</p>
+<ol>
+<li>使用clear方法清除</li>
+<li>使用迭代器一个一个清除</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">while(!iv.empty())&#123;</span><br><span class="line"> auto iter = iv.cbegin();</span><br><span class="line"> iv.erase(iter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1310-类型转化static_cast-reinterpret_cast等"><a class="markdownIt-Anchor" href="#1310-类型转化static_cast-reinterpret_cast等"></a> 13.10 类型转化:static_cast、reinterpret_cast等</h2>
+<p>C风格的强制类型转化:</p>
+<ol>
+<li>(类型)待转换的内容;</li>
+<li>类型 (待转换的内容);</li>
+</ol>
+<p>C++中强制类型转换的<mark>通用形式</mark>:</p>
+<blockquote>
+<p>强制类型转换名 &lt;type&gt;(express);</p>
+</blockquote>
+<ol>
+<li>
+<p>static_cast :静态转换</p>
+<ul>
+<li>与C语言强制类型转换相似</li>
+<li>派生类转换为基类</li>
+<li>不可用于指针类型之间的转换</li>
+</ul>
+</li>
+<li>
+<p>dynamic_cast :在转换时会进行类型识别和检查</p>
+<ul>
+<li>主要用于父类转换为子类</li>
+</ul>
+</li>
+<li>
+<p>const_cast: 去除指针或者引用的const属性</p>
+<ul>
+<li>注意只能用于<mark>原先不是常量,后来转换为常量的变量的去除</mark>,(原先是常量的去除为为定义行为)</li>
+<li>const_cast不可以改变表达式的类型</li>
+</ul>
+</li>
+<li>
+<p>reinterpret_cast  :用来处理无关类型之间的转换</p>
+<ul>
+<li>可以将整型转换为指针、一个类型指针转换为另一个类型的指针</li>
+<li>可以将一个指针转换为整型<br>
+<mark>static_cast、reinterpret_cast可以替代C语言风格的类型转换</mark></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="14-类"><a class="markdownIt-Anchor" href="#14-类"></a> 14 类</h1>
+<h2 id="141-成员函数-对象复制与私有成员"><a class="markdownIt-Anchor" href="#141-成员函数-对象复制与私有成员"></a> 14.1 成员函数、对象复制与私有成员</h2>
+<p>设计<mark>类</mark>思考的角度:</p>
+<ul>
+<li>站在设计和实现者的角度考虑,<mark>类的数据存储布局、必要的成员变量和成员函数</mark></li>
+<li>站在使用者的角度,<mark>可以访问的接口、对外开放仅供内部函数使用的接口</mark></li>
+<li>设计父类供子类继承时,如何设计父类</li>
+</ul>
+<p>类的成员主要包括:成员变量、成员函数等<br>
+访问类成员:</p>
+<ul>
+<li>使用“对象名.成员名”访问成员</li>
+<li>使用指向这个对象的指针访问: 指针名-&gt;成员名</li>
+</ul>
+<p>注意点:</p>
+<ul>
+<li>public修饰的成员可供外部访问,而private修饰的成员不可以被外部访问</li>
+<li><mark>class成员默认为private</mark>,而struct默认为public的</li>
+<li>建议:没有成员函数只有成员变量的数据结构使用struct;而有成员函数的数据结构一般使用class</li>
+</ul>
+<h3 id="1413-成员函数"><a class="markdownIt-Anchor" href="#1413-成员函数"></a> 14.1.3 成员函数</h3>
+<p><strong>类可以被定义多次,而全局变量只能被定义一次</strong><br>
+在C++中,若类定义和类实现放在不同文件时,其成员函数需要使用==“类名::成员函数名”==表明该成员函数为该类的成员函数(::为作用域运算符)<br>
+如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 函数代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1414-对象复制"><a class="markdownIt-Anchor" href="#1414-对象复制"></a> 14.1.4 对象复制</h3>
+<p>可以使用==”=“、”()“、”{}“、”={}“==符号实现对象的复制操作</p>
+<h2 id="142-构造函数详解-explicit与初始化列表"><a class="markdownIt-Anchor" href="#142-构造函数详解-explicit与初始化列表"></a> 14.2 构造函数详解、explicit与初始化列表</h2>
+<ul>
+<li>将成员函数的声明和实现都写在<mark>类的内部</mark>,称为成员函数的定义</li>
+<li>将成员函数的声明写在类的内部,外部的成员函数代码称为:“成员函数的实现”</li>
+</ul>
+<p>构造函数:与类名相同,系统会自动调用,<mark>目的就是为了初始化类对象的数据成员(成员变量)</mark></p>
+<ul>
+<li>构造函数<mark>无返回值</mark></li>
+<li>构造函数<mark>不可以手工调用,会发生程序错误</mark>,系统会自动调用</li>
+<li>正常情况下,构造函数<mark>声明为public</mark></li>
+<li>构造函数中含有的参数,在创建对象时需要给定相应的参数</li>
+<li>一个类可以存在多个构造函数，必须为该类对象的创建提供多种方法，多个构造函数需要在<mark>参数数量或者参数类型上有所不同</mark></li>
+</ul>
+<p>对象的复制会调用<mark>拷贝构造函数</mark></p>
+<h3 id="1424-函数默认参数"><a class="markdownIt-Anchor" href="#1424-函数默认参数"></a> 14.2.4 函数默认参数</h3>
+<p><mark>任何函数都可以有默认参数，对于传统函数，默认参数一般放在函数声明中，而不放在函数实现中，除非函数只有定义</mark></p>
+<ul>
+<li>对于类中的成员函数，默认参数写在类的成员函数声明中，一般写在.h文件中</li>
+<li>具有多个参数的函数中指定默认参数，默认参数必须出现在非默认参数的右侧，且默认参数必须给定默认值</li>
+</ul>
+<h3 id="1425-隐式转换和explicit"><a class="markdownIt-Anchor" href="#1425-隐式转换和explicit"></a> 14.2.5 隐式转换和explicit</h3>
+<p>在调用构造函数时，有可能会调用隐式转换。<br>
+可以要求<mark>构造函数不进行隐式转换</mark>，在函数声明中带有explicit（显式），则该构造函数只能用于初始化和显式类型转换</p>
+<blockquote>
+<p>explicit 构造函数名(形参列表);</p>
+</blockquote>
+<ul>
+<li>在类进行实例化<mark>调用explicit多参数构造函数</mark>时，若带有=号，则隐式类型转换失效（含有等号，表示进行了隐式初始化；<mark>省略等号，为显式初始化为直接初始化</mark>）</li>
+<li>调用explicit单参数构造函数，也只可以使用显式转换</li>
+<li><mark>在调用explicit构造函数时，使用{}进行初始化可以避免进行隐式类型转换而出错</mark></li>
+</ul>
+<h3 id="1426-构造函数初始化列表"><a class="markdownIt-Anchor" href="#1426-构造函数初始化列表"></a> 14.2.6 构造函数初始化列表</h3>
+<p>调用构造函数时，可以初始化成员变量的值（为冒号括号逗号式写法），位于构造函数的定义中，（这种写法<mark>只用于构造函数中</mark>）<br>
+例如：</p>
+<blockquote>
+<p>Time::Time(int tmphour, int tmpmin, int tmpsec)<br>
+:Hour(tmphour),Minute(tmpmin)  //构造函数初始化列表</p>
+</blockquote>
+<ul>
+<li>在书写带初始化列表的构造函数时，应避免某个成员变量（Minute）的值依赖某个成员变量的值（Hour），不可写成（Minute（Hour））</li>
+<li>使用构造函数初始化列表可以提升初始化效率（避免了调用成员变量相关类的各种特殊成员函数）</li>
+</ul>
+<h2 id="143-inline-const-mutable-this与static"><a class="markdownIt-Anchor" href="#143-inline-const-mutable-this与static"></a> 14.3 inline、const、mutable、this与static</h2>
+<h3 id="1431-在类定义中实现成员函数inline"><a class="markdownIt-Anchor" href="#1431-在类定义中实现成员函数inline"></a> 14.3.1 在类定义中实现成员函数inline</h3>
+<p>在类的定义中实现的成员函数会被当做inline内联函数处理<br>
+<a href="#1362inline%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0">跳转至该位置</a></p>
+<h3 id="1432-成员函数末尾的const"><a class="markdownIt-Anchor" href="#1432-成员函数末尾的const"></a> 14.3.2 成员函数末尾的const</h3>
+<p>在成员函数的末尾添加const为常量成员函数，表示<mark>该成员函数不会修改该对象内任何成员变量的值</mark>（不可以在该成员函数的实现中修改成员变量的值）<br>
+对于<mark>成员函数和实现代码分开的成员函数，不但要在成员函数的声明中增加const，也要在实现中增加const</mark></p>
+<h3 id="1433-mutable"><a class="markdownIt-Anchor" href="#1433-mutable"></a> 14.3.3 mutable</h3>
+<p><mark>被mutable修饰的成员变量，永远为可变状态，可被const常量成员函数修改</mark></p>
+<h3 id="1434-返回自身对象的引用this"><a class="markdownIt-Anchor" href="#1434-返回自身对象的引用this"></a> 14.3.4 返回自身对象的引用——this</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">声明：</span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line"> <span class="function">Time&amp; <span class="title">rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span>;  <span class="comment">//返回自身的引用</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Time&amp; <span class="title">Time::rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Hour += tmphour;</span><br><span class="line"> <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>this在成员函数中为一个隐藏的函数参数，表示的时只想本对象的指针，而*this表示该指针指向的对象，即为本对象,*this为调用这个成员函数的对象</p>
+<ul>
+<li>编译器内的实际声明：</li>
+</ul>
+<blockquote>
+<p>Time&amp; Time::rtnhour(Time * const this, int tmphour){…}</p>
+</blockquote>
+<ul>
+<li>编译器内的实际调用：</li>
+</ul>
+<blockquote>
+<p>mytime.rtnhour(&amp;mytime,3);</p>
+</blockquote>
+<p><mark>this为一个指针常量，指向这个对象的本身，不可以再指向其他地方</mark><br>
+<a href="##1364-%E5%8C%BA%E5%88%AB">跳转至该位置</a></p>
+<ul>
+<li>this只可以在成员函数（普通成员函数以及特殊的成员函数中使用），不可以在全局函数、静态函数中使用this指针</li>
+<li>在普通成员函数中，this是一个<mark>非const对象的指针常量</mark></li>
+<li>在const成员函数中，this指针是<mark>指向一个const对象的指针常量</mark></li>
+</ul>
+<h3 id="1435-static成员"><a class="markdownIt-Anchor" href="#1435-static成员"></a> 14.3.5 static成员</h3>
+<p><a href="#765-static%E5%85%B3%E9%94%AE%E5%AD%97%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93">跳转至该位置</a></p>
+<p>static成员变量：不属于某个对象而<mark>属于整个类</mark></p>
+<ul>
+<li>
+<p>通过对象名修改了static成员变量的值，其他类对象中的相应值也发生改变</p>
+</li>
+<li>
+<p>普通成员变量在定义类对象时被分配内存，==静态成员变量在</p>
+</li>
+<li>
+<p>声明：<mark>在类内部声明</mark></p>
+</li>
+</ul>
+<blockquote>
+<p>static 类型 变量名；<br>
+static 返回类型 函数名(形参列表);</p>
+</blockquote>
+<ul>
+<li>初始化：(一般写在.cpp文件开头)</li>
+</ul>
+<blockquote>
+<p>//[]内内容可以省略，初始化时可不给初值,<mark>且实现时不需要写static关键字</mark><br>
+类型名 类::变量名 [= 值];<br>
+对象名.变量名 [=值];<br>
+类型名 类::静态成员函数名<br>
+对象名.静态成员函数名</p>
+</blockquote>
+<h2 id="144-类内初始化-默认构造函数-default-delete"><a class="markdownIt-Anchor" href="#144-类内初始化-默认构造函数-default-delete"></a> 14.4 类内初始化、默认构造函数、=default、=delete</h2>
+<h3 id="1441-类相关非成员函数"><a class="markdownIt-Anchor" href="#1441-类相关非成员函数"></a> 14.4.1 类相关非成员函数</h3>
+<p>与类有点关系，但不适合写在类内的函数，这种函数的定义可以放到该类成员函数实现的代码中</p>
+<h3 id="1442-类内初始值"><a class="markdownIt-Anchor" href="#1442-类内初始值"></a> 14.4.2 类内初始值</h3>
+<p>在C++11新标准中，<mark>可以为新成员提供一个类内的初始值，那么在创建成员的时候，这个初始值就会初始化该成员变量</mark>，对于没有初始值的成员变量，系统会默认赋值。<br>
+若在构造函数初始化列表或者在构造函数中赋值，该值会覆盖初始值</p>
+<h3 id="1443-const成员变量的初始化"><a class="markdownIt-Anchor" href="#1443-const成员变量的初始化"></a> 14.4.3 const成员变量的初始化</h3>
+<p>对于类的const成员，只能使用初始化列表进行初始化操作（或者在声明该const变量时进行初始化操作），<mark>不能在构造函数内部进行赋值操作</mark></p>
+<ul>
+<li>构造函数不可以声明为const类型</li>
+<li>在const变量完成初始化之后，该变量才具有const属性</li>
+</ul>
+<h3 id="1444-默认构造函数"><a class="markdownIt-Anchor" href="#1444-默认构造函数"></a> 14.4.4 默认构造函数</h3>
+<ul>
+<li>编译器会为一个类生成默认构造函数；<mark>若声明了一个构造函数，就不会自动生成其他的默认构造函数</mark></li>
+<li>一旦程序员书写了自己的构造函数，那么在创建对象时，<mark>必须提供与书写的构造函数形参相符合的实参</mark>，才能够成功创建对象</li>
+</ul>
+<h3 id="1445-defalue和delete"><a class="markdownIt-Anchor" href="#1445-defalue和delete"></a> 14.4.5 =defalue；和=delete</h3>
+<ol>
+<li>
+<p>=default<br>
+相当于为<mark>特殊函数</mark>自动生成函数体（等价与空函数体{}）<br>
+包括构造函数、拷贝构造函数等</p>
+</li>
+<li>
+<p>=delete<br>
+显式的禁止某个函数</p>
+</li>
+</ol>
+<h2 id="145-拷贝构造函数"><a class="markdownIt-Anchor" href="#145-拷贝构造函数"></a> 14.5 拷贝构造函数</h2>
+<p><a href="#1414-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6">跳转至该位置</a><br>
+默认情况下：类对象的复制就是每个成员变量的逐个复制<br>
+拷贝拷贝构造函数：用于类对象的复制<br>
+如果一个类的构造函数的第一个参数为所属类的类引用，若有额外的参数，那么这些额外的参数都有默认值，该构造函数的默认参数必须放在函数声明中（除非该构造函数没有函数声明），那么这个构造函数就是拷贝构造函数。</p>
+<blockquote>
+<p>类名::类名(const 类名&amp; 参数名，[其他形参列表]);</p>
+</blockquote>
+<ul>
+<li>const，拷贝构造函数的第一个参数都是带有const的</li>
+<li>explicit，（禁止隐式转换）
+<ul>
+<li>一般来说单参数的构造函数都声明为explicit以避免参数模糊不清的问题</li>
+<li>拷贝构造函数，一般<mark>不声明为explicit</mark></li>
+</ul>
+</li>
+</ul>
+<p>如果一个类没有自己的拷贝构造函数，那么编译器会合成一个拷贝构造函数，参考  <a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a><br>
+拷贝构造函数的成员变量的赋值操作可以成初始化列表进行  <a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a></p>
+<p>调用拷贝构造函数的情况：</p>
+<ul>
+<li>将对象作为实参传递给另一个非引用类型的形参（复制构造，效率低）</li>
+<li>从函数中返回一个对象(系统会将局部对象(临时对象)return出去,会调用拷贝构造函数)</li>
+<li>其他情况</li>
+</ul>
+<h2 id="146-重载运算符-拷贝赋值运算符与析构函数"><a class="markdownIt-Anchor" href="#146-重载运算符-拷贝赋值运算符与析构函数"></a> 14.6 重载运算符、拷贝赋值运算符与析构函数</h2>
+<h3 id="1461-重载运算符"><a class="markdownIt-Anchor" href="#1461-重载运算符"></a> 14.6.1 重载运算符</h3>
+<p><mark>运算符(==,!=,&gt;,&gt;=等)想要应用与类对象，需要对这些运算符进行重载（即以这些运算符为成员函数名定义成员函数实现功能）</mark><br>
+实现方式：operator关键字后面接这个运算符（本质为函数，需要有返回类型和参数列表）<br>
+<strong>赋值运算符编译器会帮助重载</strong></p>
+<ul>
+<li>重载==运算符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bool</span> Time:<span class="keyword">operator</span>==(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">if</span>(Hour == t.Hour)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重载=运算符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time&amp; Time:<span class="keyword">operator</span>=(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">//....</span></span><br><span class="line"> <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1462-拷贝赋值运算符赋值运算符"><a class="markdownIt-Anchor" href="#1462-拷贝赋值运算符赋值运算符"></a> 14.6.2 拷贝赋值运算符（赋值运算符）</h3>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo</title>
     <url>/2021/11/30/Hexo/</url>
     <content><![CDATA[<h1 id="1-安装nodejs"><a class="markdownIt-Anchor" href="#1-安装nodejs"></a> 1 安装Nodejs</h1>
@@ -797,6 +2025,549 @@
 <li>单例模式的探究</li>
 <li>Stream流</li>
 <li>Forkjoin</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java8实战</title>
+    <url>/2022/03/02/Java8%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<h1 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> Lambda表达式</h1>
+<h2 id="行为参数化"><a class="markdownIt-Anchor" href="#行为参数化"></a> 行为参数化</h2>
+<ul>
+<li>一种软件开发模式，<mark>将代码块作为参数传递给另一个方法，稍后再去执行，方法的行为就基于那块代码被参数化了</mark></li>
+</ul>
+<h2 id="lambda表达式的三个部分参数列表箭头lambda主体"><a class="markdownIt-Anchor" href="#lambda表达式的三个部分参数列表箭头lambda主体"></a> Lambda表达式的三个部分:参数列表,箭头,Lambda主体</h2>
+<ul>
+<li>在函数式接口中使用Lambda接口
+<ul>
+<li>函数式接口就是只定义了一个抽象方法的接口,在该接口中可以拥有默认方法(即在类没有对方法进行实现时，其主体为方法提供默认实现的方法)</li>
+<li>Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例</li>
+<li><mark>@ FunctionalInterface 为函数式接口的标注, 抽象方法的签名称为函数描述符</mark></li>
+</ul>
+</li>
+<li>常用的函数式接口:
+<ul>
+<li>Predicate&lt;T&gt;  boolean test(T t)</li>
+<li>Consumer&lt;T&gt;   void accept(T t)</li>
+<li>Function&lt;T,R&gt;  R apply(T t)</li>
+<li>Supplier&lt;T&gt;</li>
+</ul>
+</li>
+<li><mark>引用类型(Byte,Integer,Object,List),与原始类型(int,double,byte,char)类型，但是泛型只能绑定到引用类型</mark>
+<ul>
+<li><mark>Java中具有将原始类型转换为引用类型的机制(装箱),同时存在拆箱的机制</mark></li>
+<li>装箱后的值本质上就是把原始类型包裹起来，并保存在堆</li>
+</ul>
+</li>
+<li>若Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）</li>
+</ul>
+<span id="more"></span>
+<h2 id="使用局部变量"><a class="markdownIt-Anchor" href="#使用局部变量"></a> 使用局部变量</h2>
+<ul>
+<li><mark>Lambda表达式允许使用自由变量(不是参数,而是在外层作用域定义的变量),被称为捕获Lambda</mark></li>
+<li>局部变量必须显式声明为final(Lambda表达式只能捕获派给它们的局部变量一次)
+<ul>
+<li>第一，实例变量和局部变量背后的实现有一个关键不同。实例变量都存储在堆中，而局部变量则保存在栈上。如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。因此，Java在访问自由局部变量时，实际上是在访问它的副本，而不是访问原始变量。如果局部变量仅仅赋值一次那就没有什么区别了——因此就有了这个限制。</li>
+<li>第二，这一限制不鼓励你使用改变外部变量的典型命令式编程模式（我们会在以后的各章中解释，这种模式会阻碍很容易做到的并行处理）。</li>
+</ul>
+</li>
+<li>Java8的Lambda和匿名类对值封闭，而不是对变量封闭(原因在局部变量保存在栈上，并且隐式表示他们仅限于其所在线程)</li>
+</ul>
+<h2 id="方法引用lambda的快捷写法"><a class="markdownIt-Anchor" href="#方法引用lambda的快捷写法"></a> 方法引用(Lambda的快捷写法)</h2>
+<ul>
+<li>方法引用的三类
+<ul>
+<li>指向静态方法的方法引用</li>
+<li>指向任意类型实例方法的方法引用</li>
+<li>指向现有对象的实例方法的方法引用</li>
+</ul>
+</li>
+<li>构造函数引用
+<ul>
+<li>可以利用名称和关键字new来创建引用</li>
+</ul>
+</li>
+<li>复合Lambda表达式
+<ul>
+<li>比较器复合: 1.逆序 2.比较器链</li>
+<li>谓词复合: negate、and和or</li>
+<li>函数复合: andThen 方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数；compose方法把给定的函数用作compose的参数里面给的那个函数，然后再把函数本身用于结果</li>
+</ul>
+</li>
+</ul>
+<h1 id="流简介"><a class="markdownIt-Anchor" href="#流简介"></a> 流简介</h1>
+<ul>
+<li>流允许以声明性方式处理数据集合(通过查询语句来表达,而不是临时编写一个实现)</li>
+<li>优势：
+<ul>
+<li>声明性:说明想要完成什么而不是说明如何实现一个操作</li>
+<li>可复合</li>
+<li>可并行</li>
+</ul>
+</li>
+</ul>
+<h2 id="流-从支持数据处理操作的源生成元素序列"><a class="markdownIt-Anchor" href="#流-从支持数据处理操作的源生成元素序列"></a> 流: 从支持数据处理操作的源生成元素序列</h2>
+<ul>
+<li><strong>元素序列</strong>——集合一样，流也提供了一个接口，可以访问特定元素类型的一组有序值，<mark>流的目的在于表达计算，集合为数据</mark></li>
+<li><strong>源</strong>——流会使用一个提供数据的源，从有序集合生成流，从有序集合生成流时会保留原有的顺序</li>
+<li><strong>数据处理操作</strong>——流的数据处理功能支持类似于数据库的操作，以及函数式编程语言中的常用操作,
+<ul>
+<li>filter：接受Lambda，从流中排除某些元素</li>
+<li>map：接受Lambda，将元素转换成其他形式或提取信息</li>
+<li>limit：截断流，使元素不超过其他给定数量</li>
+<li>collect：将流转换成其他元素（toList()将流转换为列表）</li>
+<li><mark>流操作可以顺序执行，也可以并行执行</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="流与集合"><a class="markdownIt-Anchor" href="#流与集合"></a> 流与集合</h2>
+<ul>
+<li>集合是内存中的数据结构，包含数据结构中的所有值——集合中的每个元素都得先算出才能添加到集合中</li>
+<li>流是在概念上固定得数据结构，<mark>元素是按需计算</mark>，流是延迟创建的集合(只有在消费者要求的时候才会计算值)</li>
+<li><mark>集合和流的关键区别之一</mark>：遍历数据的方式，集合利用迭代器来访问for-each循环中的内部成员</li>
+<li><mark>流只能遍历一次</mark></li>
+<li>==外部迭代和内部迭代
+<ul>
+<li>使用Collection接口需要用户去做迭代，被称为外部迭代，(for-each循环,Iterator迭代器—外部迭代)</li>
+<li>Streams库使用内部迭代——流将迭代做了，将得到的流值存在某个地方</li>
+</ul>
+</li>
+</ul>
+<h2 id="流操作"><a class="markdownIt-Anchor" href="#流操作"></a> 流操作</h2>
+<ul>
+<li>中间操作：可以连接起来的流操作，中间操作会返回另一个流，可以使多个操作连接</li>
+<li>终端操作：关闭流的操作，产生结果</li>
+</ul>
+<h2 id="流的使用"><a class="markdownIt-Anchor" href="#流的使用"></a> 流的使用</h2>
+<ul>
+<li><strong>一个数据源：如集合，来执行一个查询</strong></li>
+<li><strong>一个中间操作链：形成一条流的流水线</strong>
+<ul>
+<li>filter——操作类型Predicate&lt;T&gt;——函数描述符T-&gt;boolean</li>
+<li>map——操作类型Function&lt;T,R&gt;——函数描述符T-&gt;R</li>
+<li>limit</li>
+<li>sorted——操作类型Comparator&lt;T&gt;——函数描述符(T, T)-&gt;R</li>
+<li>distinct</li>
+</ul>
+</li>
+<li><strong>一个终端操作</strong>：执行流水线，并能生成结果
+<ul>
+<li>forEach——消费流中的每个元素并对其应用Lambda。这一操作返回void</li>
+<li>count——返回流中元素的个数。这一操作返回long</li>
+<li>collection——把流归约成一个集合</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用流"><a class="markdownIt-Anchor" href="#使用流"></a> 使用流</h1>
+<h2 id="筛选和切片"><a class="markdownIt-Anchor" href="#筛选和切片"></a> 筛选和切片</h2>
+<ul>
+<li>用谓词<mark>筛选</mark>：filter方法，接受一个谓词(一个返回boolean的函数)作为参数，并返回一个包括所有符合谓词的元素的流</li>
+<li><mark>筛选各异的元素</mark>：distinct方法，返回一个元素各异(根据流所产生元素的hashCode和equals方法实现)的流</li>
+<li><mark>截短流</mark>：limit(n)方法，该方法会返回一个不超过给定长度的流</li>
+<li><mark>跳过元素</mark>：skip(n)方法，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流</li>
+</ul>
+<h2 id="映射"><a class="markdownIt-Anchor" href="#映射"></a> 映射</h2>
+<ul>
+<li><mark>对流中每一个元素应用函数</mark>：map方法，接受一个函数作为参数。函数应用到每个元素上将其映射成新的元素</li>
+<li><mark>流的扁平化</mark>：获得单词列表总各不相同的字符
+<ul>
+<li>使用map()与distinct()方法返回的为Stream&lt;String[]&gt;类型，而需要的为Stream&lt;String&gt;类型</li>
+<li>使用map与Arrays .stream()(该方法可以接受一个数组并产生一个流)
+<ul>
+<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).map(Arrays::stream).distinct().collect(Collectors.toList()) 返回Stream&lt;String&gt;的列表</li>
+</ul>
+</li>
+<li><mark>使用flatMap解决</mark>：
+<ul>
+<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).flatmap(Arrays::stream).distinct().collect(Collectors.toList()) 返回List&lt;String&gt;</li>
+<li>flatmap方法把流中的每一个值都转换成另一个值，然后把所有的流连接起来成为一个流，创建扁平流</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="查找和匹配"><a class="markdownIt-Anchor" href="#查找和匹配"></a> 查找和匹配</h2>
+<ul>
+<li><mark>检查谓词是否至少匹配一个元素</mark>
+<ul>
+<li>anyMatch方法——流中是否有一个元素能匹配给定谓词</li>
+</ul>
+</li>
+<li><mark>检查谓词是否匹配所有元素</mark>
+<ul>
+<li>allMatch方法——流中是否都能匹配给定谓词</li>
+<li>noneMatch方法——流中没有任何元素与给定谓词匹配</li>
+</ul>
+</li>
+<li><mark>findAny方法——将返回当前流中的任意元素</mark>
+<ul>
+<li>Optional&lt;T&gt;类使一个容器类，代表一个值存在或不存在</li>
+<li>isPresent方法——将在Optional包含值得时候返回true</li>
+<li>ifPresent(Consumer&lt;T&gt; block)方法——在值存在时执行给定的代码块</li>
+<li>T get()方法——在值存在时返回值</li>
+<li>T orElse(T other)方法——会在值存在时返回值，否则返回一个默认值</li>
+</ul>
+</li>
+<li><mark>查找第一个元素——findFirst方法</mark></li>
+</ul>
+<h2 id="归约"><a class="markdownIt-Anchor" href="#归约"></a> 归约</h2>
+<ul>
+<li>归约操作(折叠) ：将流中的元素组合起来，使用reduce操作来表达复杂的查询</li>
+<li>元素求和：
+<ul>
+<li>使用reduce方法
+<ul>
+<li>reduce方法接受两个参数，一个参数为初始值，另一个参数为BinaryOperator&lt;T&gt;为Lambda表达式
+<ul>
+<li>Integer中具有sum方法可以使用进行求和</li>
+<li>不接受初始值，返回Optional对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最大值和最小值
+<ul>
+<li>使用归约可以计算最大值和最小值
+<ul>
+<li>Integer中的max方法可以计算最大值，min方法计算最小值</li>
+<li>可以使用并行处理，将strean()换成parallelStream()即可实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流操作:
+<ul>
+<li>无状态和有状态：
+<ul>
+<li>无状态操作：没有内部状态，假设用户提供的Lambda或方法引用没有内部可变状态
+<ul>
+<li>如map或filter等操作会从输入流中获得每一个元素，并且在输出流中得到0或者1个结果</li>
+</ul>
+</li>
+<li>有状态操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数值流"><a class="markdownIt-Anchor" href="#数值流"></a> 数值流</h2>
+<ul>
+<li><strong>原始类型流特化，专门支持数值流的方法</strong></li>
+<li>原始类型流特化
+<ul>
+<li>三个原始类型特化流接口：<strong>IntStream , DoubleStream , LongStream</strong> 分别将流中的元素特化为int , long  和long类型
+<ul>
+<li><mark><strong>避免了暗含的装箱操作成本</strong></mark></li>
+</ul>
+</li>
+<li>映射到数值流：maoToInt mapToDouble mapToLong</li>
+<li>转换回对象流：boxed()方法——可以将原始流转换为一般流(每个元素会自动装箱成为一个引用类型)</li>
+<li>默认值OptionalInt：存在Optional原始类型特化版本 OptionalInt OptionalDouble OptionalLong
+<ul>
+<li>可以使用orElse方法，在不存在时设置一个默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数值范围
+<ul>
+<li>range()方法不包含结束值，rangeClosed()方法包含结束值</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建流"><a class="markdownIt-Anchor" href="#构建流"></a> 构建流</h2>
+<ul>
+<li>由值创建流：可以使用<strong>静态Steam.of方法显式创建一个流</strong>，使用Steam.empty()方法创建一个空流</li>
+<li>由数组创建流：可以使用静态Arrays.steam方法从数组创建一个流</li>
+<li>由文件创建流：
+<ul>
+<li>java.nio.file.Files中的很多静态方法都支持返回一个流</li>
+<li>Files.lines返回一个由指定文件中各行构成的字符串流</li>
+</ul>
+</li>
+<li>由函数生成流
+<ul>
+<li>无限流：不像从固定集合创建的流那样有固定大小的流</li>
+<li>Stream.iterate和Stream.generate方法可以生成无限流
+<ul>
+<li>generate接受一个Supplier&lt;T&gt;类型的Lambda提供新的值</li>
+<li><strong>使用iterate的方法则是纯粹不变的：它没有修改现有状态，但在每次迭代时会创建新的元组。而generate方法会使Supplier实例的状态产生变化</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="用流收集数据"><a class="markdownIt-Anchor" href="#用流收集数据"></a> 用流收集数据</h1>
+<h2 id="收集器简介"><a class="markdownIt-Anchor" href="#收集器简介"></a> 收集器简介</h2>
+<ul>
+<li><strong>收集器用作高级归纳</strong>——Collector会对元素应用一个转换函数，并且将结果累计在一个数据结构中，从而产生这一过程的最终输出</li>
+<li>收集器的功能：将流元素归约和汇总为一个值，元素分组，元素分区</li>
+</ul>
+<h2 id="归约和汇总"><a class="markdownIt-Anchor" href="#归约和汇总"></a> 归约和汇总</h2>
+<ul>
+<li>查找流中的最大值和最小值
+<ul>
+<li>两个收集器：Collectors.maxBy和Collectors.minBy来计算流中的最大值或最小值 接收器接收一个Comparator参数来比较流中的元素</li>
+</ul>
+</li>
+<li>汇总
+<ul>
+<li>汇总的工厂方法：Collectors.summingInt 接受一个把对象映射为求和所需int的函数，并返回一个收集器，该收集器在传递给普通的collect方法后执行汇总操作
+<ul>
+<li>Collectors.summingLong Collectors.summingDouble ——求和 averagingLong averagingDouble 计算平均值</li>
+<li><strong>summarizingInt summarizingLong summarizingLong方法 返回的收集器——可以得到元素个数，总和，平均值，最大值和最小值——返回IntSummaryStatistics类,LongSummaryStatistics类,DoubleSummaryStatistics类</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接字符串
+<ul>
+<li>joining工厂方法——对流中每一个对象引用toString方法得到的所有字符串连接成一个字符串
+<ul>
+<li>重载版本可以设置元素之间的分界符</li>
+<li>若类具有toString方法，则无需重新提取字符串</li>
+</ul>
+</li>
+<li><strong>joining在内部使用了StringBuilder来把生成的字符串逐个追加起来</strong></li>
+</ul>
+</li>
+<li>广义的归约汇总
+<ul>
+<li>Collectors.reducing方法使所有特殊情况的一般化</li>
+<li>三个参数
+<ul>
+<li>第一个参数使归约操作的起始值，也是流中没有元素的返回值</li>
+<li>第二个参数</li>
+<li>第三个参数使BinaryOperator，将两个项目累积成一个同类型的值</li>
+</ul>
+</li>
+<li>单参数形式
+<ul>
+<li>三个参数形式的特殊情况</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h2>
+<ul>
+<li><strong>Collectors.groupingBy工厂方法可以实现分类操作</strong>，其参数为一个分类函数，分组的结果保存在一个Map中</li>
+<li>多级分类：
+<ul>
+<li><strong>双参数版本的Collectors.groupingBy可以实现多级分类</strong>
+<ul>
+<li><strong>其传入参数除了普通的分类函数之外，还可以接受Collectors类型的第二个参数，利用内层groupingBy传递给外层groupingBy，其类型为二级标准</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按子组收集数据：
+<ul>
+<li>Collectors.groupingBy的第二个参数可以使任意类型，如可以传递counting收集器作为参数统计数量</li>
+<li>单参数的groupingBy(f)实际上使groupingBy(f,toList())的简便写法</li>
+<li>将收集器的结果转换为另一种类型： Collectors.collectingAndThen工厂方法第一个参数为要转换的收集器，第二个参数为转换函数</li>
+<li>Collectors.mapping——该方法接受两个参数，一个函数对流中的元素进行转换，另一个将变换的结果收集起来</li>
+</ul>
+</li>
+</ul>
+<h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
+<ul>
+<li>分组的特殊情况：由一个谓词作为分类函数，称为分区函数，分区函数返回一个布尔值，得到的Map的键为Boolean类型</li>
+<li><strong>分区函数 partitioningBy——其传递的函数为分区函数</strong></li>
+<li>分区的好处：保留了分区函数返回true或False的两套流元素列表
+<ul>
+<li>partitioningBy——重载版本，第一个参数为分区函数，第二个参数为收集器</li>
+</ul>
+</li>
+<li>partitioningBy收集器也允许结合其他收集器使用，可以实现多级分区</li>
+</ul>
+<h2 id="收集器接口"><a class="markdownIt-Anchor" href="#收集器接口"></a> 收集器接口</h2>
+<ul>
+<li>Collector接口：T是流中要收集的项目的泛型，A是累加器的类型(累加器是在收集过程中用于累计部分结果的对象)，R是收集操作得到的对象的类型
+<ul>
+<li>建立新的结果容器：supplier方法</li>
+<li>将元素添加到结果容器：accumulator方法</li>
+<li>对结果容器应用最终转换：finisher方法</li>
+<li>合并两个结果容器：combiner方法</li>
+<li>characteristics方法——返回一个不可变的Characteristics集合，它定义了收集器的行为——尤其是关于流是否可以并行归约，以及可以使用哪些优化的提示，为三个项目的枚举
+<ul>
+<li>UNORDERED——归约结果不受流中项目的遍历和累积顺序的影响</li>
+<li>CONCURRENT——accumulator函数可以从多个线程同时调用，且该收集器可以并行归约流。如果收集器没有标为UNORDERED，那它仅在用于无序数据源时才可以并行归约</li>
+<li>IDENTITY_FINISH——这表明完成器方法返回的函数是一个恒等函数，可以跳过。这种情况下，累加器对象将会直接用作归约过程的最终结果。这也意味着，将累加器A不加检查地转换为结果R是安全的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>调用自定义实现Collector接口的类时，需要使用new方法进行实例化(toList是工厂方法，故不需要new进行实例化)</strong></li>
+<li><strong>可直接在重载的collect()方法中接受三个函数supplier,accumlator和combiner函数，实现上述操作</strong>
+<ul>
+<li><strong>第二个collect方法不能传递任何Characteristics，所以它永远都是一个IDENTITY_FINISH和CONCURRENT但并非UNORDERED的收集器</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>,<span class="title">A</span> <span class="title">R</span>&gt;</span>&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="并行数据处理与性能"><a class="markdownIt-Anchor" href="#并行数据处理与性能"></a> 并行数据处理与性能</h1>
+<h2 id="并行流"><a class="markdownIt-Anchor" href="#并行流"></a> 并行流</h2>
+<ul>
+<li>parallelStream 方法 ——将集合转换为并行流
+<ul>
+<li>并行流将内容分成多个数据块，并用不同的线程分别处理每个数据块的流</li>
+</ul>
+</li>
+<li>将顺序流转换为并行流
+<ul>
+<li>对顺序流调用parallel方法转换为并行流——函数的归约过程并行运行</li>
+<li>对并行流调用sequential方法转换为顺序流</li>
+<li><strong>iterate产生的是装箱的对象，必须拆箱成数字才能求和</strong></li>
+</ul>
+</li>
+<li>高效使用并行流
+<ul>
+<li>留意装箱</li>
+<li>留意数据结构是否易于分解</li>
+<li>ArrayList IntStream等 可分解性极佳 &gt; HashSet TreeSet 分解性较好 &gt; LinkedList 原生Stream</li>
+</ul>
+</li>
+</ul>
+<h2 id="分支合并框架forkjoin框架"><a class="markdownIt-Anchor" href="#分支合并框架forkjoin框架"></a> 分支合并框架(Fork/Join框架)</h2>
+<ul>
+<li>以递归方式将可并行的任务拆分成更小的任务，然后将每个子任务的结果合并起来生成整体结果，把子任务分配给- ForkJoinPool(线程池)中的工作线程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// R是并行化任务产生的结果类型</span></span><br><span class="line"><span class="comment">// 其唯一抽象方法为compute方法</span></span><br><span class="line">RecursiveTask&lt;R&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//伪代码</span></span><br><span class="line">compute()&#123;</span><br><span class="line">  <span class="keyword">if</span>(任务足够小或不可分)&#123;</span><br><span class="line">       顶序计算该任务</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      将任务分成两个子任务</span><br><span class="line">       递归调用本方法，拆分每个子任务，等待所有子任务完成</span><br><span class="line">        合并每个子任务的结果</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任务不产生返回结果</span></span><br><span class="line">RecursiveAction</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用分支/合并框架的最佳做法
+<ul>
+<li>对一个任务调用join方法会阻塞调用方，直到该任务做出结果**(有必要在两个子任务的计算都开始之后再调用它。否则，你得到的版本会比原始的顺序算法更慢更复杂，因为每个子任务都必须等待另一个子任务完成才能启动)**；</li>
+<li>不应该在RecursiveTask内部使用ForkJoinPool的invoke方法。相反，你应该始终直接调用compute或fork方法，只有顺序代码才应该用invoke来启动并行计算；</li>
+<li>对子任务调用fork方法可以把它排进ForkJoinPool。同时对左边和右边的子任务调用它似乎很自然，但这样做的效率要比直接对其中一个调用compute低。这样做你可以为其中一个子任务重用同一线程，从而避免在线程池中多分配一个任务造成的开销；</li>
+<li>和并行流一样，你不应理所当然地认为在多核处理器上使用分支/合并框架就比顺序计算快。我们已经说过，一个任务可以分解成多个独立的子任务，才能让性能在并行化时有所提升</li>
+</ul>
+</li>
+</ul>
+<h2 id="spliterator"><a class="markdownIt-Anchor" href="#spliterator"></a> Spliterator</h2>
+<ul>
+<li>Java8中引入的一个新接口，为可分迭代器，用于遍历数据源中的元素，但其为了并行执行、</li>
+<li>tryAdvance方法的行为类似于普通的Iterator，按顺序一个一个使用Spliterator中的元素，并且如果还有其他元素要遍历就返回true</li>
+<li>trySplit是专为Spliterator接口设计的，可以把一些元素划出去分给第二个Spliterator（由该方法返回），两个并行处理</li>
+<li>Spliterator还可通过estimateSize方法估计还剩下多少元素要遍历，因为即使不那么确切，能快速算出来是一个值也有助于让拆分均匀一点</li>
+<li>Spliterator接口声明的最后一个抽象方法是characteristics，它将返回一个int，代表Spliterator本身特性集的编码</li>
+<li>拆分过程：递归过程拆分直至调用trySplit方法返回null，受Spliterator本身特性影响，该特性通过characteristics方法声明</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Spliterator</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAdvance</span><span class="params">(Consumer&lt;?<span class="keyword">super</span> T&gt;action)</span></span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="function"><span class="keyword">long</span> <span class="title">estimateSize</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">charactenstics</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="默认方法"><a class="markdownIt-Anchor" href="#默认方法"></a> 默认方法</h1>
+<ul>
+<li>Java8允许在接口内声明静态方法，同时引入了<strong>默认方法</strong>，通过默认方法可以指定接口方法的默认实现</li>
+<li>Java的类只能继承单一的类，但一个类可以实现多接口</li>
+<li>可以使用代理有效地规避代码复用的复杂性，即创建一个方法通过该类的成员变量直接调用该类的方法
+<ul>
+<li><mark>为什么有的时候我们发现有些类被刻意地声明为final类型：</mark>
+<ul>
+<li>声明为final的类不能被其他的类继承，避免发生这样的反模式，防止核心代码的功能被污染</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><mark>解决默认方法签名相同时产生的冲突问题(一个类使用相同的函数签名从多个地方（比如另一个类或接口）继承了方法)：</mark>
+<ul>
+<li>类中的方法优先级最高。类或父类中声明的方法的优先级高于任何声明为默认方法的优先级</li>
+<li>如果无法依据第一条进行判断，那么子接口的优先级更高：函数签名相同时，优先选择拥有最具体实现的默认方法的接口，即如果B继承了A，那么B就比A更加具体</li>
+<li>最后，如果还是无法判断，继承了多个接口的类必须通过显式覆盖和调用期望的方法，显式地选择使用哪一个默认方法的实现</li>
+</ul>
+</li>
+</ul>
+<h1 id="用optional取代null"><a class="markdownIt-Anchor" href="#用optional取代null"></a> 用Optional取代null</h1>
+<ul>
+<li>避免遇到NullPointerException异常</li>
+<li>Optional&lt;T&gt;
+<ul>
+<li>变量存在时，Optional类只是对类简单封装;</li>
+<li>变量不存在时，缺失的值会被建模成一个“空”的Optional对象，由方法Optional.empty()返回</li>
+</ul>
+</li>
+<li>创建Optional对象
+<ul>
+<li><strong>声明一个空的Optional</strong>：Optional.empty()静态方法——返回Optional类的特定单一实例</li>
+<li><strong>依据一个非空值创建Optional</strong>：Optional.of()静态方法——依据非空值创建一个Optional对象</li>
+<li><strong>可接受null的Optional</strong>：Optional.ofNullable()静态方法——创建一个允许null值得Optional对象</li>
+</ul>
+</li>
+<li>函数方法
+<ul>
+<li>map方法——使用map从Optional对象中提取和转换值；map操作会将提供的函数引用于流的每个元素，可以把Optional对象堪称一种特殊的集合数据（如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换。如果Optional为空，就什么也不做）</li>
+<li>flatMap方法——将两层的Optional对象转换为单一Optional对象，使用flatMap链接Optional对象</li>
+<li>get()——最简单但不安全，若变量存在返回封装的变量值，否则抛出NoSuchElementException异常</li>
+<li>orElse(T other)——允许在Optional对象不包含值时提供一个默认值</li>
+<li>orElseGet(Supplier&lt; ? extends T&gt; other)——Supplier方法只有在Optional对象不含值时才执行调用</li>
+<li>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)——遭遇Optional对象为空时都会抛出一个可定制的异常</li>
+<li>ifPresent(Consumer&lt;? super T&gt;)——在变量值存在时执行一个作为参数传入的方法，否则就不进行任何操作</li>
+<li>isPresent()——如果Optional对象包含值，该方法就返回true</li>
+<li>filter()——方法接受一个谓词作为参数；如果Optional对象的值存在，并且它符合谓词的条件，filter方法就返回其值；否则它就返回一个空的Optional对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="新的日期和时间api"><a class="markdownIt-Anchor" href="#新的日期和时间api"></a> 新的日期和时间API</h1>
+<ul>
+<li>LocalDate
+<ul>
+<li>LocalDate.of()——创建一个LocalDate实例</li>
+<li>LocalDate.now()——从系统时钟中获取当前日期</li>
+<li>get()——传递TemporalField参数获取某个字段的值(ChronoField枚举实现了TemporalField接口)</li>
+<li>parse()静态方法——格式化一个日期或者时间对象</li>
+</ul>
+</li>
+<li>LocalTime
+<ul>
+<li>LocalTime.of()——创建LocalTIme实例</li>
+<li>getHour getMinute getSecond</li>
+<li>parse()静态方法——格式化一个日期或者时间对象</li>
+</ul>
+</li>
+<li>LocalDateTime
+<ul>
+<li>是LocalDate和LocalTime的合体，同时表示了日期和时间，但不带有时区信息</li>
+<li>of方法</li>
+<li>atTime()方法——传递日期对象或者时间对象创建</li>
+<li>toLocalDate或toLocalTime方法——提取LocalDate或LocalTime组件</li>
+</ul>
+</li>
+<li>Instant类
+<ul>
+<li>计算机角度的建模时间，表示一个持续时间段上某个点的单一大整型数</li>
+<li>ofEpochSecond()——传递一个代表秒数的值创建该类的实例
+<ul>
+<li>重载版本，接受第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整</li>
+</ul>
+</li>
+<li>now()——获取当前时刻的时间戳</li>
+</ul>
+</li>
+<li>Duration类和Period
+<ul>
+<li>Duration类静态方法between——传递两个LocalTimes对象，LocalDateTimes对象，Instant对象，获得两个对象之间的时间长短(秒和纳秒)</li>
+<li>Period类静态方法between——得到LocalDate之间的时长</li>
+</ul>
+</li>
+<li>使用TemporalAdjuster：with()——传递一个提供定制化选择的TemporalAdjuster对象，更加灵活的处理日期</li>
+<li>打印输出及解析日期-时间对象：
+<ul>
+<li>DateTimeFormatter类：创建格式器最简单的方法是通过静态方法和常量，BASIC_ISO_DATE和ISO_LOCAL_DATE- 为DateTimeFormatter类的预定义实例
+<ul>
+<li>parse()静态方法——使用同样的格式器解析字符串并重建该日期对象</li>
+<li>ofPattern()方法——创建某了Local的格式器</li>
+<li>DateTimeFormatterBuilder类提供更加复杂的格式器</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -4173,1777 +5944,6 @@ s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class=
       </categories>
       <tags>
         <tag>Study</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java8实战</title>
-    <url>/2022/03/02/Java8%E5%AE%9E%E6%88%98/</url>
-    <content><![CDATA[<h1 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> Lambda表达式</h1>
-<h2 id="行为参数化"><a class="markdownIt-Anchor" href="#行为参数化"></a> 行为参数化</h2>
-<ul>
-<li>一种软件开发模式，<mark>将代码块作为参数传递给另一个方法，稍后再去执行，方法的行为就基于那块代码被参数化了</mark></li>
-</ul>
-<h2 id="lambda表达式的三个部分参数列表箭头lambda主体"><a class="markdownIt-Anchor" href="#lambda表达式的三个部分参数列表箭头lambda主体"></a> Lambda表达式的三个部分:参数列表,箭头,Lambda主体</h2>
-<ul>
-<li>在函数式接口中使用Lambda接口
-<ul>
-<li>函数式接口就是只定义了一个抽象方法的接口,在该接口中可以拥有默认方法(即在类没有对方法进行实现时，其主体为方法提供默认实现的方法)</li>
-<li>Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例</li>
-<li><mark>@ FunctionalInterface 为函数式接口的标注, 抽象方法的签名称为函数描述符</mark></li>
-</ul>
-</li>
-<li>常用的函数式接口:
-<ul>
-<li>Predicate&lt;T&gt;  boolean test(T t)</li>
-<li>Consumer&lt;T&gt;   void accept(T t)</li>
-<li>Function&lt;T,R&gt;  R apply(T t)</li>
-<li>Supplier&lt;T&gt;</li>
-</ul>
-</li>
-<li><mark>引用类型(Byte,Integer,Object,List),与原始类型(int,double,byte,char)类型，但是泛型只能绑定到引用类型</mark>
-<ul>
-<li><mark>Java中具有将原始类型转换为引用类型的机制(装箱),同时存在拆箱的机制</mark></li>
-<li>装箱后的值本质上就是把原始类型包裹起来，并保存在堆</li>
-</ul>
-</li>
-<li>若Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）</li>
-</ul>
-<span id="more"></span>
-<h2 id="使用局部变量"><a class="markdownIt-Anchor" href="#使用局部变量"></a> 使用局部变量</h2>
-<ul>
-<li><mark>Lambda表达式允许使用自由变量(不是参数,而是在外层作用域定义的变量),被称为捕获Lambda</mark></li>
-<li>局部变量必须显式声明为final(Lambda表达式只能捕获派给它们的局部变量一次)
-<ul>
-<li>第一，实例变量和局部变量背后的实现有一个关键不同。实例变量都存储在堆中，而局部变量则保存在栈上。如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。因此，Java在访问自由局部变量时，实际上是在访问它的副本，而不是访问原始变量。如果局部变量仅仅赋值一次那就没有什么区别了——因此就有了这个限制。</li>
-<li>第二，这一限制不鼓励你使用改变外部变量的典型命令式编程模式（我们会在以后的各章中解释，这种模式会阻碍很容易做到的并行处理）。</li>
-</ul>
-</li>
-<li>Java8的Lambda和匿名类对值封闭，而不是对变量封闭(原因在局部变量保存在栈上，并且隐式表示他们仅限于其所在线程)</li>
-</ul>
-<h2 id="方法引用lambda的快捷写法"><a class="markdownIt-Anchor" href="#方法引用lambda的快捷写法"></a> 方法引用(Lambda的快捷写法)</h2>
-<ul>
-<li>方法引用的三类
-<ul>
-<li>指向静态方法的方法引用</li>
-<li>指向任意类型实例方法的方法引用</li>
-<li>指向现有对象的实例方法的方法引用</li>
-</ul>
-</li>
-<li>构造函数引用
-<ul>
-<li>可以利用名称和关键字new来创建引用</li>
-</ul>
-</li>
-<li>复合Lambda表达式
-<ul>
-<li>比较器复合: 1.逆序 2.比较器链</li>
-<li>谓词复合: negate、and和or</li>
-<li>函数复合: andThen 方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数；compose方法把给定的函数用作compose的参数里面给的那个函数，然后再把函数本身用于结果</li>
-</ul>
-</li>
-</ul>
-<h1 id="流简介"><a class="markdownIt-Anchor" href="#流简介"></a> 流简介</h1>
-<ul>
-<li>流允许以声明性方式处理数据集合(通过查询语句来表达,而不是临时编写一个实现)</li>
-<li>优势：
-<ul>
-<li>声明性:说明想要完成什么而不是说明如何实现一个操作</li>
-<li>可复合</li>
-<li>可并行</li>
-</ul>
-</li>
-</ul>
-<h2 id="流-从支持数据处理操作的源生成元素序列"><a class="markdownIt-Anchor" href="#流-从支持数据处理操作的源生成元素序列"></a> 流: 从支持数据处理操作的源生成元素序列</h2>
-<ul>
-<li><strong>元素序列</strong>——集合一样，流也提供了一个接口，可以访问特定元素类型的一组有序值，<mark>流的目的在于表达计算，集合为数据</mark></li>
-<li><strong>源</strong>——流会使用一个提供数据的源，从有序集合生成流，从有序集合生成流时会保留原有的顺序</li>
-<li><strong>数据处理操作</strong>——流的数据处理功能支持类似于数据库的操作，以及函数式编程语言中的常用操作,
-<ul>
-<li>filter：接受Lambda，从流中排除某些元素</li>
-<li>map：接受Lambda，将元素转换成其他形式或提取信息</li>
-<li>limit：截断流，使元素不超过其他给定数量</li>
-<li>collect：将流转换成其他元素（toList()将流转换为列表）</li>
-<li><mark>流操作可以顺序执行，也可以并行执行</mark></li>
-</ul>
-</li>
-</ul>
-<h2 id="流与集合"><a class="markdownIt-Anchor" href="#流与集合"></a> 流与集合</h2>
-<ul>
-<li>集合是内存中的数据结构，包含数据结构中的所有值——集合中的每个元素都得先算出才能添加到集合中</li>
-<li>流是在概念上固定得数据结构，<mark>元素是按需计算</mark>，流是延迟创建的集合(只有在消费者要求的时候才会计算值)</li>
-<li><mark>集合和流的关键区别之一</mark>：遍历数据的方式，集合利用迭代器来访问for-each循环中的内部成员</li>
-<li><mark>流只能遍历一次</mark></li>
-<li>==外部迭代和内部迭代
-<ul>
-<li>使用Collection接口需要用户去做迭代，被称为外部迭代，(for-each循环,Iterator迭代器—外部迭代)</li>
-<li>Streams库使用内部迭代——流将迭代做了，将得到的流值存在某个地方</li>
-</ul>
-</li>
-</ul>
-<h2 id="流操作"><a class="markdownIt-Anchor" href="#流操作"></a> 流操作</h2>
-<ul>
-<li>中间操作：可以连接起来的流操作，中间操作会返回另一个流，可以使多个操作连接</li>
-<li>终端操作：关闭流的操作，产生结果</li>
-</ul>
-<h2 id="流的使用"><a class="markdownIt-Anchor" href="#流的使用"></a> 流的使用</h2>
-<ul>
-<li><strong>一个数据源：如集合，来执行一个查询</strong></li>
-<li><strong>一个中间操作链：形成一条流的流水线</strong>
-<ul>
-<li>filter——操作类型Predicate&lt;T&gt;——函数描述符T-&gt;boolean</li>
-<li>map——操作类型Function&lt;T,R&gt;——函数描述符T-&gt;R</li>
-<li>limit</li>
-<li>sorted——操作类型Comparator&lt;T&gt;——函数描述符(T, T)-&gt;R</li>
-<li>distinct</li>
-</ul>
-</li>
-<li><strong>一个终端操作</strong>：执行流水线，并能生成结果
-<ul>
-<li>forEach——消费流中的每个元素并对其应用Lambda。这一操作返回void</li>
-<li>count——返回流中元素的个数。这一操作返回long</li>
-<li>collection——把流归约成一个集合</li>
-</ul>
-</li>
-</ul>
-<h1 id="使用流"><a class="markdownIt-Anchor" href="#使用流"></a> 使用流</h1>
-<h2 id="筛选和切片"><a class="markdownIt-Anchor" href="#筛选和切片"></a> 筛选和切片</h2>
-<ul>
-<li>用谓词<mark>筛选</mark>：filter方法，接受一个谓词(一个返回boolean的函数)作为参数，并返回一个包括所有符合谓词的元素的流</li>
-<li><mark>筛选各异的元素</mark>：distinct方法，返回一个元素各异(根据流所产生元素的hashCode和equals方法实现)的流</li>
-<li><mark>截短流</mark>：limit(n)方法，该方法会返回一个不超过给定长度的流</li>
-<li><mark>跳过元素</mark>：skip(n)方法，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流</li>
-</ul>
-<h2 id="映射"><a class="markdownIt-Anchor" href="#映射"></a> 映射</h2>
-<ul>
-<li><mark>对流中每一个元素应用函数</mark>：map方法，接受一个函数作为参数。函数应用到每个元素上将其映射成新的元素</li>
-<li><mark>流的扁平化</mark>：获得单词列表总各不相同的字符
-<ul>
-<li>使用map()与distinct()方法返回的为Stream&lt;String[]&gt;类型，而需要的为Stream&lt;String&gt;类型</li>
-<li>使用map与Arrays .stream()(该方法可以接受一个数组并产生一个流)
-<ul>
-<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).map(Arrays::stream).distinct().collect(Collectors.toList()) 返回Stream&lt;String&gt;的列表</li>
-</ul>
-</li>
-<li><mark>使用flatMap解决</mark>：
-<ul>
-<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).flatmap(Arrays::stream).distinct().collect(Collectors.toList()) 返回List&lt;String&gt;</li>
-<li>flatmap方法把流中的每一个值都转换成另一个值，然后把所有的流连接起来成为一个流，创建扁平流</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="查找和匹配"><a class="markdownIt-Anchor" href="#查找和匹配"></a> 查找和匹配</h2>
-<ul>
-<li><mark>检查谓词是否至少匹配一个元素</mark>
-<ul>
-<li>anyMatch方法——流中是否有一个元素能匹配给定谓词</li>
-</ul>
-</li>
-<li><mark>检查谓词是否匹配所有元素</mark>
-<ul>
-<li>allMatch方法——流中是否都能匹配给定谓词</li>
-<li>noneMatch方法——流中没有任何元素与给定谓词匹配</li>
-</ul>
-</li>
-<li><mark>findAny方法——将返回当前流中的任意元素</mark>
-<ul>
-<li>Optional&lt;T&gt;类使一个容器类，代表一个值存在或不存在</li>
-<li>isPresent方法——将在Optional包含值得时候返回true</li>
-<li>ifPresent(Consumer&lt;T&gt; block)方法——在值存在时执行给定的代码块</li>
-<li>T get()方法——在值存在时返回值</li>
-<li>T orElse(T other)方法——会在值存在时返回值，否则返回一个默认值</li>
-</ul>
-</li>
-<li><mark>查找第一个元素——findFirst方法</mark></li>
-</ul>
-<h2 id="归约"><a class="markdownIt-Anchor" href="#归约"></a> 归约</h2>
-<ul>
-<li>归约操作(折叠) ：将流中的元素组合起来，使用reduce操作来表达复杂的查询</li>
-<li>元素求和：
-<ul>
-<li>使用reduce方法
-<ul>
-<li>reduce方法接受两个参数，一个参数为初始值，另一个参数为BinaryOperator&lt;T&gt;为Lambda表达式
-<ul>
-<li>Integer中具有sum方法可以使用进行求和</li>
-<li>不接受初始值，返回Optional对象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>最大值和最小值
-<ul>
-<li>使用归约可以计算最大值和最小值
-<ul>
-<li>Integer中的max方法可以计算最大值，min方法计算最小值</li>
-<li>可以使用并行处理，将strean()换成parallelStream()即可实现</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>流操作:
-<ul>
-<li>无状态和有状态：
-<ul>
-<li>无状态操作：没有内部状态，假设用户提供的Lambda或方法引用没有内部可变状态
-<ul>
-<li>如map或filter等操作会从输入流中获得每一个元素，并且在输出流中得到0或者1个结果</li>
-</ul>
-</li>
-<li>有状态操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="数值流"><a class="markdownIt-Anchor" href="#数值流"></a> 数值流</h2>
-<ul>
-<li><strong>原始类型流特化，专门支持数值流的方法</strong></li>
-<li>原始类型流特化
-<ul>
-<li>三个原始类型特化流接口：<strong>IntStream , DoubleStream , LongStream</strong> 分别将流中的元素特化为int , long  和long类型
-<ul>
-<li><mark><strong>避免了暗含的装箱操作成本</strong></mark></li>
-</ul>
-</li>
-<li>映射到数值流：maoToInt mapToDouble mapToLong</li>
-<li>转换回对象流：boxed()方法——可以将原始流转换为一般流(每个元素会自动装箱成为一个引用类型)</li>
-<li>默认值OptionalInt：存在Optional原始类型特化版本 OptionalInt OptionalDouble OptionalLong
-<ul>
-<li>可以使用orElse方法，在不存在时设置一个默认值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数值范围
-<ul>
-<li>range()方法不包含结束值，rangeClosed()方法包含结束值</li>
-</ul>
-</li>
-</ul>
-<h2 id="构建流"><a class="markdownIt-Anchor" href="#构建流"></a> 构建流</h2>
-<ul>
-<li>由值创建流：可以使用<strong>静态Steam.of方法显式创建一个流</strong>，使用Steam.empty()方法创建一个空流</li>
-<li>由数组创建流：可以使用静态Arrays.steam方法从数组创建一个流</li>
-<li>由文件创建流：
-<ul>
-<li>java.nio.file.Files中的很多静态方法都支持返回一个流</li>
-<li>Files.lines返回一个由指定文件中各行构成的字符串流</li>
-</ul>
-</li>
-<li>由函数生成流
-<ul>
-<li>无限流：不像从固定集合创建的流那样有固定大小的流</li>
-<li>Stream.iterate和Stream.generate方法可以生成无限流
-<ul>
-<li>generate接受一个Supplier&lt;T&gt;类型的Lambda提供新的值</li>
-<li><strong>使用iterate的方法则是纯粹不变的：它没有修改现有状态，但在每次迭代时会创建新的元组。而generate方法会使Supplier实例的状态产生变化</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="用流收集数据"><a class="markdownIt-Anchor" href="#用流收集数据"></a> 用流收集数据</h1>
-<h2 id="收集器简介"><a class="markdownIt-Anchor" href="#收集器简介"></a> 收集器简介</h2>
-<ul>
-<li><strong>收集器用作高级归纳</strong>——Collector会对元素应用一个转换函数，并且将结果累计在一个数据结构中，从而产生这一过程的最终输出</li>
-<li>收集器的功能：将流元素归约和汇总为一个值，元素分组，元素分区</li>
-</ul>
-<h2 id="归约和汇总"><a class="markdownIt-Anchor" href="#归约和汇总"></a> 归约和汇总</h2>
-<ul>
-<li>查找流中的最大值和最小值
-<ul>
-<li>两个收集器：Collectors.maxBy和Collectors.minBy来计算流中的最大值或最小值 接收器接收一个Comparator参数来比较流中的元素</li>
-</ul>
-</li>
-<li>汇总
-<ul>
-<li>汇总的工厂方法：Collectors.summingInt 接受一个把对象映射为求和所需int的函数，并返回一个收集器，该收集器在传递给普通的collect方法后执行汇总操作
-<ul>
-<li>Collectors.summingLong Collectors.summingDouble ——求和 averagingLong averagingDouble 计算平均值</li>
-<li><strong>summarizingInt summarizingLong summarizingLong方法 返回的收集器——可以得到元素个数，总和，平均值，最大值和最小值——返回IntSummaryStatistics类,LongSummaryStatistics类,DoubleSummaryStatistics类</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>连接字符串
-<ul>
-<li>joining工厂方法——对流中每一个对象引用toString方法得到的所有字符串连接成一个字符串
-<ul>
-<li>重载版本可以设置元素之间的分界符</li>
-<li>若类具有toString方法，则无需重新提取字符串</li>
-</ul>
-</li>
-<li><strong>joining在内部使用了StringBuilder来把生成的字符串逐个追加起来</strong></li>
-</ul>
-</li>
-<li>广义的归约汇总
-<ul>
-<li>Collectors.reducing方法使所有特殊情况的一般化</li>
-<li>三个参数
-<ul>
-<li>第一个参数使归约操作的起始值，也是流中没有元素的返回值</li>
-<li>第二个参数</li>
-<li>第三个参数使BinaryOperator，将两个项目累积成一个同类型的值</li>
-</ul>
-</li>
-<li>单参数形式
-<ul>
-<li>三个参数形式的特殊情况</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h2>
-<ul>
-<li><strong>Collectors.groupingBy工厂方法可以实现分类操作</strong>，其参数为一个分类函数，分组的结果保存在一个Map中</li>
-<li>多级分类：
-<ul>
-<li><strong>双参数版本的Collectors.groupingBy可以实现多级分类</strong>
-<ul>
-<li><strong>其传入参数除了普通的分类函数之外，还可以接受Collectors类型的第二个参数，利用内层groupingBy传递给外层groupingBy，其类型为二级标准</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>按子组收集数据：
-<ul>
-<li>Collectors.groupingBy的第二个参数可以使任意类型，如可以传递counting收集器作为参数统计数量</li>
-<li>单参数的groupingBy(f)实际上使groupingBy(f,toList())的简便写法</li>
-<li>将收集器的结果转换为另一种类型： Collectors.collectingAndThen工厂方法第一个参数为要转换的收集器，第二个参数为转换函数</li>
-<li>Collectors.mapping——该方法接受两个参数，一个函数对流中的元素进行转换，另一个将变换的结果收集起来</li>
-</ul>
-</li>
-</ul>
-<h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
-<ul>
-<li>分组的特殊情况：由一个谓词作为分类函数，称为分区函数，分区函数返回一个布尔值，得到的Map的键为Boolean类型</li>
-<li><strong>分区函数 partitioningBy——其传递的函数为分区函数</strong></li>
-<li>分区的好处：保留了分区函数返回true或False的两套流元素列表
-<ul>
-<li>partitioningBy——重载版本，第一个参数为分区函数，第二个参数为收集器</li>
-</ul>
-</li>
-<li>partitioningBy收集器也允许结合其他收集器使用，可以实现多级分区</li>
-</ul>
-<h2 id="收集器接口"><a class="markdownIt-Anchor" href="#收集器接口"></a> 收集器接口</h2>
-<ul>
-<li>Collector接口：T是流中要收集的项目的泛型，A是累加器的类型(累加器是在收集过程中用于累计部分结果的对象)，R是收集操作得到的对象的类型
-<ul>
-<li>建立新的结果容器：supplier方法</li>
-<li>将元素添加到结果容器：accumulator方法</li>
-<li>对结果容器应用最终转换：finisher方法</li>
-<li>合并两个结果容器：combiner方法</li>
-<li>characteristics方法——返回一个不可变的Characteristics集合，它定义了收集器的行为——尤其是关于流是否可以并行归约，以及可以使用哪些优化的提示，为三个项目的枚举
-<ul>
-<li>UNORDERED——归约结果不受流中项目的遍历和累积顺序的影响</li>
-<li>CONCURRENT——accumulator函数可以从多个线程同时调用，且该收集器可以并行归约流。如果收集器没有标为UNORDERED，那它仅在用于无序数据源时才可以并行归约</li>
-<li>IDENTITY_FINISH——这表明完成器方法返回的函数是一个恒等函数，可以跳过。这种情况下，累加器对象将会直接用作归约过程的最终结果。这也意味着，将累加器A不加检查地转换为结果R是安全的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>调用自定义实现Collector接口的类时，需要使用new方法进行实例化(toList是工厂方法，故不需要new进行实例化)</strong></li>
-<li><strong>可直接在重载的collect()方法中接受三个函数supplier,accumlator和combiner函数，实现上述操作</strong>
-<ul>
-<li><strong>第二个collect方法不能传递任何Characteristics，所以它永远都是一个IDENTITY_FINISH和CONCURRENT但并非UNORDERED的收集器</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>,<span class="title">A</span> <span class="title">R</span>&gt;</span>&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="并行数据处理与性能"><a class="markdownIt-Anchor" href="#并行数据处理与性能"></a> 并行数据处理与性能</h1>
-<h2 id="并行流"><a class="markdownIt-Anchor" href="#并行流"></a> 并行流</h2>
-<ul>
-<li>parallelStream 方法 ——将集合转换为并行流
-<ul>
-<li>并行流将内容分成多个数据块，并用不同的线程分别处理每个数据块的流</li>
-</ul>
-</li>
-<li>将顺序流转换为并行流
-<ul>
-<li>对顺序流调用parallel方法转换为并行流——函数的归约过程并行运行</li>
-<li>对并行流调用sequential方法转换为顺序流</li>
-<li><strong>iterate产生的是装箱的对象，必须拆箱成数字才能求和</strong></li>
-</ul>
-</li>
-<li>高效使用并行流
-<ul>
-<li>留意装箱</li>
-<li>留意数据结构是否易于分解</li>
-<li>ArrayList IntStream等 可分解性极佳 &gt; HashSet TreeSet 分解性较好 &gt; LinkedList 原生Stream</li>
-</ul>
-</li>
-</ul>
-<h2 id="分支合并框架forkjoin框架"><a class="markdownIt-Anchor" href="#分支合并框架forkjoin框架"></a> 分支合并框架(Fork/Join框架)</h2>
-<ul>
-<li>以递归方式将可并行的任务拆分成更小的任务，然后将每个子任务的结果合并起来生成整体结果，把子任务分配给- ForkJoinPool(线程池)中的工作线程</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// R是并行化任务产生的结果类型</span></span><br><span class="line"><span class="comment">// 其唯一抽象方法为compute方法</span></span><br><span class="line">RecursiveTask&lt;R&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//伪代码</span></span><br><span class="line">compute()&#123;</span><br><span class="line">  <span class="keyword">if</span>(任务足够小或不可分)&#123;</span><br><span class="line">       顶序计算该任务</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      将任务分成两个子任务</span><br><span class="line">       递归调用本方法，拆分每个子任务，等待所有子任务完成</span><br><span class="line">        合并每个子任务的结果</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任务不产生返回结果</span></span><br><span class="line">RecursiveAction</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用分支/合并框架的最佳做法
-<ul>
-<li>对一个任务调用join方法会阻塞调用方，直到该任务做出结果**(有必要在两个子任务的计算都开始之后再调用它。否则，你得到的版本会比原始的顺序算法更慢更复杂，因为每个子任务都必须等待另一个子任务完成才能启动)**；</li>
-<li>不应该在RecursiveTask内部使用ForkJoinPool的invoke方法。相反，你应该始终直接调用compute或fork方法，只有顺序代码才应该用invoke来启动并行计算；</li>
-<li>对子任务调用fork方法可以把它排进ForkJoinPool。同时对左边和右边的子任务调用它似乎很自然，但这样做的效率要比直接对其中一个调用compute低。这样做你可以为其中一个子任务重用同一线程，从而避免在线程池中多分配一个任务造成的开销；</li>
-<li>和并行流一样，你不应理所当然地认为在多核处理器上使用分支/合并框架就比顺序计算快。我们已经说过，一个任务可以分解成多个独立的子任务，才能让性能在并行化时有所提升</li>
-</ul>
-</li>
-</ul>
-<h2 id="spliterator"><a class="markdownIt-Anchor" href="#spliterator"></a> Spliterator</h2>
-<ul>
-<li>Java8中引入的一个新接口，为可分迭代器，用于遍历数据源中的元素，但其为了并行执行、</li>
-<li>tryAdvance方法的行为类似于普通的Iterator，按顺序一个一个使用Spliterator中的元素，并且如果还有其他元素要遍历就返回true</li>
-<li>trySplit是专为Spliterator接口设计的，可以把一些元素划出去分给第二个Spliterator（由该方法返回），两个并行处理</li>
-<li>Spliterator还可通过estimateSize方法估计还剩下多少元素要遍历，因为即使不那么确切，能快速算出来是一个值也有助于让拆分均匀一点</li>
-<li>Spliterator接口声明的最后一个抽象方法是characteristics，它将返回一个int，代表Spliterator本身特性集的编码</li>
-<li>拆分过程：递归过程拆分直至调用trySplit方法返回null，受Spliterator本身特性影响，该特性通过characteristics方法声明</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Spliterator</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAdvance</span><span class="params">(Consumer&lt;?<span class="keyword">super</span> T&gt;action)</span></span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="function"><span class="keyword">long</span> <span class="title">estimateSize</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">charactenstics</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<h1 id="默认方法"><a class="markdownIt-Anchor" href="#默认方法"></a> 默认方法</h1>
-<ul>
-<li>Java8允许在接口内声明静态方法，同时引入了<strong>默认方法</strong>，通过默认方法可以指定接口方法的默认实现</li>
-<li>Java的类只能继承单一的类，但一个类可以实现多接口</li>
-<li>可以使用代理有效地规避代码复用的复杂性，即创建一个方法通过该类的成员变量直接调用该类的方法
-<ul>
-<li><mark>为什么有的时候我们发现有些类被刻意地声明为final类型：</mark>
-<ul>
-<li>声明为final的类不能被其他的类继承，避免发生这样的反模式，防止核心代码的功能被污染</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><mark>解决默认方法签名相同时产生的冲突问题(一个类使用相同的函数签名从多个地方（比如另一个类或接口）继承了方法)：</mark>
-<ul>
-<li>类中的方法优先级最高。类或父类中声明的方法的优先级高于任何声明为默认方法的优先级</li>
-<li>如果无法依据第一条进行判断，那么子接口的优先级更高：函数签名相同时，优先选择拥有最具体实现的默认方法的接口，即如果B继承了A，那么B就比A更加具体</li>
-<li>最后，如果还是无法判断，继承了多个接口的类必须通过显式覆盖和调用期望的方法，显式地选择使用哪一个默认方法的实现</li>
-</ul>
-</li>
-</ul>
-<h1 id="用optional取代null"><a class="markdownIt-Anchor" href="#用optional取代null"></a> 用Optional取代null</h1>
-<ul>
-<li>避免遇到NullPointerException异常</li>
-<li>Optional&lt;T&gt;
-<ul>
-<li>变量存在时，Optional类只是对类简单封装;</li>
-<li>变量不存在时，缺失的值会被建模成一个“空”的Optional对象，由方法Optional.empty()返回</li>
-</ul>
-</li>
-<li>创建Optional对象
-<ul>
-<li><strong>声明一个空的Optional</strong>：Optional.empty()静态方法——返回Optional类的特定单一实例</li>
-<li><strong>依据一个非空值创建Optional</strong>：Optional.of()静态方法——依据非空值创建一个Optional对象</li>
-<li><strong>可接受null的Optional</strong>：Optional.ofNullable()静态方法——创建一个允许null值得Optional对象</li>
-</ul>
-</li>
-<li>函数方法
-<ul>
-<li>map方法——使用map从Optional对象中提取和转换值；map操作会将提供的函数引用于流的每个元素，可以把Optional对象堪称一种特殊的集合数据（如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换。如果Optional为空，就什么也不做）</li>
-<li>flatMap方法——将两层的Optional对象转换为单一Optional对象，使用flatMap链接Optional对象</li>
-<li>get()——最简单但不安全，若变量存在返回封装的变量值，否则抛出NoSuchElementException异常</li>
-<li>orElse(T other)——允许在Optional对象不包含值时提供一个默认值</li>
-<li>orElseGet(Supplier&lt; ? extends T&gt; other)——Supplier方法只有在Optional对象不含值时才执行调用</li>
-<li>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)——遭遇Optional对象为空时都会抛出一个可定制的异常</li>
-<li>ifPresent(Consumer&lt;? super T&gt;)——在变量值存在时执行一个作为参数传入的方法，否则就不进行任何操作</li>
-<li>isPresent()——如果Optional对象包含值，该方法就返回true</li>
-<li>filter()——方法接受一个谓词作为参数；如果Optional对象的值存在，并且它符合谓词的条件，filter方法就返回其值；否则它就返回一个空的Optional对象</li>
-</ul>
-</li>
-</ul>
-<h1 id="新的日期和时间api"><a class="markdownIt-Anchor" href="#新的日期和时间api"></a> 新的日期和时间API</h1>
-<ul>
-<li>LocalDate
-<ul>
-<li>LocalDate.of()——创建一个LocalDate实例</li>
-<li>LocalDate.now()——从系统时钟中获取当前日期</li>
-<li>get()——传递TemporalField参数获取某个字段的值(ChronoField枚举实现了TemporalField接口)</li>
-<li>parse()静态方法——格式化一个日期或者时间对象</li>
-</ul>
-</li>
-<li>LocalTime
-<ul>
-<li>LocalTime.of()——创建LocalTIme实例</li>
-<li>getHour getMinute getSecond</li>
-<li>parse()静态方法——格式化一个日期或者时间对象</li>
-</ul>
-</li>
-<li>LocalDateTime
-<ul>
-<li>是LocalDate和LocalTime的合体，同时表示了日期和时间，但不带有时区信息</li>
-<li>of方法</li>
-<li>atTime()方法——传递日期对象或者时间对象创建</li>
-<li>toLocalDate或toLocalTime方法——提取LocalDate或LocalTime组件</li>
-</ul>
-</li>
-<li>Instant类
-<ul>
-<li>计算机角度的建模时间，表示一个持续时间段上某个点的单一大整型数</li>
-<li>ofEpochSecond()——传递一个代表秒数的值创建该类的实例
-<ul>
-<li>重载版本，接受第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整</li>
-</ul>
-</li>
-<li>now()——获取当前时刻的时间戳</li>
-</ul>
-</li>
-<li>Duration类和Period
-<ul>
-<li>Duration类静态方法between——传递两个LocalTimes对象，LocalDateTimes对象，Instant对象，获得两个对象之间的时间长短(秒和纳秒)</li>
-<li>Period类静态方法between——得到LocalDate之间的时长</li>
-</ul>
-</li>
-<li>使用TemporalAdjuster：with()——传递一个提供定制化选择的TemporalAdjuster对象，更加灵活的处理日期</li>
-<li>打印输出及解析日期-时间对象：
-<ul>
-<li>DateTimeFormatter类：创建格式器最简单的方法是通过静态方法和常量，BASIC_ISO_DATE和ISO_LOCAL_DATE- 为DateTimeFormatter类的预定义实例
-<ul>
-<li>parse()静态方法——使用同样的格式器解析字符串并重建该日期对象</li>
-<li>ofPattern()方法——创建某了Local的格式器</li>
-<li>DateTimeFormatterBuilder类提供更加复杂的格式器</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++新经典</title>
-    <url>/2021/11/20/C++%E6%96%B0%E7%BB%8F%E5%85%B8/</url>
-    <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
-<ul>
-<li>王建伟老师的《C++新经典》的学习笔记</li>
-</ul>
-<span id="more"></span>
-<hr>
-<h1 id="2-数据类型-运算符与表达式"><a class="markdownIt-Anchor" href="#2-数据类型-运算符与表达式"></a> 2 数据类型、运算符与表达式</h1>
-<h2 id="21-常量-变量-整型-实型和字符串"><a class="markdownIt-Anchor" href="#21-常量-变量-整型-实型和字符串"></a> 2.1 常量、变量、整型、实型和字符串</h2>
-<p>项目要先 <strong><mark>编译、链接、生成可执行程序</mark></strong> ，然后才能运行。</p>
-<h3 id="212-c语言的数据类型"><a class="markdownIt-Anchor" href="#212-c语言的数据类型"></a> 2.1.2 C语言的数据类型</h3>
-<p>其中包括：</p>
-<ul>
-<li>基础类型：数值类型（整型、浮点型）、字符类型</li>
-<li>构造类型：数组、结构体(struct)、共用体(union)、枚举类型(enum)</li>
-<li>指针类型</li>
-<li>void空类型</li>
-</ul>
-<p>其中在64位系统中，<mark>int、float类型为4字节，double、long、long long类型为8字节，一个字节为8位二进制数</mark></p>
-<h3 id="213-常量和变量"><a class="markdownIt-Anchor" href="#213-常量和变量"></a> 2.1.3 常量和变量</h3>
-<blockquote>
-<p>变量定义：<br>
-类型名 变量名[ = 变量初始值]<br>
-<em>使用[]包括的内容可以省略</em></p>
-</blockquote>
-<p><mark>变量必须先定义才可以使用</mark><br>
-<strong>变量命名方法：推荐第一个字符表示类型，用几个单词的组合表示含义，每个单词的第一个字符大写</strong></p>
-<h3 id="214-整型数据"><a class="markdownIt-Anchor" href="#214-整型数据"></a> 2.1.4 整型数据</h3>
-<ul>
-<li>八进制数：以0开头的数字</li>
-<li>十六进制：以0x开头的数字</li>
-</ul>
-<p>整型变量主要包括基本型int类型、长整型long int（简写为long）类型、无符号类型（unsigned），可以使用<mark>sizeof（）函数</mark>获取变量所占字节数。</p>
-<ul>
-<li>常量的类型的<strong>特殊写法</strong></li>
-<li>常数后加<mark>U或u</mark>，表示<mark>无符号整型类型存储</mark>，相当于unsigned int</li>
-<li>常数后加<mark>L或l</mark>，表示<mark>长整型</mark>存储，相当于long</li>
-<li>常数后加<mark>F或f</mark>，表示以<mark>浮点</mark>存储，相当于float</li>
-</ul>
-<h3 id="215-实型数据"><a class="markdownIt-Anchor" href="#215-实型数据"></a> 2.1.5 实型数据</h3>
-<p>实型数据是指实数，也称为<mark>浮点数</mark>，浮点数在内存中都是以<mark>指数形式</mark>存储。</p>
-<p><strong>如何区分float和double两种浮点数？</strong><br>
-精度不同，float在内存中一般占4字节，而double在内存中一般占8字节，float提供7位有效数字，而double提供15-16位有效数字。</p>
-<p><mark>给浮点数赋值0.51，但显示为0.509999990的原因？<br>
-Ans：计算机中，会把十进制数转换为二进制数保存，在查看时在转换为十进制数显示，在这中间存在着一些出发操作，会导致在二进制转换为十进制的过程中丢失精度</mark></p>
-<h3 id="216-字符型数据"><a class="markdownIt-Anchor" href="#216-字符型数据"></a> 2.1.6 字符型数据</h3>
-<p><strong>推荐单引号内只能放一个字符的规定</strong> ^3eb832</p>
-<p>字符变量<br>
-<mark>将一个字符常量放在字符变量中，实际上是以字符对应的ASCII码存储在内存中</mark><br>
-ACSII码，空格字符对应32、数字0对应48、A对应65、a对应97</p>
-<h3 id="217-字符串变量"><a class="markdownIt-Anchor" href="#217-字符串变量"></a> 2.1.7 字符串变量</h3>
-<p><a href="#216-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%95%B0%E6%8D%AE">跳转至该位置</a><br>
-规定，单引号包含单个字符串。<br>
-<strong>字符串变量为双引号包含一串字符</strong><br>
-<mark>'a’与&quot;a&quot;的区别？<br>
-'a’表示单个字符变量，在内存中只占一个字节，而&quot;a&quot;表示字符串变量，在内存中占两个字节</mark></p>
-<h3 id="219-数值型数据之间的混合运算"><a class="markdownIt-Anchor" href="#219-数值型数据之间的混合运算"></a> 2.1.9 数值型数据之间的混合运算</h3>
-<p>不同类型的数值型数据进行混合运算时，系统会尝试进行变量类型统一，然后再进行计算。<br>
-<mark>转换规则：</mark></p>
-<ul>
-<li>int转为unsigned转为long转为double，当类型不同时进行转换。</li>
-<li>char和short转换为int，float转换为double，<mark>强制转换，在该类型进行运算时，必须转为int或double类型，再进行计算</mark></li>
-</ul>
-<h2 id="22-算数运算符和表达式"><a class="markdownIt-Anchor" href="#22-算数运算符和表达式"></a> 2.2 算数运算符和表达式</h2>
-<h3 id="221-c语言的运算符"><a class="markdownIt-Anchor" href="#221-c语言的运算符"></a> 2.2.1 C语言的运算符</h3>
-<p>共13个大类，包括算数运算符、关系运算符、逻辑运算符、位运算符、赋值运算符、条件运算符、逗号运算符、指针运算符、求字节运算符、强制类型转换运算符、成员变量运算符、下标运算符、其他。</p>
-<h3 id="223-运算符优先级问题"><a class="markdownIt-Anchor" href="#223-运算符优先级问题"></a> 2.2.3 运算符优先级问题</h3>
-<p>单目运算符&gt;双目运算符&gt;三目运算符&gt;赋值运算符</p>
-<p>单目运算符、条件运算符、赋值运算符为从右到左结合，其他的为从左到右结合。</p>
-<h3 id="224-强制类型转换运算符"><a class="markdownIt-Anchor" href="#224-强制类型转换运算符"></a> 2.2.4 强制类型转换运算符</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&gt;表达式一般形式</span><br><span class="line">&gt;(类型名) (表达式名)</span><br></pre></td></tr></table></figure>
-<h3 id="225-自增和自减运算符"><a class="markdownIt-Anchor" href="#225-自增和自减运算符"></a> 2.2.5 自增和自减运算符</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">++i;  先加一再使用</span><br><span class="line">i++; 先使用再加一</span><br><span class="line">--i; 先减一再使用</span><br><span class="line">i--; 先使用再减一</span><br></pre></td></tr></table></figure>
-<p><mark>-i++ 表示-(i++);i+<ins>j表示(i</ins>) +j</mark></p>
-<h2 id="23-赋值运算符"><a class="markdownIt-Anchor" href="#23-赋值运算符"></a> 2.3 赋值运算符</h2>
-<p>赋值的原则:赋值符号的左右两边的数据类型应该相同,类型不同时可以使用强制转换符进行转换.<br>
-**逗号运算符的求解规则:先求解表达式1,再求解表达式2.</p>
-<hr>
-<h1 id="3-程序的基本结构和语句"><a class="markdownIt-Anchor" href="#3-程序的基本结构和语句"></a> 3 程序的基本结构和语句</h1>
-<h2 id="31-c语言的语句和程序的基本结构"><a class="markdownIt-Anchor" href="#31-c语言的语句和程序的基本结构"></a> 3.1 C语言的语句和程序的基本结构</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">continue</span>  结束本次循环,开始下次循环是否执行的判断</span><br><span class="line"><span class="keyword">break</span>    终止循环的执行或者跳出<span class="keyword">switch</span>语句</span><br></pre></td></tr></table></figure>
-<h3 id="312-程序的三种基本结构"><a class="markdownIt-Anchor" href="#312-程序的三种基本结构"></a> 3.1.2 程序的三种基本结构</h3>
-<ul>
-<li>顺序结构</li>
-<li>选择结构</li>
-<li>循环结构
-<ul>
-<li>当型循环:先判断再执行</li>
-<li>直到型循环:先执行再判断</li>
-</ul>
-</li>
-</ul>
-<h2 id="32-数据的输出与输入"><a class="markdownIt-Anchor" href="#32-数据的输出与输入"></a> 3.2 数据的输出与输入</h2>
-<ul>
-<li><mark>当使用尖括号&lt;&gt;包括头文件时,表示在系统目录中寻找头文件</mark></li>
-<li><mark>当使用双引号&quot;&quot;包括头文件时,表示在源代码所在目录中搜索头文件,再到系统目录中搜索头文件</mark></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>()函数</span><br><span class="line"><span class="built_in">printf</span>(格式控制字符串,输出表列)</span><br><span class="line">%d:表示以十进制输出数字</span><br><span class="line">%o:表示以八进制输出数字</span><br><span class="line">%x:表示以十六进制输出数字</span><br><span class="line">%u:以十进制输出无符号数字</span><br><span class="line">%c:表示输出一个字符</span><br><span class="line">%s:表示输出一个字符串.**字符串末尾有一个系统自动加入的’\<span class="number">0&#x27;</span>作为字符串结束标记,但输出显示不显示该字符**.</span><br><span class="line">%f:输出一个小数.==%x.yf表示以x宽度输出y位小数的数字==</span><br></pre></td></tr></table></figure>
-<p>百分号的输出方法:</p>
-<ol>
-<li>使用两个百分号输出</li>
-<li>使用%c输出‘%’</li>
-<li>使用%s输出“%”</li>
-</ol>
-<h3 id="322-数据的输入"><a class="markdownIt-Anchor" href="#322-数据的输入"></a> 3.2.2 数据的输入</h3>
-<p>在程序中,最好只使用一个getchar()输入,避免结束输入时,第二个getchar()函数读取回车符号,影响程序的正常预期.</p>
-<p><strong>scanf(格式控制字符串,地址表列);</strong></p>
-<ul>
-<li>第二个参数为地址表列,使用的是地址,不要忘记 &amp; 符号对变量取地址</li>
-<li>要注意输入与格式控制字符串形式相同</li>
-</ul>
-<hr>
-<h1 id="4-逻辑运算和判断选择"><a class="markdownIt-Anchor" href="#4-逻辑运算和判断选择"></a> 4 逻辑运算和判断选择</h1>
-<p><a href="#223-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E9%97%AE%E9%A2%98">跳转至该位置</a></p>
-<ul>
-<li>优先级顺序:算术运算符&gt;关系运算符&gt;赋值运算符</li>
-</ul>
-<p>逻辑运算符:</p>
-<ul>
-<li>&amp;&amp; 与运算符:同真为真,有假出假</li>
-<li>|| 或运算符:有真出真,同假为假</li>
-<li>! 非运算符:反转</li>
-</ul>
-<p>if()语句:</p>
-<ul>
-<li>if(判断表达式)语句;</li>
-<li>if(判断表达式)语句1; else 语句2;</li>
-<li>if(判断表达式1) 语句1; else if(判断表达式2) 语句2;······</li>
-</ul>
-<p>switch()语句:<br>
-注意<mark>break语句为跳出switch()结构终止该结构的运行,注意其使用的技巧</mark></p>
-<hr>
-<h1 id="5-循环控制"><a class="markdownIt-Anchor" href="#5-循环控制"></a> 5 循环控制</h1>
-<h2 id="51-goto语句"><a class="markdownIt-Anchor" href="#51-goto语句"></a> 5.1 goto语句</h2>
-<p>goto语句需要搭配==语句标号:==语句一起使用,goto 语句标号;为使用方式.</p>
-<p>主要用途:</p>
-<ul>
-<li>与if语句一起使用构成循环</li>
-<li>从循环体内跳转到循环体外(<strong>不建议使用</strong>)</li>
-<li><mark>goto语句不能跨函数使用</mark></li>
-</ul>
-<h2 id="52-while表达式-要执行的语句"><a class="markdownIt-Anchor" href="#52-while表达式-要执行的语句"></a> 5.2 while(表达式) 要执行的语句</h2>
-<h2 id="53-do-要执行的语句-while表达式"><a class="markdownIt-Anchor" href="#53-do-要执行的语句-while表达式"></a> 5.3 do 要执行的语句 while(表达式)</h2>
-<h2 id="54-for语句"><a class="markdownIt-Anchor" href="#54-for语句"></a> 5.4 for语句</h2>
-<p>for(表达式1(初始值);表达式2(结束条件);表达式3(变化量)) 内嵌的语句;</p>
-<ul>
-<li>表达式1省略,循环外需要初始化变量</li>
-<li>表达式2省略,需要使用break语句终止循环</li>
-<li>表达式3省略,需要在循环内改变循环量</li>
-<li>三个表达式都可以省略,但都需要对应的操作</li>
-<li>三个表达式都省略,且不加对应的操作,for(;😉{}相当于while(1){}</li>
-<li>表达式1可以设置其他变量初始化</li>
-<li>表达式3执行很多次,但表达式1只执行1次</li>
-</ul>
-<p><mark>break语句和continue语句的区别?<br>
-continue只结束本次循环,而不是结束整个循环,而break是结束整个循环</mark></p>
-<hr>
-<h1 id="6-数组"><a class="markdownIt-Anchor" href="#6-数组"></a> 6 数组</h1>
-<h2 id="61-一维数组"><a class="markdownIt-Anchor" href="#61-一维数组"></a> 6.1 一维数组</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">定义:</span><br><span class="line">类型说明 数组名\[常量表达式\]</span><br><span class="line"></span><br><span class="line">引用:</span><br><span class="line">数组名\[下标\]</span><br></pre></td></tr></table></figure>
-<h2 id="62-二维数组"><a class="markdownIt-Anchor" href="#62-二维数组"></a> 6.2 二维数组</h2>
-<p>在C语言中,二维数组的元素存放顺序为:按<strong>行</strong>存放<br>
-多维数组在内存中排列顺序:第一维下标变化最慢,最右边维度变化最快</p>
-<h2 id="63-字符数组"><a class="markdownIt-Anchor" href="#63-字符数组"></a> 6.3 字符数组</h2>
-<h3 id="633-字符串和字符串结束标记"><a class="markdownIt-Anchor" href="#633-字符串和字符串结束标记"></a> 6.3.3 字符串和字符串结束标记</h3>
-<p><mark>C语言中规定了一个字符串结束标记,用’\0’代表,如果一个字符串的第十个字符为‘\0’,则该字符串的长度为9个,即遇到‘\0’表示字符串结束,该字符前面的字符构成字符串.可见10个可见字符的字符串,其可见字符若每个占用一个字节,则整个字符串在内存中占用11个字节</mark><br>
-<strong>注意:设置字符串变量的时候需要考虑–字符串结束标记–,则需要可见字符串长度加一设置大小</strong><br>
-<mark>对于双引号包含的字符串,系统会自动往末尾添加一个’\0’,若人工添加也是可以的,若没有字符串结束标记也是可以的</mark></p>
-<h3 id="635-字符串处理函数"><a class="markdownIt-Anchor" href="#635-字符串处理函数"></a> 6.3.5 字符串处理函数</h3>
-<p>strcat(字符数组1,字符数组2);<br>
-把字符数组2连接到字符数组1的后面,存放在字符数组1中.<br>
-说明:</p>
-<ul>
-<li>字符数组必须足够大,能够容纳连接后的新字符串.</li>
-<li>连接前两个字符数组都包括字符结束标记,但连接时会自动删除字符数组1的字符结束标记</li>
-<li>连接后字符数组2没有变化</li>
-</ul>
-<p>strcpy(字符数组1,字符数组2);<br>
-把字符数组2复制到字符数组1中.<br>
-<mark>不能使用赋值语句对字符数组直接赋值,只能对单个字符进行赋值</mark></p>
-<p>strcmp(字符数组1,字符数组2);<br>
-字符串比较,若字符数组1&gt;字符数组2,使用的是ASCII码进行比较,返回一个正整数,相等返回0.</p>
-<p>strlen(字符数组);<br>
-返回字符串的长度,<mark>不包括字符结束标记</mark>.</p>
-<hr>
-<h1 id="7-函数"><a class="markdownIt-Anchor" href="#7-函数"></a> 7 函数</h1>
-<h2 id="71-函数的基本概念和定义"><a class="markdownIt-Anchor" href="#71-函数的基本概念和定义"></a> 7.1 函数的基本概念和定义</h2>
-<h3 id="712-函数的定义和返回值"><a class="markdownIt-Anchor" href="#712-函数的定义和返回值"></a> 7.1.2 函数的定义和返回值</h3>
-<p><strong>如果函数的实参和形参为数组名(数组名代表的是数组的首地址),则传递的是数组的首地址.</strong></p>
-<h2 id="72-函数调用的一般形式"><a class="markdownIt-Anchor" href="#72-函数调用的一般形式"></a> 7.2 函数调用的一般形式</h2>
-<p>函数声明的一般形式:</p>
-<blockquote>
-<p>返回类型 函数名(形参列表);</p>
-</blockquote>
-<ul>
-<li>==函数定义和函数声明的区别?
-<ul>
-<li>函数定义里面包含函数体,函数体中的代码确定了函数需要执行的功能,而函数声明,只是对一定义的函数进行说明,不包括函数体.函数声明可以提前指明该函数的参数类型、返回值类型等,让函数的调用者明确的知道这些信息.==</li>
-</ul>
-</li>
-<li><strong>C语言不允许嵌套定义函数,但可以嵌套调用函数</strong></li>
-<li>函数的递归调用:执行递归函数将反复调用其自身,每调用一次就进入新的一层,<strong>递归函数必须有结束条件</strong></li>
-</ul>
-<h3 id="723-递归调用的出口"><a class="markdownIt-Anchor" href="#723-递归调用的出口"></a> 7.2.3 递归调用的出口</h3>
-<p>利用递归调用计算阶乘例程:</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dg_jiecheng</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">int</span> result;</span><br><span class="line"> <span class="keyword">if</span>(n = <span class="number">1</span>)</span><br><span class="line"> &#123;</span><br><span class="line">  result = <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line"> &#123;</span><br><span class="line">  result = dg_jiecheng(n<span class="number">-1</span>)*n;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="733-递归调用的优缺点以及是否必须用递归"><a class="markdownIt-Anchor" href="#733-递归调用的优缺点以及是否必须用递归"></a> 7.3.3 递归调用的优缺点以及是否必须用递归</h3>
-<p>优点:代码简洁<br>
-缺点:</p>
-<ul>
-<li>理解起来困难</li>
-<li>若调用层次太深,调用栈可能会溢出</li>
-<li>效率和性能不高</li>
-</ul>
-<p><mark>汉诺塔问题:<br>
-大梵天创造世界时造了三根金钢石柱子，其中一根柱子自底向上叠着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。</mark><br>
-解决方法:</p>
-<ul>
-<li>使用递归调用方法.(将前n-1个盘子看成一个整体,递归调用函数,不断对可调动的盘子调动)</li>
-<li>TODO: 使用其他方法(之后详解).</li>
-</ul>
-<h2 id="74-数组作为函数参数"><a class="markdownIt-Anchor" href="#74-数组作为函数参数"></a> 7.4 数组作为函数参数</h2>
-<h3 id="742-数组名作为函数实参"><a class="markdownIt-Anchor" href="#742-数组名作为函数实参"></a> 7.4.2 数组名作为函数实参</h3>
-<ul>
-<li><strong>将数组名作为函数实参进行传递时,传递的是数组的首地址,此时函数中的形参也应该使用数组名(或者数组指针)</strong></li>
-<li><mark>称为地址传递,形参数组中的各个元素的值如果发生变化,等价于数组中的元素的值发生了相应的改变</mark></li>
-<li>实参为数组名,形参也应该为数组名</li>
-<li>实参数组与形参数组类型必须一致</li>
-<li>形参数组的大小可以不指定,即使指定也可以与实参数组大小不一致</li>
-</ul>
-<h3 id="743-用多维数组作为函数实参"><a class="markdownIt-Anchor" href="#743-用多维数组作为函数实参"></a> 7.4.3 用多维数组作为函数实参</h3>
-<p>形参数组在定义时,<mark>可以省略第一维的大小,但不可以省略第二维的大小</mark>.实参是多少行多少列,形参应该尽量和实参大小一致.</p>
-<h2 id="75-局部变量和全局变量"><a class="markdownIt-Anchor" href="#75-局部变量和全局变量"></a> 7.5 局部变量和全局变量</h2>
-<h3 id="751-局部变量"><a class="markdownIt-Anchor" href="#751-局部变量"></a> 7.5.1 局部变量</h3>
-<ul>
-<li>形参也是局部变量</li>
-<li>不同函数内部可以使用相同的变量名,之间互不干扰</li>
-<li>复合语句(用括号{}包括的语句),其中定义的参数为局部变量,生命周期只在定义的范围内生效</li>
-</ul>
-<h3 id="752-全局变量"><a class="markdownIt-Anchor" href="#752-全局变量"></a> 7.5.2 全局变量</h3>
-<ul>
-<li><strong>如果某个函数想引用在它后面定义的全局变量,可以使用<mark>extern</mark>做外部变量说明.<mark>在进行外部变量说明时,不可以进行赋值操作.</mark></strong></li>
-<li>严格区分外部变量和全局变量说明:
-<ul>
-<li>全局变量定义只能有一次,位于所有函数之外,定义时即分配内存.</li>
-<li>外部变量,可以在一个文件中可以声明很多次.</li>
-</ul>
-</li>
-<li>同一个源文件中,局部变量和全局变量同名,则在局部变量的作用范围内,全局变量不生效.</li>
-<li>如果在一个源程序文件中定义的全局变量想在项目其他源文件中使用,则需要在其他需要使用的源文件中添加extern关键字做外部变量声明即可使用.</li>
-</ul>
-<h2 id="76-变量的存储和引用与内部和外部函数"><a class="markdownIt-Anchor" href="#76-变量的存储和引用与内部和外部函数"></a> 7.6 变量的存储和引用与内部和外部函数</h2>
-<p>程序在内存中的存储空间分为程序代码区、静态存储区、动态存储区</p>
-<ul>
-<li>全局变量存储在静态存储区</li>
-<li>函数形参、局部变量、函数调用时的现场数据和返回地址存储在动态存储区</li>
-</ul>
-<h3 id="762-局部变量的存储方式"><a class="markdownIt-Anchor" href="#762-局部变量的存储方式"></a> 7.6.2 局部变量的存储方式</h3>
-<p>局部变量声明为<mark>局部静态变量</mark>时,需要添加<mark>static</mark>关键字,则在函数调用结束后,该局部变量<mark>不会被释放</mark>.</p>
-<ul>
-<li>在静态存储区中分配内存,程序在整个运行期间不会释放</li>
-<li>局部静态变量在编译时<mark>赋初值</mark>,且<mark>只赋一次初值.之后调用函数时,不再进行赋初值操作,只是保留上一次运行结束的值</mark></li>
-<li>定义局部静态变量时,如果不赋初值,则==编译时,自动赋初值为0.</li>
-<li>虽然局部静态变量在函数调用结束后依然存在,但在其他函数中不能引用</li>
-<li>局部静态变量长期占用内存</li>
-<li><strong>如非必要,不要过多使用局部静态变量</strong></li>
-</ul>
-<h3 id="763-全局变量跨文件使用"><a class="markdownIt-Anchor" href="#763-全局变量跨文件使用"></a> 7.6.3 全局变量跨文件使用</h3>
-<p><a href="#752-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F">跳转至该位置</a><br>
-跨文件使用的全局变量extern用法,<mark>一般放在程序的开头部分</mark></p>
-<p>若需要全局变量,只能<mark>在本文件中使用</mark>,则需要在该全局变量声明时,添加==static<br>
-==关键字声明为静态全局变量</p>
-<h3 id="764-函数跨文件使用"><a class="markdownIt-Anchor" href="#764-函数跨文件使用"></a> 7.6.4 函数跨文件使用</h3>
-<p>内部函数定义:只能在本文件中使用(需要添加<mark>static</mark>关键字)</p>
-<blockquote>
-<p>static 返回类型 函数名 (形参列表){…}</p>
-</blockquote>
-<h3 id="765-static关键字用法总结"><a class="markdownIt-Anchor" href="#765-static关键字用法总结"></a> 7.6.5 static关键字用法总结</h3>
-<ul>
-<li>局部变量  <a href="#762-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F">跳转至该位置</a></li>
-<li>全局变量,只在本文件中使用   <a href="#763-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E8%B7%A8%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8">跳转至该位置</a></li>
-<li>内部函数   <a href="#764-%E5%87%BD%E6%95%B0%E8%B7%A8%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8">跳转至该位置</a></li>
-</ul>
-<hr>
-<h1 id="8-编译预处理"><a class="markdownIt-Anchor" href="#8-编译预处理"></a> 8 编译预处理</h1>
-<p>C语言提供的三种预处理操作:</p>
-<ul>
-<li>宏定义</li>
-<li>文件包含</li>
-<li>条件编译</li>
-</ul>
-<h2 id="81-宏定义"><a class="markdownIt-Anchor" href="#81-宏定义"></a> 8.1 宏定义</h2>
-<ul>
-<li>宏名一般使用<mark>大写字母</mark>表示</li>
-<li>#define的有效范围到程序文件结束的部分,不可跨文件使用</li>
-<li>可以使用\undef结束宏定义的作用域</li>
-</ul>
-<h3 id="812-带参数的宏定义"><a class="markdownIt-Anchor" href="#812-带参数的宏定义"></a> 8.1.2 带参数的宏定义</h3>
-<p>一般形式:</p>
-<blockquote>
-<p>#define 宏名(参数表) 被替换的内容<br>
-作用:用右边的“被替换的内容”代替“宏名(参数表)”</p>
-</blockquote>
-<ul>
-<li>
-<p>对一般形式中提到的“被替换的内容”,要从左到右处理</p>
-</li>
-<li>
-<p>如果“被替换的内容”中有“宏名”后列出的形参,则程序代码中相应的实参代替形参.</p>
-</li>
-<li>
-<p>如果“被替换的内容”的项并不是“宏名”后列出的形参,则保留.</p>
-</li>
-<li>
-<p>一般在形参外面加一个括号</p>
-</li>
-<li>
-<p>宏定义时,宏名和带参数的括号之间不能加空格</p>
-</li>
-<li>
-<p>函数调用是先求实参表达式的值,然后传递给形参;带参数的宏只进行简单的替换,展开时不求值</p>
-</li>
-<li>
-<p>宏展开只占用编译时间,不占用运行时间;函数调用占用运行时间,不占用编译时间.</p>
-</li>
-</ul>
-<h2 id="82-文件包含和条件编译"><a class="markdownIt-Anchor" href="#82-文件包含和条件编译"></a> 8.2 文件包含和条件编译</h2>
-<h3 id="821-文件包含"><a class="markdownIt-Anchor" href="#821-文件包含"></a> 8.2.1 文件包含</h3>
-<p>常把一些宏定义,函数说明,甚至一些公共的#include命令、外部变量说明(extern)等,都可以写到一个.h文件中,然后在源程序中#include这个头文件即可<br>
-#include头文件允许<mark>文件嵌套</mark>使用</p>
-<h3 id="822-条件编译"><a class="markdownIt-Anchor" href="#822-条件编译"></a> 8.2.2 条件编译</h3>
-<blockquote>
-<p>#ifdef 标示符<br>
-程序段1<br>
-#else<br>
-程序段2<br>
-#endif</p>
-</blockquote>
-<p>或</p>
-<blockquote>
-<p>#ifndef 标示符<br>
-程序段1<br>
-#else<br>
-程序段2<br>
-#endif</p>
-</blockquote>
-<p>或</p>
-<blockquote>
-<p>#if 表达式<br>
-程序段1<br>
-#else<br>
-程序段2<br>
-#endif</p>
-</blockquote>
-<p>或</p>
-<blockquote>
-<p>#if 表达式1<br>
-程序段1<br>
-#elif 表达式2<br>
-程序段2<br>
-#else<br>
-程序段3<br>
-#endif</p>
-</blockquote>
-<hr>
-<h1 id="9-指针"><a class="markdownIt-Anchor" href="#9-指针"></a> 9 指针</h1>
-<p><mark>在常见的X86、X64平台下,int类型占4字节,char占1字节,float占4字节,double占8字节</mark><br>
-<strong>在x86平台下,整型指针变量占用4字节地址,而x64平台下,整型指针变量占用8字节地址</strong></p>
-<ul>
-<li>指针变量:用于存储另一个变量的地址</li>
-<li>指针变量的值:为另一个变量的地址</li>
-<li><mark>指针就是一个地址,指针变量就是存储其他变量地址的量</mark></li>
-</ul>
-<!-- more -->
-<h2 id="92-变量的指针和指向变量的指针变量"><a class="markdownIt-Anchor" href="#92-变量的指针和指向变量的指针变量"></a> 9.2 变量的指针和指向变量的指针变量</h2>
-<p>定义指针变量:</p>
-<blockquote>
-<p>类型标识符 * 标识符;</p>
-</blockquote>
-<ul>
-<li>在定义指针变量时,指针变量前面具有*,表示正在定义一个指针变量,但在使用该指针变量时,指针前面的*是没有的</li>
-<li>一个指针变量只能指向同一个类型的变量</li>
-</ul>
-<p>引用指针变量:</p>
-<ul>
-<li>&amp; 取地址运算符</li>
-<li>* 指针运算符(间接访问运算符)</li>
-</ul>
-<p>==*p1++ 从右到左结合,等价于*(p1++)</p>
-<ul>
-<li>要注意将指针作为函数参数传入函数后,操作指针<mark>可能会导致指针指向发生变化,但实际指向的变量并没有发生变化</mark>(例教材P139)</li>
-<li>可以间接在函数中改变指针变量所指向的变量的值,从而实现<mark>在调用函数内改变外部变量的值</mark></li>
-</ul>
-<h2 id="93-数组的指针和指向数组的指针变量"><a class="markdownIt-Anchor" href="#93-数组的指针和指向数组的指针变量"></a> 9.3 数组的指针和指向数组的指针变量</h2>
-<p><strong>数组名等于数组首地址(数组第一个元素的地址),所以数组名a等效于&amp;a[0]</strong><br>
-指向数组的指针变量,<mark>可以带下标</mark>,如p[i]与*(p +i)等效,等效于数组a的a[i]变量</p>
-<p><mark>*(p++)与*(++p)的区别?<br>
-++在变量p的后面,表示先用再加,<ins>在变量p的前面表示先加再用;<br>
-若p指向a[0],则*(p</ins>)表示先用后加,则使用时,p指向a[0],当使用结束后p指向a[1]</mark></p>
-<h3 id="935-指向多维数组的指针和指针变量探究"><a class="markdownIt-Anchor" href="#935-指向多维数组的指针和指针变量探究"></a> 9.3.5 指向多维数组的指针和指针变量探究</h3>
-<p>二维数组:</p>
-<ul>
-<li>a 为二维数组名,数组首地址,第0行首地址</li>
-<li>a + 1,表示第1行首地址</li>
-<li>a[0],&amp;a[0][0],<em>a,</em>(a+0),&amp;a[0] 表示第0行首<mark>地址</mark>(第0行第0列元素地址)</li>
-<li>a[0]+1,&amp;a[0][1],*a+1 表示第0行第1列元素<mark>地址</mark></li>
-<li><em>(a[0] +1),a[0][1],</em>(*a +1) 表示第0行第1列<mark>元素值</mark></li>
-</ul>
-<h3 id="936-指针数组和数组指针"><a class="markdownIt-Anchor" href="#936-指针数组和数组指针"></a> 9.3.6 指针数组和数组指针</h3>
-<ol>
-<li>指针数组<br>
-int * p[10]<br>
-表示数组,但是数组的元素都是指针.</li>
-<li>数组指针<br>
-int <a href="10">*p</a>;<br>
-<mark>数组指针是指向数组地址的指针，其本质为指针；<br>
-指针变量,名称为p,表示这个指针变量用来指向含有10个元素的一维数组</mark></li>
-</ol>
-<p><strong>指向一维数组的指针变量</strong><br>
-设一维数组为a[n],<br>
-<strong>定义方法：*指针变量名 (即*P</strong>)</p>
-<p><strong>指向二维数组的指针变量</strong><br>
-设二维数组为a[m][n],<br>
-<strong>定义方法：<a href="%E9%95%BF%E5%BA%A6">*指针变量名</a> (即（*P）[n]</strong>)<br>
-<strong>“长度”表示二维数组分解为多个一维数组时，一维数组的长度，也就是二维数组的列数。</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//数组指针:</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>, <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>&#125;;</span><br><span class="line"><span class="built_in"><span class="keyword">int</span></span> (*p) [<span class="number">4</span>];</span><br><span class="line">p= (<span class="built_in"><span class="keyword">int</span></span>(*) [<span class="number">4</span>])a;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++) <span class="built_in">printf</span>(<span class="string">&quot;&amp;d&quot;</span>,p[i][j]); <span class="comment">//或者*(* (p+i) +j)或者* (p[li]+j)</span></span><br><span class="line">      <span class="built_in">printf</span> (<span class="string">&quot;\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//指针数组:</span></span><br><span class="line"><span class="keyword">int</span> ix=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>, <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>);</span><br><span class="line"><span class="keyword">int</span> *p[<span class="number">3</span>] ;</span><br><span class="line"><span class="keyword">for</span> (ix;ix&lt;<span class="number">3</span>;ix++) p[ix]-a[ix];</span><br><span class="line"><span class="keyword">for</span> (i;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)<span class="comment">//注意这里的j要赋值等于0，要不然只能输出第一-行1234, 达不到预期的效果</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="built_in">printf</span> (<span class="string">&quot;8d&quot;</span>,p[i][j]); <span class="comment">//或者 * (* (p+i) +j)或者* (p[i]+j)</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="937-多维数组的指针作为函数参数"><a class="markdownIt-Anchor" href="#937-多维数组的指针作为函数参数"></a> 9.3.7 多维数组的指针作为函数参数</h3>
-<p>一维数组的地址可以作为函数参数传递,多维数组的地址也可以作为函数参数传递<br>
-<strong>C语言中,对于字符串常量会在内存中开辟一块专门的地址用来存放字符串常量,这段内存是只读的,不可以进行修改</strong></p>
-<h2 id="95-函数指针和返回指针值的函数"><a class="markdownIt-Anchor" href="#95-函数指针和返回指针值的函数"></a> 9.5 函数指针和返回指针值的函数</h2>
-<p>指针变量指向函数,从而可以通过指针来调用所指向的函数</p>
-<p>定义:</p>
-<blockquote>
-<p>数据类型标识符 ( * 指针变量名) (形参列表);<br>
-指针变量名 = 函数名;  //进行赋值,将函数的地址赋值给指针</p>
-</blockquote>
-<ul>
-<li>int *p(int x, int y);  表示这个函数的返回值是指向整型变量的指针,表示定义返回整型指针的函数</li>
-<li>int (* p)(int x, int y);  表示p指针指向函数,表示函数指针</li>
-</ul>
-<h3 id="952-把指向函数的指针变量作为函数参数"><a class="markdownIt-Anchor" href="#952-把指向函数的指针变量作为函数参数"></a> 9.5.2 把指向函数的指针变量作为函数参数</h3>
-<p><strong>指向函数的指针变量可以作为参数,从而实现函数地址的传递,也就是将函数地址传递给形参.</strong><br>
-用函数指针变量作为形参和实参可以方便的实现调用函数的切换,增强程序的灵活性和扩展性.</p>
-<h3 id="953-返回指针值的函数"><a class="markdownIt-Anchor" href="#953-返回指针值的函数"></a> 9.5.3 返回指针值的函数</h3>
-<p>一般定义形式:</p>
-<blockquote>
-<p>数据类型 * 函数名(参数列表){…}</p>
-</blockquote>
-<p><mark>在构造子函数时,需要注意局部变量的生命周期,避免因为局部变量被系统回收而造成程序崩溃(特别需要注意返回变量的引用)</mark></p>
-<h2 id="96-指针数组-指针的指针与main函数参数"><a class="markdownIt-Anchor" href="#96-指针数组-指针的指针与main函数参数"></a> 9.6 指针数组、指针的指针与main函数参数</h2>
-<p>指针数组定义:<br>
-<a href="#936-%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88">跳转至该位置</a></p>
-<blockquote>
-<p>类型标识符 * 数组名[长度]</p>
-</blockquote>
-<h3 id="963-指针数组作为main函数参数"><a class="markdownIt-Anchor" href="#963-指针数组作为main函数参数"></a> 9.6.3 指针数组作为main函数参数</h3>
-<p>main函数需要改造一下才可以接受系统传递进来的参数:</p>
-<blockquote>
-<p>int main(int argc, char * argv[])</p>
-</blockquote>
-<p>main函数接受两个参数:</p>
-<ul>
-<li>第一个参数是整型数据</li>
-<li>第二个参数是指针数组(作为函数形参)</li>
-</ul>
-<h2 id="97-本章小结"><a class="markdownIt-Anchor" href="#97-本章小结"></a> 9.7 本章小结</h2>
-<ul>
-<li>指针变量可以指向NULL(空),表示不指向任何有效内容</li>
-<li>void * 指针,为万能指针,可以指向任意数据类型</li>
-</ul>
-<hr>
-<h1 id="10-结构体与共用体"><a class="markdownIt-Anchor" href="#10-结构体与共用体"></a> 10 结构体与共用体</h1>
-<h2 id="101-结构体变量定义-引用与初始化"><a class="markdownIt-Anchor" href="#101-结构体变量定义-引用与初始化"></a> 10.1 结构体变量定义、引用与初始化</h2>
-<h3 id="1011-结构体类型定义"><a class="markdownIt-Anchor" href="#1011-结构体类型定义"></a> 10.1.1 结构体类型定义</h3>
-<blockquote>
-<p>struct 结构体名<br>
-{<br>
-成员列表<br>
-}</p>
-</blockquote>
-<h3 id="1012-结构变量的定义方法"><a class="markdownIt-Anchor" href="#1012-结构变量的定义方法"></a> 10.1.2 结构变量的定义方法</h3>
-<ul>
-<li>形式1:定义完结构类型后定义变量</li>
-</ul>
-<blockquote>
-<p>struct 结构体名 变量列表;</p>
-</blockquote>
-<ul>
-<li>形式2:定义结构类型时定义变量</li>
-</ul>
-<blockquote>
-<p>struct 结构体名<br>
-{<br>
-成员列表<br>
-}变量名列表;</p>
-</blockquote>
-<ul>
-<li>形式3:直接定义结构变量</li>
-</ul>
-<blockquote>
-<p>struct<br>
-{<br>
-成员列表<br>
-}变量名列表;</p>
-</blockquote>
-<p>说明:</p>
-<ul>
-<li>使用结构体,一般需要定义一个结构体类型,在定义结构变量</li>
-<li>结构体内可以套结构</li>
-<li>结构体内成员名可以和程序中的变量名相同</li>
-</ul>
-<h3 id="1013-结构体类型变量的引用"><a class="markdownIt-Anchor" href="#1013-结构体类型变量的引用"></a> 10.1.3 结构体类型变量的引用</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引用方式:</span></span><br><span class="line">结构体变量.成员名</span><br><span class="line"></span><br><span class="line">使用指针引用成员</span><br><span class="line">类型名 \*指针名 = &amp;结构体变量.成员名</span><br></pre></td></tr></table></figure>
-<h2 id="102-结构体数组和结构体指针"><a class="markdownIt-Anchor" href="#102-结构体数组和结构体指针"></a> 10.2 结构体数组和结构体指针</h2>
-<h3 id="1022-结构体指针"><a class="markdownIt-Anchor" href="#1022-结构体指针"></a> 10.2.2 结构体指针</h3>
-<p>定义:</p>
-<blockquote>
-<p>struct 结构体类型名 * 指针名;</p>
-</blockquote>
-<p>赋值:<br>
-<mark>只能指向一个结构体类型的变量,或者结构体类型数组中的某一个元素,不可以指向其中的具体成员</mark></p>
-<p>访问结构体变量成员</p>
-<ul>
-<li>使用结构体成员运算符“.”</li>
-<li>使用结构体成员运算符&quot;-&gt;&quot;</li>
-</ul>
-<p>如:</p>
-<blockquote>
-<p>struct students stu;<br>
-struct students *p;<br>
-p = &amp;stu;<br>
-(*ps).num = 1; <mark>(*的优先级比“.”低)</mark><br>
-ps -&gt; num =1;</p>
-</blockquote>
-<ul>
-<li><strong>可以使用指向结构体的指针作为函数参数</strong></li>
-</ul>
-<h2 id="103-共用体-枚举类型与typedef"><a class="markdownIt-Anchor" href="#103-共用体-枚举类型与typedef"></a> 10.3 共用体、枚举类型与typedef</h2>
-<h3 id="1031-共用体"><a class="markdownIt-Anchor" href="#1031-共用体"></a> 10.3.1 共用体</h3>
-<p><mark>共用体和结构体的区别?<br>
-共用体的成员会占用同一段内存,而结构体中的成员会占用不同的内存</mark></p>
-<p>定义:</p>
-<blockquote>
-<p>union 共用体名<br>
-{<br>
-成员列表<br>
-}变量列表;</p>
-</blockquote>
-<p><mark>共用体类型的定义和共用体变量的定义与结构体的定义和结构体变量的定义相似</mark><br>
-<mark>共用体成员共占一段内存,所以占用内存的大小等于所占用内存最大的成员的大小</mark><br>
-<mark>每个瞬间只有一个成员起作用,其他成员不起作用</mark></p>
-<h3 id="1032-枚举类型"><a class="markdownIt-Anchor" href="#1032-枚举类型"></a> 10.3.2 枚举类型</h3>
-<p>定义枚举类型:</p>
-<blockquote>
-<p>enum 枚举类型名<br>
-{<br>
-值<br>
-}变量列表;</p>
-</blockquote>
-<ul>
-<li>C语言会自动按照定义时的顺序规定它们的值,并且值是从0开始的.</li>
-<li>可以手动在定义枚举类型的时候设置默认的<mark>枚举常量的值</mark>,后面的枚举常量的值为前一个的值+1</li>
-<li>不可以将整数直接赋值给枚举变量,但使用强制类型转换是可以的(enum 枚举类型名);</li>
-</ul>
-<h3 id="1033-用typedef定义类型"><a class="markdownIt-Anchor" href="#1033-用typedef定义类型"></a> 10.3.3 用typedef定义类型</h3>
-<p>typedef是用于<mark>定义类型名</mark>的</p>
-<blockquote>
-<p>typedef 原类型名 新类型名;<br>
-习惯上,用typedef定义的类型名用大写字母表示</p>
-</blockquote>
-<hr>
-<h1 id="11-位运算"><a class="markdownIt-Anchor" href="#11-位运算"></a> 11 位运算</h1>
-<ul>
-<li><strong>1个字节是由8个二进制位组成的</strong></li>
-<li>&amp; 按位与</li>
-<li>| 按位或</li>
-<li>^ 按位异或:<mark>两个位相同,返回0,不同为1</mark></li>
-<li>~ 取反</li>
-<li>&lt;&lt; 左移</li>
-<li>&gt;&gt; 右移</li>
-</ul>
-<!-- more -->
-<p><mark>可以使用该代码定义位操作</mark></p>
-<blockquote>
-<p>#define BIT(X) (1&lt;&lt;(X)) 带参数的宏定义</p>
-</blockquote>
-<hr>
-<h1 id="12-文件操作"><a class="markdownIt-Anchor" href="#12-文件操作"></a> 12 文件操作</h1>
-<p>文本文件中,<mark>每个字节存放一个ASCII码,代表一个字符</mark></p>
-<p><strong>大端存储与小端存储?</strong></p>
-<ul>
-<li>
-<p>大端存储:低字节存储在高地址,高字节存储在低地址</p>
-</li>
-<li>
-<p>小端存储:低字节存储在低地址,高字节存储在高地址</p>
-</li>
-<li>
-<p>如果在文本文件中,以16进制保存数字,保存比较节省空间,但需要<mark>人工阅读</mark></p>
-</li>
-</ul>
-<h2 id="122-文件的打开-关闭-读写"><a class="markdownIt-Anchor" href="#122-文件的打开-关闭-读写"></a> 12.2 文件的打开、关闭、读写</h2>
-<p>文件在进行读写操作之前,必须先打开,在读写结束后,必须关闭文件</p>
-<p>文件打开:</p>
-<blockquote>
-<p>FILE * fp; //FILE为一个结构体,fp是指向结构体的指针(文件指针)<br>
-fp = fopen(文件名,文件使用方式);</p>
-</blockquote>
-<p>文件使用方式:</p>
-<ul>
-<li>
-<p>r 只读</p>
-</li>
-<li>
-<p>w 只写(文件存在,则清空重写,否则创建文件)</p>
-</li>
-<li>
-<p>a 追加(末尾追加)</p>
-</li>
-<li>
-<p>rb 只读(打开二进制文件)</p>
-</li>
-<li>
-<p>wb 只写(二进制文件)</p>
-</li>
-<li>
-<p>ab 追加(二进制文件)</p>
-</li>
-<li>
-<p>r+ 读写(打开文本文件)</p>
-</li>
-<li>
-<p>w+ 读写(创建文本文件)</p>
-</li>
-<li>
-<p>文件打开后,会返回一个位置指针(*char),代表当前从文件的哪个位置开始读写.</p>
-</li>
-<li>
-<p>文件不存在时<mark>fopen函数</mark>会返回<mark>空(NULL)</mark></p>
-</li>
-</ul>
-<p>文件关闭:</p>
-<blockquote>
-<p>fclose(文件指针);</p>
-</blockquote>
-<p><mark>文件关闭时,会将缓冲区的数据立即写到磁盘上</mark></p>
-<p>文件读写:</p>
-<ul>
-<li>fputc(ch,fp); //将ch写入磁盘文件中</li>
-<li>fgetc(fp); //从磁盘文件中读取一个字符</li>
-<li>feof(fp);  //判断文件是否结束(结束返回1,否则返回0)</li>
-</ul>
-<h2 id="123-将结构体写入二进制文件再读出"><a class="markdownIt-Anchor" href="#123-将结构体写入二进制文件再读出"></a> 12.3 将结构体写入二进制文件再读出</h2>
-<blockquote>
-<p>fwrite(butter, size, count, fp);<br>
-向文件写入数据<br>
-butter:指针或者地址(将要写入的数据)<br>
-size:写入文件的字节数<br>
-count:要写入多少size的数据项<br>
-fp:文件指针<br>
-返回值,如果fwrite失败,返回0,否则返回count值</p>
-</blockquote>
-<ul>
-<li>对于要写入的结构体,结构体成员中不要出现指针型成员(因为指针类型成员地址可能失效)</li>
-<li>可以使用==#pragma pack(1)设置代码对齐方式为1字节对齐,即不要对齐==,可以避免程序在Linux平台读数据出错</li>
-</ul>
-<blockquote>
-<p>fread(buffer,size,count,fp);<br>
-向文件读出数据<br>
-butter:指针或者地址(将要写入的数据)<br>
-size:写入文件的字节数<br>
-count:要写入多少size的数据项<br>
-fp:文件指针<br>
-返回值,如果fwrite失败,返回0,否则返回count值</p>
-</blockquote>
-<hr>
-<h1 id="13-c基本语言"><a class="markdownIt-Anchor" href="#13-c基本语言"></a> 13 C++基本语言</h1>
-<h2 id="131-语言特性-工程构成与可移植性"><a class="markdownIt-Anchor" href="#131-语言特性-工程构成与可移植性"></a> 13.1 语言特性、工程构成与可移植性</h2>
-<p>C语言是过程式的语言<br>
-C++为面向对象的语言,其与面向过程语言的最大区别是:在基于面向对象的程序设计中,额外应用了<mark>继承性和多态技术</mark></p>
-<p>面向对象的程序设计的优点:</p>
-<ul>
-<li>易维护</li>
-<li>易扩展</li>
-<li>模块化</li>
-</ul>
-<p>C++程序的头文件一般以.h居多,此外还有.hpp;<br>
-hpp文件一般来说就是把定义和实现都包含在一个文件中,可以有效的减少编译次数</p>
-<p><mark>C++为编译型语言<br>
-在程序执行前,需要一个专门的编译过程,将程序编译成二进制文件,执行的时候不需要重新编译,直接使用编译结果.</mark></p>
-<h2 id="132-命名空间简介与基本输入输出精解"><a class="markdownIt-Anchor" href="#132-命名空间简介与基本输入输出精解"></a> 13.2 命名空间简介与基本输入输出精解</h2>
-<p>命名空间就是为了防止名字冲突而引入的一种机制.</p>
-<p>定义:</p>
-<blockquote>
-<p>namespace 命名空间名<br>
-{<br>
-其他函数、<br>
-}</p>
-</blockquote>
-<p>访问:使用“::”作用域运算符</p>
-<blockquote>
-<p>命名空间名::实体名</p>
-</blockquote>
-<ul>
-<li>命名空间定义可以不连续,可以写在不同的位置,甚至可以写在不同的源文件中</li>
-<li>注意不同命名空间中相同的函数在同一个函数中调用,若冲突则:
-<ul>
-<li>要么不声明两个命名空间</li>
-<li>要么不同命名空间中的函数不要同名</li>
-<li>要么调用命名空间中的函数时添加“ 命名空间:: ”表达方式</li>
-</ul>
-</li>
-</ul>
-<h3 id="1322-基本输入输出"><a class="markdownIt-Anchor" href="#1322-基本输入输出"></a> 13.2.2 基本输入输出</h3>
-<p>C++中输入输出的标准库是iostream库(输入/输出流)</p>
-<ul>
-<li>std是标准库中的一个命名空间</li>
-<li>std::cout 是一个对象,为标准输出</li>
-<li>std::cin为基本输入</li>
-<li>&lt;&lt; 向左扎,为输出运算符,与std::cout结合表示将内容扎到cout中,表示将&lt;&lt;右侧的内容写到cout屏幕中</li>
-<li>std::endl 相当于函数指针.其作用为: 1. 输出换行符 2.刷新输出缓冲区,调用flush函数强制输出缓冲区中所有数据,然后把缓冲区中的数据清除</li>
-</ul>
-<p><mark>为什么要有输出缓冲区?<br>
-将数据临时保存到输出缓冲区,当缓冲区满了、或者程序执行到main函数的return正常结束时、或者使用std::endl函数(后面会调用flush()函数)等情况,程序一次性将数据写入磁盘,提升速递,降低内存消耗</mark></p>
-<p>注意&lt;&lt;符号为右结合性</p>
-<h2 id="133-auto-头文件防卫-引用与常量"><a class="markdownIt-Anchor" href="#133-auto-头文件防卫-引用与常量"></a> 13.3 auto、头文件防卫、引用与常量</h2>
-<h3 id="1331-局部变量和初始化"><a class="markdownIt-Anchor" href="#1331-局部变量和初始化"></a> 13.3.1 局部变量和初始化</h3>
-<p><mark>C++中,变量随时定义即可</mark>,不必像C语言中需要在函数开头定义</p>
-<p>在C++新标准中,<mark>可以使用“{}“对变量进行初始化</mark>.</p>
-<ul>
-<li>例如: int abc{5};</li>
-</ul>
-<p>==在C++中的新标准的好处:</p>
-<blockquote>
-<p>int abc = 3.5f; //编译成功,自动进行截断操作<br>
-int abc{3.5f}; //编译错误,语法报错<br>
-这样做数据不会被截断==</p>
-</blockquote>
-<p>同样也可以使用“()”对变量进行初始化操作</p>
-<h3 id="1332-auto关键字简介"><a class="markdownIt-Anchor" href="#1332-auto关键字简介"></a> 13.3.2 auto关键字简介</h3>
-<p>auto<mark>在C++11</mark>中的全新含义:变量的自动推断<br>
-变量的自动推断发生在编译期,所以在使用时不会造成程序的效率降低</p>
-<h3 id="1333-头文件防卫式声明"><a class="markdownIt-Anchor" href="#1333-头文件防卫式声明"></a> 13.3.3 头文件防卫式声明</h3>
-<p>为了避免重复定义头文件,在声明头文件时,需要添加头文件防卫式声明:</p>
-<blockquote>
-<p>#ifndef <strong>文件名</strong><br>
-#define <strong>文件名</strong><br>
-代码程序<br>
-#endif</p>
-</blockquote>
-<p>在每一个.h文件的#ifdef后面的定义的名字都不一样,不可以重名</p>
-<h3 id="1334-引用"><a class="markdownIt-Anchor" href="#1334-引用"></a> 13.3.4 引用</h3>
-<p>引用是为变量起的另一个名字,一般使用&quot; &amp; &quot;符号, 引用和原变量所占的内存是同一段内存(对初学者来说)<br>
-<mark>定义引用变量时必须进行初始化操作</mark></p>
-<blockquote>
-<p>引用数据类型 &amp; 变量名 = 被引用变量名称;  //==(引用变量必须绑定到变量或者对象上,不能绑定到常量上)</p>
-</blockquote>
-<ul>
-<li>&amp; 在=左侧表示引用</li>
-<li>&amp; 在=右侧表示取地址</li>
-</ul>
-<h3 id="1335-常量"><a class="markdownIt-Anchor" href="#1335-常量"></a> 13.3.5 常量</h3>
-<ol>
-<li>const常量<br>
-定义变量时,在前面添加const关键字,即为常量</li>
-<li>constexpr常量<br>
-在C++11中的新关键字,代表一个常量,表示<mark>在编译时进行求值,可以提升运行时的性能</mark></li>
-</ol>
-<ul>
-<li>在书写constexpr返回类型的函数时,需要格外注意:如
-<ul>
-<li>
-<ol>
-<li>在定义变量时,不可定义未初始化的变量(定义变量必须进行初始化操作)</li>
-</ol>
-</li>
-<li>2.传入constexpr函数的形参对应的实参必须为常量或常量表达式</li>
-<li>
-<ol start="2">
-<li>其中代码需要尽量简单</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>加了constexpr修饰的函数不但能用在常量表达式中,也能用在常规的函数调用中</li>
-</ul>
-<p><mark>常量表达式不可以强制转换得到</mark></p>
-<h2 id="134-范围for-new内存动态分配与nullptr"><a class="markdownIt-Anchor" href="#134-范围for-new内存动态分配与nullptr"></a> 13.4 范围for、new内存动态分配与nullptr</h2>
-<h3 id="1341-范围for语句"><a class="markdownIt-Anchor" href="#1341-范围for语句"></a> 13.4.1 范围for语句</h3>
-<p>范例：</p>
-<blockquote>
-<p>int v[]{12，13，14，15，16}；<br>
-for{auto x:v}   //此为范围for语句<br>
-{<br>
-代码;<br>
-}</p>
-</blockquote>
-<p><mark>此例多了一个复制的动作，可以使用引用避免复制，提高运行效率</mark></p>
-<blockquote>
-<p>for { auto &amp;x : v}</p>
-</blockquote>
-<p><mark>一般来说，一个容器只要内部支持begin和end成员函数用于返回一个迭代器，能够指向容器的第一个元素和末尾元素的后面，这种容器就饿可以支持范围for语句</mark></p>
-<h3 id="1342-动态内存分配问题"><a class="markdownIt-Anchor" href="#1342-动态内存分配问题"></a> 13.4.2 动态内存分配问题</h3>
-<p>C++中内存被分为<mark>5块区域</mark>：</p>
-<ol>
-<li>栈：局部变量创建时存储的位置</li>
-<li>堆：使用malloc/new申请，free/delete释放的区域</li>
-<li>全局/静态存储区</li>
-<li>常量存储区</li>
-<li>程序代码区</li>
-</ol>
-<ul>
-<li>内存分配和释放必须成对出现</li>
-<li>free和delete不可以重复调用</li>
-<li>new相较于malloc，new还进行一些额外的初始化工作；delete相较于free，delete还会进行一些额外的清理工作</li>
-</ul>
-<p><mark>堆和栈的区别：<br>
-栈空间有限，使用便捷；堆空间自由决定分配的内存大小。</mark></p>
-<ol>
-<li>malloc和free<br>
-在C语言中成对出现，用于在堆中分配内存<br>
-一般形式为：</li>
-</ol>
-<blockquote>
-<p>void * malloc(int NumBytes);<br>
-void free(void * Ptr)<br>
-malloc为向系统申请NumBytes字节的内存空间，分配成功返回被分配内存的指针，否则返回NULL空指针<br>
-free为回收指针Ptr对应的内存</p>
-</blockquote>
-<p>strcpy_s:为strcpy的安全版本，能够检测所容纳的元素是否越界。<br>
-2. new和delete<br>
-<mark>new和delete为运算符，不是和malloc和free一样的函数</mark><br>
-在C++中从堆中分配内存<br>
-new的使用方法：</p>
-<blockquote>
-<p>指针变量名 = new 类型标识符；<br>
-指针变量名 = new 类型标识符(初始值);<br>
-指针变量名 = new 类型标识符[内存单元个数];</p>
-</blockquote>
-<h3 id="1343-nullptr"><a class="markdownIt-Anchor" href="#1343-nullptr"></a> 13.4.3 nullptr</h3>
-<p>nullptr为<mark>C++11中引入的新关键字，表示“空指针”</mark></p>
-<p>typeid()函数用于取类型，其中name成员可打印出类型名</p>
-<p>==使用nullptr可以避免在整数和指针之间发生混淆</p>
-<ul>
-<li>NULL 其类型为int类型，其实就是0</li>
-<li>nullptr表示指针类型</li>
-<li><strong>NULL和nullptr会导致调用不同的重载函数</strong></li>
-<li>在实际中，对于<mark>指针的初始化</mark>，能用nullptr尽量使用nullptr</li>
-</ul>
-<h2 id="135-结构-权限修饰符与类简介"><a class="markdownIt-Anchor" href="#135-结构-权限修饰符与类简介"></a> 13.5 结构、权限修饰符与类简介</h2>
-<p>当形参类型使用引用时，在调用函数内所改变的值在主调函数中也会发生相应的改变。实参和形参代表的是同一段内存地址，在传递参数时不存在参数值的复制。</p>
-<p>在C++中，结构不仅可以定义成员变量，还可以定义成员函数（方法），可以使用对象名.成员函数名（实参列表）进行调用。</p>
-<h3 id="1352-public和private权限修饰符"><a class="markdownIt-Anchor" href="#1352-public和private权限修饰符"></a> 13.5.2 public和private权限修饰符</h3>
-<ul>
-<li>public为“公共”的，可以被外部访问，类似类的外部接口</li>
-<li>private为“私有”的，表示只能被该结构或者类内部定义的成员函数使用</li>
-<li>成员函数可以直接访问成员变量（不管成员变量是否为private都可以访问）</li>
-</ul>
-<p><mark>默认情况下，struct定义的结构，其内部的成员变量和成员函数都是public</mark></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> 结构类型名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  成员变量；</span><br><span class="line">  成员函数；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在C++中引入类的概念，<mark>使用class定义</mark><br>
-结构使用struct定义（与C语言一致）</p>
-<p><mark>类的某个变量成为对象，为类的实例化，类中间的成员函数称为方法</mark></p>
-<ul>
-<li>类的内部变量默认为private</li>
-<li>C++中<mark>结构的继承默认为public，而类的继承默认为private</mark></li>
-</ul>
-<h2 id="136-函数新特性-inline内联函数与const详解"><a class="markdownIt-Anchor" href="#136-函数新特性-inline内联函数与const详解"></a> 13.6 函数新特性、inline内联函数与const详解</h2>
-<h3 id="1361-函数回顾与后置返回类型"><a class="markdownIt-Anchor" href="#1361-函数回顾与后置返回类型"></a> 13.6.1 函数回顾与后置返回类型</h3>
-<ul>
-<li>在函数声明中，可以没有形参名</li>
-<li>在函数定义中，需要有形参类型和形参名，但<mark>若该形参不需要使用，可以不添加函数名，但是在调用是必须给出该位置的实参</mark></li>
-</ul>
-<p>后置返回类型：<br>
-在函数声明或定义中，把返回类型写在参数列表之后</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> 函数名(形参列表) -&gt; 函数返回类型;  <span class="comment">//函数声明</span></span><br></pre></td></tr></table></figure>
-<h3 id="1362-inline内联函数"><a class="markdownIt-Anchor" href="#1362-inline内联函数"></a> 13.6.2 inline内联函数</h3>
-<p>为避免函数调用消耗系统资源，解决函数体很小，调用频繁的函数消耗系统性能，使用inline关键字</p>
-<ul>
-<li>系统尝试将调用该函数的动作替换为函数的本体</li>
-<li>内联函数的定义写在头文件中</li>
-<li>inline函数应该尽量简单，避免循环、分支、递归调用等
-<ul>
-<li>可以将constexpr函数看为更加严格的内联函数（constexpr自带inline属性）</li>
-</ul>
-</li>
-</ul>
-<p>函数特殊写法：</p>
-<ul>
-<li>函数只可以被定义一次，但是可以<mark>声明很多次</mark></li>
-<li>在C++中，更加习惯使用<mark>引用类型的形参</mark>来代替使用指针类型的形参</li>
-<li>函数重载时，<mark>const关键字会被同名函数忽略</mark></li>
-</ul>
-<h3 id="1364-区别"><a class="markdownIt-Anchor" href="#1364-区别"></a> 13.6.4 区别</h3>
-<p><mark>const char * 、char const * 与char * const三者的区别</mark></p>
-<ul>
-<li>const char *p<br>
-定义一个常量指针p(p指向的内容不可以通过p来修改)</li>
-<li>char const *p<br>
-等价于const char *p</li>
-<li>char * const p<br>
-定义一个指针常量p(p不可以指向其他内容,但可以修改指向的目标中的内容)</li>
-</ul>
-<h3 id="1365-函数形参中带const"><a class="markdownIt-Anchor" href="#1365-函数形参中带const"></a> 13.6.5 函数形参中带const</h3>
-<p>如果<mark>不希望在函数中修改形参的值,建议形参使用常量引用</mark></p>
-<ul>
-<li>可以防止无意中修改了形参的值导致实参值被改变</li>
-<li>实参类型可以更加灵活<br>
-使用常量引用,不仅仅可以接收<mark>普通引用作为实参</mark>,还可以接收<mark>常量引用作为实参</mark></li>
-</ul>
-<h2 id="137-string类型"><a class="markdownIt-Anchor" href="#137-string类型"></a> 13.7 string类型</h2>
-<p>string<mark>位于std命名空间中,位于string头文件中</mark></p>
-<p>(string为一个对象)<br>
-定义和初始化:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;I love China&quot;</span>;</span><br><span class="line"><span class="function">string <span class="title">s3</span><span class="params">(<span class="string">&quot;I love China&quot;</span>)</span></span>;</span><br><span class="line">string s4 = s2;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">6</span>;</span><br><span class="line"><span class="function">string <span class="title">s5</span><span class="params">(num,<span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>常用操作:</p>
-<ul>
-<li>.empty()方法 :返回布尔量判断是否为空</li>
-<li>.size或.length方法 :返回字节数量</li>
-<li>s[n] :返回s中的第n个字符</li>
-<li>s1+s2  :字符串连接</li>
-<li>s1=s2 :字符串对象赋值</li>
-<li>s1==s2  :判断两个字符串是否相等</li>
-<li>s1 !=s2  :判断两个字符串是否不相等</li>
-<li>s.c_str()  :返回一个字符串s中的内容指针(==把string对象转换为C中的字符串样式)</li>
-<li>范围for语句 :for(auto&amp; x:s1)</li>
-</ul>
-<h2 id="138-vector类型"><a class="markdownIt-Anchor" href="#138-vector类型"></a> 13.8 vector类型</h2>
-<p>代表一个容器、集合、或者动态数组,可以将一堆相同类型的类对象放到vector容器中</p>
-<p>vector<mark>位于std命名空间中,vector头文件中</mark><br>
-定义:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector  &lt;类型&gt; 对象名; </span><br><span class="line"><span class="comment">//vector为类模版,&lt;&gt;是类模版的一个实例化过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//空vector</span></span><br><span class="line">vector &lt;string&gt; mystr;  <span class="comment">//可使用push_back向容器末尾添加数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//vector对象复制</span></span><br><span class="line">vector &lt;string&gt; <span class="built_in">mystr2</span>(mystr1);</span><br><span class="line">vector &lt;string&gt; mystr3 = mystr2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用初始化列表方式初始化</span></span><br><span class="line">vector &lt;string&gt; def = &#123;<span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定数量的元素</span></span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt; <span class="built_in">ijihe</span>(<span class="number">15</span>,<span class="number">-200</span>); <span class="comment">//创建15个int类型元素的集合,其中每个元素的值都为-200</span></span><br><span class="line"><span class="comment">//有元素数量的概念的初始化操作都使用()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><mark>vector容器不能用来装引用</mark>(引用只是一个别名,并不是一个对象)<br>
-<mark>一般使用()表示与元素数量相关的操作,用{}表示只与元素内容相关的内容</mark></p>
-<h3 id="1383-vector对象上的操作"><a class="markdownIt-Anchor" href="#1383-vector对象上的操作"></a> 13.8.3 vector对象上的操作</h3>
-<ul>
-<li>.empty   :判断是否为空</li>
-<li>.push_back()  :向vector末尾添加元素</li>
-<li>.size   :返回元素数量</li>
-<li>.clear  :移除所有元素,容器清空</li>
-<li>v[n]</li>
-<li>=,==,!=,</li>
-<li>范围for语句,在范围for语句中,<mark>不要改变vector的容量,增加、删除元素都不可以</mark></li>
-</ul>
-<h2 id="139-迭代器精彩演绎-失效分析及弥补-实战"><a class="markdownIt-Anchor" href="#139-迭代器精彩演绎-失效分析及弥补-实战"></a> 13.9 迭代器精彩演绎、失效分析及弥补、实战</h2>
-<p>在C<ins>中很少通过下标访问string或vector中的元素,通常使用迭代器访问<br>
-通过迭代器,可以读取容器中的元素值,修改容器中某个迭代器代表的元素的值,可以像指针一样使用</ins>,–等运算符进行元素访问</p>
-<p><strong>C++中每种容器都定义了迭代器类型,以vector容器举例:</strong><br>
-定义容器:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector &lt;<span class="keyword">int</span>&gt; iv = &#123;<span class="number">100</span>,<span class="number">200</span>,<span class="number">300</span>&#125;;</span><br><span class="line">vector &lt;<span class="keyword">int</span>&gt;::iterator iter; <span class="comment">//定义了一个迭代器iter</span></span><br></pre></td></tr></table></figure>
-<h3 id="1393-迭代器beginend-反向迭代器rbeginrend操作"><a class="markdownIt-Anchor" href="#1393-迭代器beginend-反向迭代器rbeginrend操作"></a> 13.9.3 迭代器begin,end、反向迭代器rbegin,rend操作</h3>
-<ol>
-<li>迭代器</li>
-<li>反向迭代器
-<ul>
-<li>rbegin:指向最后一个元素</li>
-<li>rend:指向第一个元素前面的位置</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// begin成员函数:返回一个迭代器类型</span></span><br><span class="line">iter = iv.<span class="built_in">begin</span>(); <span class="comment">//返回容器的迭代器,指向第一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// end成员函数:返回一个迭代器类型</span></span><br><span class="line"><span class="comment">// 一般起到一个标志作用,当iter走到了end位置,表示已经遍历完了容器里的所有元素</span></span><br><span class="line">iter = iv.<span class="built_in">end</span>(); <span class="comment">//指向末尾元素的下一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 经典写法:</span></span><br><span class="line"><span class="keyword">for</span>(vector &lt;<span class="keyword">int</span>&gt;::iterator iter = iv.<span class="built_in">begin</span>();iter != iv.<span class="built_in">end</span>();iter ++)&#123;...&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="1394-迭代器运算符"><a class="markdownIt-Anchor" href="#1394-迭代器运算符"></a> 13.9.4 迭代器运算符</h3>
-<ul>
-<li>*iter  //返回迭代器元素的引用</li>
-<li>++iter,–iter</li>
-<li>==,!=</li>
-<li>结构成员变量的引用</li>
-</ul>
-<h3 id="1395-const_iterator迭代器"><a class="markdownIt-Anchor" href="#1395-const_iterator迭代器"></a> 13.9.5 const_iterator迭代器</h3>
-<p>类似一个常量指针,<mark>若容器对象为常量对象,则必须使用const_iterator迭代器</mark><br>
-C++11中引入新的关键字,<mark>cbegin与cend返回常量迭代器(不管容器是否为常量容器)</mark></p>
-<h3 id="1396-迭代器失效"><a class="markdownIt-Anchor" href="#1396-迭代器失效"></a> 13.9.6 迭代器失效</h3>
-<p><mark>如果在一个使用了迭代器的循环中插入元素到容器,当插入元素后应立即跳出循环体,不应该继续使用带迭代器操作容器</mark></p>
-<p>容器清空:</p>
-<ol>
-<li>使用clear方法清除</li>
-<li>使用迭代器一个一个清除</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">while(!iv.empty())&#123;</span><br><span class="line"> auto iter = iv.cbegin();</span><br><span class="line"> iv.erase(iter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1310-类型转化static_cast-reinterpret_cast等"><a class="markdownIt-Anchor" href="#1310-类型转化static_cast-reinterpret_cast等"></a> 13.10 类型转化:static_cast、reinterpret_cast等</h2>
-<p>C风格的强制类型转化:</p>
-<ol>
-<li>(类型)待转换的内容;</li>
-<li>类型 (待转换的内容);</li>
-</ol>
-<p>C++中强制类型转换的<mark>通用形式</mark>:</p>
-<blockquote>
-<p>强制类型转换名 &lt;type&gt;(express);</p>
-</blockquote>
-<ol>
-<li>
-<p>static_cast :静态转换</p>
-<ul>
-<li>与C语言强制类型转换相似</li>
-<li>派生类转换为基类</li>
-<li>不可用于指针类型之间的转换</li>
-</ul>
-</li>
-<li>
-<p>dynamic_cast :在转换时会进行类型识别和检查</p>
-<ul>
-<li>主要用于父类转换为子类</li>
-</ul>
-</li>
-<li>
-<p>const_cast: 去除指针或者引用的const属性</p>
-<ul>
-<li>注意只能用于<mark>原先不是常量,后来转换为常量的变量的去除</mark>,(原先是常量的去除为为定义行为)</li>
-<li>const_cast不可以改变表达式的类型</li>
-</ul>
-</li>
-<li>
-<p>reinterpret_cast  :用来处理无关类型之间的转换</p>
-<ul>
-<li>可以将整型转换为指针、一个类型指针转换为另一个类型的指针</li>
-<li>可以将一个指针转换为整型<br>
-<mark>static_cast、reinterpret_cast可以替代C语言风格的类型转换</mark></li>
-</ul>
-</li>
-</ol>
-<hr>
-<h1 id="14-类"><a class="markdownIt-Anchor" href="#14-类"></a> 14 类</h1>
-<h2 id="141-成员函数-对象复制与私有成员"><a class="markdownIt-Anchor" href="#141-成员函数-对象复制与私有成员"></a> 14.1 成员函数、对象复制与私有成员</h2>
-<p>设计<mark>类</mark>思考的角度:</p>
-<ul>
-<li>站在设计和实现者的角度考虑,<mark>类的数据存储布局、必要的成员变量和成员函数</mark></li>
-<li>站在使用者的角度,<mark>可以访问的接口、对外开放仅供内部函数使用的接口</mark></li>
-<li>设计父类供子类继承时,如何设计父类</li>
-</ul>
-<p>类的成员主要包括:成员变量、成员函数等<br>
-访问类成员:</p>
-<ul>
-<li>使用“对象名.成员名”访问成员</li>
-<li>使用指向这个对象的指针访问: 指针名-&gt;成员名</li>
-</ul>
-<p>注意点:</p>
-<ul>
-<li>public修饰的成员可供外部访问,而private修饰的成员不可以被外部访问</li>
-<li><mark>class成员默认为private</mark>,而struct默认为public的</li>
-<li>建议:没有成员函数只有成员变量的数据结构使用struct;而有成员函数的数据结构一般使用class</li>
-</ul>
-<h3 id="1413-成员函数"><a class="markdownIt-Anchor" href="#1413-成员函数"></a> 14.1.3 成员函数</h3>
-<p><strong>类可以被定义多次,而全局变量只能被定义一次</strong><br>
-在C++中,若类定义和类实现放在不同文件时,其成员函数需要使用==“类名::成员函数名”==表明该成员函数为该类的成员函数(::为作用域运算符)<br>
-如：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 函数代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="1414-对象复制"><a class="markdownIt-Anchor" href="#1414-对象复制"></a> 14.1.4 对象复制</h3>
-<p>可以使用==”=“、”()“、”{}“、”={}“==符号实现对象的复制操作</p>
-<h2 id="142-构造函数详解-explicit与初始化列表"><a class="markdownIt-Anchor" href="#142-构造函数详解-explicit与初始化列表"></a> 14.2 构造函数详解、explicit与初始化列表</h2>
-<ul>
-<li>将成员函数的声明和实现都写在<mark>类的内部</mark>,称为成员函数的定义</li>
-<li>将成员函数的声明写在类的内部,外部的成员函数代码称为:“成员函数的实现”</li>
-</ul>
-<p>构造函数:与类名相同,系统会自动调用,<mark>目的就是为了初始化类对象的数据成员(成员变量)</mark></p>
-<ul>
-<li>构造函数<mark>无返回值</mark></li>
-<li>构造函数<mark>不可以手工调用,会发生程序错误</mark>,系统会自动调用</li>
-<li>正常情况下,构造函数<mark>声明为public</mark></li>
-<li>构造函数中含有的参数,在创建对象时需要给定相应的参数</li>
-<li>一个类可以存在多个构造函数，必须为该类对象的创建提供多种方法，多个构造函数需要在<mark>参数数量或者参数类型上有所不同</mark></li>
-</ul>
-<p>对象的复制会调用<mark>拷贝构造函数</mark></p>
-<h3 id="1424-函数默认参数"><a class="markdownIt-Anchor" href="#1424-函数默认参数"></a> 14.2.4 函数默认参数</h3>
-<p><mark>任何函数都可以有默认参数，对于传统函数，默认参数一般放在函数声明中，而不放在函数实现中，除非函数只有定义</mark></p>
-<ul>
-<li>对于类中的成员函数，默认参数写在类的成员函数声明中，一般写在.h文件中</li>
-<li>具有多个参数的函数中指定默认参数，默认参数必须出现在非默认参数的右侧，且默认参数必须给定默认值</li>
-</ul>
-<h3 id="1425-隐式转换和explicit"><a class="markdownIt-Anchor" href="#1425-隐式转换和explicit"></a> 14.2.5 隐式转换和explicit</h3>
-<p>在调用构造函数时，有可能会调用隐式转换。<br>
-可以要求<mark>构造函数不进行隐式转换</mark>，在函数声明中带有explicit（显式），则该构造函数只能用于初始化和显式类型转换</p>
-<blockquote>
-<p>explicit 构造函数名(形参列表);</p>
-</blockquote>
-<ul>
-<li>在类进行实例化<mark>调用explicit多参数构造函数</mark>时，若带有=号，则隐式类型转换失效（含有等号，表示进行了隐式初始化；<mark>省略等号，为显式初始化为直接初始化</mark>）</li>
-<li>调用explicit单参数构造函数，也只可以使用显式转换</li>
-<li><mark>在调用explicit构造函数时，使用{}进行初始化可以避免进行隐式类型转换而出错</mark></li>
-</ul>
-<h3 id="1426-构造函数初始化列表"><a class="markdownIt-Anchor" href="#1426-构造函数初始化列表"></a> 14.2.6 构造函数初始化列表</h3>
-<p>调用构造函数时，可以初始化成员变量的值（为冒号括号逗号式写法），位于构造函数的定义中，（这种写法<mark>只用于构造函数中</mark>）<br>
-例如：</p>
-<blockquote>
-<p>Time::Time(int tmphour, int tmpmin, int tmpsec)<br>
-:Hour(tmphour),Minute(tmpmin)  //构造函数初始化列表</p>
-</blockquote>
-<ul>
-<li>在书写带初始化列表的构造函数时，应避免某个成员变量（Minute）的值依赖某个成员变量的值（Hour），不可写成（Minute（Hour））</li>
-<li>使用构造函数初始化列表可以提升初始化效率（避免了调用成员变量相关类的各种特殊成员函数）</li>
-</ul>
-<h2 id="143-inline-const-mutable-this与static"><a class="markdownIt-Anchor" href="#143-inline-const-mutable-this与static"></a> 14.3 inline、const、mutable、this与static</h2>
-<h3 id="1431-在类定义中实现成员函数inline"><a class="markdownIt-Anchor" href="#1431-在类定义中实现成员函数inline"></a> 14.3.1 在类定义中实现成员函数inline</h3>
-<p>在类的定义中实现的成员函数会被当做inline内联函数处理<br>
-<a href="#1362inline%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0">跳转至该位置</a></p>
-<h3 id="1432-成员函数末尾的const"><a class="markdownIt-Anchor" href="#1432-成员函数末尾的const"></a> 14.3.2 成员函数末尾的const</h3>
-<p>在成员函数的末尾添加const为常量成员函数，表示<mark>该成员函数不会修改该对象内任何成员变量的值</mark>（不可以在该成员函数的实现中修改成员变量的值）<br>
-对于<mark>成员函数和实现代码分开的成员函数，不但要在成员函数的声明中增加const，也要在实现中增加const</mark></p>
-<h3 id="1433-mutable"><a class="markdownIt-Anchor" href="#1433-mutable"></a> 14.3.3 mutable</h3>
-<p><mark>被mutable修饰的成员变量，永远为可变状态，可被const常量成员函数修改</mark></p>
-<h3 id="1434-返回自身对象的引用this"><a class="markdownIt-Anchor" href="#1434-返回自身对象的引用this"></a> 14.3.4 返回自身对象的引用——this</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">声明：</span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line"> <span class="function">Time&amp; <span class="title">rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span>;  <span class="comment">//返回自身的引用</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Time&amp; <span class="title">Time::rtnhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Hour += tmphour;</span><br><span class="line"> <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>this在成员函数中为一个隐藏的函数参数，表示的时只想本对象的指针，而*this表示该指针指向的对象，即为本对象,*this为调用这个成员函数的对象</p>
-<ul>
-<li>编译器内的实际声明：</li>
-</ul>
-<blockquote>
-<p>Time&amp; Time::rtnhour(Time * const this, int tmphour){…}</p>
-</blockquote>
-<ul>
-<li>编译器内的实际调用：</li>
-</ul>
-<blockquote>
-<p>mytime.rtnhour(&amp;mytime,3);</p>
-</blockquote>
-<p><mark>this为一个指针常量，指向这个对象的本身，不可以再指向其他地方</mark><br>
-<a href="##1364-%E5%8C%BA%E5%88%AB">跳转至该位置</a></p>
-<ul>
-<li>this只可以在成员函数（普通成员函数以及特殊的成员函数中使用），不可以在全局函数、静态函数中使用this指针</li>
-<li>在普通成员函数中，this是一个<mark>非const对象的指针常量</mark></li>
-<li>在const成员函数中，this指针是<mark>指向一个const对象的指针常量</mark></li>
-</ul>
-<h3 id="1435-static成员"><a class="markdownIt-Anchor" href="#1435-static成员"></a> 14.3.5 static成员</h3>
-<p><a href="#765-static%E5%85%B3%E9%94%AE%E5%AD%97%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93">跳转至该位置</a></p>
-<p>static成员变量：不属于某个对象而<mark>属于整个类</mark></p>
-<ul>
-<li>
-<p>通过对象名修改了static成员变量的值，其他类对象中的相应值也发生改变</p>
-</li>
-<li>
-<p>普通成员变量在定义类对象时被分配内存，==静态成员变量在</p>
-</li>
-<li>
-<p>声明：<mark>在类内部声明</mark></p>
-</li>
-</ul>
-<blockquote>
-<p>static 类型 变量名；<br>
-static 返回类型 函数名(形参列表);</p>
-</blockquote>
-<ul>
-<li>初始化：(一般写在.cpp文件开头)</li>
-</ul>
-<blockquote>
-<p>//[]内内容可以省略，初始化时可不给初值,<mark>且实现时不需要写static关键字</mark><br>
-类型名 类::变量名 [= 值];<br>
-对象名.变量名 [=值];<br>
-类型名 类::静态成员函数名<br>
-对象名.静态成员函数名</p>
-</blockquote>
-<h2 id="144-类内初始化-默认构造函数-default-delete"><a class="markdownIt-Anchor" href="#144-类内初始化-默认构造函数-default-delete"></a> 14.4 类内初始化、默认构造函数、=default、=delete</h2>
-<h3 id="1441-类相关非成员函数"><a class="markdownIt-Anchor" href="#1441-类相关非成员函数"></a> 14.4.1 类相关非成员函数</h3>
-<p>与类有点关系，但不适合写在类内的函数，这种函数的定义可以放到该类成员函数实现的代码中</p>
-<h3 id="1442-类内初始值"><a class="markdownIt-Anchor" href="#1442-类内初始值"></a> 14.4.2 类内初始值</h3>
-<p>在C++11新标准中，<mark>可以为新成员提供一个类内的初始值，那么在创建成员的时候，这个初始值就会初始化该成员变量</mark>，对于没有初始值的成员变量，系统会默认赋值。<br>
-若在构造函数初始化列表或者在构造函数中赋值，该值会覆盖初始值</p>
-<h3 id="1443-const成员变量的初始化"><a class="markdownIt-Anchor" href="#1443-const成员变量的初始化"></a> 14.4.3 const成员变量的初始化</h3>
-<p>对于类的const成员，只能使用初始化列表进行初始化操作（或者在声明该const变量时进行初始化操作），<mark>不能在构造函数内部进行赋值操作</mark></p>
-<ul>
-<li>构造函数不可以声明为const类型</li>
-<li>在const变量完成初始化之后，该变量才具有const属性</li>
-</ul>
-<h3 id="1444-默认构造函数"><a class="markdownIt-Anchor" href="#1444-默认构造函数"></a> 14.4.4 默认构造函数</h3>
-<ul>
-<li>编译器会为一个类生成默认构造函数；<mark>若声明了一个构造函数，就不会自动生成其他的默认构造函数</mark></li>
-<li>一旦程序员书写了自己的构造函数，那么在创建对象时，<mark>必须提供与书写的构造函数形参相符合的实参</mark>，才能够成功创建对象</li>
-</ul>
-<h3 id="1445-defalue和delete"><a class="markdownIt-Anchor" href="#1445-defalue和delete"></a> 14.4.5 =defalue；和=delete</h3>
-<ol>
-<li>
-<p>=default<br>
-相当于为<mark>特殊函数</mark>自动生成函数体（等价与空函数体{}）<br>
-包括构造函数、拷贝构造函数等</p>
-</li>
-<li>
-<p>=delete<br>
-显式的禁止某个函数</p>
-</li>
-</ol>
-<h2 id="145-拷贝构造函数"><a class="markdownIt-Anchor" href="#145-拷贝构造函数"></a> 14.5 拷贝构造函数</h2>
-<p><a href="#1414-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6">跳转至该位置</a><br>
-默认情况下：类对象的复制就是每个成员变量的逐个复制<br>
-拷贝拷贝构造函数：用于类对象的复制<br>
-如果一个类的构造函数的第一个参数为所属类的类引用，若有额外的参数，那么这些额外的参数都有默认值，该构造函数的默认参数必须放在函数声明中（除非该构造函数没有函数声明），那么这个构造函数就是拷贝构造函数。</p>
-<blockquote>
-<p>类名::类名(const 类名&amp; 参数名，[其他形参列表]);</p>
-</blockquote>
-<ul>
-<li>const，拷贝构造函数的第一个参数都是带有const的</li>
-<li>explicit，（禁止隐式转换）
-<ul>
-<li>一般来说单参数的构造函数都声明为explicit以避免参数模糊不清的问题</li>
-<li>拷贝构造函数，一般<mark>不声明为explicit</mark></li>
-</ul>
-</li>
-</ul>
-<p>如果一个类没有自己的拷贝构造函数，那么编译器会合成一个拷贝构造函数，参考  <a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a><br>
-拷贝构造函数的成员变量的赋值操作可以成初始化列表进行  <a href="#1426-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8">跳转至该位置</a></p>
-<p>调用拷贝构造函数的情况：</p>
-<ul>
-<li>将对象作为实参传递给另一个非引用类型的形参（复制构造，效率低）</li>
-<li>从函数中返回一个对象(系统会将局部对象(临时对象)return出去,会调用拷贝构造函数)</li>
-<li>其他情况</li>
-</ul>
-<h2 id="146-重载运算符-拷贝赋值运算符与析构函数"><a class="markdownIt-Anchor" href="#146-重载运算符-拷贝赋值运算符与析构函数"></a> 14.6 重载运算符、拷贝赋值运算符与析构函数</h2>
-<h3 id="1461-重载运算符"><a class="markdownIt-Anchor" href="#1461-重载运算符"></a> 14.6.1 重载运算符</h3>
-<p><mark>运算符(==,!=,&gt;,&gt;=等)想要应用与类对象，需要对这些运算符进行重载（即以这些运算符为成员函数名定义成员函数实现功能）</mark><br>
-实现方式：operator关键字后面接这个运算符（本质为函数，需要有返回类型和参数列表）<br>
-<strong>赋值运算符编译器会帮助重载</strong></p>
-<ul>
-<li>重载==运算符</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bool</span> Time:<span class="keyword">operator</span>==(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">if</span>(Hour == t.Hour)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>重载=运算符</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time&amp; Time:<span class="keyword">operator</span>=(Time&amp; t)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">//....</span></span><br><span class="line"> <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="1462-拷贝赋值运算符赋值运算符"><a class="markdownIt-Anchor" href="#1462-拷贝赋值运算符赋值运算符"></a> 14.6.2 拷贝赋值运算符（赋值运算符）</h3>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
