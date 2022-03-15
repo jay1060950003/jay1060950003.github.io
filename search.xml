@@ -1,549 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Java8实战</title>
-    <url>/2022/03/02/Java8%E5%AE%9E%E6%88%98/</url>
-    <content><![CDATA[<h1 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> Lambda表达式</h1>
-<h2 id="行为参数化"><a class="markdownIt-Anchor" href="#行为参数化"></a> 行为参数化</h2>
-<ul>
-<li>一种软件开发模式，<mark>将代码块作为参数传递给另一个方法，稍后再去执行，方法的行为就基于那块代码被参数化了</mark></li>
-</ul>
-<h2 id="lambda表达式的三个部分参数列表箭头lambda主体"><a class="markdownIt-Anchor" href="#lambda表达式的三个部分参数列表箭头lambda主体"></a> Lambda表达式的三个部分:参数列表,箭头,Lambda主体</h2>
-<ul>
-<li>在函数式接口中使用Lambda接口
-<ul>
-<li>函数式接口就是只定义了一个抽象方法的接口,在该接口中可以拥有默认方法(即在类没有对方法进行实现时，其主体为方法提供默认实现的方法)</li>
-<li>Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例</li>
-<li><mark>@ FunctionalInterface 为函数式接口的标注, 抽象方法的签名称为函数描述符</mark></li>
-</ul>
-</li>
-<li>常用的函数式接口:
-<ul>
-<li>Predicate&lt;T&gt;  boolean test(T t)</li>
-<li>Consumer&lt;T&gt;   void accept(T t)</li>
-<li>Function&lt;T,R&gt;  R apply(T t)</li>
-<li>Supplier&lt;T&gt;</li>
-</ul>
-</li>
-<li><mark>引用类型(Byte,Integer,Object,List),与原始类型(int,double,byte,char)类型，但是泛型只能绑定到引用类型</mark>
-<ul>
-<li><mark>Java中具有将原始类型转换为引用类型的机制(装箱),同时存在拆箱的机制</mark></li>
-<li>装箱后的值本质上就是把原始类型包裹起来，并保存在堆</li>
-</ul>
-</li>
-<li>若Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）</li>
-</ul>
-<span id="more"></span>
-<h2 id="使用局部变量"><a class="markdownIt-Anchor" href="#使用局部变量"></a> 使用局部变量</h2>
-<ul>
-<li><mark>Lambda表达式允许使用自由变量(不是参数,而是在外层作用域定义的变量),被称为捕获Lambda</mark></li>
-<li>局部变量必须显式声明为final(Lambda表达式只能捕获派给它们的局部变量一次)
-<ul>
-<li>第一，实例变量和局部变量背后的实现有一个关键不同。实例变量都存储在堆中，而局部变量则保存在栈上。如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。因此，Java在访问自由局部变量时，实际上是在访问它的副本，而不是访问原始变量。如果局部变量仅仅赋值一次那就没有什么区别了——因此就有了这个限制。</li>
-<li>第二，这一限制不鼓励你使用改变外部变量的典型命令式编程模式（我们会在以后的各章中解释，这种模式会阻碍很容易做到的并行处理）。</li>
-</ul>
-</li>
-<li>Java8的Lambda和匿名类对值封闭，而不是对变量封闭(原因在局部变量保存在栈上，并且隐式表示他们仅限于其所在线程)</li>
-</ul>
-<h2 id="方法引用lambda的快捷写法"><a class="markdownIt-Anchor" href="#方法引用lambda的快捷写法"></a> 方法引用(Lambda的快捷写法)</h2>
-<ul>
-<li>方法引用的三类
-<ul>
-<li>指向静态方法的方法引用</li>
-<li>指向任意类型实例方法的方法引用</li>
-<li>指向现有对象的实例方法的方法引用</li>
-</ul>
-</li>
-<li>构造函数引用
-<ul>
-<li>可以利用名称和关键字new来创建引用</li>
-</ul>
-</li>
-<li>复合Lambda表达式
-<ul>
-<li>比较器复合: 1.逆序 2.比较器链</li>
-<li>谓词复合: negate、and和or</li>
-<li>函数复合: andThen 方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数；compose方法把给定的函数用作compose的参数里面给的那个函数，然后再把函数本身用于结果</li>
-</ul>
-</li>
-</ul>
-<h1 id="流简介"><a class="markdownIt-Anchor" href="#流简介"></a> 流简介</h1>
-<ul>
-<li>流允许以声明性方式处理数据集合(通过查询语句来表达,而不是临时编写一个实现)</li>
-<li>优势：
-<ul>
-<li>声明性:说明想要完成什么而不是说明如何实现一个操作</li>
-<li>可复合</li>
-<li>可并行</li>
-</ul>
-</li>
-</ul>
-<h2 id="流-从支持数据处理操作的源生成元素序列"><a class="markdownIt-Anchor" href="#流-从支持数据处理操作的源生成元素序列"></a> 流: 从支持数据处理操作的源生成元素序列</h2>
-<ul>
-<li><strong>元素序列</strong>——集合一样，流也提供了一个接口，可以访问特定元素类型的一组有序值，<mark>流的目的在于表达计算，集合为数据</mark></li>
-<li><strong>源</strong>——流会使用一个提供数据的源，从有序集合生成流，从有序集合生成流时会保留原有的顺序</li>
-<li><strong>数据处理操作</strong>——流的数据处理功能支持类似于数据库的操作，以及函数式编程语言中的常用操作,
-<ul>
-<li>filter：接受Lambda，从流中排除某些元素</li>
-<li>map：接受Lambda，将元素转换成其他形式或提取信息</li>
-<li>limit：截断流，使元素不超过其他给定数量</li>
-<li>collect：将流转换成其他元素（toList()将流转换为列表）</li>
-<li><mark>流操作可以顺序执行，也可以并行执行</mark></li>
-</ul>
-</li>
-</ul>
-<h2 id="流与集合"><a class="markdownIt-Anchor" href="#流与集合"></a> 流与集合</h2>
-<ul>
-<li>集合是内存中的数据结构，包含数据结构中的所有值——集合中的每个元素都得先算出才能添加到集合中</li>
-<li>流是在概念上固定得数据结构，<mark>元素是按需计算</mark>，流是延迟创建的集合(只有在消费者要求的时候才会计算值)</li>
-<li><mark>集合和流的关键区别之一</mark>：遍历数据的方式，集合利用迭代器来访问for-each循环中的内部成员</li>
-<li><mark>流只能遍历一次</mark></li>
-<li>==外部迭代和内部迭代
-<ul>
-<li>使用Collection接口需要用户去做迭代，被称为外部迭代，(for-each循环,Iterator迭代器—外部迭代)</li>
-<li>Streams库使用内部迭代——流将迭代做了，将得到的流值存在某个地方</li>
-</ul>
-</li>
-</ul>
-<h2 id="流操作"><a class="markdownIt-Anchor" href="#流操作"></a> 流操作</h2>
-<ul>
-<li>中间操作：可以连接起来的流操作，中间操作会返回另一个流，可以使多个操作连接</li>
-<li>终端操作：关闭流的操作，产生结果</li>
-</ul>
-<h2 id="流的使用"><a class="markdownIt-Anchor" href="#流的使用"></a> 流的使用</h2>
-<ul>
-<li><strong>一个数据源：如集合，来执行一个查询</strong></li>
-<li><strong>一个中间操作链：形成一条流的流水线</strong>
-<ul>
-<li>filter——操作类型Predicate&lt;T&gt;——函数描述符T-&gt;boolean</li>
-<li>map——操作类型Function&lt;T,R&gt;——函数描述符T-&gt;R</li>
-<li>limit</li>
-<li>sorted——操作类型Comparator&lt;T&gt;——函数描述符(T, T)-&gt;R</li>
-<li>distinct</li>
-</ul>
-</li>
-<li><strong>一个终端操作</strong>：执行流水线，并能生成结果
-<ul>
-<li>forEach——消费流中的每个元素并对其应用Lambda。这一操作返回void</li>
-<li>count——返回流中元素的个数。这一操作返回long</li>
-<li>collection——把流归约成一个集合</li>
-</ul>
-</li>
-</ul>
-<h1 id="使用流"><a class="markdownIt-Anchor" href="#使用流"></a> 使用流</h1>
-<h2 id="筛选和切片"><a class="markdownIt-Anchor" href="#筛选和切片"></a> 筛选和切片</h2>
-<ul>
-<li>用谓词<mark>筛选</mark>：filter方法，接受一个谓词(一个返回boolean的函数)作为参数，并返回一个包括所有符合谓词的元素的流</li>
-<li><mark>筛选各异的元素</mark>：distinct方法，返回一个元素各异(根据流所产生元素的hashCode和equals方法实现)的流</li>
-<li><mark>截短流</mark>：limit(n)方法，该方法会返回一个不超过给定长度的流</li>
-<li><mark>跳过元素</mark>：skip(n)方法，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流</li>
-</ul>
-<h2 id="映射"><a class="markdownIt-Anchor" href="#映射"></a> 映射</h2>
-<ul>
-<li><mark>对流中每一个元素应用函数</mark>：map方法，接受一个函数作为参数。函数应用到每个元素上将其映射成新的元素</li>
-<li><mark>流的扁平化</mark>：获得单词列表总各不相同的字符
-<ul>
-<li>使用map()与distinct()方法返回的为Stream&lt;String[]&gt;类型，而需要的为Stream&lt;String&gt;类型</li>
-<li>使用map与Arrays .stream()(该方法可以接受一个数组并产生一个流)
-<ul>
-<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).map(Arrays::stream).distinct().collect(Collectors.toList()) 返回Stream&lt;String&gt;的列表</li>
-</ul>
-</li>
-<li><mark>使用flatMap解决</mark>：
-<ul>
-<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).flatmap(Arrays::stream).distinct().collect(Collectors.toList()) 返回List&lt;String&gt;</li>
-<li>flatmap方法把流中的每一个值都转换成另一个值，然后把所有的流连接起来成为一个流，创建扁平流</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="查找和匹配"><a class="markdownIt-Anchor" href="#查找和匹配"></a> 查找和匹配</h2>
-<ul>
-<li><mark>检查谓词是否至少匹配一个元素</mark>
-<ul>
-<li>anyMatch方法——流中是否有一个元素能匹配给定谓词</li>
-</ul>
-</li>
-<li><mark>检查谓词是否匹配所有元素</mark>
-<ul>
-<li>allMatch方法——流中是否都能匹配给定谓词</li>
-<li>noneMatch方法——流中没有任何元素与给定谓词匹配</li>
-</ul>
-</li>
-<li><mark>findAny方法——将返回当前流中的任意元素</mark>
-<ul>
-<li>Optional&lt;T&gt;类使一个容器类，代表一个值存在或不存在</li>
-<li>isPresent方法——将在Optional包含值得时候返回true</li>
-<li>ifPresent(Consumer&lt;T&gt; block)方法——在值存在时执行给定的代码块</li>
-<li>T get()方法——在值存在时返回值</li>
-<li>T orElse(T other)方法——会在值存在时返回值，否则返回一个默认值</li>
-</ul>
-</li>
-<li><mark>查找第一个元素——findFirst方法</mark></li>
-</ul>
-<h2 id="归约"><a class="markdownIt-Anchor" href="#归约"></a> 归约</h2>
-<ul>
-<li>归约操作(折叠) ：将流中的元素组合起来，使用reduce操作来表达复杂的查询</li>
-<li>元素求和：
-<ul>
-<li>使用reduce方法
-<ul>
-<li>reduce方法接受两个参数，一个参数为初始值，另一个参数为BinaryOperator&lt;T&gt;为Lambda表达式
-<ul>
-<li>Integer中具有sum方法可以使用进行求和</li>
-<li>不接受初始值，返回Optional对象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>最大值和最小值
-<ul>
-<li>使用归约可以计算最大值和最小值
-<ul>
-<li>Integer中的max方法可以计算最大值，min方法计算最小值</li>
-<li>可以使用并行处理，将strean()换成parallelStream()即可实现</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>流操作:
-<ul>
-<li>无状态和有状态：
-<ul>
-<li>无状态操作：没有内部状态，假设用户提供的Lambda或方法引用没有内部可变状态
-<ul>
-<li>如map或filter等操作会从输入流中获得每一个元素，并且在输出流中得到0或者1个结果</li>
-</ul>
-</li>
-<li>有状态操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="数值流"><a class="markdownIt-Anchor" href="#数值流"></a> 数值流</h2>
-<ul>
-<li><strong>原始类型流特化，专门支持数值流的方法</strong></li>
-<li>原始类型流特化
-<ul>
-<li>三个原始类型特化流接口：<strong>IntStream , DoubleStream , LongStream</strong> 分别将流中的元素特化为int , long  和long类型
-<ul>
-<li><mark><strong>避免了暗含的装箱操作成本</strong></mark></li>
-</ul>
-</li>
-<li>映射到数值流：maoToInt mapToDouble mapToLong</li>
-<li>转换回对象流：boxed()方法——可以将原始流转换为一般流(每个元素会自动装箱成为一个引用类型)</li>
-<li>默认值OptionalInt：存在Optional原始类型特化版本 OptionalInt OptionalDouble OptionalLong
-<ul>
-<li>可以使用orElse方法，在不存在时设置一个默认值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数值范围
-<ul>
-<li>range()方法不包含结束值，rangeClosed()方法包含结束值</li>
-</ul>
-</li>
-</ul>
-<h2 id="构建流"><a class="markdownIt-Anchor" href="#构建流"></a> 构建流</h2>
-<ul>
-<li>由值创建流：可以使用<strong>静态Steam.of方法显式创建一个流</strong>，使用Steam.empty()方法创建一个空流</li>
-<li>由数组创建流：可以使用静态Arrays.steam方法从数组创建一个流</li>
-<li>由文件创建流：
-<ul>
-<li>java.nio.file.Files中的很多静态方法都支持返回一个流</li>
-<li>Files.lines返回一个由指定文件中各行构成的字符串流</li>
-</ul>
-</li>
-<li>由函数生成流
-<ul>
-<li>无限流：不像从固定集合创建的流那样有固定大小的流</li>
-<li>Stream.iterate和Stream.generate方法可以生成无限流
-<ul>
-<li>generate接受一个Supplier&lt;T&gt;类型的Lambda提供新的值</li>
-<li><strong>使用iterate的方法则是纯粹不变的：它没有修改现有状态，但在每次迭代时会创建新的元组。而generate方法会使Supplier实例的状态产生变化</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="用流收集数据"><a class="markdownIt-Anchor" href="#用流收集数据"></a> 用流收集数据</h1>
-<h2 id="收集器简介"><a class="markdownIt-Anchor" href="#收集器简介"></a> 收集器简介</h2>
-<ul>
-<li><strong>收集器用作高级归纳</strong>——Collector会对元素应用一个转换函数，并且将结果累计在一个数据结构中，从而产生这一过程的最终输出</li>
-<li>收集器的功能：将流元素归约和汇总为一个值，元素分组，元素分区</li>
-</ul>
-<h2 id="归约和汇总"><a class="markdownIt-Anchor" href="#归约和汇总"></a> 归约和汇总</h2>
-<ul>
-<li>查找流中的最大值和最小值
-<ul>
-<li>两个收集器：Collectors.maxBy和Collectors.minBy来计算流中的最大值或最小值 接收器接收一个Comparator参数来比较流中的元素</li>
-</ul>
-</li>
-<li>汇总
-<ul>
-<li>汇总的工厂方法：Collectors.summingInt 接受一个把对象映射为求和所需int的函数，并返回一个收集器，该收集器在传递给普通的collect方法后执行汇总操作
-<ul>
-<li>Collectors.summingLong Collectors.summingDouble ——求和 averagingLong averagingDouble 计算平均值</li>
-<li><strong>summarizingInt summarizingLong summarizingLong方法 返回的收集器——可以得到元素个数，总和，平均值，最大值和最小值——返回IntSummaryStatistics类,LongSummaryStatistics类,DoubleSummaryStatistics类</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>连接字符串
-<ul>
-<li>joining工厂方法——对流中每一个对象引用toString方法得到的所有字符串连接成一个字符串
-<ul>
-<li>重载版本可以设置元素之间的分界符</li>
-<li>若类具有toString方法，则无需重新提取字符串</li>
-</ul>
-</li>
-<li><strong>joining在内部使用了StringBuilder来把生成的字符串逐个追加起来</strong></li>
-</ul>
-</li>
-<li>广义的归约汇总
-<ul>
-<li>Collectors.reducing方法使所有特殊情况的一般化</li>
-<li>三个参数
-<ul>
-<li>第一个参数使归约操作的起始值，也是流中没有元素的返回值</li>
-<li>第二个参数</li>
-<li>第三个参数使BinaryOperator，将两个项目累积成一个同类型的值</li>
-</ul>
-</li>
-<li>单参数形式
-<ul>
-<li>三个参数形式的特殊情况</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h2>
-<ul>
-<li><strong>Collectors.groupingBy工厂方法可以实现分类操作</strong>，其参数为一个分类函数，分组的结果保存在一个Map中</li>
-<li>多级分类：
-<ul>
-<li><strong>双参数版本的Collectors.groupingBy可以实现多级分类</strong>
-<ul>
-<li><strong>其传入参数除了普通的分类函数之外，还可以接受Collectors类型的第二个参数，利用内层groupingBy传递给外层groupingBy，其类型为二级标准</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>按子组收集数据：
-<ul>
-<li>Collectors.groupingBy的第二个参数可以使任意类型，如可以传递counting收集器作为参数统计数量</li>
-<li>单参数的groupingBy(f)实际上使groupingBy(f,toList())的简便写法</li>
-<li>将收集器的结果转换为另一种类型： Collectors.collectingAndThen工厂方法第一个参数为要转换的收集器，第二个参数为转换函数</li>
-<li>Collectors.mapping——该方法接受两个参数，一个函数对流中的元素进行转换，另一个将变换的结果收集起来</li>
-</ul>
-</li>
-</ul>
-<h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
-<ul>
-<li>分组的特殊情况：由一个谓词作为分类函数，称为分区函数，分区函数返回一个布尔值，得到的Map的键为Boolean类型</li>
-<li><strong>分区函数 partitioningBy——其传递的函数为分区函数</strong></li>
-<li>分区的好处：保留了分区函数返回true或False的两套流元素列表
-<ul>
-<li>partitioningBy——重载版本，第一个参数为分区函数，第二个参数为收集器</li>
-</ul>
-</li>
-<li>partitioningBy收集器也允许结合其他收集器使用，可以实现多级分区</li>
-</ul>
-<h2 id="收集器接口"><a class="markdownIt-Anchor" href="#收集器接口"></a> 收集器接口</h2>
-<ul>
-<li>Collector接口：T是流中要收集的项目的泛型，A是累加器的类型(累加器是在收集过程中用于累计部分结果的对象)，R是收集操作得到的对象的类型
-<ul>
-<li>建立新的结果容器：supplier方法</li>
-<li>将元素添加到结果容器：accumulator方法</li>
-<li>对结果容器应用最终转换：finisher方法</li>
-<li>合并两个结果容器：combiner方法</li>
-<li>characteristics方法——返回一个不可变的Characteristics集合，它定义了收集器的行为——尤其是关于流是否可以并行归约，以及可以使用哪些优化的提示，为三个项目的枚举
-<ul>
-<li>UNORDERED——归约结果不受流中项目的遍历和累积顺序的影响</li>
-<li>CONCURRENT——accumulator函数可以从多个线程同时调用，且该收集器可以并行归约流。如果收集器没有标为UNORDERED，那它仅在用于无序数据源时才可以并行归约</li>
-<li>IDENTITY_FINISH——这表明完成器方法返回的函数是一个恒等函数，可以跳过。这种情况下，累加器对象将会直接用作归约过程的最终结果。这也意味着，将累加器A不加检查地转换为结果R是安全的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>调用自定义实现Collector接口的类时，需要使用new方法进行实例化(toList是工厂方法，故不需要new进行实例化)</strong></li>
-<li><strong>可直接在重载的collect()方法中接受三个函数supplier,accumlator和combiner函数，实现上述操作</strong>
-<ul>
-<li><strong>第二个collect方法不能传递任何Characteristics，所以它永远都是一个IDENTITY_FINISH和CONCURRENT但并非UNORDERED的收集器</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>,<span class="title">A</span> <span class="title">R</span>&gt;</span>&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="并行数据处理与性能"><a class="markdownIt-Anchor" href="#并行数据处理与性能"></a> 并行数据处理与性能</h1>
-<h2 id="并行流"><a class="markdownIt-Anchor" href="#并行流"></a> 并行流</h2>
-<ul>
-<li>parallelStream 方法 ——将集合转换为并行流
-<ul>
-<li>并行流将内容分成多个数据块，并用不同的线程分别处理每个数据块的流</li>
-</ul>
-</li>
-<li>将顺序流转换为并行流
-<ul>
-<li>对顺序流调用parallel方法转换为并行流——函数的归约过程并行运行</li>
-<li>对并行流调用sequential方法转换为顺序流</li>
-<li><strong>iterate产生的是装箱的对象，必须拆箱成数字才能求和</strong></li>
-</ul>
-</li>
-<li>高效使用并行流
-<ul>
-<li>留意装箱</li>
-<li>留意数据结构是否易于分解</li>
-<li>ArrayList IntStream等 可分解性极佳 &gt; HashSet TreeSet 分解性较好 &gt; LinkedList 原生Stream</li>
-</ul>
-</li>
-</ul>
-<h2 id="分支合并框架forkjoin框架"><a class="markdownIt-Anchor" href="#分支合并框架forkjoin框架"></a> 分支合并框架(Fork/Join框架)</h2>
-<ul>
-<li>以递归方式将可并行的任务拆分成更小的任务，然后将每个子任务的结果合并起来生成整体结果，把子任务分配给- ForkJoinPool(线程池)中的工作线程</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// R是并行化任务产生的结果类型</span></span><br><span class="line"><span class="comment">// 其唯一抽象方法为compute方法</span></span><br><span class="line">RecursiveTask&lt;R&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//伪代码</span></span><br><span class="line">compute()&#123;</span><br><span class="line">  <span class="keyword">if</span>(任务足够小或不可分)&#123;</span><br><span class="line">       顶序计算该任务</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      将任务分成两个子任务</span><br><span class="line">       递归调用本方法，拆分每个子任务，等待所有子任务完成</span><br><span class="line">        合并每个子任务的结果</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任务不产生返回结果</span></span><br><span class="line">RecursiveAction</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用分支/合并框架的最佳做法
-<ul>
-<li>对一个任务调用join方法会阻塞调用方，直到该任务做出结果**(有必要在两个子任务的计算都开始之后再调用它。否则，你得到的版本会比原始的顺序算法更慢更复杂，因为每个子任务都必须等待另一个子任务完成才能启动)**；</li>
-<li>不应该在RecursiveTask内部使用ForkJoinPool的invoke方法。相反，你应该始终直接调用compute或fork方法，只有顺序代码才应该用invoke来启动并行计算；</li>
-<li>对子任务调用fork方法可以把它排进ForkJoinPool。同时对左边和右边的子任务调用它似乎很自然，但这样做的效率要比直接对其中一个调用compute低。这样做你可以为其中一个子任务重用同一线程，从而避免在线程池中多分配一个任务造成的开销；</li>
-<li>和并行流一样，你不应理所当然地认为在多核处理器上使用分支/合并框架就比顺序计算快。我们已经说过，一个任务可以分解成多个独立的子任务，才能让性能在并行化时有所提升</li>
-</ul>
-</li>
-</ul>
-<h2 id="spliterator"><a class="markdownIt-Anchor" href="#spliterator"></a> Spliterator</h2>
-<ul>
-<li>Java8中引入的一个新接口，为可分迭代器，用于遍历数据源中的元素，但其为了并行执行、</li>
-<li>tryAdvance方法的行为类似于普通的Iterator，按顺序一个一个使用Spliterator中的元素，并且如果还有其他元素要遍历就返回true</li>
-<li>trySplit是专为Spliterator接口设计的，可以把一些元素划出去分给第二个Spliterator（由该方法返回），两个并行处理</li>
-<li>Spliterator还可通过estimateSize方法估计还剩下多少元素要遍历，因为即使不那么确切，能快速算出来是一个值也有助于让拆分均匀一点</li>
-<li>Spliterator接口声明的最后一个抽象方法是characteristics，它将返回一个int，代表Spliterator本身特性集的编码</li>
-<li>拆分过程：递归过程拆分直至调用trySplit方法返回null，受Spliterator本身特性影响，该特性通过characteristics方法声明</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Spliterator</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAdvance</span><span class="params">(Consumer&lt;?<span class="keyword">super</span> T&gt;action)</span></span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="function"><span class="keyword">long</span> <span class="title">estimateSize</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">charactenstics</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<h1 id="默认方法"><a class="markdownIt-Anchor" href="#默认方法"></a> 默认方法</h1>
-<ul>
-<li>Java8允许在接口内声明静态方法，同时引入了<strong>默认方法</strong>，通过默认方法可以指定接口方法的默认实现</li>
-<li>Java的类只能继承单一的类，但一个类可以实现多接口</li>
-<li>可以使用代理有效地规避代码复用的复杂性，即创建一个方法通过该类的成员变量直接调用该类的方法
-<ul>
-<li><mark>为什么有的时候我们发现有些类被刻意地声明为final类型：</mark>
-<ul>
-<li>声明为final的类不能被其他的类继承，避免发生这样的反模式，防止核心代码的功能被污染</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><mark>解决默认方法签名相同时产生的冲突问题(一个类使用相同的函数签名从多个地方（比如另一个类或接口）继承了方法)：</mark>
-<ul>
-<li>类中的方法优先级最高。类或父类中声明的方法的优先级高于任何声明为默认方法的优先级</li>
-<li>如果无法依据第一条进行判断，那么子接口的优先级更高：函数签名相同时，优先选择拥有最具体实现的默认方法的接口，即如果B继承了A，那么B就比A更加具体</li>
-<li>最后，如果还是无法判断，继承了多个接口的类必须通过显式覆盖和调用期望的方法，显式地选择使用哪一个默认方法的实现</li>
-</ul>
-</li>
-</ul>
-<h1 id="用optional取代null"><a class="markdownIt-Anchor" href="#用optional取代null"></a> 用Optional取代null</h1>
-<ul>
-<li>避免遇到NullPointerException异常</li>
-<li>Optional&lt;T&gt;
-<ul>
-<li>变量存在时，Optional类只是对类简单封装;</li>
-<li>变量不存在时，缺失的值会被建模成一个“空”的Optional对象，由方法Optional.empty()返回</li>
-</ul>
-</li>
-<li>创建Optional对象
-<ul>
-<li><strong>声明一个空的Optional</strong>：Optional.empty()静态方法——返回Optional类的特定单一实例</li>
-<li><strong>依据一个非空值创建Optional</strong>：Optional.of()静态方法——依据非空值创建一个Optional对象</li>
-<li><strong>可接受null的Optional</strong>：Optional.ofNullable()静态方法——创建一个允许null值得Optional对象</li>
-</ul>
-</li>
-<li>函数方法
-<ul>
-<li>map方法——使用map从Optional对象中提取和转换值；map操作会将提供的函数引用于流的每个元素，可以把Optional对象堪称一种特殊的集合数据（如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换。如果Optional为空，就什么也不做）</li>
-<li>flatMap方法——将两层的Optional对象转换为单一Optional对象，使用flatMap链接Optional对象</li>
-<li>get()——最简单但不安全，若变量存在返回封装的变量值，否则抛出NoSuchElementException异常</li>
-<li>orElse(T other)——允许在Optional对象不包含值时提供一个默认值</li>
-<li>orElseGet(Supplier&lt; ? extends T&gt; other)——Supplier方法只有在Optional对象不含值时才执行调用</li>
-<li>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)——遭遇Optional对象为空时都会抛出一个可定制的异常</li>
-<li>ifPresent(Consumer&lt;? super T&gt;)——在变量值存在时执行一个作为参数传入的方法，否则就不进行任何操作</li>
-<li>isPresent()——如果Optional对象包含值，该方法就返回true</li>
-<li>filter()——方法接受一个谓词作为参数；如果Optional对象的值存在，并且它符合谓词的条件，filter方法就返回其值；否则它就返回一个空的Optional对象</li>
-</ul>
-</li>
-</ul>
-<h1 id="新的日期和时间api"><a class="markdownIt-Anchor" href="#新的日期和时间api"></a> 新的日期和时间API</h1>
-<ul>
-<li>LocalDate
-<ul>
-<li>LocalDate.of()——创建一个LocalDate实例</li>
-<li>LocalDate.now()——从系统时钟中获取当前日期</li>
-<li>get()——传递TemporalField参数获取某个字段的值(ChronoField枚举实现了TemporalField接口)</li>
-<li>parse()静态方法——格式化一个日期或者时间对象</li>
-</ul>
-</li>
-<li>LocalTime
-<ul>
-<li>LocalTime.of()——创建LocalTIme实例</li>
-<li>getHour getMinute getSecond</li>
-<li>parse()静态方法——格式化一个日期或者时间对象</li>
-</ul>
-</li>
-<li>LocalDateTime
-<ul>
-<li>是LocalDate和LocalTime的合体，同时表示了日期和时间，但不带有时区信息</li>
-<li>of方法</li>
-<li>atTime()方法——传递日期对象或者时间对象创建</li>
-<li>toLocalDate或toLocalTime方法——提取LocalDate或LocalTime组件</li>
-</ul>
-</li>
-<li>Instant类
-<ul>
-<li>计算机角度的建模时间，表示一个持续时间段上某个点的单一大整型数</li>
-<li>ofEpochSecond()——传递一个代表秒数的值创建该类的实例
-<ul>
-<li>重载版本，接受第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整</li>
-</ul>
-</li>
-<li>now()——获取当前时刻的时间戳</li>
-</ul>
-</li>
-<li>Duration类和Period
-<ul>
-<li>Duration类静态方法between——传递两个LocalTimes对象，LocalDateTimes对象，Instant对象，获得两个对象之间的时间长短(秒和纳秒)</li>
-<li>Period类静态方法between——得到LocalDate之间的时长</li>
-</ul>
-</li>
-<li>使用TemporalAdjuster：with()——传递一个提供定制化选择的TemporalAdjuster对象，更加灵活的处理日期</li>
-<li>打印输出及解析日期-时间对象：
-<ul>
-<li>DateTimeFormatter类：创建格式器最简单的方法是通过静态方法和常量，BASIC_ISO_DATE和ISO_LOCAL_DATE- 为DateTimeFormatter类的预定义实例
-<ul>
-<li>parse()静态方法——使用同样的格式器解析字符串并重建该日期对象</li>
-<li>ofPattern()方法——创建某了Local的格式器</li>
-<li>DateTimeFormatterBuilder类提供更加复杂的格式器</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo</title>
     <url>/2021/11/30/Hexo/</url>
     <content><![CDATA[<h1 id="1-安装nodejs"><a class="markdownIt-Anchor" href="#1-安装nodejs"></a> 1 安装Nodejs</h1>
@@ -4719,6 +4176,549 @@ s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class=
       </tags>
   </entry>
   <entry>
+    <title>Java8实战</title>
+    <url>/2022/03/02/Java8%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<h1 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> Lambda表达式</h1>
+<h2 id="行为参数化"><a class="markdownIt-Anchor" href="#行为参数化"></a> 行为参数化</h2>
+<ul>
+<li>一种软件开发模式，<mark>将代码块作为参数传递给另一个方法，稍后再去执行，方法的行为就基于那块代码被参数化了</mark></li>
+</ul>
+<h2 id="lambda表达式的三个部分参数列表箭头lambda主体"><a class="markdownIt-Anchor" href="#lambda表达式的三个部分参数列表箭头lambda主体"></a> Lambda表达式的三个部分:参数列表,箭头,Lambda主体</h2>
+<ul>
+<li>在函数式接口中使用Lambda接口
+<ul>
+<li>函数式接口就是只定义了一个抽象方法的接口,在该接口中可以拥有默认方法(即在类没有对方法进行实现时，其主体为方法提供默认实现的方法)</li>
+<li>Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例</li>
+<li><mark>@ FunctionalInterface 为函数式接口的标注, 抽象方法的签名称为函数描述符</mark></li>
+</ul>
+</li>
+<li>常用的函数式接口:
+<ul>
+<li>Predicate&lt;T&gt;  boolean test(T t)</li>
+<li>Consumer&lt;T&gt;   void accept(T t)</li>
+<li>Function&lt;T,R&gt;  R apply(T t)</li>
+<li>Supplier&lt;T&gt;</li>
+</ul>
+</li>
+<li><mark>引用类型(Byte,Integer,Object,List),与原始类型(int,double,byte,char)类型，但是泛型只能绑定到引用类型</mark>
+<ul>
+<li><mark>Java中具有将原始类型转换为引用类型的机制(装箱),同时存在拆箱的机制</mark></li>
+<li>装箱后的值本质上就是把原始类型包裹起来，并保存在堆</li>
+</ul>
+</li>
+<li>若Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）</li>
+</ul>
+<span id="more"></span>
+<h2 id="使用局部变量"><a class="markdownIt-Anchor" href="#使用局部变量"></a> 使用局部变量</h2>
+<ul>
+<li><mark>Lambda表达式允许使用自由变量(不是参数,而是在外层作用域定义的变量),被称为捕获Lambda</mark></li>
+<li>局部变量必须显式声明为final(Lambda表达式只能捕获派给它们的局部变量一次)
+<ul>
+<li>第一，实例变量和局部变量背后的实现有一个关键不同。实例变量都存储在堆中，而局部变量则保存在栈上。如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。因此，Java在访问自由局部变量时，实际上是在访问它的副本，而不是访问原始变量。如果局部变量仅仅赋值一次那就没有什么区别了——因此就有了这个限制。</li>
+<li>第二，这一限制不鼓励你使用改变外部变量的典型命令式编程模式（我们会在以后的各章中解释，这种模式会阻碍很容易做到的并行处理）。</li>
+</ul>
+</li>
+<li>Java8的Lambda和匿名类对值封闭，而不是对变量封闭(原因在局部变量保存在栈上，并且隐式表示他们仅限于其所在线程)</li>
+</ul>
+<h2 id="方法引用lambda的快捷写法"><a class="markdownIt-Anchor" href="#方法引用lambda的快捷写法"></a> 方法引用(Lambda的快捷写法)</h2>
+<ul>
+<li>方法引用的三类
+<ul>
+<li>指向静态方法的方法引用</li>
+<li>指向任意类型实例方法的方法引用</li>
+<li>指向现有对象的实例方法的方法引用</li>
+</ul>
+</li>
+<li>构造函数引用
+<ul>
+<li>可以利用名称和关键字new来创建引用</li>
+</ul>
+</li>
+<li>复合Lambda表达式
+<ul>
+<li>比较器复合: 1.逆序 2.比较器链</li>
+<li>谓词复合: negate、and和or</li>
+<li>函数复合: andThen 方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数；compose方法把给定的函数用作compose的参数里面给的那个函数，然后再把函数本身用于结果</li>
+</ul>
+</li>
+</ul>
+<h1 id="流简介"><a class="markdownIt-Anchor" href="#流简介"></a> 流简介</h1>
+<ul>
+<li>流允许以声明性方式处理数据集合(通过查询语句来表达,而不是临时编写一个实现)</li>
+<li>优势：
+<ul>
+<li>声明性:说明想要完成什么而不是说明如何实现一个操作</li>
+<li>可复合</li>
+<li>可并行</li>
+</ul>
+</li>
+</ul>
+<h2 id="流-从支持数据处理操作的源生成元素序列"><a class="markdownIt-Anchor" href="#流-从支持数据处理操作的源生成元素序列"></a> 流: 从支持数据处理操作的源生成元素序列</h2>
+<ul>
+<li><strong>元素序列</strong>——集合一样，流也提供了一个接口，可以访问特定元素类型的一组有序值，<mark>流的目的在于表达计算，集合为数据</mark></li>
+<li><strong>源</strong>——流会使用一个提供数据的源，从有序集合生成流，从有序集合生成流时会保留原有的顺序</li>
+<li><strong>数据处理操作</strong>——流的数据处理功能支持类似于数据库的操作，以及函数式编程语言中的常用操作,
+<ul>
+<li>filter：接受Lambda，从流中排除某些元素</li>
+<li>map：接受Lambda，将元素转换成其他形式或提取信息</li>
+<li>limit：截断流，使元素不超过其他给定数量</li>
+<li>collect：将流转换成其他元素（toList()将流转换为列表）</li>
+<li><mark>流操作可以顺序执行，也可以并行执行</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="流与集合"><a class="markdownIt-Anchor" href="#流与集合"></a> 流与集合</h2>
+<ul>
+<li>集合是内存中的数据结构，包含数据结构中的所有值——集合中的每个元素都得先算出才能添加到集合中</li>
+<li>流是在概念上固定得数据结构，<mark>元素是按需计算</mark>，流是延迟创建的集合(只有在消费者要求的时候才会计算值)</li>
+<li><mark>集合和流的关键区别之一</mark>：遍历数据的方式，集合利用迭代器来访问for-each循环中的内部成员</li>
+<li><mark>流只能遍历一次</mark></li>
+<li>==外部迭代和内部迭代
+<ul>
+<li>使用Collection接口需要用户去做迭代，被称为外部迭代，(for-each循环,Iterator迭代器—外部迭代)</li>
+<li>Streams库使用内部迭代——流将迭代做了，将得到的流值存在某个地方</li>
+</ul>
+</li>
+</ul>
+<h2 id="流操作"><a class="markdownIt-Anchor" href="#流操作"></a> 流操作</h2>
+<ul>
+<li>中间操作：可以连接起来的流操作，中间操作会返回另一个流，可以使多个操作连接</li>
+<li>终端操作：关闭流的操作，产生结果</li>
+</ul>
+<h2 id="流的使用"><a class="markdownIt-Anchor" href="#流的使用"></a> 流的使用</h2>
+<ul>
+<li><strong>一个数据源：如集合，来执行一个查询</strong></li>
+<li><strong>一个中间操作链：形成一条流的流水线</strong>
+<ul>
+<li>filter——操作类型Predicate&lt;T&gt;——函数描述符T-&gt;boolean</li>
+<li>map——操作类型Function&lt;T,R&gt;——函数描述符T-&gt;R</li>
+<li>limit</li>
+<li>sorted——操作类型Comparator&lt;T&gt;——函数描述符(T, T)-&gt;R</li>
+<li>distinct</li>
+</ul>
+</li>
+<li><strong>一个终端操作</strong>：执行流水线，并能生成结果
+<ul>
+<li>forEach——消费流中的每个元素并对其应用Lambda。这一操作返回void</li>
+<li>count——返回流中元素的个数。这一操作返回long</li>
+<li>collection——把流归约成一个集合</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用流"><a class="markdownIt-Anchor" href="#使用流"></a> 使用流</h1>
+<h2 id="筛选和切片"><a class="markdownIt-Anchor" href="#筛选和切片"></a> 筛选和切片</h2>
+<ul>
+<li>用谓词<mark>筛选</mark>：filter方法，接受一个谓词(一个返回boolean的函数)作为参数，并返回一个包括所有符合谓词的元素的流</li>
+<li><mark>筛选各异的元素</mark>：distinct方法，返回一个元素各异(根据流所产生元素的hashCode和equals方法实现)的流</li>
+<li><mark>截短流</mark>：limit(n)方法，该方法会返回一个不超过给定长度的流</li>
+<li><mark>跳过元素</mark>：skip(n)方法，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流</li>
+</ul>
+<h2 id="映射"><a class="markdownIt-Anchor" href="#映射"></a> 映射</h2>
+<ul>
+<li><mark>对流中每一个元素应用函数</mark>：map方法，接受一个函数作为参数。函数应用到每个元素上将其映射成新的元素</li>
+<li><mark>流的扁平化</mark>：获得单词列表总各不相同的字符
+<ul>
+<li>使用map()与distinct()方法返回的为Stream&lt;String[]&gt;类型，而需要的为Stream&lt;String&gt;类型</li>
+<li>使用map与Arrays .stream()(该方法可以接受一个数组并产生一个流)
+<ul>
+<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).map(Arrays::stream).distinct().collect(Collectors.toList()) 返回Stream&lt;String&gt;的列表</li>
+</ul>
+</li>
+<li><mark>使用flatMap解决</mark>：
+<ul>
+<li>words.stream().map(w-&gt;w.split(&quot;&quot;)).flatmap(Arrays::stream).distinct().collect(Collectors.toList()) 返回List&lt;String&gt;</li>
+<li>flatmap方法把流中的每一个值都转换成另一个值，然后把所有的流连接起来成为一个流，创建扁平流</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="查找和匹配"><a class="markdownIt-Anchor" href="#查找和匹配"></a> 查找和匹配</h2>
+<ul>
+<li><mark>检查谓词是否至少匹配一个元素</mark>
+<ul>
+<li>anyMatch方法——流中是否有一个元素能匹配给定谓词</li>
+</ul>
+</li>
+<li><mark>检查谓词是否匹配所有元素</mark>
+<ul>
+<li>allMatch方法——流中是否都能匹配给定谓词</li>
+<li>noneMatch方法——流中没有任何元素与给定谓词匹配</li>
+</ul>
+</li>
+<li><mark>findAny方法——将返回当前流中的任意元素</mark>
+<ul>
+<li>Optional&lt;T&gt;类使一个容器类，代表一个值存在或不存在</li>
+<li>isPresent方法——将在Optional包含值得时候返回true</li>
+<li>ifPresent(Consumer&lt;T&gt; block)方法——在值存在时执行给定的代码块</li>
+<li>T get()方法——在值存在时返回值</li>
+<li>T orElse(T other)方法——会在值存在时返回值，否则返回一个默认值</li>
+</ul>
+</li>
+<li><mark>查找第一个元素——findFirst方法</mark></li>
+</ul>
+<h2 id="归约"><a class="markdownIt-Anchor" href="#归约"></a> 归约</h2>
+<ul>
+<li>归约操作(折叠) ：将流中的元素组合起来，使用reduce操作来表达复杂的查询</li>
+<li>元素求和：
+<ul>
+<li>使用reduce方法
+<ul>
+<li>reduce方法接受两个参数，一个参数为初始值，另一个参数为BinaryOperator&lt;T&gt;为Lambda表达式
+<ul>
+<li>Integer中具有sum方法可以使用进行求和</li>
+<li>不接受初始值，返回Optional对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最大值和最小值
+<ul>
+<li>使用归约可以计算最大值和最小值
+<ul>
+<li>Integer中的max方法可以计算最大值，min方法计算最小值</li>
+<li>可以使用并行处理，将strean()换成parallelStream()即可实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流操作:
+<ul>
+<li>无状态和有状态：
+<ul>
+<li>无状态操作：没有内部状态，假设用户提供的Lambda或方法引用没有内部可变状态
+<ul>
+<li>如map或filter等操作会从输入流中获得每一个元素，并且在输出流中得到0或者1个结果</li>
+</ul>
+</li>
+<li>有状态操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数值流"><a class="markdownIt-Anchor" href="#数值流"></a> 数值流</h2>
+<ul>
+<li><strong>原始类型流特化，专门支持数值流的方法</strong></li>
+<li>原始类型流特化
+<ul>
+<li>三个原始类型特化流接口：<strong>IntStream , DoubleStream , LongStream</strong> 分别将流中的元素特化为int , long  和long类型
+<ul>
+<li><mark><strong>避免了暗含的装箱操作成本</strong></mark></li>
+</ul>
+</li>
+<li>映射到数值流：maoToInt mapToDouble mapToLong</li>
+<li>转换回对象流：boxed()方法——可以将原始流转换为一般流(每个元素会自动装箱成为一个引用类型)</li>
+<li>默认值OptionalInt：存在Optional原始类型特化版本 OptionalInt OptionalDouble OptionalLong
+<ul>
+<li>可以使用orElse方法，在不存在时设置一个默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数值范围
+<ul>
+<li>range()方法不包含结束值，rangeClosed()方法包含结束值</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建流"><a class="markdownIt-Anchor" href="#构建流"></a> 构建流</h2>
+<ul>
+<li>由值创建流：可以使用<strong>静态Steam.of方法显式创建一个流</strong>，使用Steam.empty()方法创建一个空流</li>
+<li>由数组创建流：可以使用静态Arrays.steam方法从数组创建一个流</li>
+<li>由文件创建流：
+<ul>
+<li>java.nio.file.Files中的很多静态方法都支持返回一个流</li>
+<li>Files.lines返回一个由指定文件中各行构成的字符串流</li>
+</ul>
+</li>
+<li>由函数生成流
+<ul>
+<li>无限流：不像从固定集合创建的流那样有固定大小的流</li>
+<li>Stream.iterate和Stream.generate方法可以生成无限流
+<ul>
+<li>generate接受一个Supplier&lt;T&gt;类型的Lambda提供新的值</li>
+<li><strong>使用iterate的方法则是纯粹不变的：它没有修改现有状态，但在每次迭代时会创建新的元组。而generate方法会使Supplier实例的状态产生变化</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="用流收集数据"><a class="markdownIt-Anchor" href="#用流收集数据"></a> 用流收集数据</h1>
+<h2 id="收集器简介"><a class="markdownIt-Anchor" href="#收集器简介"></a> 收集器简介</h2>
+<ul>
+<li><strong>收集器用作高级归纳</strong>——Collector会对元素应用一个转换函数，并且将结果累计在一个数据结构中，从而产生这一过程的最终输出</li>
+<li>收集器的功能：将流元素归约和汇总为一个值，元素分组，元素分区</li>
+</ul>
+<h2 id="归约和汇总"><a class="markdownIt-Anchor" href="#归约和汇总"></a> 归约和汇总</h2>
+<ul>
+<li>查找流中的最大值和最小值
+<ul>
+<li>两个收集器：Collectors.maxBy和Collectors.minBy来计算流中的最大值或最小值 接收器接收一个Comparator参数来比较流中的元素</li>
+</ul>
+</li>
+<li>汇总
+<ul>
+<li>汇总的工厂方法：Collectors.summingInt 接受一个把对象映射为求和所需int的函数，并返回一个收集器，该收集器在传递给普通的collect方法后执行汇总操作
+<ul>
+<li>Collectors.summingLong Collectors.summingDouble ——求和 averagingLong averagingDouble 计算平均值</li>
+<li><strong>summarizingInt summarizingLong summarizingLong方法 返回的收集器——可以得到元素个数，总和，平均值，最大值和最小值——返回IntSummaryStatistics类,LongSummaryStatistics类,DoubleSummaryStatistics类</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接字符串
+<ul>
+<li>joining工厂方法——对流中每一个对象引用toString方法得到的所有字符串连接成一个字符串
+<ul>
+<li>重载版本可以设置元素之间的分界符</li>
+<li>若类具有toString方法，则无需重新提取字符串</li>
+</ul>
+</li>
+<li><strong>joining在内部使用了StringBuilder来把生成的字符串逐个追加起来</strong></li>
+</ul>
+</li>
+<li>广义的归约汇总
+<ul>
+<li>Collectors.reducing方法使所有特殊情况的一般化</li>
+<li>三个参数
+<ul>
+<li>第一个参数使归约操作的起始值，也是流中没有元素的返回值</li>
+<li>第二个参数</li>
+<li>第三个参数使BinaryOperator，将两个项目累积成一个同类型的值</li>
+</ul>
+</li>
+<li>单参数形式
+<ul>
+<li>三个参数形式的特殊情况</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="分组"><a class="markdownIt-Anchor" href="#分组"></a> 分组</h2>
+<ul>
+<li><strong>Collectors.groupingBy工厂方法可以实现分类操作</strong>，其参数为一个分类函数，分组的结果保存在一个Map中</li>
+<li>多级分类：
+<ul>
+<li><strong>双参数版本的Collectors.groupingBy可以实现多级分类</strong>
+<ul>
+<li><strong>其传入参数除了普通的分类函数之外，还可以接受Collectors类型的第二个参数，利用内层groupingBy传递给外层groupingBy，其类型为二级标准</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按子组收集数据：
+<ul>
+<li>Collectors.groupingBy的第二个参数可以使任意类型，如可以传递counting收集器作为参数统计数量</li>
+<li>单参数的groupingBy(f)实际上使groupingBy(f,toList())的简便写法</li>
+<li>将收集器的结果转换为另一种类型： Collectors.collectingAndThen工厂方法第一个参数为要转换的收集器，第二个参数为转换函数</li>
+<li>Collectors.mapping——该方法接受两个参数，一个函数对流中的元素进行转换，另一个将变换的结果收集起来</li>
+</ul>
+</li>
+</ul>
+<h2 id="分区"><a class="markdownIt-Anchor" href="#分区"></a> 分区</h2>
+<ul>
+<li>分组的特殊情况：由一个谓词作为分类函数，称为分区函数，分区函数返回一个布尔值，得到的Map的键为Boolean类型</li>
+<li><strong>分区函数 partitioningBy——其传递的函数为分区函数</strong></li>
+<li>分区的好处：保留了分区函数返回true或False的两套流元素列表
+<ul>
+<li>partitioningBy——重载版本，第一个参数为分区函数，第二个参数为收集器</li>
+</ul>
+</li>
+<li>partitioningBy收集器也允许结合其他收集器使用，可以实现多级分区</li>
+</ul>
+<h2 id="收集器接口"><a class="markdownIt-Anchor" href="#收集器接口"></a> 收集器接口</h2>
+<ul>
+<li>Collector接口：T是流中要收集的项目的泛型，A是累加器的类型(累加器是在收集过程中用于累计部分结果的对象)，R是收集操作得到的对象的类型
+<ul>
+<li>建立新的结果容器：supplier方法</li>
+<li>将元素添加到结果容器：accumulator方法</li>
+<li>对结果容器应用最终转换：finisher方法</li>
+<li>合并两个结果容器：combiner方法</li>
+<li>characteristics方法——返回一个不可变的Characteristics集合，它定义了收集器的行为——尤其是关于流是否可以并行归约，以及可以使用哪些优化的提示，为三个项目的枚举
+<ul>
+<li>UNORDERED——归约结果不受流中项目的遍历和累积顺序的影响</li>
+<li>CONCURRENT——accumulator函数可以从多个线程同时调用，且该收集器可以并行归约流。如果收集器没有标为UNORDERED，那它仅在用于无序数据源时才可以并行归约</li>
+<li>IDENTITY_FINISH——这表明完成器方法返回的函数是一个恒等函数，可以跳过。这种情况下，累加器对象将会直接用作归约过程的最终结果。这也意味着，将累加器A不加检查地转换为结果R是安全的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>调用自定义实现Collector接口的类时，需要使用new方法进行实例化(toList是工厂方法，故不需要new进行实例化)</strong></li>
+<li><strong>可直接在重载的collect()方法中接受三个函数supplier,accumlator和combiner函数，实现上述操作</strong>
+<ul>
+<li><strong>第二个collect方法不能传递任何Characteristics，所以它永远都是一个IDENTITY_FINISH和CONCURRENT但并非UNORDERED的收集器</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>,<span class="title">A</span> <span class="title">R</span>&gt;</span>&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="并行数据处理与性能"><a class="markdownIt-Anchor" href="#并行数据处理与性能"></a> 并行数据处理与性能</h1>
+<h2 id="并行流"><a class="markdownIt-Anchor" href="#并行流"></a> 并行流</h2>
+<ul>
+<li>parallelStream 方法 ——将集合转换为并行流
+<ul>
+<li>并行流将内容分成多个数据块，并用不同的线程分别处理每个数据块的流</li>
+</ul>
+</li>
+<li>将顺序流转换为并行流
+<ul>
+<li>对顺序流调用parallel方法转换为并行流——函数的归约过程并行运行</li>
+<li>对并行流调用sequential方法转换为顺序流</li>
+<li><strong>iterate产生的是装箱的对象，必须拆箱成数字才能求和</strong></li>
+</ul>
+</li>
+<li>高效使用并行流
+<ul>
+<li>留意装箱</li>
+<li>留意数据结构是否易于分解</li>
+<li>ArrayList IntStream等 可分解性极佳 &gt; HashSet TreeSet 分解性较好 &gt; LinkedList 原生Stream</li>
+</ul>
+</li>
+</ul>
+<h2 id="分支合并框架forkjoin框架"><a class="markdownIt-Anchor" href="#分支合并框架forkjoin框架"></a> 分支合并框架(Fork/Join框架)</h2>
+<ul>
+<li>以递归方式将可并行的任务拆分成更小的任务，然后将每个子任务的结果合并起来生成整体结果，把子任务分配给- ForkJoinPool(线程池)中的工作线程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// R是并行化任务产生的结果类型</span></span><br><span class="line"><span class="comment">// 其唯一抽象方法为compute方法</span></span><br><span class="line">RecursiveTask&lt;R&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//伪代码</span></span><br><span class="line">compute()&#123;</span><br><span class="line">  <span class="keyword">if</span>(任务足够小或不可分)&#123;</span><br><span class="line">       顶序计算该任务</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      将任务分成两个子任务</span><br><span class="line">       递归调用本方法，拆分每个子任务，等待所有子任务完成</span><br><span class="line">        合并每个子任务的结果</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任务不产生返回结果</span></span><br><span class="line">RecursiveAction</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用分支/合并框架的最佳做法
+<ul>
+<li>对一个任务调用join方法会阻塞调用方，直到该任务做出结果**(有必要在两个子任务的计算都开始之后再调用它。否则，你得到的版本会比原始的顺序算法更慢更复杂，因为每个子任务都必须等待另一个子任务完成才能启动)**；</li>
+<li>不应该在RecursiveTask内部使用ForkJoinPool的invoke方法。相反，你应该始终直接调用compute或fork方法，只有顺序代码才应该用invoke来启动并行计算；</li>
+<li>对子任务调用fork方法可以把它排进ForkJoinPool。同时对左边和右边的子任务调用它似乎很自然，但这样做的效率要比直接对其中一个调用compute低。这样做你可以为其中一个子任务重用同一线程，从而避免在线程池中多分配一个任务造成的开销；</li>
+<li>和并行流一样，你不应理所当然地认为在多核处理器上使用分支/合并框架就比顺序计算快。我们已经说过，一个任务可以分解成多个独立的子任务，才能让性能在并行化时有所提升</li>
+</ul>
+</li>
+</ul>
+<h2 id="spliterator"><a class="markdownIt-Anchor" href="#spliterator"></a> Spliterator</h2>
+<ul>
+<li>Java8中引入的一个新接口，为可分迭代器，用于遍历数据源中的元素，但其为了并行执行、</li>
+<li>tryAdvance方法的行为类似于普通的Iterator，按顺序一个一个使用Spliterator中的元素，并且如果还有其他元素要遍历就返回true</li>
+<li>trySplit是专为Spliterator接口设计的，可以把一些元素划出去分给第二个Spliterator（由该方法返回），两个并行处理</li>
+<li>Spliterator还可通过estimateSize方法估计还剩下多少元素要遍历，因为即使不那么确切，能快速算出来是一个值也有助于让拆分均匀一点</li>
+<li>Spliterator接口声明的最后一个抽象方法是characteristics，它将返回一个int，代表Spliterator本身特性集的编码</li>
+<li>拆分过程：递归过程拆分直至调用trySplit方法返回null，受Spliterator本身特性影响，该特性通过characteristics方法声明</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Spliterator</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAdvance</span><span class="params">(Consumer&lt;?<span class="keyword">super</span> T&gt;action)</span></span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="function"><span class="keyword">long</span> <span class="title">estimateSize</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">charactenstics</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="默认方法"><a class="markdownIt-Anchor" href="#默认方法"></a> 默认方法</h1>
+<ul>
+<li>Java8允许在接口内声明静态方法，同时引入了<strong>默认方法</strong>，通过默认方法可以指定接口方法的默认实现</li>
+<li>Java的类只能继承单一的类，但一个类可以实现多接口</li>
+<li>可以使用代理有效地规避代码复用的复杂性，即创建一个方法通过该类的成员变量直接调用该类的方法
+<ul>
+<li><mark>为什么有的时候我们发现有些类被刻意地声明为final类型：</mark>
+<ul>
+<li>声明为final的类不能被其他的类继承，避免发生这样的反模式，防止核心代码的功能被污染</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><mark>解决默认方法签名相同时产生的冲突问题(一个类使用相同的函数签名从多个地方（比如另一个类或接口）继承了方法)：</mark>
+<ul>
+<li>类中的方法优先级最高。类或父类中声明的方法的优先级高于任何声明为默认方法的优先级</li>
+<li>如果无法依据第一条进行判断，那么子接口的优先级更高：函数签名相同时，优先选择拥有最具体实现的默认方法的接口，即如果B继承了A，那么B就比A更加具体</li>
+<li>最后，如果还是无法判断，继承了多个接口的类必须通过显式覆盖和调用期望的方法，显式地选择使用哪一个默认方法的实现</li>
+</ul>
+</li>
+</ul>
+<h1 id="用optional取代null"><a class="markdownIt-Anchor" href="#用optional取代null"></a> 用Optional取代null</h1>
+<ul>
+<li>避免遇到NullPointerException异常</li>
+<li>Optional&lt;T&gt;
+<ul>
+<li>变量存在时，Optional类只是对类简单封装;</li>
+<li>变量不存在时，缺失的值会被建模成一个“空”的Optional对象，由方法Optional.empty()返回</li>
+</ul>
+</li>
+<li>创建Optional对象
+<ul>
+<li><strong>声明一个空的Optional</strong>：Optional.empty()静态方法——返回Optional类的特定单一实例</li>
+<li><strong>依据一个非空值创建Optional</strong>：Optional.of()静态方法——依据非空值创建一个Optional对象</li>
+<li><strong>可接受null的Optional</strong>：Optional.ofNullable()静态方法——创建一个允许null值得Optional对象</li>
+</ul>
+</li>
+<li>函数方法
+<ul>
+<li>map方法——使用map从Optional对象中提取和转换值；map操作会将提供的函数引用于流的每个元素，可以把Optional对象堪称一种特殊的集合数据（如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换。如果Optional为空，就什么也不做）</li>
+<li>flatMap方法——将两层的Optional对象转换为单一Optional对象，使用flatMap链接Optional对象</li>
+<li>get()——最简单但不安全，若变量存在返回封装的变量值，否则抛出NoSuchElementException异常</li>
+<li>orElse(T other)——允许在Optional对象不包含值时提供一个默认值</li>
+<li>orElseGet(Supplier&lt; ? extends T&gt; other)——Supplier方法只有在Optional对象不含值时才执行调用</li>
+<li>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)——遭遇Optional对象为空时都会抛出一个可定制的异常</li>
+<li>ifPresent(Consumer&lt;? super T&gt;)——在变量值存在时执行一个作为参数传入的方法，否则就不进行任何操作</li>
+<li>isPresent()——如果Optional对象包含值，该方法就返回true</li>
+<li>filter()——方法接受一个谓词作为参数；如果Optional对象的值存在，并且它符合谓词的条件，filter方法就返回其值；否则它就返回一个空的Optional对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="新的日期和时间api"><a class="markdownIt-Anchor" href="#新的日期和时间api"></a> 新的日期和时间API</h1>
+<ul>
+<li>LocalDate
+<ul>
+<li>LocalDate.of()——创建一个LocalDate实例</li>
+<li>LocalDate.now()——从系统时钟中获取当前日期</li>
+<li>get()——传递TemporalField参数获取某个字段的值(ChronoField枚举实现了TemporalField接口)</li>
+<li>parse()静态方法——格式化一个日期或者时间对象</li>
+</ul>
+</li>
+<li>LocalTime
+<ul>
+<li>LocalTime.of()——创建LocalTIme实例</li>
+<li>getHour getMinute getSecond</li>
+<li>parse()静态方法——格式化一个日期或者时间对象</li>
+</ul>
+</li>
+<li>LocalDateTime
+<ul>
+<li>是LocalDate和LocalTime的合体，同时表示了日期和时间，但不带有时区信息</li>
+<li>of方法</li>
+<li>atTime()方法——传递日期对象或者时间对象创建</li>
+<li>toLocalDate或toLocalTime方法——提取LocalDate或LocalTime组件</li>
+</ul>
+</li>
+<li>Instant类
+<ul>
+<li>计算机角度的建模时间，表示一个持续时间段上某个点的单一大整型数</li>
+<li>ofEpochSecond()——传递一个代表秒数的值创建该类的实例
+<ul>
+<li>重载版本，接受第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整</li>
+</ul>
+</li>
+<li>now()——获取当前时刻的时间戳</li>
+</ul>
+</li>
+<li>Duration类和Period
+<ul>
+<li>Duration类静态方法between——传递两个LocalTimes对象，LocalDateTimes对象，Instant对象，获得两个对象之间的时间长短(秒和纳秒)</li>
+<li>Period类静态方法between——得到LocalDate之间的时长</li>
+</ul>
+</li>
+<li>使用TemporalAdjuster：with()——传递一个提供定制化选择的TemporalAdjuster对象，更加灵活的处理日期</li>
+<li>打印输出及解析日期-时间对象：
+<ul>
+<li>DateTimeFormatter类：创建格式器最简单的方法是通过静态方法和常量，BASIC_ISO_DATE和ISO_LOCAL_DATE- 为DateTimeFormatter类的预定义实例
+<ul>
+<li>parse()静态方法——使用同样的格式器解析字符串并重建该日期对象</li>
+<li>ofPattern()方法——创建某了Local的格式器</li>
+<li>DateTimeFormatterBuilder类提供更加复杂的格式器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++新经典</title>
     <url>/2021/11/20/C++%E6%96%B0%E7%BB%8F%E5%85%B8/</url>
     <content><![CDATA[<h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
@@ -7022,6 +7022,393 @@ static 返回类型 函数名(形参列表);</p>
 </li>
 </ul>
 <h1 id="8-查找"><a class="markdownIt-Anchor" href="#8-查找"></a> 8 查找</h1>
+<h2 id="82-查找概论"><a class="markdownIt-Anchor" href="#82-查找概论"></a> 8.2 查找概论</h2>
+<ul>
+<li><strong>查找表</strong>：由同一个类型的数据元素（或记录）构成的集合
+<ul>
+<li><strong>关键字</strong>：数据元素中某个数据项的值，又称为<strong>键值</strong>；用它可以标志一个数据元素</li>
+<li><strong>关键码</strong>：标志一个记录的某个数据项</li>
+<li><strong>主关键字</strong>：此关键字可以唯一地标志一个记录</li>
+<li><strong>主关键码</strong>：主关键字所在的数据项</li>
+<li><strong>次关键字</strong>：可以识别多个数据元素的关键字</li>
+<li><strong>次关键码</strong>：次关键字对应的数据项</li>
+</ul>
+</li>
+<li>查找按<mark>操作方式</mark>分为两大类：静态查找表和动态查找表
+<ul>
+<li><strong>静态查找表</strong>：只做查找操作的查找表
+<ul>
+<li>查找某个“特定的”数据元素是否在查找表中</li>
+<li>检索某个特定的数据元素和属性</li>
+</ul>
+</li>
+<li><strong>动态查找表</strong>：在查找过程中同时插入查找表中不存在的数据元素，或者从查找表中删除已经存在的某个数据元素
+<ul>
+<li>查找时插入数据元素</li>
+<li>查找时删除数据元素</li>
+</ul>
+</li>
+<li>面向查找的数据结构为查找结构
+<ul>
+<li>从逻辑上上，查找所基于的数据结构是集合，集合中的记录之间没有本质关系。但需要获得更高的查找性能，需要改变数据结构，在查找时将集合组织成表,树等结构</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="83-顺序表查找"><a class="markdownIt-Anchor" href="#83-顺序表查找"></a> 8.3 顺序表查找</h2>
+<ul>
+<li><strong>顺序查找</strong>：线性查找
+<ul>
+<li>查找过程为：从表中第一个记录开始，逐个进行记录的关键字和给定值比较，若某个记录的关键字和给定值相等，则查找成功，找到所查的记录；如果直到最后一个记录，其关键字和给定值比较都不等时，则表中没有所查的记录，查找不成功</li>
+</ul>
+</li>
+<li><strong>顺序表查找的优化</strong>：
+<ul>
+<li>利用哨兵：在查找方向的尽头放置哨兵，免去了在查找过程中每一次比较后都要判断查找位置是否越界
+<ul>
+<li>在数据量较大时，效率有所提高</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><mark>时间复杂度为O(n)</mark></li>
+</ul>
+<h2 id="84-有序表查找"><a class="markdownIt-Anchor" href="#84-有序表查找"></a> 8.4 有序表查找</h2>
+<ul>
+<li><strong>折半查找</strong>
+<ul>
+<li>折半查找技术，又称为二分查找。前提是线性表中的记录必须是关键字有序，线性表必须采用顺序存储</li>
+<li>折半查找的基本思想：在有序表中，取中间记录作为比较对象，若给定值与中间记录的关键字相等，则查找成功；若给定值小于中间记录的关键字，则在中间记录的左半区继续查找，若给定值大于中间记录的关键字，则在中间记录的右半区继续查找。不断重复上述操作，直到查找成功，过所有查找区域无记录，查找失败为止</li>
+<li><mark>折半查找的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></mark></li>
+<li><strong>折半查找的前提条件是需要有序表顺序存储，对于静态查找表，一次排序后不再变化</strong>，但对于频繁执行插入或删除操作的数据集，维护有序的排列成本较高</li>
+</ul>
+</li>
+<li><strong>插值查找</strong>
+<ul>
+<li><strong>根据要查找的关键字key与查找表中最大最小记录的关键字比较后的查找方法，核心在于插值的计算，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>k</mi><mi>e</mi><mi>y</mi><mo>−</mo><mi>a</mi><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo stretchy="false">]</mo></mrow><mrow><mi>a</mi><mo stretchy="false">[</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi><mo stretchy="false">]</mo><mo>−</mo><mi>a</mi><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">mid=\frac{key-a[low]}{a[high]-a[low]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight">h</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="mord mathdefault mtight">h</span><span class="mclose mtight">]</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mclose mtight">]</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></strong></li>
+<li>时间复杂度为O(log n)</li>
+<li>对于表长较大，而关键字分布比较均匀的查找表插值查找性能较好；极端不均匀的数据，效率不高</li>
+</ul>
+</li>
+<li><strong>斐波那契查找</strong>
+<ul>
+<li>利用黄金分割的原理</li>
+<li>算法的核心：(F[k]为斐波那契数列)
+<ol>
+<li>当key = a[mid]时，查找成功</li>
+<li>当key &lt; a[mid]时，新范围为第low个到第mid-1个，此时范围个数为F[k-1]-1个</li>
+<li>当key &gt; a[mid]时，新范围为第m+1个到第high个，此时范围个数为F[k-2]-1个</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>折半查找是加法和除法运算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">mid=\frac{low+high}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.277216em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322159999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.446108em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight">h</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="mord mathdefault mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>；插值查找是进行复杂的四则运算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>k</mi><mi>e</mi><mi>y</mi><mo>−</mo><mi>a</mi><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo stretchy="false">]</mo></mrow><mrow><mi>a</mi><mo stretchy="false">[</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi><mo stretchy="false">]</mo><mo>−</mo><mi>a</mi><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">mid=\frac{key-a[low]}{a[high]-a[low]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight">h</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="mord mathdefault mtight">h</span><span class="mclose mtight">]</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mclose mtight">]</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">a</span><span class="mopen mtight">[</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>；斐波那契查找是进行简单的加减运算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>F</mi><mo stretchy="false">[</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">mid = low+F[k-1]-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+<h2 id="85-线性索引查找"><a class="markdownIt-Anchor" href="#85-线性索引查找"></a> 8.5 线性索引查找</h2>
+<ul>
+<li>数据结构的最终目的就是提高数据的处理速度，索引是为了加快查找速度而设计的一种数据结构</li>
+<li><strong>索引</strong>：把关键字与它对应的记录相关联的过程，一个索引由若干个索引项构成，每个索引至少包含关键字和其对应的记录在存储器中的位置信息
+<ul>
+<li>索引按照结构分为线性索引,树形索引和多级索引
+<ul>
+<li>线性索引就是将索引项集合组织为线性结构，也称索引表</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三种线性索引结构：稠密索引,分块索引和倒排索引</li>
+<li><strong>稠密索引</strong>
+<ul>
+<li>稠密索引是指在线性索引中，将数据集中的每个记录对应一个索引项</li>
+<li>对于稠密索引这个索引表说，索引项一定是按照关键码有序排列的</li>
+</ul>
+</li>
+<li><strong>分块索引</strong>
+<ul>
+<li>对于分块有序的数据集，将每块对应一个索引项，该索引方法称为<strong>分块索引</strong>，(为了减少索引项的个数，可以对数据集进行分块，使其分块有序，然后再对每一块建立一个索引项，从而减少索引项的个数)</li>
+<li><strong>分块有序是把数据集的记录分成了若干块，并且块满足：</strong>
+<ul>
+<li>块内无序，每一块内的记录不要求有序</li>
+<li>块间有序</li>
+</ul>
+</li>
+<li>分块索引的索引项结构
+<ul>
+<li>最大关键码，存储每一块中的最大关键字</li>
+<li>存储了块中的记录个数</li>
+<li>用于指向块首数据元素的指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>倒排索引</strong>
+<ul>
+<li>索引项的通用结构，次关键码和记录表号，其中记录表存储具有相同次关键字的所有记录的记录号(可以是指向记录的指针或者该记录的主关键字)。这样的索引方法就是倒排索引</li>
+<li>倒排索引根据属性的值查找记录，这种索引表中的每一项都包括一个属性值和具有该属性值的各记录地址。<mark>由于不是由记录来确定属性值，而是由属性值来确定记录的位置，因此称为倒排索引</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="86-二叉排列树"><a class="markdownIt-Anchor" href="#86-二叉排列树"></a> 8.6 二叉排列树</h2>
+<ul>
+<li><mark>动态查找表的数据结构之一</mark></li>
+<li><strong>二叉排序树(二叉查找树)</strong>：或者是一棵空树，或者是具有以下性质的二叉树
+<ul>
+<li>若它的左子树不空，则左子树上的所有结点的值均小于它的根结点的值</li>
+<li>若它的右子树不空，则右子树上的所有结点的值均大于它的根结点的值</li>
+<li>它的左,右子树也分别为二叉排序树</li>
+</ul>
+</li>
+<li><mark>前提是二叉树，采用递归的定义方式，结点之间满足次序关系，<strong>左子树结点一定比双亲结点小，右子树结点一定比其双亲节点大</strong></mark></li>
+<li>二叉树的查找操作,二叉树的插入操作和二叉树的删除操作
+<ul>
+<li>对于二叉树的查找，走的就是从根节点到查找的结点的路径，其比较次数等于给定值的结点在二叉排序树中的层数
+<ul>
+<li>极端情况，最少为1次，即根节点到要找到的结点最多不会超过树的深度，<mark>二叉排序树的查找性能取决于二叉排序树的形状</mark></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二叉排序树以链接的方式存储，保持了链接存储结构在执行插入或删除操作时不用移动元素的优点，只要找到合适的插入和删除位置后，仅需要修改链接指针即可
+<ul>
+<li><mark>希望二叉排序树是平衡的，即深度与完全二叉树相同，都为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>n</mi><mo stretchy="false">]</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">[log_2n]+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">n</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>,近似于折半查找</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="87-平衡二叉树avl树"><a class="markdownIt-Anchor" href="#87-平衡二叉树avl树"></a> 8.7 平衡二叉树(AVL树)</h2>
+<ul>
+<li><strong>平衡二叉树</strong>：是一种二叉排序树，其中每一个结点的左子树和右子树的高度差至多等于1
+<ul>
+<li><strong>平衡因子BF</strong>：二叉树上的结点的左子树高度减右子树高度的值</li>
+<li><strong>最小不平衡子树</strong>：距离插入结点最近的，且平衡因子的绝对值大于1的结点为根的子树</li>
+</ul>
+</li>
+<li><strong>实现原理</strong>：
+<ul>
+<li>构建二叉排序树的过程中，每当插入一个结点时，先检查是否因插入而破坏了树的平衡性，若是，则找出最小不平衡子树。在保持二叉排序树特性的前提下，调整最小不平衡子树中个结点之间的连接关系，进行相应的旋转，使之称为新的平衡子树</li>
+</ul>
+</li>
+<li><mark>当最小平衡子树根结点平衡因子BF大于1时，右旋，小于-1就左旋</mark>
+<ul>
+<li><mark>当最小不平衡子树的BF与它的子树的BF符号相反时，就需要对结点先进行一次旋转使得符号相同后，再反向旋转一次完成平衡操作</mark></li>
+</ul>
+</li>
+<li><mark>二叉排序树是平衡二叉树，查找的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，插入和删除操作为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></mark></li>
+</ul>
+<h2 id="88-多路查找树b树"><a class="markdownIt-Anchor" href="#88-多路查找树b树"></a> 8.8 多路查找树(B树)</h2>
+<ul>
+<li><strong>多路查找树</strong>，其每一个结点的孩子数可以多余两个，且每一个结点处可以存储多个元素</li>
+<li>每一个结点存储多少个元素，以及它的孩子树的多少是非常关键的，四种特殊结构：2-3树,2-3-4树,B树,B+树</li>
+<li><strong>2-3树</strong>：其中每个结点都具有两个孩子(2结点)或三个孩子(3结点)
+<ul>
+<li>一个2结点包含一个元素和两个孩子(或没有孩子),且与二叉排序树类似，左子树包含的元素小于该元素，右子树包含的元素大于该元素</li>
+<li>一个3结点包含一小一大两个元素和三个孩子(或没有孩子)，左子树包含小于较小元素的元素，右子树包含大于该元素的元素</li>
+</ul>
+</li>
+<li><mark>2-3树复杂的地方在于新节点的插入和已有结点的删除</mark></li>
+<li>插入分为3种情况：
+<ol>
+<li>对于空树，插入一个2结点即可</li>
+<li>插入结点到一个2结点的叶子上</li>
+<li>要往3结点种插入元素
+<ul>
+<li><mark>2-3树插入的传播效应导致根节点的拆分，则树的高度会增加</mark></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>删除的3种情况
+<ol>
+<li>所删除元素位于一个3结点的叶子结点上</li>
+<li>所删除元素位于一个2结点上，即要删除的是一个只有一个元素的结点
+<ol>
+<li>此结点的双亲也是2结点，且拥有一个3结点的孩子</li>
+<li>此结点的双亲是2结点，它的右孩子也是2结点</li>
+<li>此结点的双亲是一个3结点</li>
+<li>若当前树是一个满二叉树的情况，此时删除任何一个叶子都会是整棵树不能满足2-3树的定义</li>
+</ol>
+</li>
+<li>所删除的元素位于非叶子的分支结点，通常将树按中序遍历后得到此元素的前驱或后继元素，考虑让它们来补位即可</li>
+</ol>
+</li>
+<li><strong>2-3-4树</strong>
+<ul>
+<li>2-3树的概念扩展，包括了4结点的使用；一个4结点包含小中大三个元素和4个孩子(或没有孩子)</li>
+</ul>
+</li>
+<li><strong>B树</strong>
+<ul>
+<li><strong>B树是一种平衡的多路查找树</strong>，2-3树和2-3-4树都是B树的特例</li>
+<li><strong>B树的阶</strong>：结点最大的孩子数目称为B树的阶</li>
+<li>m阶B树具有的属性：
+<ul>
+<li>如果根节点不是叶结点，则其至少有两棵子树</li>
+<li>每一个非根的分支节点都有k-1个元素和k个孩子，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi mathvariant="normal">m</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">]</mo><mo>⩽</mo><mi mathvariant="normal">k</mi><mo>⩽</mo><mi mathvariant="normal">m</mi></mrow><annotation encoding="application/x-tex">[\mathrm{m} / 2] \leqslant \mathrm{k} \leqslant \mathrm{m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathrm">m</span></span><span class="mord">/</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83111em;vertical-align:-0.13667em;"></span><span class="mord"><span class="mord mathrm">k</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">m</span></span></span></span></span>。每一个叶子结点结点n都有k-1个元素，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi mathvariant="normal">m</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">]</mo><mo>⩽</mo><mi mathvariant="normal">k</mi><mo>⩽</mo><mi mathvariant="normal">m</mi></mrow><annotation encoding="application/x-tex">[\mathrm{m} / 2] \leqslant \mathrm{k} \leqslant \mathrm{m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathrm">m</span></span><span class="mord">/</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83111em;vertical-align:-0.13667em;"></span><span class="mord"><span class="mord mathrm">k</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">m</span></span></span></span></span></li>
+<li>所有叶子结点都位于同一层次</li>
+<li>所有分支结点包含下列信息数据<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mi mathvariant="normal">n</mi><mo separator="true">,</mo><msub><mi mathvariant="normal">A</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mrow><mtext> </mtext><mi mathvariant="normal">K</mi></mrow><mn>1</mn></msub><mo separator="true">,</mo><msub><mrow><mtext> </mtext><mi mathvariant="normal">A</mi></mrow><mn>1</mn></msub><mo separator="true">,</mo><msub><mrow><mtext> </mtext><mi mathvariant="normal">K</mi></mrow><mn>2</mn></msub><mo separator="true">,</mo><msub><mrow><mtext> </mtext><mi mathvariant="normal">A</mi></mrow><mn>2</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi mathvariant="normal">K</mi><mi mathvariant="normal">n</mi></msub><mo separator="true">,</mo><msub><mi mathvariant="normal">A</mi><mi mathvariant="normal">n</mi></msub><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(\mathrm{n}, \mathrm{A}_{0}, \mathrm{~K}_{1}, \mathrm{~A}_{1}, \mathrm{~K}_{2}, \mathrm{~A}_{2}, \cdots, \mathrm{K}_{\mathrm{n}}, \mathrm{A}_{\mathrm{n}}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathrm">n</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">A</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mspace nobreak"> </span><span class="mord mathrm">K</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mspace nobreak"> </span><span class="mord mathrm">A</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mspace nobreak"> </span><span class="mord mathrm">K</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mspace nobreak"> </span><span class="mord mathrm">A</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">K</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">A</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></li>
+</ul>
+</li>
+<li>在B树上查找是一个顺指针查找结点和在结点中查找关键字的交叉过程</li>
+<li>外存是将所有的信息分割称相等大小的页面，每次硬盘读写的都是一个或多个完整的页面，对于一个硬盘来说，一页的长度可能是21-214B
+<ul>
+<li><strong>B树的一个典型应用</strong>：要处理的硬盘数据量很大，无法一次全部装入内存
+<ul>
+<li>将B树进行调整，使B树的阶数与硬盘存储的页面大小相匹配</li>
+<li>一棵B树的阶为1001，高度为2，可以存储超过10亿个关键字，只要让根节点持久的保留在内存中，那么在这棵树上，寻找某一个关键字至多需要两次硬盘的读写</li>
+</ul>
+</li>
+<li><mark>B树的数据结构就是为内外存的数据交互准备的</mark></li>
+</ul>
+</li>
+<li>在含有n个关键字的B树上查找时，从根节点到关键字结点的路径上涉及的点数不超过<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mrow><mo stretchy="false">[</mo><mfrac><mi>m</mi><mn>2</mn></mfrac><mo stretchy="false">]</mo></mrow></msub><mrow><mo fence="true">(</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\log _{[\frac{m}{2}]}\left(\frac{n+1}{2}\right)+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.33494em;vertical-align:-0.4849399999999999em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2808599999999999em;"><span style="top:-2.75586em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6915428571428572em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4849399999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+</li>
+<li><strong>B+树</strong>
+<ul>
+<li>为了解决所有元素遍历等问题，我们在原有B树结构基础上，加上了新的元素组织方式，形成B+树</li>
+<li><mark>在B+树中，出现在分支节点中的元素会被当做它们在该分支结点位置的中序后继者中再次列出。另外，每一个叶子结点都会存储一个指向后一叶子结点的指针</mark></li>
+<li>m阶B+树和m阶B树的差别
+<ul>
+<li>有n棵子树的结点中含有n个关键字</li>
+<li>所有的叶子结点包含全部关键字信息，及指向含这些关键字记录的指针，叶子结点本身依关键字的大小自小而大顺序链接</li>
+<li>所有分支结点可以看成索引，结点中仅含有其子树中的最大（或最小）关键字</li>
+</ul>
+</li>
+<li>好处：
+<ul>
+<li>如果是要随机查找，从根结点触发，与B树的查找方式相同，只不过即使在分支结点找到了待查找的关键字，也只是用来索引的，不能提供实际记录的访问，还是需要到达包含次关键字的终端结点</li>
+<li>如果需要从最小关键字进行从小到大的顺序查找，可以从最左侧的叶子结点出发，不经过分支结点，而是沿着指向下一叶子的指针就可遍历所有的关键字</li>
+</ul>
+</li>
+<li>B+树的插入，删除过程都与B树类似，只不过插入和删除的元素都是在叶子结点上进行而已</li>
+</ul>
+</li>
+</ul>
+<h2 id="89-散列表查找哈希表概述"><a class="markdownIt-Anchor" href="#89-散列表查找哈希表概述"></a> 8.9 散列表查找(哈希表)概述</h2>
+<ul>
+<li><strong>散列技术</strong>：在记录的存储位置和它的关键字之间建立一个确定的对应关系f，使得每个关键字key对应一个存储位置f(key)
+<ul>
+<li>对应关系f称为<strong>散列函数</strong>，又称为<strong>哈希(Hash)函数</strong></li>
+<li>采用散列技术将记录存储在一块连续的存储空间中，这块连续存储空间称为散列表或哈希表</li>
+</ul>
+</li>
+<li><strong>查找步骤</strong>：
+<ul>
+<li>在存储时，通过散列函数计算记录的散列地址，并按此散列地址存储该记录</li>
+<li>当查找记录时，通过同样的散列函数计算记录的散列函数，按此散列地址访问该记录</li>
+</ul>
+</li>
+<li><mark>散列技术最适合求解的问题是查找与给定值相等的记录</mark></li>
+<li><strong>冲突</strong>：两个关键字<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>1</mn></msub><mo>≠</mo><mrow><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>2</mn></msub></mrow></mrow><annotation encoding="application/x-tex">key_1 \not ={ key_2 }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>,但是却有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(key_1) = f(key_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，并且将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>k</mi><mi>e</mi><msub><mi>y</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">key_1,key_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>称为这个散列函数的同义词</li>
+<li><strong>散列函数的构造函数</strong>
+<ul>
+<li>直接定址法：
+<ul>
+<li>取关键字的某个线性函数为散列函数,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>×</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo>+</mo><mi>b</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">常</mi><mi mathvariant="normal">数</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(key)=a \times key +b(a,b为常数)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">常</span><span class="mord cjk_fallback">数</span><span class="mclose">)</span></span></span></span></li>
+<li>散列函数的优点简单,均匀，也不会产生冲突，但问题是这需要事先知道关键字的分布情况，适合查找表较小且连续的情况</li>
+</ul>
+</li>
+<li>数学分析法
+<ul>
+<li>抽取方法是使用关键字的一部分来计算散列存储位置的方法</li>
+<li>数学分析法通常适合处理关键字位数比较多的情况，事先知道关键字的分布且关键字的若干位分布较均匀，可以使用该方法</li>
+</ul>
+</li>
+<li>平方取中法
+<ul>
+<li>平方取中法比较适合不知道关键字的分布，而位数又不是很多的情况</li>
+</ul>
+</li>
+<li>折叠法
+<ul>
+<li>折叠法是将关键字从左到右分割成位数相等的几部分，然后将这几部分叠加求和，并按散列表表长，取后几位作为散列地址</li>
+<li><mark>折叠法实现不需要知道关键字的分布，适合关键字位数较多的情况</mark></li>
+</ul>
+</li>
+<li>除留余数法(最常用的构造散列函数的方法)
+<ul>
+<li>散列表长为m的散列函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>o</mi><mi>d</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo separator="true">,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(key)=mod(key,p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span>，对key取模</li>
+<li>不仅可以对关键字直接取模，也可在折叠,平方取中后再取模</li>
+<li>若散列表表长为m，通常p为小于或等于表长的最小质数或不包含小于20质因子的合数</li>
+</ul>
+</li>
+<li>随机数法
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>r</mi><mi>a</mi><mi>n</mi><mi>d</mi><mi>o</mi><mi>m</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(key)=random(key)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">o</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></li>
+<li>当关键字的长度不等时，采用这个方法构造散列函数是比较适合的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="811-处理散列冲突的办法"><a class="markdownIt-Anchor" href="#811-处理散列冲突的办法"></a> 8.11 处理散列冲突的办法</h2>
+<ul>
+<li><strong>开放定址法</strong>
+<ul>
+<li>开放定址法是一旦发生了冲突，就取寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存下</li>
+<li><strong>线性探测法</strong>：公式：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>M</mi><mi>O</mi><mi>D</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>m</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3...</mn><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_i(key) = MOD(f(key)+d_i,m),(d_i=1,2,3...m-1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></li>
+<li>本身不是同义词却需要争夺一个地址的情况称为<strong>堆积</strong></li>
+<li><strong>二次探测法</strong>：公式：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>M</mi><mi>O</mi><mi>D</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>m</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><msup><mn>1</mn><mn>2</mn></msup><mo separator="true">,</mo><mo>−</mo><msup><mn>1</mn><mn>2</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>2</mn></msup><mo separator="true">,</mo><mo>−</mo><msup><mn>2</mn><mn>2</mn></msup><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><msup><mi>q</mi><mn>2</mn></msup><mo separator="true">,</mo><mo>−</mo><msup><mi>q</mi><mn>2</mn></msup><mo separator="true">,</mo><mi>q</mi><mo>⩽</mo><mi>m</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_i(key) = MOD(f(key)+d_i,m),(d_i=1^2,-1^2,2^2,-2^2...q^2,-q^2,q \leqslant m/2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span></span></span></span>
+<ul>
+<li>增加平方运算的目的是为了不让关键字都聚集在某一个区域</li>
+</ul>
+</li>
+<li><strong>随机探测法</strong>：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>M</mi><mi>O</mi><mi>D</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>m</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">(</mo><msub><mi>d</mi><mi>i</mi></msub><mi mathvariant="normal">为</mi><mi mathvariant="normal">随</mi><mi mathvariant="normal">机</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi></mrow><annotation encoding="application/x-tex">f_i(key) = MOD(f(key)+d_i,m),(d_i为随机数列</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">随</span><span class="mord cjk_fallback">机</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span></span></span></span>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">d_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为伪随机数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>再散列函数法</strong>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><msub><mi>H</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_i(key) = RH_i(key)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>,RH为不同的散列函数</li>
+</ul>
+</li>
+<li><strong>链地址法</strong>
+<ul>
+<li>将所有关键字为同义词的记录存储在一个单链表中，这种表为<strong>同义词子表</strong></li>
+<li>链地址法对于可能会造成很多冲突的散列函数来说，提供了绝不会出现找不到地址的保障，<strong>查找时需要遍历单链表，性能损耗</strong></li>
+</ul>
+</li>
+<li><strong>公共溢出区法</strong>
+<ul>
+<li>在查找时，对给定值通过散列函数计算出散列地址后，先与基本表的相应位置进行比对，如果相等，则查找成功；如果不相等，则到溢出表取进行顺序查找。如果相对于基本表而言，有冲突的数据很少的情况下，公共溢出区的结构对查找性能来说非常高</li>
+</ul>
+</li>
+<li>散列表查找的性能分析
+<ul>
+<li>==若没有冲突，散列查找的性能最高，时间复杂度为O(1)</li>
+<li>散列函数是否均匀</li>
+<li>处理冲突的方法</li>
+<li>散列表的装填因子
+<ul>
+<li><mark>所谓的装填因子a=填入表中的记录个数/散列表长度</mark></li>
+<li>a标志着散列表的装满程度，填入表中的记录越多，a越大，产生冲突的可能性越大</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-排序"><a class="markdownIt-Anchor" href="#9-排序"></a> 9 排序</h1>
+<h2 id="92-排序的基本概念与分类"><a class="markdownIt-Anchor" href="#92-排序的基本概念与分类"></a> 9.2 排序的基本概念与分类</h2>
+<ul>
+<li><strong>排序</strong>：假设含有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">n</mi></mrow><annotation encoding="application/x-tex">\mathbf{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">n</span></span></span></span></span> 个记录的序列为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">{</mo><msub><mi mathvariant="bold">r</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">r</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi mathvariant="bold">r</mi><mi mathvariant="bold">n</mi></msub><mo fence="true">}</mo></mrow><annotation encoding="application/x-tex">\left\{\mathbf{r}_{1}, \mathbf{r}_{2}, \cdots \cdots, \mathbf{r}_{\mathbf{n}}\right\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">{</span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">}</span></span></span></span></span>, 其相应的关键字分别为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">{</mo><msub><mi mathvariant="bold">k</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">k</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mo>⋯</mo><mtext> </mtext></mrow><annotation encoding="application/x-tex">\left\{\mathbf{k}_{1}, \mathbf{k}_{2}, \cdots \cdots\right.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">{</span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mclose nulldelimiter"></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">k</mi><mi mathvariant="bold">n</mi></msub><mo fence="true">}</mo></mrow><annotation encoding="application/x-tex">\left.\mathbf{k}_{\mathbf{n}}\right\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen nulldelimiter"></span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">}</span></span></span></span></span>, 需确定 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi mathvariant="bold">n</mi></mrow><annotation encoding="application/x-tex">1,2, \cdots \cdots, \mathbf{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathbf">n</span></span></span></span></span> 的一种排列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">p</mi><mn mathvariant="bold">1</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">p</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>⋯</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi mathvariant="bold">p</mi><mi mathvariant="bold">n</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{p}_{\mathbf{1}}, \mathbf{p}_{2}, \cdots \cdots, \mathbf{p}_{\mathbf{n}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">p</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">1</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">p</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">p</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, 使其相应的关键字满足 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">k</mi><mrow><mi mathvariant="bold">p</mi><mn>1</mn></mrow></msub><mo>⩽</mo></mrow><annotation encoding="application/x-tex">\mathbf{k}_{\mathbf{p} 1} \leqslant</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">p</span></span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">k</mi><mrow><mi mathvariant="normal">p</mi><mn>2</mn></mrow></msub><mo>⩽</mo><mo>⋯</mo><mo>⋯</mo><mo>⩽</mo><msub><mi mathvariant="bold">k</mi><mrow><mi mathvariant="normal">p</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{k}_{\mathrm{p} 2} \leqslant \cdots \cdots \leqslant \mathbf{k}_{\mathrm{pn}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">p</span></span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7733399999999999em;vertical-align:-0.13667em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">k</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">p</span><span class="mord mathrm mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> (非递减或非递增) 关系, 即使得序列成为一个按关键字有序的序列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">{</mo><msub><mi mathvariant="bold">r</mi><mrow><mi mathvariant="bold">p</mi><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">r</mi><mrow><mi mathvariant="bold">p</mi><mn>2</mn></mrow></msub><mo separator="true">,</mo><mo>⋯</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><msub><mi mathvariant="bold">r</mi><mrow><mi mathvariant="bold">p</mi><mi mathvariant="bold">n</mi></mrow></msub><mo fence="true">}</mo></mrow><annotation encoding="application/x-tex">\left\{\mathbf{r}_{\mathbf{p} 1}, \mathbf{r}_{\mathbf{p} 2}, \cdots \cdots, \mathbf{r}_{\mathbf{p n}}\right\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">{</span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">p</span></span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">p</span></span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">p</span><span class="mord mathbf mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">}</span></span></span></span></span>, 这样的操作就称为排序</li>
+<li><strong>排序的稳定性</strong>：假设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mi mathvariant="bold">i</mi></msub><mo>=</mo><msub><mi>k</mi><mi mathvariant="bold">j</mi></msub><mrow><mo fence="true">(</mo><mn>1</mn><mo>⩽</mo><mi>i</mi><mo>⩽</mo><mi>n</mi><mo separator="true">,</mo><mn>1</mn><mo>⩽</mo><mi mathvariant="bold">j</mi><mo>⩽</mo><mi>n</mi><mo separator="true">,</mo><mi>i</mi><mi mathvariant="normal">≠</mi><mi>j</mi></mrow></mrow><annotation encoding="application/x-tex">k_{\mathbf{i}}=k_{\mathbf{j}}\left(1 \leqslant i \leqslant n, 1 \leqslant \mathbf{j} \leqslant n, i \neq j\right.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">i</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">j</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbf">j</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">⩽</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose nulldelimiter"></span></span></span></span></span> ), 且在排序前的序列中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">r_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 领先于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi mathvariant="bold">j</mi></msub></mrow><annotation encoding="application/x-tex">r_{\mathbf{j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">j</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> （即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">i</mi><mo>&lt;</mo><mi mathvariant="bold">j</mi></mrow><annotation encoding="application/x-tex">\mathbf{i}&lt;\mathbf{j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathbf">i</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathbf">j</span></span></span></span></span> )。如 果排序后 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">r</mi><mi mathvariant="bold">i</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{r}_{\mathbf{i}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.59444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">i</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 仍领先于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">r</mi><mi mathvariant="bold">j</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{r}_{\mathbf{j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.730548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">j</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>, 则称所用的排序方法是稳定的; 反之, 若可能使得排序后的 序列中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">r_{j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 领先 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">r_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, 则称所用的排序方法是不稳定的</li>
+<li>排序分为<mark>内排序和外排序</mark>
+<ul>
+<li>内排序：内排序是在排序整个过程中, 待排序的所有记录全部被放置在内存中。外排序是 由于排序的记录个数太多, 不能同时放置在内存, 整个排序过程需要在内外存之间多 次交换数据才能进行</li>
+</ul>
+</li>
+<li>内排序的排序算法性能：
+<ol>
+<li>时间性能</li>
+<li>辅助空间</li>
+<li>算法的复杂性</li>
+</ol>
+</li>
+</ul>
+<h2 id="93-冒泡排序"><a class="markdownIt-Anchor" href="#93-冒泡排序"></a> 9.3 冒泡排序</h2>
 ]]></content>
       <categories>
         <category>Coding</category>
