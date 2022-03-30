@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/blogImg/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/blogImg/favicon.ico">
 
@@ -624,7 +624,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collector</span>&lt;<span class="title">T</span>,<span class="title">A</span> <span class="title">R</span>&gt;</span>&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Collector</span>&lt;T,A R&gt;&#123;</span><br><span class="line">  Supplier&lt;A&gt;supplier();</span><br><span class="line">  BiConsumer&lt;A T&gt;accumulator();</span><br><span class="line">  Function&lt;A R&gt;finisher();</span><br><span class="line">  BinaryOperator&lt;A&gt;combiner();</span><br><span class="line">  Set &lt;Characteristics&gt;characteristics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="并行数据处理与性能"><a class="markdownIt-Anchor" href="#并行数据处理与性能"></a> 并行数据处理与性能</h1>
 <h2 id="并行流"><a class="markdownIt-Anchor" href="#并行流"></a> 并行流</h2>
 <ul>
@@ -672,7 +672,7 @@
 <li>Spliterator接口声明的最后一个抽象方法是characteristics，它将返回一个int，代表Spliterator本身特性集的编码</li>
 <li>拆分过程：递归过程拆分直至调用trySplit方法返回null，受Spliterator本身特性影响，该特性通过characteristics方法声明</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Spliterator</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAdvance</span><span class="params">(Consumer&lt;?<span class="keyword">super</span> T&gt;action)</span></span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="function"><span class="keyword">long</span> <span class="title">estimateSize</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">charactenstics</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Spliterator</span>&lt;T&gt;&#123;</span><br><span class="line"> <span class="type">boolean</span> <span class="title function_">tryAdvance</span><span class="params">(Consumer&lt;?<span class="built_in">super</span> T&gt;action)</span>;</span><br><span class="line"> Spliterator&lt;T&gt;trySplit();</span><br><span class="line"> <span class="type">long</span> <span class="title function_">estimateSize</span><span class="params">()</span>;</span><br><span class="line"> <span class="type">int</span> <span class="title function_">charactenstics</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
 <h1 id="默认方法"><a class="markdownIt-Anchor" href="#默认方法"></a> 默认方法</h1>
 <ul>
 <li>Java8允许在接口内声明静态方法，同时引入了<strong>默认方法</strong>，通过默认方法可以指定接口方法的默认实现</li>
@@ -797,8 +797,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/01/15/JavaSE%E9%98%B6%E6%AE%B5%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" rel="prev" title="JavaSE阶段回顾总结">
-      <i class="fa fa-chevron-left"></i> JavaSE阶段回顾总结
+    <a href="/2022/01/10/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/" rel="prev" title="Java核心技术">
+      <i class="fa fa-chevron-left"></i> Java核心技术
     </a></div>
       <div class="post-nav-item">
     <a href="/2022/03/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="next" title="数据结构与算法">
