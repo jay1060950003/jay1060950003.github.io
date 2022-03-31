@@ -219,7 +219,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-03-31 16:52:28 / 修改时间：16:52:43" itemprop="dateCreated datePublished" datetime="2022-03-31T16:52:28+08:00">2022-03-31</time>
+              <time title="创建时间：2022-03-31 16:52:28 / 修改时间：21:10:57" itemprop="dateCreated datePublished" datetime="2022-03-31T16:52:28+08:00">2022-03-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +246,305 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h1>
+<ul>
+<li>C++ Primer的学习笔记</li>
+</ul>
+<h1 id="1-开始"><a class="markdownIt-Anchor" href="#1-开始"></a> 1 开始</h1>
+<h2 id="12-初始输入输出"><a class="markdownIt-Anchor" href="#12-初始输入输出"></a> 1.2 初始输入输出</h2>
+<ul>
+<li>iostream库为IO库,其中包含两个基本类型istream和ostream,分别表示输入流和输出流
+<ul>
+<li>一个流就是一个字符序列,是从IO设备读出或写入IO设备的</li>
+</ul>
+</li>
+<li>标准输入输出对象
+<ul>
+<li>cin标准输入</li>
+<li>cout标准输出</li>
+<li>cerr输出警告和错误信息,标准错误</li>
+<li>clog输出程序运行时的一般性信息</li>
+</ul>
+</li>
+<li>向流中写入数据
+<ul>
+<li>输出运算符&lt;&lt;
+<ul>
+<li>接受两个运算对象,左边为ostream对象,右边为要打印的值</li>
+<li>std::endl为操纵符：结束当前行,并将与设备关联的缓冲区中的内容刷到设备中
+<ul>
+<li>缓冲刷新操作可以保证到目前为止程序所产生的所有输出真正写入输出流中,而不是仅停留在内存中等待写入流</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从流中读取数据
+<ul>
+<li>输入运算符&gt;&gt;</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="2-变量和基本类型"><a class="markdownIt-Anchor" href="#2-变量和基本类型"></a> 2 变量和基本类型</h1>
+<h2 id="21-基本内置类型"><a class="markdownIt-Anchor" href="#21-基本内置类型"></a> 2.1 基本内置类型</h2>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>最小尺寸</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td>布尔类型</td>
+<td>未定义</td>
+</tr>
+<tr>
+<td>char</td>
+<td>字符</td>
+<td>8位</td>
+</tr>
+<tr>
+<td>wchar_t</td>
+<td>宽字符16</td>
+<td>位</td>
+</tr>
+<tr>
+<td>char16_t</td>
+<td>unicode字符16</td>
+<td>位</td>
+</tr>
+<tr>
+<td>char32_t</td>
+<td>unicode字符32</td>
+<td>位</td>
+</tr>
+<tr>
+<td>short</td>
+<td>短整型16</td>
+<td>位</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整型16</td>
+<td>位</td>
+</tr>
+<tr>
+<td>long</td>
+<td>长整型32</td>
+<td>位</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>长整型64</td>
+<td>位</td>
+</tr>
+<tr>
+<td>float</td>
+<td>单精度浮点数</td>
+<td>6位有效数字</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>扩展精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>C++规定,一个int至少和一个short一样大,一个long至少和一个int一样大,一个long long至少和一个long一样大
+<ul>
+<li><mark>long long在C++11中新定义</mark></li>
+<li><mark>一个字节为8bit,一个字32或64bit</mark></li>
+</ul>
+</li>
+<li>带符号类型和无符号类型
+<ul>
+<li>int,short,long和long long都是带符号的,<mark>在类型名前添加unsigned就可以得到无符号类型</mark></li>
+<li>char,signed,unsigned char：char,signed并不一样</li>
+</ul>
+</li>
+<li>类型转换
+<ul>
+<li><mark>赋给带符号类型一个超出表示范围的值时,结果是<em>未定</em>的</mark></li>
+<li><mark>切勿混用带符号类型和无符号类型</mark></li>
+</ul>
+</li>
+<li>字面值常量
+<ul>
+<li>以0开头的整数表示八进制数,以0x开头的整数表示十六进制数</li>
+<li>浮点数字面值表现位一个小数或以科学计数法表示的指数,其中指数部分用E标识,默认的浮点型字面值为double</li>
+<li><mark>单引号</mark>括起来的单个字符称为<mark>char型字面值</mark>,<mark>双括号</mark>括起来的零个或多个字符则构成<mark>字符串型字面值</mark>
+<ul>
+<li>字符串字面值实际上是由常量字符构成的数组,在末尾处有’\0’</li>
+</ul>
+</li>
+<li>转义字符：以反斜线作为开始
+<ul>
+<li>泛化的转义序列,其形式是\x后紧跟1个或多个十六进制,或者紧跟八进制数字,其中数字部分表示的是字符对应的数值</li>
+</ul>
+</li>
+<li>指定字面值的类型：添加前缀和后缀可以改变整型、浮点型和字符型字面值的默认类型
+<ul>
+<li>如果后缀中有U,则该字面值属于无符号类型</li>
+<li>如果后缀中有L,则字面值的类型至少是long</li>
+<li>如果后缀中有LL,则字面值的类型将是long long和unsigned long long 中的一种</li>
+</ul>
+</li>
+<li><mark>nullptr是指针字面值</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="22-变量"><a class="markdownIt-Anchor" href="#22-变量"></a> 2.2 变量</h2>
+<ul>
+<li>何为对象：对象是指一块能存储数据并具有某种类型的内部空间</li>
+<li><mark>C++中,初始化和赋值为两个概念</mark>
+<ul>
+<li>C++11,引入<mark>列表初始化</mark>：用花括号来初始化变量</li>
+</ul>
+</li>
+<li>默认初始化：内置类型的变量未被显式初始化,值由定义的位置决定,定义于任何函数体之外的变量被初始化为0
+<ul>
+<li>定义在函数体内部的内部的内置类型变量将不被初始化</li>
+<li><mark>一个未被初始化的内置类型变量的值是未被定义的</mark></li>
+<li>一些类要求每个对象都显式初始化,如果创建了一个该类的对象而未对其做明确的初始化操作,将引发错误</li>
+</ul>
+</li>
+<li>分离式编译
+<ul>
+<li>C++将声明和定义区分开,声明使得名字为程序所致,定义负责创建实体
+<ul>
+<li>变量声明规定了变量的类型和名字,同时申请存储空间</li>
+</ul>
+</li>
+<li>声明变量而不定义,需要在变量名前添加extern,而且不要显式初始化变量
+<ul>
+<li><mark>任何显式初始化的声明为定义</mark></li>
+<li><mark>在函数体内部,尝试初始化一个由extern关键字标记的变量将会引发错误</mark></li>
+<li><mark>变量只能被定义一次,但可以声明多次</mark>,变量的定义必须出现在且只能出现在一个文件中,而其他用到该变量的文件必须对其进行声明,却绝对不能重复定义</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C++是一种静态类型语言,其含义是在编译阶段检查类型</li>
+<li>标识符
+<ul>
+<li>C++的标识符由字母、数字和下画线组成,其中必须以字母或下画线开头</li>
+<li><mark>标识符的长度没有限制,但是对大小写字母敏感</mark></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义变量并初始化</span></span><br><span class="line"><span class="type">int</span> units_sold = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> units_sold = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> units_sold&#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">units_sold</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明变量而不定义</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> i;</span><br><span class="line"><span class="comment">// 声明并定义j</span></span><br><span class="line"><span class="type">int</span> j;</span><br></pre></td></tr></table></figure>
+<h2 id="23-复合类型"><a class="markdownIt-Anchor" href="#23-复合类型"></a> 2.3 复合类型</h2>
+<ul>
+<li>引用
+<ul>
+<li>引用为对象起了另一个名字，引用类型引用另外一种类型，通过将声明符携程&amp;d的形式来定义引用类型，其中d是声明的变量名</li>
+<li><mark>一般在初始化变量时，初始值会被拷贝到新建的对象中，然而定义引用时，程序会把引用和它的初始值绑定在一起，而不是将初始值拷贝给引用</mark>
+<ul>
+<li>引用必须初始化(引用无法令引用重新绑定到另外一个对象)</li>
+<li>一旦初始化完成，引用将和它的初始值对象一直绑定在一起</li>
+<li>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指针
+<ul>
+<li>与引用类似，指针也实现了对其他对象的间接访问</li>
+<li>指针与引用相比又有很多不同点
+<ol>
+<li>指针本身就是一个对象，允许对指针赋值和拷贝，而且在指针的生命周期内它可以先后指向几个不同的对象</li>
+<li>指针无须在定义时赋初值。和其他内置类型一样，在块作用域内定义的指针如果没有被初始化，也将拥有一个不确定的值</li>
+</ol>
+</li>
+<li>定义指针类型的方法将声明携程*d的形式,其中d式变量名</li>
+<li>在声明语句中指针的类型实际上被用于指定它所指向对象的类型,二者必须匹配。如果指针指向了一个其他类型的对象，对该对象的操作将发生错误</li>
+<li><strong>获取对象的地址</strong>，需要使用取地址符&amp;</li>
+<li><strong>指针值的4种状态</strong>
+<ul>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针</li>
+<li>无效指针
+<ul>
+<li>试图拷贝或以其他方式访问无效指针的值都将引发错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>指针访问对象</strong>，需要使用解引用符*访问对象
+<ul>
+<li>对指针解引用会得出所指的对象，若给解引用的结果赋值，实际上也就是给指针所指的对象赋值</li>
+<li>==解引用操作只适用于指向了某个对象的有效指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>空指针
+<ul>
+<li>C++11引入的新方法，使用nullptr初始化指针</li>
+<li>nullptr是一种特殊类型的字面值，可以转换成任意其他类型的指针类型</li>
+<li><mark>NULL的预处理变量来给指针赋值，其值为0，定义在cstdlib中</mark></li>
+</ul>
+</li>
+<li>赋值和指针
+<ul>
+<li>指针和引用都能提供对其他对象的间接访问，<strong>在具体实现细节上二者有很大不同</strong>，其中最重要的一点就是<strong>引用本身并非一个对象</strong>
+<ul>
+<li><strong>一旦定义了引用，就无法令其再绑定到另外的对象，之后每次使用这个引用都是访问它最初绑定的那个对象</strong></li>
+</ul>
+</li>
+<li><strong>指针和它存放的地址之间就没有这种限制了</strong>。和其他任何变量（只要不是引用）一样，给指针赋值就是令它存放一个新的地址，从而指向一个新的对象</li>
+</ul>
+</li>
+<li>任何非0指针对应的条件值都是true</li>
+<li>void* 指针
+<ul>
+<li>特殊的指针类型，可以存放任意对象的地址</li>
+<li>利用void*指针能做的事儿比较有限：拿它和别的指针比较、作为函数的输入或输出，或者赋给另外一个void*指针
+<ul>
+<li><mark>不能直接操作void*指针所指的对象</mark></li>
+</ul>
+</li>
+<li><mark>以void*的视角来看内存空间也就仅仅是内存空间，没办法访问内存空间中所存的对象</mark></li>
+</ul>
+</li>
+<li>复合类型的声明
+<ul>
+<li>定义包括一个基本数据类型和<mark>一组声明符</mark></li>
+<li><mark>定义多个变量时，基本数据类型是基本数据类型而非基本类型*，*仅仅是修饰了变量名而已</mark>
+<ul>
+<li><strong>将*或&amp;与变量名连在一起</strong></li>
+</ul>
+</li>
+<li>指向指针的指针
+<ul>
+<li>**表示指向指针的指针</li>
+<li>解引用指向指针的指针会得到一个指针</li>
+<li>两次解引用指向指针的指针会得到最原始的对象</li>
+</ul>
+</li>
+<li><strong>指向指针的引用</strong>
+<ul>
+<li>*&amp;r,理解时最简单的办法是从右向左阅读r的定义;离变量名最近的符号（此例中是&amp;r的符号&amp;）对变量的类型有最直接的影响，因此r是一个引用;声明符的其余部分用以确定r引用的类型是什么，此例中的符号*说明r引用的是一个指针;声明的基本数据类型部分指出r引用的是一个int指针</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p;  <span class="comment">//定义指向int型对象的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="type">int</span> *p = &amp;ival;     <span class="comment">//p存放ival的地址,p式指向变量ival的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* p1,p2;     <span class="comment">//p1为一个指向int的指针,p2为int类型</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> **pp = &amp;p;    <span class="comment">//pp1表示指向一个int指针的指针</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="type">int</span> *p;</span><br><span class="line"><span class="type">int</span> *&amp;r = p;    <span class="comment">//r是对指针p的引用</span></span><br><span class="line"></span><br><span class="line">r = &amp;i; <span class="comment">//r引用了一个指针，因此给r赋值&amp;i就是令p指向i</span></span><br><span class="line">*r = <span class="number">0</span>; <span class="comment">//解引用r得到i，也就是p指向的对象，将i的值改为0</span></span><br><span class="line"><span class="comment">//要理解r的类型到底是什么，最简单的办法是从右向左阅读r的定义</span></span><br><span class="line"><span class="comment">//离变量名最近的符号（此例中是&amp;r的符号&amp;）对变量的类型有最直接的影响，因此r是一个引用</span></span><br><span class="line"><span class="comment">//声明符的其余部分用以确定r引用的类型是什么，此例中的符号＊说明r引用的是一个指针</span></span><br><span class="line"><span class="comment">//最后，声明的基本数据类型部分指出r引用的是一个int指针</span></span><br></pre></td></tr></table></figure>
+<h2 id="24-const限定符"><a class="markdownIt-Anchor" href="#24-const限定符"></a> 2.4 const限定符</h2>
+
       
     </div>
 
