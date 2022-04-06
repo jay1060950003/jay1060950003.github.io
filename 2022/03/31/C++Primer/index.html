@@ -38,7 +38,7 @@
 <meta property="og:description" content="引言  C++ Primer的学习笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-31T08:52:28.000Z">
-<meta property="article:modified_time" content="2022-04-04T14:57:33.256Z">
+<meta property="article:modified_time" content="2022-04-06T14:33:25.717Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-04 22:57:33" itemprop="dateModified" datetime="2022-04-04T22:57:33+08:00">2022-04-04</time>
+                <time title="修改时间：2022-04-06 22:33:25" itemprop="dateModified" datetime="2022-04-06T22:33:25+08:00">2022-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -685,17 +685,10 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// using声明</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span>::name;</span><br></pre></td></tr></table></figure>
 <h2 id="32-标准库类型string"><a class="markdownIt-Anchor" href="#32-标准库类型string"></a> 3.2 标准库类型string</h2>
 <ul>
-<li>
-<p>标准库类型<strong>string</strong>表示可变长字符序列,包含在string头文件中</p>
-</li>
-<li>
-<p>定义和初始化string对象</p>
-</li>
-<li>
-<p>使用=初始化变量,执行拷贝初始化,不使用=进行直接初始化</p>
-</li>
-<li>
-<p>string操作的注意事项</p>
+<li>标准库类型<strong>string</strong>表示可变长字符序列,包含在string头文件中</li>
+<li>定义和初始化string对象</li>
+<li>使用=初始化变量,执行拷贝初始化,不使用=进行直接初始化</li>
+<li>string操作的注意事项
 <ul>
 <li>getline函数的参数是一个输入流和一个string对象,函数从给定的输入流中读入内容,直到遇到换行符为止(注意换行符也被读进来了)
 <ul>
@@ -714,8 +707,7 @@
 </li>
 </ul>
 </li>
-<li>
-<p>C++11引入<strong>范围for</strong>语句</p>
+<li>C++11引入<strong>范围for</strong>语句
 <ul>
 <li>遍历给定序列中的每个元素并对序列中的每个值执行某种操作</li>
 <li>for(declaration:expression)</li>
@@ -726,14 +718,11 @@
 </li>
 </ul>
 </li>
-<li>
-<p>string的操作</p>
-</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>string的操作</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -780,13 +769,10 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>cctype头文件中的标准库函数操作</li>
-</ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>cctype头文件中的标准库函数操作</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -848,8 +834,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::string;</span><br><span class="line"></span><br><span class="line">string s1;    <span class="comment">//默认初始化</span></span><br><span class="line">string s2 = s1; <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(s1)</span></span>;  <span class="comment">// 拷贝初始化</span></span><br><span class="line">string s3 = <span class="string">&quot;hiya&quot;</span>;   <span class="comment">//拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s3</span><span class="params">(<span class="string">&quot;hiya&quot;</span>)</span></span>;   <span class="comment">//直接初始化</span></span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">10</span>,<span class="string">&#x27;c&#x27;</span>)</span></span>;    <span class="comment">//cccccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 读写string对象</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  string s;</span><br><span class="line">  cin&gt;&gt;s;</span><br><span class="line">  cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读写数量未知的string</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  string word;</span><br><span class="line">  <span class="keyword">while</span>(cin&gt;&gt;word)</span><br><span class="line">    cout&lt;&lt;word&lt;&lt;endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// auto推断</span></span><br><span class="line"><span class="keyword">auto</span> len = line.<span class="built_in">size</span>(); <span class="comment">//len string::size_type</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 范围for</span></span><br><span class="line"><span class="keyword">for</span>(declaration:expression)</span><br><span class="line">  statement</span><br></pre></td></tr></table></figure>
 <h2 id="33-标准库类型vector"><a class="markdownIt-Anchor" href="#33-标准库类型vector"></a> 3.3 标准库类型vector</h2>
 <ul>
-<li>
-<p>标准库类型vector表示<strong>对象的集合</strong>,其中所有对象的类型都相同,常被称为容器</p>
+<li>标准库类型vector表示<strong>对象的集合</strong>,其中所有对象的类型都相同,常被称为容器
 <ul>
 <li>集合中每个对象都有一个与之对应的索引,索引用于访问对象</li>
 <li>vector属于类模板
@@ -860,8 +845,7 @@
 <li><mark>vector能容纳绝大多数类型的对象作为其元素,但引用不属于对象,不存在包含引用的vector</mark></li>
 </ul>
 </li>
-<li>
-<p>定义和初始化vector对象</p>
+<li>定义和初始化vector对象
 <ul>
 <li>定义一个空vector,然后当运行时获取到元素的值后再逐一添加(在程序运行时高效地往vector对象中添加元素)</li>
 <li>在定义对象时指定元素的初始值</li>
@@ -869,8 +853,7 @@
 <li><mark>用圆括号初始化指定的一般为数量,用花括号初始化的为初始化列表</mark></li>
 </ul>
 </li>
-<li>
-<p>向vector对象中添加元素</p>
+<li>向vector对象中添加元素
 <ul>
 <li>使用<strong>push_back</strong>向vector对象添加元素,将值作为尾元素压入vector中
 <ul>
@@ -882,14 +865,11 @@
 <li><mark>如果循环体内部包含有向vector对象添加元素的语句,则不能使用范围for循环</mark></li>
 </ul>
 </li>
-<li>
-<p>定义vector对象的方法</p>
-</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>定义vector对象的方法</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -924,13 +904,10 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>vector对象地其他操作</li>
-</ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>vector对象地其他操作</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -972,14 +949,12 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line">usind std::vector;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; ivec;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">ivec.<span class="built_in">push_back</span>(<span class="number">1</span>);  <span class="comment">//向ivec中添加元素</span></span><br></pre></td></tr></table></figure>
 <h2 id="34-迭代器介绍"><a class="markdownIt-Anchor" href="#34-迭代器介绍"></a> 3.4 迭代器介绍</h2>
 <ul>
-<li>
-<p>标准库容器可以使用<strong>迭代器</strong>,迭代器类似指针类型,提供了对对象的间接访问</p>
+<li>标准库容器可以使用<strong>迭代器</strong>,迭代器类似指针类型,提供了对对象的间接访问
 <ul>
 <li>使用迭代器可以访问某个元素,迭代器也能从一个元素移动到另一个元素；有效的迭代器指向某个元素或容器尾元素的下一个位置</li>
 </ul>
 </li>
-<li>
-<p>使用迭代器</p>
+<li>使用迭代器
 <ul>
 <li><strong>有迭代器的类型同时拥有返回迭代器的成员,这些类型拥有begin和end成员</strong>
 <ul>
@@ -992,15 +967,13 @@
 <li>和指针类似,可通过解引用迭代器来获取它所指示的元素</li>
 </ul>
 </li>
-<li>
-<p><strong>begin和end返回的具体类型由对象是否是常量决定</strong></p>
+<li><strong>begin和end返回的具体类型由对象是否是常量决定</strong>
 <ul>
 <li>如果对象是常量,begin和end返回const_iterator</li>
 <li>如果对象不是常量,返回iterator</li>
 </ul>
 </li>
-<li>
-<p>拥有迭代器的标准库类型<strong>使用iterator和const_iterator来表示迭代器类型</strong></p>
+<li>拥有迭代器的标准库类型<strong>使用iterator和const_iterator来表示迭代器类型</strong>
 <ul>
 <li><mark>const_iterator为常量,可以读取但不能修改它所指向的元素值</mark>
 <ul>
@@ -1009,17 +982,12 @@
 </li>
 </ul>
 </li>
-<li>
-<p>C++语言定义了箭头运算符-&gt;, <strong>箭头运算符把解引用和成员访问两个操作结合在一起</strong>,it-&gt;mem等价于(*it).mem</p>
-</li>
-<li>
-<p>迭代器运算符</p>
-</li>
+<li>C++语言定义了箭头运算符-&gt;, <strong>箭头运算符把解引用和成员访问两个操作结合在一起</strong>,it-&gt;mem等价于(*it).mem</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>迭代器运算符</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -1050,13 +1018,10 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>迭代器支持的运算符</li>
-</ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>迭代器支持的运算符</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -1159,12 +1124,11 @@
 <li>一般利用指针来操作这些字符串</li>
 </ul>
 </li>
-<li>cstring头文件中,C风格字符串的函数</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>cstring头文件中,C风格字符串的函数</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -1509,8 +1473,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// try语句块通用语法结构</span></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  program-statements</span><br><span class="line">&#125;<span class="built_in">catch</span>(exception-declaration)&#123;</span><br><span class="line">  handler-statements</span><br><span class="line">&#125;<span class="built_in">catch</span>(exception-declaration)&#123;</span><br><span class="line">  handler-statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="563-标准异常"><a class="markdownIt-Anchor" href="#563-标准异常"></a> 5.6.3 标准异常</h3>
 <ul>
-<li>
-<p>C++标准库定义了异常类</p>
+<li>C++标准库定义了异常类
 <ul>
 <li>exception头文件定义了最通用的异常类exception；只报告异常的发生,不提供任何额外信息</li>
 <li>stdexcept头文件定义了几种常用的异常类,详细信息在表5.1中列出</li>
@@ -1518,26 +1481,18 @@
 <li>type_info头文件定义了bad_cast异常类型</li>
 </ul>
 </li>
-<li>
-<p>标准库异常类只定义了几种运算,<mark>包括创建或拷贝异常类型的对象,以及为异常类型的对象赋值</mark></p>
-</li>
-<li>
-<p><mark>只能以<strong>默认初始化的方式初始化exception、bad_alloc和bad_cast对象</strong>,不允许为这些对象提供初始值</mark></p>
+<li>标准库异常类只定义了几种运算,<mark>包括创建或拷贝异常类型的对象,以及为异常类型的对象赋值</mark></li>
+<li><mark>只能以<strong>默认初始化的方式初始化exception、bad_alloc和bad_cast对象</strong>,不允许为这些对象提供初始值</mark>
 <ul>
 <li>其他异常类型不允许使用默认初始化的方式：应该使用string对象或者C风格字符串初始化这些类型的对象；当创建此类对象时,必须提供初始值,该初始值含有错误相关的信息</li>
 </ul>
 </li>
-<li>
-<p>异常类型只定义了一个名为what的成员函数,该函数没有任何参数,目的是提供关于异常的一些文本信息,返回值是一个指向C风格字符串的const char*</p>
-</li>
-<li>
-<p>&lt;stdexcept&gt;定义的异常类</p>
-</li>
+<li>异常类型只定义了一个名为what的成员函数,该函数没有任何参数,目的是提供关于异常的一些文本信息,返回值是一个指向C风格字符串的const char*</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>&lt;stdexcept&gt;定义的异常类</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -1732,16 +1687,14 @@
 </ul>
 <h3 id="626-含有可变形参的函数"><a class="markdownIt-Anchor" href="#626-含有可变形参的函数"></a> 6.2.6 含有可变形参的函数</h3>
 <ul>
-<li>
-<p>编写处理不同数量实参的函数,两种方法</p>
+<li>编写处理不同数量实参的函数,两种方法
 <ul>
 <li>如果实参类型相同,传递一个名为initializer_list的标准库类型</li>
 <li>如果实参的类型不同,编写可变参数模板函数</li>
 <li><mark>利用省略符,传递可变数量的实参,一般只用于与C函数交互的接口程序</mark></li>
 </ul>
 </li>
-<li>
-<p><strong>使用initializer_list类型的形参</strong>表示<strong>函数的实参数量未知但是全部实参的类型都相同</strong></p>
+<li><strong>使用initializer_list类型的形参</strong>表示<strong>函数的实参数量未知但是全部实参的类型都相同</strong>
 <ul>
 <li>initializer_list是一种标准库类型,用于表示某种特定类型的值的数组</li>
 <li>initializer_list类型定义在同名的头文件中</li>
@@ -1753,8 +1706,7 @@
 <li>和vector不一样的是,initializer_list对象中的元素永远是常量值,<strong>无法改变initializer_list对象中元素的值</strong></li>
 </ul>
 </li>
-<li>
-<p>省略符形参</p>
+<li>省略符形参
 <ul>
 <li>为了C++程序访问某些特殊的C代码而设置</li>
 <li>省略符形参应该仅仅用于C和C++通用的类型
@@ -1765,14 +1717,11 @@
 <li><mark>省略符形参只出现在形参列表的最后一个位置</mark></li>
 </ul>
 </li>
-<li>
-<p>initializer_list提供的操作</p>
-</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>操作</th>
+<th>initializer_list提供的操作</th>
 <th>解释</th>
 </tr>
 </thead>
@@ -2466,7 +2415,413 @@
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面值常量类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Debug</span>&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="title">Debug</span><span class="params">(<span class="type">bool</span> b = <span class="literal">true</span>)</span>: hw(b),io(b),other(b)&#123;</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="title">Debug</span><span class="params">(<span class="type">bool</span> h, <span class="type">bool</span> i, <span class="type">bool</span> o)</span>: hw(h),io(i),other(o)&#123;</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">constexpr</span> <span class="type">bool</span> <span class="title">any</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> hw||io||other;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_io</span><span class="params">(<span class="type">bool</span> b)</span></span>&#123;io=b;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_hw</span><span class="params">(<span class="type">bool</span> b)</span></span>&#123;hw=b;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_other</span><span class="params">(<span class="type">bool</span> b)</span></span>&#123;hw=b;&#125;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> hw;</span><br><span class="line">    <span class="type">bool</span> io;</span><br><span class="line">    <span class="type">bool</span> other;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// constexpr构造函数用于生成constexpr对象以及constexpr函数的参数或返回类型</span></span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> Debug <span class="title">io_sub</span><span class="params">(<span class="literal">false</span>,<span class="literal">true</span>,<span class="literal">false</span>)</span></span>; <span class="comment">//调试io</span></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">if</span>(io_sub.<span class="built_in">any</span>())</span><br><span class="line">  cerr &lt;&lt; <span class="string">&quot;print error&quot;</span> &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> Debug <span class="title">prod</span><span class="params">(<span class="literal">false</span>)</span></span>;  <span class="comment">//无调试</span></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">if</span>(prod.<span class="built_in">any</span>())</span><br><span class="line">  cerr &lt;&lt; <span class="string">&quot;print error&quot;</span> &lt;&lt;endl;</span><br></pre></td></tr></table></figure>
-<h1 id="76-类的静态成员"><a class="markdownIt-Anchor" href="#76-类的静态成员"></a> 7.6 类的静态成员</h1>
+<h2 id="76-类的静态成员"><a class="markdownIt-Anchor" href="#76-类的静态成员"></a> 7.6 类的静态成员</h2>
+<ul>
+<li>声明静态成员
+<ul>
+<li>声明成员为<strong>static</strong>使得其<strong>与类关联在一起</strong></li>
+<li>可以是public或private，可以是常量,引用，指针，类类型等</li>
+</ul>
+</li>
+<li>类的静态成员存在于任何对象之外,对象中不包含任何与静态数据成员有关的数据
+<ul>
+<li><mark>静态成员函数不会与任何对象绑定在一起，不包含this指针</mark></li>
+<li><mark>静态成员函数不能声明称const，且不能在静态成员函数中使用this指针</mark></li>
+</ul>
+</li>
+<li>通过**作用域运算符:😗*访问静态成员,可以使用类的对象,引用或指针来访问静态成员。
+<ul>
+<li>成员函数不用通过作用域运算符就可以直接访问静态成员</li>
+</ul>
+</li>
+<li><strong>定义静态成员</strong>
+<ul>
+<li>可以在类的内部或外部定义静态成员函数</li>
+<li>在类的外部定义静态成员时，不能重复static关键字，<mark>该static关键字只能出现在类内部的声明中</mark></li>
+<li>静态数据成员不属于类的任何一个对象，不是由类的构造函数初始化的，因此需要在类的外部定义和初始化每个静态成员，静态数据只能定义一次，且存在于程序的整个声明周期</li>
+</ul>
+</li>
+<li><strong>静态成员的类内初始化</strong>
+<ul>
+<li>通常情况下，类的静态成员不应该在类的内部初始化</li>
+<li><mark>然而，可以为静态成员提供const整数类型的类内初始值，不过要求静态成员必须是字面值常量类型的constexpr</mark></li>
+<li>即使一个常量静态数据成员在类内部被初始化了，通常情况下也应该在类的外部定义一下该成员</li>
+</ul>
+</li>
+<li><mark>静态数据可以作为默认实参，非静态数据成员不能作为默认实参，因为它的值本身属于对象的一部分</mark></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义并初始化一个静态成员</span></span><br><span class="line"><span class="type">double</span> Account::interestRate = <span class="built_in">initRate</span>();</span><br><span class="line"><span class="comment">// 该对象是类Account的静态成员,其类型是double</span></span><br><span class="line"><span class="comment">// 从类名开始，这条定义语句的剩余部分就都位于类的作用域之内了</span></span><br><span class="line"><span class="comment">// 因此，可以直接使用initRate函数</span></span><br><span class="line"><span class="comment">// 注意，虽然initRate是私有的，也能用它初始化interestRate</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态成员的类内初始化</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span>&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">double</span> <span class="title">rate</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> interestRate;&#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">rate</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="keyword">constexpr</span> <span class="type">int</span> period = <span class="number">30</span>; <span class="comment">//常量表达式</span></span><br><span class="line">    <span class="type">double</span> daily_tbl[period];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="8-io库"><a class="markdownIt-Anchor" href="#8-io库"></a> 8 IO库</h1>
+<ul>
+<li>io库的基础设施
+<ul>
+<li>istream</li>
+<li>ostream</li>
+<li>cin</li>
+<li>cout</li>
+<li>cerr</li>
+<li>&gt;&gt;</li>
+<li>&lt;&lt;</li>
+<li>getline()</li>
+</ul>
+</li>
+</ul>
+<h2 id="81-io类"><a class="markdownIt-Anchor" href="#81-io类"></a> 8.1 IO类</h2>
+<table>
+<thead>
+<tr>
+<th>IO库类型和头文件</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iostream</td>
+<td>istream,wistream从流读取数据</td>
+</tr>
+<tr>
+<td>ostream,wistream向流写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>iostream,wiostream读写流</td>
+<td></td>
+</tr>
+<tr>
+<td>fstream</td>
+<td>ifstream,wifstream从文件读取数据</td>
+</tr>
+<tr>
+<td>ofstream,wofstream向文件写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>fstream,wfstream读写文件</td>
+<td></td>
+</tr>
+<tr>
+<td>sstream</td>
+<td>istringstream,wistringstream从string读取数据</td>
+</tr>
+<tr>
+<td>ostringstream,wostringstream向string写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>stringstream,wstringstream读写string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>宽字符版本的类型和函数的名字以w开始
+<ul>
+<li>wcin,wcout和wcerr对应cin,cout,cerr</li>
+</ul>
+</li>
+<li>IO类型间的关系
+<ul>
+<li>概念上，设备类型和字符大小都不会影响要执行的IO操作</li>
+<li>标准库使我们可以忽略不同类型的流之间的差异，是通过继承机制实现的</li>
+</ul>
+</li>
+</ul>
+<h3 id="811-io对象无拷贝或赋值"><a class="markdownIt-Anchor" href="#811-io对象无拷贝或赋值"></a> 8.1.1 IO对象无拷贝或赋值</h3>
+<ul>
+<li><mark>不能拷贝或对IO对象赋值</mark>，<mark>因此不能将形参或返回类型设置为流类型</mark>
+<ul>
+<li>进行IO操作的函数通常以引用方式传递和返回流，读写一个IO对象会改变其状态，传递和返回引用不能是const</li>
+</ul>
+</li>
+</ul>
+<h3 id="812-条件状态"><a class="markdownIt-Anchor" href="#812-条件状态"></a> 8.1.2 条件状态</h3>
+<table>
+<thead>
+<tr>
+<th>IO库条件状态</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>strm::iostate</td>
+<td>strm是一种IO类型,iostate是一种机器相关的类型，提供了表达条件状态的完整功能</td>
+</tr>
+<tr>
+<td>strm::badbit</td>
+<td>指出流已崩溃</td>
+</tr>
+<tr>
+<td>strm::failbit</td>
+<td>指出一个IO操作失败</td>
+</tr>
+<tr>
+<td>strm::eofbit</td>
+<td>指出流到达了文件结束</td>
+</tr>
+<tr>
+<td>strm::goodbit</td>
+<td>指出流未处于错误状态</td>
+</tr>
+<tr>
+<td>s.eof()</td>
+<td>若流s的eofbit置位，则返回true</td>
+</tr>
+<tr>
+<td>s.fail()</td>
+<td>若流s的failbit或badbit置位，则返回true</td>
+</tr>
+<tr>
+<td>s.bad()</td>
+<td>若流s的badbit置位，则返回true</td>
+</tr>
+<tr>
+<td>s.good()</td>
+<td>若流s处于有效状态，则返回true</td>
+</tr>
+<tr>
+<td>s.clear()</td>
+<td>若流s中所有条件状态位复位，将流的状态设置位有效，返回void</td>
+</tr>
+<tr>
+<td>s.clear(flags)</td>
+<td>根据给定的flags标志位，将流s中对应条件状态位复位。flags的类型位strm::iostate。返回void</td>
+</tr>
+<tr>
+<td>s.setstate(flags)</td>
+<td>根据给定的flags标志位，将流s中对应条件状态位置位。flags的类型位strm::iostate。返回void</td>
+</tr>
+<tr>
+<td>s.rdstate()</td>
+<td>返回流s的当前条件状态，返回类型位strm::iostate</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>IO库定义了一个与机器无关的iostate类型，提供了表达流状态的完整功能，这个类型作为一个位集合使用
+<ul>
+<li>IO库定义了4个iostate类型的constexpr值，表示特定的位状态</li>
+<li>badbit表示系统级错误，通常情况下，一旦badbit被置位，流就无法再使用了</li>
+<li>在发生可恢复错误后，failbit被置位，通常是可以修正的，流还可以继续使用</li>
+<li>如果到达文件结束位置，eofbit和failbit都会被置位</li>
+<li>goodbit的值为0，表示流未发生错误</li>
+</ul>
+</li>
+<li>管理条件状态
+<ul>
+<li>流对象的rdstate成员返回一个iostate值，对应流的当前状态</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记住cin当前状态</span></span><br><span class="line"><span class="comment">// clear不接受参数的版本清除（复位）所有错误标志位</span></span><br><span class="line"><span class="keyword">auto</span> old_state = cin.<span class="built_in">rdstate</span>();</span><br><span class="line">cin.<span class="built_in">clear</span>();</span><br><span class="line"><span class="built_in">process_input</span>(cin); <span class="comment">//使用cin</span></span><br><span class="line">cin.<span class="built_in">setstate</span>(old_state);  <span class="comment">//置位会原有状态</span></span><br><span class="line"><span class="comment">// 带参数的clear版本接受一个iostate值，表示流的新状态</span></span><br><span class="line"><span class="comment">// 复位failbit和badbit，其他位保持不变</span></span><br><span class="line">cin.<span class="built_in">clear</span>(cin.rdstate &amp; ~cin.failbit &amp; ~cin.badbit);</span><br></pre></td></tr></table></figure>
+<h3 id="813-管理输出缓冲"><a class="markdownIt-Anchor" href="#813-管理输出缓冲"></a> 8.1.3 管理输出缓冲</h3>
+<ul>
+<li>每个输出流都管理一个缓冲区，用来保存程序读写的数据</li>
+<li>导致缓冲刷新的原因
+<ul>
+<li>程序正常结束，作为main函数的return操作的一部分，缓冲刷新被执行</li>
+<li>缓冲区满时，需要刷新缓冲，而后新的数据才能继续写入缓冲区</li>
+<li>可以使用操纵符如endl来显式刷新缓冲区</li>
+<li>在每个输出操作之后，可以用操纵符unitbuf设置流的内部状态，来清空缓冲区
+<ul>
+<li>默认情况下，对cerr是设置unitbuf的，因此写到cerr的内容都是立即刷新的</li>
+</ul>
+</li>
+<li>一个输出流可能被关联到另一个流。在这种情况下，当读写被关联的流时，关联到的流的缓冲区会被刷新
+<ul>
+<li>默认情况下，cin和cerr都关联到cout。因此，读cin或写cerr都会导致cout的缓冲区被刷新</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>刷新输出缓冲区</strong>
+<ul>
+<li>endl</li>
+<li>IO库中的flush和ends
+<ul>
+<li>flush刷新缓冲区，但不输出任何额外的字符</li>
+<li>ends向缓冲区插入一个空字符，然后刷新缓冲区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>unitbu操作符</strong>
+<ul>
+<li>可控制不每次输出操作后都刷新缓冲区</li>
+<li><strong>nounitbu</strong>重置流，使其恢复正常使用</li>
+</ul>
+</li>
+<li><mark>程序崩溃，输出缓冲区不会被刷新</mark></li>
+<li>关联输入和输出
+<ul>
+<li>当一个输入流被关联到一个输出流时，任何试图从输入流读取数据的操作都会先刷新关联的输出流</li>
+<li><strong>标准库将cout和cin关联在一起</strong></li>
+<li>tie有两个重载的版本
+<ul>
+<li>不带参数：返回指向输出流的指针(如果本对象当前关联到一个输出流，则返回的就是指向这个流的指针，如果对象未关联到流，则返回空指针)</li>
+<li>接受一个指向ostream的指针：将自己关联到此ostream( x.tie(&amp;o)将x关联到输出流o)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;<span class="string">&quot;hi&quot;</span>&lt;&lt;endl;</span><br><span class="line">cout&lt;&lt;<span class="string">&quot;hi&quot;</span>&lt;&lt;flush;</span><br><span class="line">cout&lt;&lt;<span class="string">&quot;hi&quot;</span>&lt;&lt;ends;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; unitbuf;</span><br><span class="line">cout &lt;&lt; nounitbuf;</span><br><span class="line"></span><br><span class="line">cin.<span class="built_in">tie</span>(&amp;cout);</span><br><span class="line"></span><br><span class="line">ostream *old_tie = cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">cin.<span class="built_in">tie</span>(&amp;cerr);</span><br><span class="line">cin.<span class="built_in">tie</span>(old_tie);</span><br></pre></td></tr></table></figure>
+<h2 id="82-文件输入输出"><a class="markdownIt-Anchor" href="#82-文件输入输出"></a> 8.2 文件输入输出</h2>
+<ul>
+<li>头文件fstream定义了三个类型来支持文件IO：
+<ul>
+<li>ifstream从一个给定文件读取数据</li>
+<li>ofstream向一个给定文件写入数据</li>
+<li>fstream可以读写给定文件</li>
+</ul>
+</li>
+<li>使用IO运算符读写文件，可以用getline从一个ifstream读取数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>fstream特有的操作</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fstream fstrm</td>
+<td>创建一个未绑定的文件流。fstream时头文件fstream中定义的一个类型</td>
+</tr>
+<tr>
+<td>fstream fstrm(s)</td>
+<td>创建一个未绑定的文件流，并打开名为s的文件</td>
+</tr>
+<tr>
+<td>fstream fstrm(s,mode)</td>
+<td>创建一个未绑定的文件流，以mode打开名为s的文件</td>
+</tr>
+<tr>
+<td>fstrm.open(s)</td>
+<td>打开名为s的文件，并将文件与fstrm绑定</td>
+</tr>
+<tr>
+<td>fstrm.close()</td>
+<td>关闭于fstrm绑定的文件，返回void</td>
+</tr>
+<tr>
+<td>fstrm.is_open()</td>
+<td>返回一个bool值，指出与fstrm关联的文件是否成功打开且尚未关闭</td>
+</tr>
+</tbody>
+</table>
+<h3 id="821-使用文件流对象"><a class="markdownIt-Anchor" href="#821-使用文件流对象"></a> 8.2.1 使用文件流对象</h3>
+<ul>
+<li>想要读写一个文件时，可以定义一个文件流对象，并将对象与文件关联起来，每个文件流类都定义了一个名为open的成员函数，完成一些系统相关的操作，用来定位给定的文件，并视情况打开为读或写模式</li>
+<li><strong>用fstream代替iostream&amp;</strong>
+<ul>
+<li>在要求使用基类型对象的地方，可以用继承类型的对象来替代</li>
+<li>接受一个iostream类型引用(或指针)参数的函数，可以用一个对应的fstream(或sstream)类型来调用
+<ul>
+<li>如果有一个函数接受一个ostream&amp;参数，在调用这个函数时，可以传递给它一个ofstream对象，对istream&amp;和ifstream也是类似的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>成员函数open和close</strong>
+<ul>
+<li>定义一个文件流对下昂，随后可以调用open将文件关联起来(调用open失败，failbit会被置位)</li>
+</ul>
+</li>
+<li><strong>自动析构</strong>：当一个fstream对象被销毁时，close会自动被调用</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ifstream <span class="title">in</span><span class="params">(ifile)</span></span>; <span class="comment">//构建一个ifstream并代开给定文件</span></span><br><span class="line">ofstream out; <span class="comment">//输出文件流未关联到任何文件</span></span><br><span class="line"></span><br><span class="line"><span class="function">ifstream <span class="title">input</span><span class="params">(argv[<span class="number">1</span>])</span></span>;  <span class="comment">//打开销售记录文件</span></span><br><span class="line"><span class="function">ofstream <span class="title">output</span><span class="params">(argv[<span class="number">2</span>])</span></span>;</span><br><span class="line">Sales_data total;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">read</span>(input,total))&#123;</span><br><span class="line">  Sales_data trans;</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">read</span>(input,trans))&#123;</span><br><span class="line">    <span class="keyword">if</span>(total.<span class="built_in">isbn</span>()==trans.<span class="built_in">isbn</span>())</span><br><span class="line">      total.<span class="built_in">combine</span>(trans);</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">print</span>(output,total)&lt;&lt;endl;</span><br><span class="line">      total = trans;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">print</span>(out,total) &lt;&lt;endl;</span><br><span class="line">&#125; <span class="keyword">else</span></span><br><span class="line">  cerr&lt;&lt;<span class="string">&quot;No data?!&quot;</span>&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"><span class="comment">// open文件流</span></span><br><span class="line"><span class="function">ifstream <span class="title">in</span><span class="params">(ifile)</span></span>;</span><br><span class="line">ofstream out;</span><br><span class="line">out.<span class="built_in">open</span>(ifile + <span class="string">&quot;.copy&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(out) <span class="comment">//检测open是否成功</span></span><br><span class="line"></span><br><span class="line">in.close;</span><br><span class="line">in.<span class="built_in">open</span>(ifile + <span class="string">&quot;2&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="822-文件模式"><a class="markdownIt-Anchor" href="#822-文件模式"></a> 8.2.2 文件模式</h3>
+<table>
+<thead>
+<tr>
+<th>文件模式</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in</td>
+<td>以读方式打开</td>
+</tr>
+<tr>
+<td>out</td>
+<td>以写方式打开</td>
+</tr>
+<tr>
+<td>app</td>
+<td>每次写操作前均定位到文件末尾</td>
+</tr>
+<tr>
+<td>ate</td>
+<td>打开文件后立即定位到文件末尾</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>截断文件</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>以二进制方式进行IO</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>只可以对ofstream或fstream对象设定out模式</li>
+<li>只可以对ifstream或fstream对象设定in模式</li>
+<li>只有当out也被设定时才可设定trunc模式</li>
+<li>只要trunc没被设定，就可以设定app模式。在app模式下，即使没有显式指定out模式，文件也总是以输出方式被打开</li>
+<li>默认情况下，即使我们没有指定trunc，以out模式打开的文件也会被截断。为了保留以out模式打开的文件的内容，我们必须同时指定app模式，这样只会将数据追加写到文件末尾；或者同时指定in模式，即打开文件同时进行读写操作</li>
+<li>ate和binary模式可用于任何类型的文件流对象，且可以与其他任何文件模式组合使用</li>
+<li>每个文件流类型都定义了一个默认的文件模式，当我们未指定文件模式时，就使用此默认模
+<ul>
+<li>与ifstream关联的文件默认以in模式打开</li>
+<li>与ofstream关联的文件默认以out模式打开</li>
+<li>与fstream关联的文件默认以in和out模式打开</li>
+</ul>
+</li>
+<li><mark>在每次打开文件时，都要设置文件模式，可能是显式地设置，也可能是隐式地设置。当程序未指定模式时，就使用默认值</mark></li>
+</ul>
+<h2 id="83-string流"><a class="markdownIt-Anchor" href="#83-string流"></a> 8.3 string流</h2>
+<ul>
+<li>istringstream从string读取数据</li>
+<li>ostringstream向string写入数据</li>
+<li>stringstream既可从string读数据也可向string写数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>stringstream特有地操作</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sstream strm;</td>
+<td>strm是一个未绑定的stringstream对象。sstream是头文件sstream中定义的一个类型</td>
+</tr>
+<tr>
+<td>sstream strm(s);</td>
+<td>strm是一个sstream对象。保存string s的一个拷贝。此构造函数时explicit的</td>
+</tr>
+<tr>
+<td>strm.str()</td>
+<td>返回strm所保存的string的拷贝</td>
+</tr>
+<tr>
+<td>strm.str(s)</td>
+<td>将string s拷贝strm中。返回void</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>使用istringstream</strong>：当某些工作是对整行文本进行处理，而其他一些工作是处理行内的单个单词时，通常可以使用istringstream</li>
+<li><strong>使用ostringstream</strong>：当逐步构造输出，希望最后一起打印时，ostringstream是很有用的</li>
+</ul>
+<h1 id="9-序容器"><a class="markdownIt-Anchor" href="#9-序容器"></a> 9 序容器</h1>
+<h2 id="91-顺序容器概述"><a class="markdownIt-Anchor" href="#91-顺序容器概述"></a> 9.1 顺序容器概述</h2>
 
     </div>
 
@@ -2547,7 +2902,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text"> 1 开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%88%9D%E5%A7%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.2 初始输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text"> 2 变量和基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 基本内置类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text"> 2.3 复合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#231-%E5%BC%95%E7%94%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 2.3.1 引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#232-%E6%8C%87%E9%92%88"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 2.3.2 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#233-%E7%90%86%E8%A7%A3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.3.</span> <span class="nav-text"> 2.3.3 理解复合类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text"> 2.4 const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#241-const%E5%BC%95%E7%94%A8%E5%B8%B8%E9%87%8F%E5%BC%95%E7%94%A8"><span class="nav-number">3.4.1.</span> <span class="nav-text"> 2.4.1 const引用(常量引用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#242-const%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">3.4.2.</span> <span class="nav-text"> 2.4.2 const和指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#243-%E9%A1%B6%E5%B1%82const%E5%92%8C%E5%BA%95%E5%B1%82const"><span class="nav-number">3.4.3.</span> <span class="nav-text"> 2.4.3 顶层const和底层const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#244-constexpr%E5%92%8C%E5%B8%B8%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.4.4.</span> <span class="nav-text"> 2.4.4 constexpr和常量表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.5.</span> <span class="nav-text"> 2.5 处理类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#251-%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="nav-number">3.5.1.</span> <span class="nav-text"> 2.5.1 类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#252-auto%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="nav-number">3.5.2.</span> <span class="nav-text"> 2.5.2 auto类型说明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#253-decltype%E7%B1%BB%E5%9E%8B%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">3.5.3.</span> <span class="nav-text"> 2.5.3 decltype类型指示符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.6.</span> <span class="nav-text"> 2.6 自定义数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text"> 3 字符串,向量和数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84using%E5%A3%B0%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 命名空间的using声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bstring"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 标准库类型string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bvector"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 标准库类型vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.4.</span> <span class="nav-text"> 3.4 迭代器介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.</span> <span class="nav-text"> 3.5 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#353-%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.1.</span> <span class="nav-text"> 3.5.3 指针和数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#354-c%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.5.2.</span> <span class="nav-text"> 3.5.4 C风格字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#355-%E4%B8%8E%E6%97%A7%E4%BB%A3%E7%A0%81%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.5.3.</span> <span class="nav-text"> 3.5.5 与旧代码的接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.6.</span> <span class="nav-text"> 3.6 多维数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text"> 4 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E5%9F%BA%E7%A1%80"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.2.</span> <span class="nav-text"> 4.2 算数运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-%E9%80%BB%E8%BE%91%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.3.</span> <span class="nav-text"> 4.3 逻辑和关系运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#44-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.4.</span> <span class="nav-text"> 4.4 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-%E9%80%92%E5%A2%9E%E5%92%8C%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.5.</span> <span class="nav-text"> 4.5 递增和递减运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.6.</span> <span class="nav-text"> 4.6 成员访问运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#47-%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.7.</span> <span class="nav-text"> 4.7 条件运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#48-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.8.</span> <span class="nav-text"> 4.8 位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#49-sizeof%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.9.</span> <span class="nav-text"> 4.9 sizeof运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#410-%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.10.</span> <span class="nav-text"> 4.10 逗号运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#411-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.11.</span> <span class="nav-text"> 4.11 类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4113-%E6%98%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.11.1.</span> <span class="nav-text"> 4.11.3 显式转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text"> 5 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#53-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.1.</span> <span class="nav-text"> 5.3 条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#54-%E8%BF%AD%E4%BB%A3%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.2.</span> <span class="nav-text"> 5.4 迭代语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.3.</span> <span class="nav-text"> 5.5 跳转语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#56-try%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">6.4.</span> <span class="nav-text"> 5.6 try语句块和异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#561-throw%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">6.4.1.</span> <span class="nav-text"> 5.6.1 throw表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#562-try%E8%AF%AD%E5%8F%A5%E5%9D%97"><span class="nav-number">6.4.2.</span> <span class="nav-text"> 5.6.2 try语句块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#563-%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8"><span class="nav-number">6.4.3.</span> <span class="nav-text"> 5.6.3 标准异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text"> 6 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#61-%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">7.1.</span> <span class="nav-text"> 6.1 函数基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#611-%E5%B1%80%E9%83%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.1.1.</span> <span class="nav-text"> 6.1.1 局部对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#612-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">7.1.2.</span> <span class="nav-text"> 6.1.2 函数声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#613-%E5%88%86%E7%A6%BB%E5%BC%8F%E7%BC%96%E8%AF%91"><span class="nav-number">7.1.3.</span> <span class="nav-text"> 6.1.3 分离式编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">7.2.</span> <span class="nav-text"> 6.2 参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#621-%E4%BC%A0%E5%80%BC%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.1.</span> <span class="nav-text"> 6.2.1 传值参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#622-%E4%BC%A0%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.2.</span> <span class="nav-text"> 6.2.2 传引用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#623-const%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82"><span class="nav-number">7.2.3.</span> <span class="nav-text"> 6.2.3 const形参和实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#624-%E6%95%B0%E7%BB%84%E5%BD%A2%E5%8F%82"><span class="nav-number">7.2.4.</span> <span class="nav-text"> 6.2.4 数组形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#625-main%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="nav-number">7.2.5.</span> <span class="nav-text"> 6.2.5 main:处理命令行选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#626-%E5%90%AB%E6%9C%89%E5%8F%AF%E5%8F%98%E5%BD%A2%E5%8F%82%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.2.6.</span> <span class="nav-text"> 6.2.6 含有可变形参的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#63-%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8Creturn%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.3.</span> <span class="nav-text"> 6.3 返回类型和return语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#631-%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.1.</span> <span class="nav-text"> 6.3.1 无返回值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#632-%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.2.</span> <span class="nav-text"> 6.3.2 有返回值的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#633-%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88"><span class="nav-number">7.3.3.</span> <span class="nav-text"> 6.3.3 返回数组指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="nav-number">7.4.</span> <span class="nav-text"> 6.4 函数重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#65-%E7%89%B9%E6%AE%8A%E7%94%A8%E9%80%94%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7"><span class="nav-number">7.5.</span> <span class="nav-text"> 6.5 特殊用途语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#651-%E9%BB%98%E8%AE%A4%E5%AE%9E%E5%8F%82"><span class="nav-number">7.5.1.</span> <span class="nav-text"> 6.5.1 默认实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#652-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8Cconstexpr%E5%87%BD%E6%95%B0"><span class="nav-number">7.5.2.</span> <span class="nav-text"> 6.5.2 内联函数和constexpr函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#653-%E8%B0%83%E8%AF%95%E5%B8%AE%E5%8A%A9"><span class="nav-number">7.5.3.</span> <span class="nav-text"> 6.5.3 调试帮助</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#66-%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D"><span class="nav-number">7.6.</span> <span class="nav-text"> 6.6 函数匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#661-%E5%AE%9E%E5%8F%82%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.6.1.</span> <span class="nav-text"> 6.6.1 实参类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#67-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">7.7.</span> <span class="nav-text"> 6.7 函数指针</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E7%B1%BB"><span class="nav-number">8.</span> <span class="nav-text"> 7 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#71-%E5%AE%9A%E4%B9%89%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.1.</span> <span class="nav-text"> 7.1 定义抽象数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#711-%E5%AE%9A%E4%B9%89%E6%94%B9%E8%BF%9B%E7%9A%84%E7%B1%BB"><span class="nav-number">8.1.1.</span> <span class="nav-text"> 7.1.1 定义改进的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#713-%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9B%B8%E5%85%B3%E7%9A%84%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.2.</span> <span class="nav-text"> 7.1.3 定义类相关的非成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#714-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.3.</span> <span class="nav-text"> 7.1.4 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#715-%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E5%92%8C%E6%9E%90%E6%9E%84"><span class="nav-number">8.1.4.</span> <span class="nav-text"> 7.1.5 拷贝,赋值和析构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B0%81%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text"> 7.2 访问控制与封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#721-%E5%8F%8B%E5%85%83"><span class="nav-number">8.2.1.</span> <span class="nav-text"> 7.2.1 友元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#73-%E7%B1%BB%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="nav-number">8.3.</span> <span class="nav-text"> 7.3 类的其他特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#731-%E7%B1%BB%E6%88%90%E5%91%98%E5%86%8D%E6%8E%A2"><span class="nav-number">8.3.1.</span> <span class="nav-text"> 7.3.1 类成员再探</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#732-%E8%BF%94%E5%9B%9Ethis%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">8.3.2.</span> <span class="nav-text"> 7.3.2 返回*this的成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#733-%E7%B1%BB%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.3.3.</span> <span class="nav-text"> 7.3.3 类类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#734-%E5%8F%8B%E5%85%83%E5%86%8D%E6%8E%A2"><span class="nav-number">8.3.4.</span> <span class="nav-text"> 7.3.4 友元再探</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#74-%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">8.4.</span> <span class="nav-text"> 7.4 类的作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#741-%E5%90%8D%E5%AD%97%E6%9F%A5%E6%89%BE%E4%B8%8E%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">8.4.1.</span> <span class="nav-text"> 7.4.1 名字查找与类的作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#75-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%8D%E6%8E%A2"><span class="nav-number">8.5.</span> <span class="nav-text"> 7.5 构造函数再探</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#751-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%80%BC%E5%88%97%E8%A1%A8"><span class="nav-number">8.5.1.</span> <span class="nav-text"> 7.5.1 构造函数初始值列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#752-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">8.5.2.</span> <span class="nav-text"> 7.5.2 委托构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#753-%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">8.5.3.</span> <span class="nav-text"> 7.5.3 默认构造函数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#754-%E9%9A%90%E5%BC%8F%E7%9A%84%E7%B1%BB%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.5.4.</span> <span class="nav-text"> 7.5.4 隐式的类类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#755-%E8%81%9A%E5%90%88%E7%B1%BB"><span class="nav-number">8.5.5.</span> <span class="nav-text"> 7.5.5 聚合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#756-%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F%E7%B1%BB"><span class="nav-number">8.5.6.</span> <span class="nav-text"> 7.5.6 字面值常量类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#76-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-number">9.</span> <span class="nav-text"> 7.6 类的静态成员</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text"> 1 开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%88%9D%E5%A7%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.2 初始输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text"> 2 变量和基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 基本内置类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text"> 2.3 复合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#231-%E5%BC%95%E7%94%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 2.3.1 引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#232-%E6%8C%87%E9%92%88"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 2.3.2 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#233-%E7%90%86%E8%A7%A3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.3.</span> <span class="nav-text"> 2.3.3 理解复合类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text"> 2.4 const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#241-const%E5%BC%95%E7%94%A8%E5%B8%B8%E9%87%8F%E5%BC%95%E7%94%A8"><span class="nav-number">3.4.1.</span> <span class="nav-text"> 2.4.1 const引用(常量引用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#242-const%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">3.4.2.</span> <span class="nav-text"> 2.4.2 const和指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#243-%E9%A1%B6%E5%B1%82const%E5%92%8C%E5%BA%95%E5%B1%82const"><span class="nav-number">3.4.3.</span> <span class="nav-text"> 2.4.3 顶层const和底层const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#244-constexpr%E5%92%8C%E5%B8%B8%E9%87%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.4.4.</span> <span class="nav-text"> 2.4.4 constexpr和常量表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.5.</span> <span class="nav-text"> 2.5 处理类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#251-%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="nav-number">3.5.1.</span> <span class="nav-text"> 2.5.1 类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#252-auto%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="nav-number">3.5.2.</span> <span class="nav-text"> 2.5.2 auto类型说明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#253-decltype%E7%B1%BB%E5%9E%8B%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">3.5.3.</span> <span class="nav-text"> 2.5.3 decltype类型指示符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.6.</span> <span class="nav-text"> 2.6 自定义数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text"> 3 字符串,向量和数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84using%E5%A3%B0%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 命名空间的using声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bstring"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 标准库类型string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bvector"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 标准库类型vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.4.</span> <span class="nav-text"> 3.4 迭代器介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.</span> <span class="nav-text"> 3.5 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#353-%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.1.</span> <span class="nav-text"> 3.5.3 指针和数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#354-c%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.5.2.</span> <span class="nav-text"> 3.5.4 C风格字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#355-%E4%B8%8E%E6%97%A7%E4%BB%A3%E7%A0%81%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.5.3.</span> <span class="nav-text"> 3.5.5 与旧代码的接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.6.</span> <span class="nav-text"> 3.6 多维数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text"> 4 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E5%9F%BA%E7%A1%80"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.2.</span> <span class="nav-text"> 4.2 算数运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-%E9%80%BB%E8%BE%91%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.3.</span> <span class="nav-text"> 4.3 逻辑和关系运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#44-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.4.</span> <span class="nav-text"> 4.4 赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-%E9%80%92%E5%A2%9E%E5%92%8C%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.5.</span> <span class="nav-text"> 4.5 递增和递减运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.6.</span> <span class="nav-text"> 4.6 成员访问运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#47-%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.7.</span> <span class="nav-text"> 4.7 条件运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#48-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.8.</span> <span class="nav-text"> 4.8 位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#49-sizeof%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.9.</span> <span class="nav-text"> 4.9 sizeof运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#410-%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.10.</span> <span class="nav-text"> 4.10 逗号运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#411-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.11.</span> <span class="nav-text"> 4.11 类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4113-%E6%98%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.11.1.</span> <span class="nav-text"> 4.11.3 显式转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text"> 5 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#53-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.1.</span> <span class="nav-text"> 5.3 条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#54-%E8%BF%AD%E4%BB%A3%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.2.</span> <span class="nav-text"> 5.4 迭代语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.3.</span> <span class="nav-text"> 5.5 跳转语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#56-try%E8%AF%AD%E5%8F%A5%E5%9D%97%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">6.4.</span> <span class="nav-text"> 5.6 try语句块和异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#561-throw%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">6.4.1.</span> <span class="nav-text"> 5.6.1 throw表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#562-try%E8%AF%AD%E5%8F%A5%E5%9D%97"><span class="nav-number">6.4.2.</span> <span class="nav-text"> 5.6.2 try语句块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#563-%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8"><span class="nav-number">6.4.3.</span> <span class="nav-text"> 5.6.3 标准异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text"> 6 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#61-%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">7.1.</span> <span class="nav-text"> 6.1 函数基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#611-%E5%B1%80%E9%83%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.1.1.</span> <span class="nav-text"> 6.1.1 局部对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#612-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">7.1.2.</span> <span class="nav-text"> 6.1.2 函数声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#613-%E5%88%86%E7%A6%BB%E5%BC%8F%E7%BC%96%E8%AF%91"><span class="nav-number">7.1.3.</span> <span class="nav-text"> 6.1.3 分离式编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">7.2.</span> <span class="nav-text"> 6.2 参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#621-%E4%BC%A0%E5%80%BC%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.1.</span> <span class="nav-text"> 6.2.1 传值参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#622-%E4%BC%A0%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.2.</span> <span class="nav-text"> 6.2.2 传引用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#623-const%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82"><span class="nav-number">7.2.3.</span> <span class="nav-text"> 6.2.3 const形参和实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#624-%E6%95%B0%E7%BB%84%E5%BD%A2%E5%8F%82"><span class="nav-number">7.2.4.</span> <span class="nav-text"> 6.2.4 数组形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#625-main%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="nav-number">7.2.5.</span> <span class="nav-text"> 6.2.5 main:处理命令行选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#626-%E5%90%AB%E6%9C%89%E5%8F%AF%E5%8F%98%E5%BD%A2%E5%8F%82%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.2.6.</span> <span class="nav-text"> 6.2.6 含有可变形参的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#63-%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8Creturn%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.3.</span> <span class="nav-text"> 6.3 返回类型和return语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#631-%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.1.</span> <span class="nav-text"> 6.3.1 无返回值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#632-%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.2.</span> <span class="nav-text"> 6.3.2 有返回值的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#633-%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88"><span class="nav-number">7.3.3.</span> <span class="nav-text"> 6.3.3 返回数组指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="nav-number">7.4.</span> <span class="nav-text"> 6.4 函数重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#65-%E7%89%B9%E6%AE%8A%E7%94%A8%E9%80%94%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7"><span class="nav-number">7.5.</span> <span class="nav-text"> 6.5 特殊用途语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#651-%E9%BB%98%E8%AE%A4%E5%AE%9E%E5%8F%82"><span class="nav-number">7.5.1.</span> <span class="nav-text"> 6.5.1 默认实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#652-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8Cconstexpr%E5%87%BD%E6%95%B0"><span class="nav-number">7.5.2.</span> <span class="nav-text"> 6.5.2 内联函数和constexpr函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#653-%E8%B0%83%E8%AF%95%E5%B8%AE%E5%8A%A9"><span class="nav-number">7.5.3.</span> <span class="nav-text"> 6.5.3 调试帮助</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#66-%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D"><span class="nav-number">7.6.</span> <span class="nav-text"> 6.6 函数匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#661-%E5%AE%9E%E5%8F%82%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.6.1.</span> <span class="nav-text"> 6.6.1 实参类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#67-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">7.7.</span> <span class="nav-text"> 6.7 函数指针</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E7%B1%BB"><span class="nav-number">8.</span> <span class="nav-text"> 7 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#71-%E5%AE%9A%E4%B9%89%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.1.</span> <span class="nav-text"> 7.1 定义抽象数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#711-%E5%AE%9A%E4%B9%89%E6%94%B9%E8%BF%9B%E7%9A%84%E7%B1%BB"><span class="nav-number">8.1.1.</span> <span class="nav-text"> 7.1.1 定义改进的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#713-%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9B%B8%E5%85%B3%E7%9A%84%E9%9D%9E%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.2.</span> <span class="nav-text"> 7.1.3 定义类相关的非成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#714-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">8.1.3.</span> <span class="nav-text"> 7.1.4 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#715-%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E5%92%8C%E6%9E%90%E6%9E%84"><span class="nav-number">8.1.4.</span> <span class="nav-text"> 7.1.5 拷贝,赋值和析构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B0%81%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text"> 7.2 访问控制与封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#721-%E5%8F%8B%E5%85%83"><span class="nav-number">8.2.1.</span> <span class="nav-text"> 7.2.1 友元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#73-%E7%B1%BB%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%80%A7"><span class="nav-number">8.3.</span> <span class="nav-text"> 7.3 类的其他特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#731-%E7%B1%BB%E6%88%90%E5%91%98%E5%86%8D%E6%8E%A2"><span class="nav-number">8.3.1.</span> <span class="nav-text"> 7.3.1 类成员再探</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#732-%E8%BF%94%E5%9B%9Ethis%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">8.3.2.</span> <span class="nav-text"> 7.3.2 返回*this的成员函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#733-%E7%B1%BB%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.3.3.</span> <span class="nav-text"> 7.3.3 类类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#734-%E5%8F%8B%E5%85%83%E5%86%8D%E6%8E%A2"><span class="nav-number">8.3.4.</span> <span class="nav-text"> 7.3.4 友元再探</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#74-%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">8.4.</span> <span class="nav-text"> 7.4 类的作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#741-%E5%90%8D%E5%AD%97%E6%9F%A5%E6%89%BE%E4%B8%8E%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">8.4.1.</span> <span class="nav-text"> 7.4.1 名字查找与类的作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#75-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%8D%E6%8E%A2"><span class="nav-number">8.5.</span> <span class="nav-text"> 7.5 构造函数再探</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#751-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%80%BC%E5%88%97%E8%A1%A8"><span class="nav-number">8.5.1.</span> <span class="nav-text"> 7.5.1 构造函数初始值列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#752-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">8.5.2.</span> <span class="nav-text"> 7.5.2 委托构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#753-%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">8.5.3.</span> <span class="nav-text"> 7.5.3 默认构造函数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#754-%E9%9A%90%E5%BC%8F%E7%9A%84%E7%B1%BB%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.5.4.</span> <span class="nav-text"> 7.5.4 隐式的类类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#755-%E8%81%9A%E5%90%88%E7%B1%BB"><span class="nav-number">8.5.5.</span> <span class="nav-text"> 7.5.5 聚合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#756-%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F%E7%B1%BB"><span class="nav-number">8.5.6.</span> <span class="nav-text"> 7.5.6 字面值常量类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#76-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-number">8.6.</span> <span class="nav-text"> 7.6 类的静态成员</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-io%E5%BA%93"><span class="nav-number">9.</span> <span class="nav-text"> 8 IO库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#81-io%E7%B1%BB"><span class="nav-number">9.1.</span> <span class="nav-text"> 8.1 IO类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#811-io%E5%AF%B9%E8%B1%A1%E6%97%A0%E6%8B%B7%E8%B4%9D%E6%88%96%E8%B5%8B%E5%80%BC"><span class="nav-number">9.1.1.</span> <span class="nav-text"> 8.1.1 IO对象无拷贝或赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#812-%E6%9D%A1%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">9.1.2.</span> <span class="nav-text"> 8.1.2 条件状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#813-%E7%AE%A1%E7%90%86%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2"><span class="nav-number">9.1.3.</span> <span class="nav-text"> 8.1.3 管理输出缓冲</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#82-%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">9.2.</span> <span class="nav-text"> 8.2 文件输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#821-%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E6%B5%81%E5%AF%B9%E8%B1%A1"><span class="nav-number">9.2.1.</span> <span class="nav-text"> 8.2.1 使用文件流对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#822-%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.2.2.</span> <span class="nav-text"> 8.2.2 文件模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#83-string%E6%B5%81"><span class="nav-number">9.3.</span> <span class="nav-text"> 8.3 string流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E5%BA%8F%E5%AE%B9%E5%99%A8"><span class="nav-number">10.</span> <span class="nav-text"> 9 序容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#91-%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">10.1.</span> <span class="nav-text"> 9.1 顺序容器概述</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
