@@ -390,7 +390,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-20 17:26:26" itemprop="dateModified" datetime="2022-03-20T17:26:26+08:00">2022-03-20</time>
+                <time title="修改时间：2022-04-29 21:14:14" itemprop="dateModified" datetime="2022-04-29T21:14:14+08:00">2022-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -448,114 +448,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2022/03/02/Java8%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blogImg/user.png">
-      <meta itemprop="name" content="jay1060950003">
-      <meta itemprop="description" content="北京航空航天大学21级硕士研究生在读，非科班，光学工程激光雷达领域在读硕士。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyCodingStudio">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/02/Java8%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">Java8实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-03-02 19:14:00 / 修改时间：20:11:33" itemprop="dateCreated datePublished" datetime="2022-03-02T19:14:00+08:00">2022-03-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> Lambda表达式</h1>
-<h2 id="行为参数化"><a class="markdownIt-Anchor" href="#行为参数化"></a> 行为参数化</h2>
-<ul>
-<li>一种软件开发模式，<mark>将代码块作为参数传递给另一个方法，稍后再去执行，方法的行为就基于那块代码被参数化了</mark></li>
-</ul>
-<h2 id="lambda表达式的三个部分参数列表箭头lambda主体"><a class="markdownIt-Anchor" href="#lambda表达式的三个部分参数列表箭头lambda主体"></a> Lambda表达式的三个部分:参数列表,箭头,Lambda主体</h2>
-<ul>
-<li>在函数式接口中使用Lambda接口
-<ul>
-<li>函数式接口就是只定义了一个抽象方法的接口,在该接口中可以拥有默认方法(即在类没有对方法进行实现时，其主体为方法提供默认实现的方法)</li>
-<li>Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例</li>
-<li><mark>@ FunctionalInterface 为函数式接口的标注, 抽象方法的签名称为函数描述符</mark></li>
-</ul>
-</li>
-<li>常用的函数式接口:
-<ul>
-<li>Predicate&lt;T&gt;  boolean test(T t)</li>
-<li>Consumer&lt;T&gt;   void accept(T t)</li>
-<li>Function&lt;T,R&gt;  R apply(T t)</li>
-<li>Supplier&lt;T&gt;</li>
-</ul>
-</li>
-<li><mark>引用类型(Byte,Integer,Object,List),与原始类型(int,double,byte,char)类型，但是泛型只能绑定到引用类型</mark>
-<ul>
-<li><mark>Java中具有将原始类型转换为引用类型的机制(装箱),同时存在拆箱的机制</mark></li>
-<li>装箱后的值本质上就是把原始类型包裹起来，并保存在堆</li>
-</ul>
-</li>
-<li>若Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/02/Java8%E5%AE%9E%E6%88%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jay1060950003.github.io/2022/01/10/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -587,7 +479,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-06 12:51:48" itemprop="dateModified" datetime="2022-03-06T12:51:48+08:00">2022-03-06</time>
+                <time title="修改时间：2022-04-29 21:17:15" itemprop="dateModified" datetime="2022-04-29T21:17:15+08:00">2022-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -967,7 +859,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
