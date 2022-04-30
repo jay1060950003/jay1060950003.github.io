@@ -305,10 +305,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-03-20 17:25:58 / 修改时间：18:26:00" itemprop="dateCreated datePublished" datetime="2022-03-20T17:25:58+08:00">2022-03-20</time>
+              <time title="创建时间：2022-03-20 17:25:58" itemprop="dateCreated datePublished" datetime="2022-03-20T17:25:58+08:00">2022-03-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-30 22:36:46" itemprop="dateModified" datetime="2022-04-30T22:36:46+08:00">2022-04-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -340,6 +346,277 @@
 </ul>
 <h1 id="1-计算机网络和因特网"><a class="markdownIt-Anchor" href="#1-计算机网络和因特网"></a> 1. 计算机网络和因特网</h1>
 <h2 id="11-什么是因特网"><a class="markdownIt-Anchor" href="#11-什么是因特网"></a> 1.1 什么是因特网</h2>
+<h3 id="111-具体构成描述"><a class="markdownIt-Anchor" href="#111-具体构成描述"></a> 1.1.1 具体构成描述</h3>
+<ul>
+<li><strong>节点</strong>：
+<ul>
+<li>主机及其上运行的应用程序</li>
+<li>路由器，交换机等网络交换设备</li>
+</ul>
+</li>
+<li><strong>边</strong>：<strong>通信链路</strong>
+<ul>
+<li>接入网链路：主机连接到互联网的链路</li>
+<li>主干链路：路由器间的链路</li>
+</ul>
+</li>
+<li><strong>主机</strong>或<strong>端系统</strong>
+<ul>
+<li>端系统通过<strong>通信链路</strong>和<strong>分组交换机</strong>连接到一起</li>
+<li>不同的链路能够以不同的速率传输数据，链路的传输速率以**比特/秒(bit/s,bps)**度量</li>
+<li><strong>分组</strong>：当一台端系统要向另一台端系统发送数据时，发送端系统将数据分段，并为每段加上首部字节</li>
+<li><strong>分组交换机</strong>：转发分组
+<ul>
+<li><strong>分组交换机包括</strong>：<strong>路由器</strong>和<strong>链路层交换机</strong></li>
+<li>链路层交换机通常用于接入网中，而路由器通常用于网络核心中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>端系统，分组交换机和其他因特网部件需要运行一系列协议
+<ul>
+<li>TCP/IP为因特网的主要协议</li>
+<li>Internet标准
+<ul>
+<li>RFC:IETF的标准文档</li>
+<li>IETF:因特网工程任务组</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="112-服务描述"><a class="markdownIt-Anchor" href="#112-服务描述"></a> 1.1.2 服务描述</h3>
+<ul>
+<li><strong>分布式应用程序</strong>：应用程序涉及多个相互交换数据的端系统
+<ul>
+<li>因特网应用程序运行在端系统上，即它们并不运行在网络核心中的分组交换机中</li>
+<li>尽管分组交换机能够加速端系统之间的数据交换，但它们并不在意作为数据的源或宿的应用</li>
+</ul>
+</li>
+<li>与因特网相连的端系统提供了一个<strong>套接字接口</strong>，该接口规定了运行在一个端系统上的程序请求因特网基础设施向运行在另一个端系统上的特定目的地程序交付数据的方式</li>
+</ul>
+<h3 id="113-什么是协议"><a class="markdownIt-Anchor" href="#113-什么是协议"></a> 1.1.3 什么是协议</h3>
+<ul>
+<li>协议定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文传输和/或接收或其他事件方面所采取的动作</li>
+</ul>
+<h2 id="12-网络边缘"><a class="markdownIt-Anchor" href="#12-网络边缘"></a> 1.2 网络边缘</h2>
+<ul>
+<li>通常把与因特网相连的计算机和其他设备称为<strong>端系统</strong>
+<ul>
+<li>位于网络的边缘，故称为<strong>端系统</strong></li>
+<li>划分为：<strong>客户和服务器两大类</strong></li>
+</ul>
+</li>
+<li><strong>接入网</strong>：是指将端系统屋里连接到其边缘路由器的网络
+<ul>
+<li><strong>边缘路由器</strong>：是指端系统到任何其他远程端系统的路径上的第一台路由器</li>
+</ul>
+</li>
+<li><strong>采用网络设施的面向连接服务</strong>：TCP——传输控制协议</li>
+<li><strong>采用基础设施的无连接服务</strong>：UDP——用户数据报协议</li>
+</ul>
+<h2 id="13-网络核心"><a class="markdownIt-Anchor" href="#13-网络核心"></a> 1.3 网络核心</h2>
+<h3 id="131-分组交换"><a class="markdownIt-Anchor" href="#131-分组交换"></a> 1.3.1 分组交换</h3>
+<ul>
+<li>在各种网络应用中，端系统彼此交换报文</li>
+<li>为了系统向目的端系统发送一个报文，源将长报文划分为较小的数据块，称之为<strong>分组</strong></li>
+<li>在源和目的地之间，每个分组都通过通信链路和<strong>分组交换机</strong>(路由器或链路层交换机)传送</li>
+<li>分组以等于该链路最大传输速率的速度传输通过通信链路</li>
+<li>1 存储转发传输
+<ul>
+<li>多数分组交换机在<strong>链路的输入端</strong>使用<strong>存储转发传输机制</strong></li>
+<li>存储转发传输是指在交换机能够开始向输出链路传输该分组的第一个比特之前，必须接受到整个分组</li>
+<li>通过由N条速率均为R的链路组成的路径，从源到目的地发送一个分组，端到端时延为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi mathvariant="normal">端</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">端</mi></mrow></msub><mo>=</mo><mi>N</mi><mfrac><mi>L</mi><mi>R</mi></mfrac></mrow><annotation encoding="application/x-tex">d_{端到端} = N \frac{L}{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.15em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">端</span><span class="mord cjk_fallback mtight">到</span><span class="mord cjk_fallback mtight">端</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+</ul>
+</li>
+<li>2 排队时延和分组丢失
+<ul>
+<li>对于每条相连的链路，该分组交换机具有一个输出缓存(输出队列)，用于存储路由器准备发往那条链路的分组，除了存储转发时延之外，分组还需要承受输出缓存的<strong>排队时延</strong></li>
+<li>缓存空间的大小有限，一个到达分组可能发现该缓存已被完全充满，此情况下会出现<strong>丢包</strong>，到达的分组或已经排队的分组之一会被丢弃</li>
+</ul>
+</li>
+<li>3 转发表和路由选择协议
+<ul>
+<li>路由器从相连的一条通信链路得到分组，然后向相连的另一条通信链路转发该分组</li>
+<li>在因特网中，每个端系统都具有IP地址，当源主机向目的端系统发送分组时，源在该分组的首部包含了目的地的IP地址。当一个分组到达网络中的路由器时，路由器会检查该分组的目的地址的一部分，并向一台相邻的路由器转发该分组。每台路由器都有一个<strong>转发表</strong>，用于将目的地址映射成输出链路。当某分组到达一台路由器时，路由器会检查该地址，并用这个目的地址搜索其转发表，以发现适当的出链路，路由器将分组导向该出链路</li>
+</ul>
+</li>
+</ul>
+<h3 id="132-电路交换"><a class="markdownIt-Anchor" href="#132-电路交换"></a> 1.3.2 电路交换</h3>
+<ul>
+<li>通过网络链路和交换机移动数据有两种基本方法：<strong>电路交换</strong>和<strong>分组交换</strong></li>
+<li>在电路交换网络中，在端系统间通信会话期间，预留了端系统沿路径通信所需要的资源，在分组交换网络中，这些资源不需要预留</li>
+<li><strong>端到端连接</strong>：网络在两台主机之间创建的一条专用连接</li>
+<li>电路交换网络中的复用：链路中的电路时通过频分复用或时分复用来实现的</li>
+</ul>
+<h3 id="133-网络的网络"><a class="markdownIt-Anchor" href="#133-网络的网络"></a> 1.3.3 网络的网络</h3>
+<ul>
+<li>网络结构1，用单一的全球传输ISP互联所有接入ISP</li>
+<li>网络结构2，由数十万接入ISP和多个全球传输ISP组成
+<ul>
+<li>是一种两层的等级结构，其中全球传输供应商位于顶层，而接入ISP位于底层</li>
+</ul>
+</li>
+<li>网络结构3，多等级结构</li>
+<li>在等级化网络结构3上增加存在点(PoP)，多宿，对等和因特网交换点就与今天的因特网相似
+<ul>
+<li>PoP存在于等级结构的所有层次，但底层等级除外，一个PoP只是提供商网络中的一台或多台路由器群组</li>
+<li>任何ISP(除了第一层)可以选择<strong>多宿</strong>，即可以与两个或更多提供商ISP连接</li>
+<li>位于相同等级结构层次的邻近一对ISP能都<strong>对等</strong>，能直接将网络连在一起，使它们之间的所有流量经直接连接而不是通过上游的中间ISP传输</li>
+<li>沿着相同线路，第三方公司能创建一个<strong>因特网交换点(IXP)</strong>，IXP是一个因特网汇合点，多个ISP在IXP一起对等</li>
+<li><mark>网络结构4：由接入ISP，区域ISP，第一层ISP，PoP，多宿，对等和IXP组成</mark></li>
+</ul>
+</li>
+<li>网络结构5：在网络结构4顶部增加内容提供商网络</li>
+</ul>
+<h2 id="14-分组交换网中的时延丢包和吞吐量"><a class="markdownIt-Anchor" href="#14-分组交换网中的时延丢包和吞吐量"></a> 1.4 分组交换网中的时延，丢包和吞吐量</h2>
+<h3 id="141-分组交换网中的时延概念"><a class="markdownIt-Anchor" href="#141-分组交换网中的时延概念"></a> 1.4.1 分组交换网中的时延概念</h3>
+<ul>
+<li>时延包括：<strong>节点处理时延</strong>，<strong>排队时延</strong>，<strong>传输时延</strong>和<strong>传播时延</strong>
+<ul>
+<li>时延总体累加起来是<strong>节点总时延</strong></li>
+<li>处理时延
+<ul>
+<li>检查分组首部和决定分组导向何处所需要的时间是处理时延的一部分，还包括其他因素</li>
+</ul>
+</li>
+<li>排队时延
+<ul>
+<li>在队列中，当分组在链路上等待传输时，经受排队时延</li>
+<li>一个特定分组的排队时延却决于先期到达的正在排队等待向链路传输的分组数量</li>
+</ul>
+</li>
+<li>传输时延
+<ul>
+<li>假定分组以先到线服务方式传输，用L比特表示该分组的长度，用R bps表示从路由器A到路由器B的链路传输速率，传输时延是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">L/R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span></li>
+</ul>
+</li>
+<li>传播时延
+<ul>
+<li>从链路的起点到路由器B传播所需要的时间是传播时延，该传播时延等于两台路由器之间的距离除以传播速率<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi mathvariant="normal">/</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">d/s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord">/</span><span class="mord mathdefault">s</span></span></span></span></li>
+<li>该比特以该链路的传播速率传播。传播速率取决于链路的物体媒体</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传输时延和传播时延的比较
+<ul>
+<li>传输时延是路由器推出该分组所需要的时间，是分组长度和链路传播速率的函数，与两路由器之间的距离无关</li>
+<li>传播时延是一个比特从一台路由器传播到另一台路由器所需要的时间，是两台路由器之间距离函数，与分组长足或链路传输速率无关</li>
+</ul>
+</li>
+<li><mark>处理时延通常是微不足道的，但对路由器的最大吞吐量有影响</mark>，最大吞吐量是一台路由器能够转发分组的最大速率</li>
+</ul>
+<h3 id="142-排队时延和丢包"><a class="markdownIt-Anchor" href="#142-排队时延和丢包"></a> 1.4.2 排队时延和丢包</h3>
+<ul>
+<li>令a表示分组到达队列的平均速率，R为传输速率，假定所有分组都是L比特组成的，则比特到达队列的平均速率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>a</mi><mi>b</mi><mi>p</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">La bps</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">p</span><span class="mord mathdefault">s</span></span></span></span>，流量强度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>a</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">La/R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault">a</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>,若流量强度大于1则比特到达队列的平均速率超过从该队列传输出去的速率</li>
+<li><mark>设计系统时流量强度不能大于1</mark></li>
+<li>丢包
+<ul>
+<li>由于路由器没有地方存储信道的分组，路由器将丢弃该分组</li>
+<li>一个节点的性能场不仅根据时延来度量，而且根据丢包的概率来度量</li>
+</ul>
+</li>
+</ul>
+<h3 id="143-端到端时延"><a class="markdownIt-Anchor" href="#143-端到端时延"></a> 1.4.3 端到端时延</h3>
+<ul>
+<li>端到端时延
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>e</mi><mi>n</mi><mi>d</mi><mo>−</mo><mi>e</mi><mi>n</mi><mi>d</mi></mrow></msub><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>+</mo><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mo>+</mo><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>L</mi><mi mathvariant="normal">/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">d_{end-end} = N(d_{proc}+d_{trans}+d_{prop}), d_{trans}=L/R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">d</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="144-计算机网络中的吞吐量"><a class="markdownIt-Anchor" href="#144-计算机网络中的吞吐量"></a> 1.4.4 计算机网络中的吞吐量</h3>
+<ul>
+<li>在任何时间瞬间的<strong>瞬时吞吐量</strong>是主机接受到文件的速率</li>
+<li>若文件由F比特组成，主机接受到所有F比特用去T秒，则文件传输的<strong>平均吞吐量</strong>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mi mathvariant="normal">/</mi><mi>T</mi><mi>b</mi><mi>p</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">F/T bps</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">b</span><span class="mord mathdefault">p</span><span class="mord mathdefault">s</span></span></span></span></li>
+<li>令服务器的与路由器之间的链路速率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">R_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,路由器与客户之间的速率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">R_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，对于简单的两链路网络，其吞吐量是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo stretchy="false">{</mo><msub><mi>R</mi><mi>s</mi></msub><mo separator="true">,</mo><msub><mi>R</mi><mi>c</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">min\{R_s,R_c\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span></span></span></span>,是<strong>瓶颈链路</strong>的传输速率</li>
+</ul>
+<h2 id="15-协议层次及其服务模型"><a class="markdownIt-Anchor" href="#15-协议层次及其服务模型"></a> 1.5 协议层次及其服务模型</h2>
+<h3 id="151-分层的体系结构"><a class="markdownIt-Anchor" href="#151-分层的体系结构"></a> 1.5.1 分层的体系结构</h3>
+<ul>
+<li>为了给网络协议的设计提供一个结构，网络设计者以<strong>分层</strong>的方式组织协议以及实现这些协议的网络硬件和软件
+<ul>
+<li>协议分层具有概念化和结构化的优点，分层提供了一种结构化方式来讨论系统组件。模块化使更新系统组件更为容易</li>
+<li>分层的缺点是一层可能冗余较低层的功能，某层的功能可能需要可能需要仅在其他某层才出现的信息，违反层次分离的目标</li>
+</ul>
+</li>
+<li>各层的所有协议被称为<strong>协议栈</strong>，目前由5层组成：<strong>物理层，链路层，网络层，运输层和应用层</strong>
+<ul>
+<li>ISO OSI参考模型为7层：<strong>物理层，链路层，网络层，运输层，会话层，表示层和应用层</strong>
+<ul>
+<li>表示层的作用是使通信的应用程序能够解释交换数据的含义，包括数据压缩，数据加密和数据描述</li>
+<li>会话层提供了数据交换的定界和同步功能，包括了建立检查点和恢复方案的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>应用层
+<ul>
+<li>应用层是网络引用程序以及它的应用层协议存留的地方</li>
+<li>应用层协议分布在多个端系统上，而一个端系统中的应用程序使用协议与另一个端系统中的应用程序交换信息分组，把这种位于应用层的信息分组称为<strong>报文</strong></li>
+</ul>
+</li>
+<li>运输层
+<ul>
+<li>因特网的运输层在应用程序端点之间传送应用层报文</li>
+<li>在因特网中，有两种运输层协议，即TCP和UDP
+<ul>
+<li>TCP向它的应用程序提供了面向连接的服务，包括了应用层报文向目的地的确保传递和流量控制，并提供拥塞控制机制</li>
+<li>UDP协议向它的应用程序提供无连接服务，不提供不必要服务的服务，没有可靠性，没有流量控制，也没有拥塞控制</li>
+</ul>
+</li>
+<li><strong>运输层的分组称为报文段</strong></li>
+</ul>
+</li>
+<li>网络层
+<ul>
+<li>网络层负责将称为<strong>数据报</strong>的网络层分组从一台主机移动到另一台主机</li>
+<li>在一台源主机中的因特网运输层协议向网络层递交运输层报文段和目的地址</li>
+<li>网络层包括IP协议，定义了在数据报中各个字段以及端系统和路由器如何作用于这些字段，也包括决定路由的路由选择协议，根据该路由将数据报从源传输给目的地</li>
+<li><strong>网络层简单地称为IP层</strong></li>
+</ul>
+</li>
+<li>链路层
+<ul>
+<li>因特网的网络层通过源和目的地之间的一系列路由器路由数据报</li>
+<li>为了将分组从一个节点移动到路径上的下一个节点，网络层必须依靠该链路层的服务。特别是在每个节点，网络层将数据报下传给链路层，链路层沿着路径将数据报传递给下一个节点，在该下一个节点，链路层将数据包上传至网络层</li>
+<li><strong>链路层的分组称为帧</strong></li>
+</ul>
+</li>
+<li>物理层
+<ul>
+<li>物理层的任务是将该帧的一个个比特从一个节点移动到下一个节点，在这层中的协议仍然是链路相关的，并且进一步与该链路的实际传输媒体相关</li>
+</ul>
+</li>
+</ul>
+<h3 id="152-封装"><a class="markdownIt-Anchor" href="#152-封装"></a> 1.5.2 封装</h3>
+<ul>
+<li>链路层交换机实现了第一层和第二层</li>
+<li>路由器实现了第一层到第三层</li>
+<li>封装：
+<ul>
+<li>在发送主机端，一个<strong>应用层报文</strong>被传给运输层。在最简单的情况下，运输层收取报文并附上附加信息，该首部将被接收端的运输层使用，应用层报文和传输层首部信息一道构成了<strong>运输层报文段</strong>，运输层报文段因此封装了应用层报文</li>
+<li>运输层向网络层传输该报文段，网络层增加了如源和目的端系统地址等网络层首部信息，生成了<strong>网络层数据报</strong></li>
+<li>该数据包被传递给链路层，链路层增加了它自己链路层首部信息并生成<strong>链路层帧</strong></li>
+<li><mark>在每一个层中，一个分组具有两个类型的字段：首都字段和有效载荷字段，有效载荷通常使来自上一层的分组</mark></li>
+</ul>
+</li>
+</ul>
+<h2 id="16-面对攻击网络"><a class="markdownIt-Anchor" href="#16-面对攻击网络"></a> 1.6 面对攻击网络</h2>
+<ul>
+<li>拒绝服务攻击(DDOs)
+<ul>
+<li>弱点攻击</li>
+<li>带宽洪泛</li>
+<li>连接洪泛</li>
+</ul>
+</li>
+<li>分组嗅探器：记录每个流经的分组副本的被动接收机</li>
+<li>IP哄骗：将具有虚假源地址的分组注入因特网的能力</li>
+</ul>
+<h1 id="2-应用层"><a class="markdownIt-Anchor" href="#2-应用层"></a> 2 应用层</h1>
+<h2 id="21-应用层协议原理"><a class="markdownIt-Anchor" href="#21-应用层协议原理"></a> 2.1 应用层协议原理</h2>
 
       
     </div>
