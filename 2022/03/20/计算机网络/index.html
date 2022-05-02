@@ -38,7 +38,7 @@
 <meta property="og:description" content="引言  《计算机网络|自顶向下方法|第七版》学习笔记   1. 计算机网络和因特网  1.1 什么是因特网  1.1.1 具体构成描述  节点:  主机及其上运行的应用程序 路由器,交换机等网络交换设备   边:通信链路  接入网链路:主机连接到互联网的链路 主干链路:路由器间的链路   主机或端系统  端系统通过通信链路和分组交换机连接到一起 不同的链路能够以不同的速率传输数据,链路的传输速率">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-20T09:25:58.000Z">
-<meta property="article:modified_time" content="2022-05-02T04:45:23.788Z">
+<meta property="article:modified_time" content="2022-05-02T14:05:51.720Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="Basis">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-02 12:45:23" itemprop="dateModified" datetime="2022-05-02T12:45:23+08:00">2022-05-02</time>
+                <time title="修改时间：2022-05-02 22:05:51" itemprop="dateModified" datetime="2022-05-02T22:05:51+08:00">2022-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1703,7 +1703,789 @@ s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class=
 </ul>
 <hr>
 <h1 id="4-网络层数据平面"><a class="markdownIt-Anchor" href="#4-网络层数据平面"></a> 4 网络层:数据平面</h1>
+<ul>
+<li>网络层能够分解成两个相互作用的部分：<strong>数据平面</strong>和<strong>控制平面</strong></li>
+</ul>
 <h2 id="41-网络层概述"><a class="markdownIt-Anchor" href="#41-网络层概述"></a> 4.1 网络层概述</h2>
+<ul>
+<li>每台路由器的数据平面的主要作用是从其输入链路向其输出链路转发数据报</li>
+<li>控制平面的主要作用是协调一些本地的每台路由器转发动作，使得数据报沿着源和目的地主机之间的路由器路径最终进行端到端传送</li>
+</ul>
+<h3 id="411-转发和路由选择数据平面和控制平面"><a class="markdownIt-Anchor" href="#411-转发和路由选择数据平面和控制平面"></a> 4.1.1 转发和路由选择:数据平面和控制平面</h3>
+<ul>
+<li><strong>转发</strong>:指将分组从一个输入链路接口转移到适当的输出链路接口的路由器本地动作
+<ul>
+<li>当一个分组到达某路由器的一条输入链路时，该路由器必须将该分组移动到适合的输出链路</li>
+<li>转发是在数据平面中实现的唯一功能</li>
+</ul>
+</li>
+<li><strong>路由选择</strong>:指确定分组从源到目的地所采取的端到端路径的网络范围处理过程
+<ul>
+<li>当分组从发送方流向接收方时，网络层必须决定这些分组所采用的路由或路径</li>
+<li>计算这些路径的算法称为<strong>路由选择算法</strong>
+<ul>
+<li>路由选择算法决定了插入该路由器转发表的内容</li>
+<li>运行在每台路由器中，并且在每台路由器中都包含转发和路由选择两种功能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>每台网络路由器中有一个关键元素是它的<strong>转发表</strong>
+<ul>
+<li>路由器检查到达分组首部的一个或多个字段值，进而使用这些首部值在其转发表中索引，通过这种方法来转发分组。这些值对应存储在转发表项中的值，指出了该分组将被转发的路由器的输出链路接口</li>
+</ul>
+</li>
+<li>控制平面:SDN方法
+<ul>
+<li><strong>软件定义网络(SDN)</strong>:计算转发表并与路由器交互的控制器是用软件实现的，网络是软件定义的</li>
+</ul>
+</li>
+</ul>
+<h3 id="412-网络服务模型"><a class="markdownIt-Anchor" href="#412-网络服务模型"></a> 4.1.2 网络服务模型</h3>
+<ul>
+<li>网络服务模型定义了分组在发送与接收端系统之间的端到端运输特性，该服务包括
+<ul>
+<li>确保交付</li>
+<li>具有时延上界的确保交付</li>
+<li>有序分组交付</li>
+<li>确保最小带宽</li>
+<li>安全性</li>
+</ul>
+</li>
+<li>因特网的网络层提供单一的服务，称为<strong>尽力而为服务</strong>
+<ul>
+<li>传送的分组既不能保证以它们发送的顺序被接收，也不能保证它们最终交付</li>
+<li>既不能保证端到端时延，也不能保证最小带宽</li>
+</ul>
+</li>
+<li>分组交换机是一台通用分组交换设备，根据分组首部字段中的值，从输入链路接口到输出链路接口转移分组
+<ul>
+<li>某些链路层帧的字段值做出转发决定，交换机因此称为链路层(第二层)设备</li>
+<li>其他分组交换机称为路由器，基于网络层数据报中的首部字段值做出转发决定</li>
+</ul>
+</li>
+</ul>
+<h2 id="42-路由器工作原理"><a class="markdownIt-Anchor" href="#42-路由器工作原理"></a> 4.2 路由器工作原理</h2>
+<ul>
+<li>路由器的4个组件
+<ul>
+<li>输入端口</li>
+<li>交换结构</li>
+<li>输出端口</li>
+<li>路由选择处理器</li>
+</ul>
+</li>
+<li>路由器处理的信息
+<ul>
+<li>基于目的地转发</li>
+<li>通用转发</li>
+</ul>
+</li>
+</ul>
+<h3 id="421-输入端口处理和基于目的地转发"><a class="markdownIt-Anchor" href="#421-输入端口处理和基于目的地转发"></a> 4.2.1 输入端口处理和基于目的地转发</h3>
+<ul>
+<li>输入端口的线路端接功能与链路层处理实现了用于各个输入链路的物理层和链路层。在输入端口中执行的查找对于路由器运行时至关重要的
+<ul>
+<li>路由器使用转发表来查找输出端口，使得到达的分组能经过交换结构转发到该输出端口。</li>
+<li>转发表时路由选择处理器计算和更新的，或者转发表接收来自远程SDN控制器的内容</li>
+<li>使用在每个输入端口的影子副本，转发决策能在每个输入端口本地做出，无须基于每个分组调用集中式路由选择处理器，避免了集中式处理的瓶颈</li>
+</ul>
+</li>
+<li>当使用转发表时，路由器用分组目的地址的前缀与该表中的表象进行匹配
+<ul>
+<li>如果存在一个匹配项，则路由器向与该匹配项相关联的链路转发分组</li>
+<li>当有多个匹配项时，该路由器使用<strong>最长前缀匹配规则</strong>，寻找在表中最长的匹配项，并与最长前缀匹配相关联的链路接口转发分组</li>
+</ul>
+</li>
+</ul>
+<h3 id="422-交换"><a class="markdownIt-Anchor" href="#422-交换"></a> 4.2.2 交换</h3>
+<ul>
+<li>经内存交换</li>
+<li>经总线交换
+<ul>
+<li>输入端口经一根共享总线将分组直接传送到输出端口，不需要经过路哟选择处理器的干预</li>
+<li>路由器的交换带宽受到总线速率的限制</li>
+</ul>
+</li>
+<li>经互联网络交换
+<ul>
+<li>纵横式交换机是一种由2N条总线组成的互联网络，它连接N个输入端口与N个输出端口</li>
+<li>纵横式交换机是非阻塞的，即只要没有其他分组当前被转发到该输出端口，转发到输出端口的分组将不会被到达输出端口的分组阻塞</li>
+</ul>
+</li>
+</ul>
+<h3 id="424-何时出现排队"><a class="markdownIt-Anchor" href="#424-何时出现排队"></a> 4.2.4 何时出现排队</h3>
+<ul>
+<li>因为随着队列的增长，路由器的缓存空间最终将会耗尽，并且当无内存可用于存储到达的分组时将会出现丢包</li>
+<li><strong>线路前部阻塞(HOL)</strong>:在一个输入队列中排队的分组必须等待通过交换结构发哦是那个，因为它被位于线路前部的另一个分组所阻塞</li>
+<li>当没有足够的内存来缓存一个入分组时
+<ul>
+<li>要么丢弃到达的分组(<strong>弃尾</strong>)</li>
+<li>要么删除一个或多个已排队的分组</li>
+</ul>
+</li>
+</ul>
+<h3 id="425-分组调度"><a class="markdownIt-Anchor" href="#425-分组调度"></a> 4.2.5 分组调度</h3>
+<ul>
+<li><strong>先进先出(FIFO)</strong>
+<ul>
+<li>当链路当前正忙于传输另一个分组，到达链路输出队列的分组要排队等待传输，若没有足够的缓存空间来容纳到达的分组，队列的分组丢弃测量确定该分组是否被丢弃</li>
+<li>按照分组到达输出链路队列的相同次序来选择分组在链路上传输</li>
+</ul>
+</li>
+<li><strong>优先权排队</strong>
+<ul>
+<li>到达输出链路的分组被分类放入输出队列中的优先权类</li>
+<li><strong>非抢占式优先排队</strong>:一旦分组开始传输，就不能打断</li>
+</ul>
+</li>
+<li><strong>循环和加权公平排队</strong>
+<ul>
+<li><strong>循环排队规则</strong>:分组像使用优先权排队那样被分类，在类之间不存在严格的服务优先权，循环调度器在这些类之间轮流提供服务
+<ul>
+<li>最简单的循环调度中，类1的分组被传输，接着是类2的分组，接着又是类1的分组</li>
+</ul>
+</li>
+<li><strong>保持工作排队规则</strong>
+<ul>
+<li>在有分组排序等待传输时，不允许链路保持空闲</li>
+<li>当寻找给定类的分组但是没有找到时，保持工作的循环规则将立即检查循环序列中的下一个类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="43-网络协议ipv4寻址ipv6及其他"><a class="markdownIt-Anchor" href="#43-网络协议ipv4寻址ipv6及其他"></a> 4.3 网络协议:IPv4,寻址,IPV6及其他</h2>
+<h3 id="431-ipv4数据报格式"><a class="markdownIt-Anchor" href="#431-ipv4数据报格式"></a> 4.3.1 IPv4数据报格式</h3>
+<ul>
+<li><mark>网络层分组被称为数据报</mark></li>
+<li>IPv4数据报的关键字
+<ul>
+<li>版本(号)，4比特规定了数据报的IP协议版本</li>
+<li>首部长度，4比特确定IP数据报中的载荷实际开始的地方
+<ul>
+<li>大多数IP数据报不包含选项</li>
+<li><mark>一般的IP数据报具有20字节的首部</mark></li>
+</ul>
+</li>
+<li>服务类型
+<ul>
+<li>使不同类型的IP数据报能相互区别开来</li>
+</ul>
+</li>
+<li>数据报长度
+<ul>
+<li>16比特，IP数据报的总长度，以字节计</li>
+<li>IP数据报的理论最长长度为65535字节，数据报很少有超过1500字节的，该长度使得IP数据报能容纳最大长度以太网帧的载荷字段</li>
+</ul>
+</li>
+<li>标识，标志，片偏移</li>
+<li>寿命(TTL)
+<ul>
+<li>确保数据报不会永远在网络中循环</li>
+<li>每当一台路由器处理数据报时，该字段的值减1，若TTL字段减为0，则该数据报必须丢弃</li>
+</ul>
+</li>
+<li>协议
+<ul>
+<li>仅当一个IP数据报到达其最终目的地才会有用。该字段值指示了IP数据报的数据部分应当给哪个特定的运输层协议</li>
+<li>值为6表明数据部分要交给TCP，值为17表明数据要交给UDP</li>
+</ul>
+</li>
+<li>首部检验和:用于帮助路由器检测受到的IP数据报中的比特错误</li>
+<li>源和目的IP地址:当源生成一个数据报时，在源IP字段中插入它的IP地址，在目的IP地址字段中插入其最终目的地的地址</li>
+<li>选项:允许IP字段被扩展</li>
+<li>数据:有效载荷</li>
+</ul>
+</li>
+<li><mark>一个IP数据报有总长为20字节的首部，如果数据报承载一个TCP报文段，则每个数据报共承载总长40字节的首部(20字节的IP首部加上20字节的TCP首部)以及应用层报文</mark></li>
+</ul>
+<h3 id="432-ipv4数据报分片"><a class="markdownIt-Anchor" href="#432-ipv4数据报分片"></a> 4.3.2 IPv4数据报分片</h3>
+<ul>
+<li>一个链路层帧能承载的最大数据量叫做<strong>最大传输单元(MTU)</strong>
+<ul>
+<li>每个IP数据报封装在链路层帧中从一台路由器传输到下一台路由器，故链路层协议的MTU严格地限制着IP数据报的长度</li>
+</ul>
+</li>
+<li>IPv4设计者将标识，标志和片偏移字段放在IP数据报首部中
+<ul>
+<li>当生成一个数据报时，发送主机在为该数据报设置源和目的地址的同时贴上标识号</li>
+<li>发送主机通常将它的发送的每个数据报的标识号加1</li>
+<li>当某路由器需要对一个数据报分片时，形成的每个数据报具有初始数据报的源地址，目的地址与标识号</li>
+<li>当目的地从同一发送主机收到一系列数据报时，能够检查数据报的标识号以确定哪些数据报实际上是同一较大数据报的片</li>
+<li>为了让目的主机绝对地相信它已收到了初始数据报地最后一个片，最后一个片地标志比特被设为0，而所有其他片地标志比特被设为1</li>
+</ul>
+</li>
+</ul>
+<h3 id="433-ipv4编址"><a class="markdownIt-Anchor" href="#433-ipv4编址"></a> 4.3.3 IPv4编址</h3>
+<ul>
+<li>简述主机与路由器连入网络的方法
+<ul>
+<li>一台主机通常只有一个链路连接网络；当主机中的IP想发送一个数据报时，它就在该链路上发送</li>
+<li>主机与物理链路之间的边界叫做<strong>接口</strong>
+<ul>
+<li>路由器的任务是从链路层上接收数据报并从某些其他链路转发出去，路由器必须拥有两条或更多条链路与它连接</li>
+<li>路由器与它的任意一条链路之间的边界称做接口</li>
+</ul>
+</li>
+<li><strong>一个IP地址与一个接口相关联，而不是与包括该接口的主机或路由器相关联</strong></li>
+</ul>
+</li>
+<li><strong>IP地址为32比特</strong>，采用<strong>点分十进制记法</strong>
+<ul>
+<li>地址中的每个字节用它的十进制形式书写，各字节间以句号隔开</li>
+<li>在全球因特网中每台主机和路由器的每个接口都不许有全球唯一的IP地址</li>
+<li>一个接口的IP地址的一部分需要由其连接的子网来决定</li>
+</ul>
+</li>
+<li><strong>子网掩码，指示32比特中最左侧的x比特定义了子网地址</strong>
+<ul>
+<li>一个子网的IP地址定义并不局限于连接多台主机到一台路由器接口的以太网段</li>
+</ul>
+</li>
+<li>确认子网
+<ul>
+<li>分开主机和路由器的每个接口，产生几个隔离的网络岛，使用接口端接这些隔离的网络的端口</li>
+<li>隔离的网络中的每一个都叫做一个子网</li>
+</ul>
+</li>
+<li>因特网的地址分配策略称为<strong>无类别域间路由选择(CIDR)</strong>
+<ul>
+<li>将子网的概念一般化</li>
+<li>当使用子网寻址时，32比特的IP被划分为两部分，并且也具有点分十进制数形式<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi mathvariant="normal">.</mi><mi>b</mi><mi mathvariant="normal">.</mi><mi>c</mi><mi mathvariant="normal">.</mi><mi>d</mi><mi mathvariant="normal">/</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">a.b.c.d/x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord">.</span><span class="mord mathdefault">b</span><span class="mord">.</span><span class="mord mathdefault">c</span><span class="mord">.</span><span class="mord mathdefault">d</span><span class="mord">/</span><span class="mord mathdefault">x</span></span></span></span>
+<ul>
+<li>x指示了地址第一部分中的比特数,指示了<strong>子网掩码</strong></li>
+<li>x最高比特构成了IP地址的网络部分，并且经常被称为<strong>前缀</strong>
+<ul>
+<li>使用单个网络前缀通过多个网络的能力称为<strong>地址聚合或路由聚合</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi mathvariant="normal">.</mi><mi>b</mi><mi mathvariant="normal">.</mi><mi>c</mi><mi mathvariant="normal">.</mi><mi>d</mi><mi mathvariant="normal">/</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">a.b.c.d/x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord">.</span><span class="mord mathdefault">b</span><span class="mord">.</span><span class="mord mathdefault">c</span><span class="mord">.</span><span class="mord mathdefault">d</span><span class="mord">/</span><span class="mord mathdefault">x</span></span></span></span>中前x比特定义了组织的网络前缀，网络部分，剩余的32-x部分在该组织中划分子网
+<ul>
+<li>网络部分划分为长度为8位,16或24比特分别为A,B和C类网络，是一种称为分类编址的编址方案</li>
+<li>A(/8)类网络</li>
+<li>B(/16)类网络，可容纳65534台主机</li>
+<li>C(/24)类网络，可容纳<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup><mo>−</mo><mn>2</mn><mo>=</mo><mn>254</mn></mrow><annotation encoding="application/x-tex">2^8-2=254</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">4</span></span></span></span>台主机</li>
+</ul>
+</li>
+<li>当主机发出一个目的地址位255.255.255.255的数据报时，该报文会交付给同一网络中的所有主机
+<ul>
+<li>也会向邻近的子网转发该报文</li>
+</ul>
+</li>
+<li><strong>动态主机协议配置(DHCP)</strong>
+<ul>
+<li><strong>即插即用协议，零配置协议</strong></li>
+<li>某些主机将被分配一个临时的IP地址，每次与网络连接时该地址也许不同</li>
+<li>是一个客户-服务器协议，在最简单场合下，每个子网将具有一台DHCP服务器，如果在某子网中没有服务器，则需要一个DHCP中继代理</li>
+<li>DHCP是一个4个步骤的过程
+<ul>
+<li><strong>DHCP服务器发现</strong>：
+<ul>
+<li>通过使用DHCP发送报文来完成，客户在UDP分组中向端口67发送该发现报文。该UDP分组封装在一个IP数据报中</li>
+<li>在这种情况下，DHCP客户生成包含DHCP发现报文的IP数据报，其中使用广播目的地址255.255.255.255并且使用“本主机”源IP地址0.0.0.0</li>
+<li>DHCP客户将该IP数据报传递给链路层，链路层然后将该帧广播到所有与该子网连接的节点</li>
+</ul>
+</li>
+<li><strong>DHCP服务器提供</strong>
+<ul>
+<li>DHCP服务器收到一个DHCP发现报文时，用<strong>DHCP提供报文</strong>向客户做出响应，该报文向该子网的所有节点广播，仍然使用IP广播地址255.255.255.255</li>
+<li>每台路由器提供的报文包含有收到的发现报文事务ID，向客户推荐的IP地址，网络掩码以及IP地址租用期</li>
+</ul>
+</li>
+<li><strong>DHCP请求</strong>
+<ul>
+<li>新到达的客户从一个或多个服务器提供中选择一个，并向选中的服务器提供用<strong>DHCP请求报文</strong>进行响应，回显配置的参数</li>
+</ul>
+</li>
+<li><strong>DHCP ACK</strong>
+<ul>
+<li>服务器用DHCP ACK报文对DHCP请求报文进行响应，证实所要求的参数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="434-网络地址转换"><a class="markdownIt-Anchor" href="#434-网络地址转换"></a> 4.3.4 网络地址转换</h3>
+<ul>
+<li><strong>网络地址转换NAT</strong>
+<ul>
+<li>使能路由器对于外部世界来说甚至不像一台路由器</li>
+<li>相反NAT路由器对外界的行为就如同具有单一IP地址的单一设备</li>
+<li>从本质上讲，NAT使能路由器对外界隐藏了家庭网络的细节</li>
+</ul>
+</li>
+<li>从广域网到达NAT路由器的所有数据报都具有相同的目的IP地址，<strong>路由器上的NAT转换表</strong>，并且在表项中包含了端口号及其IP地址，使路由器讲某个分组转发给内容主机</li>
+<li><strong>NAT穿越</strong>和<strong>通用即插即用(UPnP)</strong>
+<ul>
+<li>UPnP是一种允许主机发现和配置邻近NAT的协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="435-ipv6"><a class="markdownIt-Anchor" href="#435-ipv6"></a> 4.3.5 IPv6</h3>
+<ul>
+<li>IPv6数据报
+<ul>
+<li>扩大的地址容量
+<ul>
+<li><mark>IPv6将IP地址长度从32比特增加到128比特</mark></li>
+<li>IPv6引入了一种任播地址的新型地址，可以是数据报交付给一组主机中的任意一个</li>
+</ul>
+</li>
+<li>简化高效的40字节首部:形成的40字节定长首部允许路由器更快地处理IP数据报</li>
+<li>流标签:具有流定义</li>
+</ul>
+</li>
+<li><strong>IPv4向IPv6的迁移</strong>
+<ul>
+<li><strong>建隧道</strong>:两台IPv6路由器之间的IPv4路由器的集合称为隧道</li>
+<li>借助于隧道，在隧道发送端的IPv6节点可将IPv6的数据报放在一个IPv4数据报的数据字段中</li>
+</ul>
+</li>
+</ul>
+<h2 id="44-通用转发和sdn"><a class="markdownIt-Anchor" href="#44-通用转发和sdn"></a> 4.4 通用转发和SDN</h2>
+<ul>
+<li>将基于目的地转发的特征总结为两个步骤
+<ul>
+<li>查找目的IP地址(“匹配”)</li>
+<li>然后将分组发送到有特定输出端口的交换结构(“动作”)</li>
+</ul>
+</li>
+<li>匹配加动作转发表在OpenFlow中称为<strong>流表</strong>，表项包括
+<ul>
+<li>首部字段值的集合</li>
+<li>计数器集合</li>
+<li>当分组匹配流表项时所采取的动作集合</li>
+</ul>
+</li>
+</ul>
+<h3 id="441-匹配"><a class="markdownIt-Anchor" href="#441-匹配"></a> 4.4.1 匹配</h3>
+<ul>
+<li>11个分组首部字段和入端口ID，该ID能被OpenFlow 1.0中的匹配加动作规则所匹配
+<ul>
+<li>到达一台分组交换机的一个链路层（第二层）帧将包含一个网络层（第三层）数据报作为其有效载荷，该载荷通常依次将包含一个运输层（第四层）报文段</li>
+<li>OpenFlow的匹配抽象允许对来自三个层次的协议首部所选择的字段进行匹配</li>
+<li>源和目的MAC地址是与帧的发送和接收接口相关联的链路层地址；通过基于以太网地址而不是IP地址进行转发，OpenFlow使能的设备能够等价于路由器（第三层设备）转发数据报以及交换机（第二层设备）转发帧。以太网类型字段对应于较高层协议（例如IP），利用该字段分解该帧的载荷，并且VLAN字段与所谓虚拟局域网相关联</li>
+<li>入端口是指分组交换机上接收分组的输入端口</li>
+</ul>
+</li>
+</ul>
+<h3 id="442-动作"><a class="markdownIt-Anchor" href="#442-动作"></a> 4.4.2 动作</h3>
+<ul>
+<li>每个流表项都有零个或多个动作列表，决定了应用与流表项匹配的分组的处理
+<ul>
+<li>若有多个动作，则按在表中规定的次序执行</li>
+</ul>
+</li>
+<li>其中最为重要的动作可能是
+<ul>
+<li>转发</li>
+<li>丢弃</li>
+<li>修改字段</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="5-网络层控制平面"><a class="markdownIt-Anchor" href="#5-网络层控制平面"></a> 5 网络层:控制平面</h1>
+<ul>
+<li>转发表和流变计算，维护和安装的方法
+<ul>
+<li>每路由器控制：在每台路由器中运行一种路由选择算法的情况，每台路由器中都包含转发和路由功能</li>
+<li>逻辑集中式控制：逻辑集中式控制器计算并分发转发表以供每台路由器使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="52-路由选择算法"><a class="markdownIt-Anchor" href="#52-路由选择算法"></a> 5.2 路由选择算法</h2>
+<ul>
+<li>用图来形式化描述路由选择问题
+<ul>
+<li>图<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><mi>N</mi><mo separator="true">,</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G=(N,E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">G</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>是一个N个节点和E条边的集合，其中每条边是取自N的一对节点</li>
+<li>在网络层路由选择的环境中，图中的节点表示路由器(做出分组转发决定的点)</li>
+<li>连接节点的边表示路由器之间的物理链路</li>
+</ul>
+</li>
+<li><strong>最低开销路径问题</strong>:找出源和目的地之间具有最低开销的一条路
+<ul>
+<li>最低开销路径就是最短路径，及在源和目的地之间具有最小链路数量的路径</li>
+</ul>
+</li>
+<li>路由选择算法的分类
+<ul>
+<li>集中式路由选择算法
+<ul>
+<li>具有关于连通性和链路开销方面的完整信息</li>
+<li>具有全局状态信息的算法称为<strong>链路状态(LS)算法</strong></li>
+</ul>
+</li>
+<li>分散式路由选择算法
+<ul>
+<li>路由器以迭代，分布式的方式计算出最低开销路径</li>
+<li><strong>距离向量(DV)算法</strong>的分散式路由选择算法</li>
+</ul>
+</li>
+<li>静态路由选择算法,动态路由选择算法</li>
+<li>负载敏感算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="521-链路状态路由选择算法"><a class="markdownIt-Anchor" href="#521-链路状态路由选择算法"></a> 5.2.1 链路状态路由选择算法</h3>
+<ul>
+<li>在链路状态算法中，网络拓扑和所有的链路开销都是一致的，可用作LS算法的输入</li>
+<li><strong>链路状态路由选择算法也叫做Dijkstra算法</strong>
+<ul>
+<li>在初始化步骤，从u到与其直接相连的邻居v、x、w的当前已知最低开销路径分别初始化为2、1和5。特别值得注意的是，到w的开销被设为5，因为这是从u到w的直接（一跳）链路开销。到y与z的开销被设为无穷大，因为它们不直接与u连接</li>
+<li>在第一次迭代中，观察那些还未加到集合N＇中的节点，并且找出在前一次迭代结束时具有最低开销的节点。那个节点便是x，其开销是1，因此x被加到集合N＇中。于是LS算法中的第12行中的程序被执行，以更新所有节点v的D（v），产生表5-1中第2行（步骤1）所示的结果。到v的路径开销未变。经过节点x到w（在初始化结束时其开销为5）的路径开销被发现为4。因此这条具有更低开销的路径被选中，且沿从u开始的最短路径上w＇的前一节点被设为x。类似地，到y（经过x）的开销被计算为2，且该表也被相应地更新</li>
+<li>在第二次迭代时，节点v与y被发现具有最低开销路径（2），并且我们任意改变次序将y加到集合N＇中，使得N＇中含有u、x和y。到仍不在N＇中的其余节点（即节点v、w和z）的开销通过LS算法中的第12行进行更新</li>
+<li>如此等等</li>
+</ul>
+</li>
+<li>链路状态算法在最差情况下复杂性为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<h3 id="522-距离向量路由选择算法"><a class="markdownIt-Anchor" href="#522-距离向量路由选择算法"></a> 5.2.2 距离向量路由选择算法</h3>
+<ul>
+<li>距离向量算法是一种迭代器，异步的和分布式的算法
+<ul>
+<li>每个节点都要从一个或多个直接相连邻居接收某些信息，执行计算，然后将器计算结果分发给邻居</li>
+<li>此过程一直要持续到邻居之间无更多信息要交换为止</li>
+<li>不要求所有节点相互之间步伐一致地操作</li>
+</ul>
+</li>
+<li>最低开销与Bellman_Ford方程<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>i</mi><msub><mi>n</mi><mi>v</mi></msub><mrow><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>v</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mo separator="true">,</mo><mi>m</mi><mi>i</mi><msub><mi>n</mi><mi>v</mi></msub><mi mathvariant="normal">是</mi><mi mathvariant="normal">对</mi><mi>x</mi><mi mathvariant="normal">地</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">邻</mi><mi mathvariant="normal">居</mi><mi mathvariant="normal">的</mi></mrow><annotation encoding="application/x-tex">d_x(y) = min_v { c(x,v) + d_v(y) },min_v是对x地所有邻居的</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">对</span><span class="mord mathdefault">x</span><span class="mord cjk_fallback">地</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">邻</span><span class="mord cjk_fallback">居</span><span class="mord cjk_fallback">的</span></span></span></span></li>
+<li>基本思想
+<ul>
+<li>每个节点x以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_x(y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>开始，对在N中的所有结点y，估计从x到y的最低开销路径的开销</li>
+<li>令<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>x</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>D</mi><mi>y</mi></msub><mo>:</mo><mi>y</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">D_x = [D_y:y \in N]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span></span></span></span>是节点x的距离向量，该向量是从x到在N中所有其他节点y的开销估计向量</li>
+<li>使用DV算法，每个节点x维护下列路由选择信息
+<ul>
+<li>对于每个邻居v，从x到直接相连邻居v的开销为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c(x,v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></li>
+<li>节点x的距离向量，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>x</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>D</mi><mi>y</mi></msub><mo>:</mo><mi>y</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">D_x = [D_y:y \in N]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span></span></span></span>，包含了x到N中所有目的地y的开销估计值</li>
+<li>它的每个邻居的距离向量，即对x的每个邻居v有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>v</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>D</mi><mi>v</mi></msub><mo>:</mo><mi>y</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">D_v = [D_v:y \in N]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mclose">]</span></span></span></span></li>
+</ul>
+</li>
+<li>在该分布式，异步算法中，每个节点不时地向它的每个邻居发送它的距离向量副本</li>
+<li>当节点x从任何一个邻居w接收到一个新距离向量，它保存w的距离向量，然后使用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>i</mi><msub><mi>n</mi><mi>v</mi></msub><mrow><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>d</mi><mi>v</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_x(y) = min_v { c(x,v) + d_v(y) }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span>方程更新自己的距离向量</li>
+<li>如果节点x的距离向量因这个变化步骤而改变，节点x接下来将向它的每个邻居发送其更新后的距离向量，继而让所有邻居更新自己的距离向量</li>
+<li><mark>每个开销估计<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mi mathvariant="normal">收</mi><mi mathvariant="normal">敛</mi><mi mathvariant="normal">到</mi><msub><mi>d</mi><mi>x</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_x(y) 收敛到 d_x(y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mord cjk_fallback">收</span><span class="mord cjk_fallback">敛</span><span class="mord cjk_fallback">到</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></mark></li>
+</ul>
+</li>
+<li>DV算法只需要两次迭代就达到了静止状态
+<ul>
+<li>在x与y之间开销减少的好消息通过网络得到了迅速传播</li>
+<li>关于链路开销增加的坏消息传播很慢</li>
+</ul>
+</li>
+<li>LS与DV算法的比较
+<ul>
+<li>在DV算法中，每个节点仅与它直接相连的邻居交谈，但为其邻居提供了从自己到网络中所有其他节点的最低开销估计
+<ul>
+<li>LS算法需要全局信息</li>
+</ul>
+</li>
+<li>报文复杂性
+<ul>
+<li>LS算法要发送<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>N</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>E</mi><mi mathvariant="normal">∣</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(|N||E|)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord">∣</span><span class="mclose">)</span></span></span></span>的报文</li>
+<li>DV算法要求在每次迭代时，在两个直接相连邻居之间交换报文
+<ul>
+<li>当链路开销改变时，DV算法仅当在新的链路开销导致与该链路相连节点的最低开销路径发生改变时，才传播以改变的链路开销</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>收敛速度
+<ul>
+<li>LS算法的实现时一个要求<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>N</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>E</mi><mi mathvariant="normal">∣</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(|N||E|)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord">∣</span><span class="mclose">)</span></span></span></span>个报文的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>算法</li>
+<li>DV算法收敛较慢，且在收敛时会遇到路由选择环路，还会遭遇无穷计数问题</li>
+</ul>
+</li>
+<li>健壮性</li>
+</ul>
+</li>
+</ul>
+<h2 id="53-因特网中自治系统内部的路由选择ospf"><a class="markdownIt-Anchor" href="#53-因特网中自治系统内部的路由选择ospf"></a> 5.3 因特网中自治系统内部的路由选择:OSPF</h2>
+<ul>
+<li><strong>自治系统:AS</strong></li>
+<li><strong>开放最短路有限(OSPF)</strong>
+<ul>
+<li>链路状态协议，使用洪泛链路状态信息和Dijkstra最低开销路径算法</li>
+<li>使用OSPF，一台路由器构建了一幅关于整个自治系统的完整拓扑图。于是，每台路由器在本地运行Dijkstra的最短路径算法，以确定一个以自身为根节点到所有子网的最短路径树</li>
+<li>使用时，路由器向自治系统内所有其他路由器广播路由选择信息。每当一条链路的状态发生变化，路由器就会广播链路状态信息。即使链路状态未发生变化，也要周期性地广播链路状态</li>
+<li><mark>OSPF通告包含在OSPF报文中，该OSPF报文直接由IP承载，对OSPF其上层协议地值未89</mark></li>
+</ul>
+</li>
+<li>OSPF的优点
+<ul>
+<li>安全</li>
+<li>多条相同开销的路径</li>
+<li>对单播与多播路由选择的综合支持</li>
+<li>支持在单个AS中的层次结构</li>
+</ul>
+</li>
+</ul>
+<h2 id="54-isp之间的路由选择bgp"><a class="markdownIt-Anchor" href="#54-isp之间的路由选择bgp"></a> 5.4 ISP之间的路由选择:BGP</h2>
+<ul>
+<li>OSPF是一个AS内部路由选择协议
+<ul>
+<li>当在相同AS内的源和目的地之间进行分组选路时，分组遵循的路径完全由AS内路由选择协议所决定</li>
+<li>因为AS间路由选择协议涉及多个AS之间的协调，AS通信必须运行相同的AS间路由选择协议</li>
+<li>在因特网中，所有的AS运行相同的AS间路由选择协议，称为<strong>边界网关协议(BGP)</strong>
+<ul>
+<li>BGP是一种分布式和异步的协议</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="541-bgp的作用"><a class="markdownIt-Anchor" href="#541-bgp的作用"></a> 5.4.1 BGP的作用</h3>
+<ul>
+<li>作为AS间的路由选择协议，BGP为每台路由器提供了一种完成以下任务的手段
+<ul>
+<li>从邻居AS获得前缀的可达性信息</li>
+<li>确定到该前缀的最好的路由器</li>
+</ul>
+</li>
+</ul>
+<h3 id="542-通过bgp路由信息"><a class="markdownIt-Anchor" href="#542-通过bgp路由信息"></a> 5.4.2 通过BGP路由信息</h3>
+<ul>
+<li>每台路由器要么是一台<strong>网关路由器</strong>，要么是一台<strong>内部路由器</strong>
+<ul>
+<li>网关路由器是一台位于AS边缘的路由器，直接连接到在其他AS中的一台或多台路由器</li>
+<li>内部路由器仅连接在它自己AS中的主机和路由器</li>
+</ul>
+</li>
+<li>在BGP中，每对路由器通过使用179端口的半永久TCP连接交换路由选择信息
+<ul>
+<li>每条直接连接以及所有通过该连接发送的BGP报文，称为BGP连接</li>
+<li>跨越两个AS的BGP连接称为<strong>外部BGP(eBGP)</strong></li>
+<li>相同AS中的两台路由器之间的BGP会话称为<strong>内部BGP(iBGP)</strong>
+<ul>
+<li>iBGP连接并不总是与物理链路对应</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="543-确认最好的路由"><a class="markdownIt-Anchor" href="#543-确认最好的路由"></a> 5.4.3 确认最好的路由</h3>
+<ul>
+<li>当路由器通过BGP连接通告前缀时，它在前缀中包括一些BGP属性
+<ul>
+<li>前缀及其属性称为<strong>路由</strong></li>
+<li>两个重要的属性是AS-PATH和NEXT-HOP
+<ul>
+<li>AS-PATH属性包含了通过已经通过的AS的列表</li>
+<li>AS-PATH属性还用来检测和防止通过环路</li>
+<li>NEXT-HOP是AS-PATH起始的路由器的接口IP的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>热土豆路由选择</strong>
+<ul>
+<li>使用热土豆路由选择，选择的路由到开始改路由的NEXT-HOP路由器具有最小的开销</li>
+</ul>
+</li>
+<li><strong>路由选择算法</strong>
+<ul>
+<li>对于任何给定目的地前缀，进入BGP的路由选择算法的输入是到某前缀的所有路由的集合，该前缀是已被路由器学习和接受的
+<ul>
+<li>如果仅有一条路由，BGP则显然选择该路由</li>
+<li>如果到相同的前缀有两条或多条路由，则顺序调用消除规则直到余一条路由
+<ul>
+<li>路由被指派一个本地偏好值作为其属性之一</li>
+<li>从余下的路由中，将选择具有最短AS-PATH的路由</li>
+<li>从余下的路由中使用热土豆路由选择</li>
+<li>若还剩余多条路由，使用BGP标识符选择路由</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="544-ip任播"><a class="markdownIt-Anchor" href="#544-ip任播"></a> 5.4.4 IP任播</h3>
+<ul>
+<li>BGP还被用于实现IP任播服务，该服务通常用在DNS中</li>
+</ul>
+<h2 id="55-sdn控制平面"><a class="markdownIt-Anchor" href="#55-sdn控制平面"></a> 5.5 SDN控制平面</h2>
+<ul>
+<li>SDN体系结构的4个关键特征
+<ul>
+<li>基于流的转发</li>
+<li>数据平面与控制平面分离</li>
+<li>网络控制功能</li>
+<li>可编程的网络</li>
+</ul>
+</li>
+<li>SDN控制器的功能大体分为3个层次
+<ul>
+<li>通信层:SDN控制器和受控网络设备之间的通信</li>
+<li>网络范围状态管理层</li>
+<li>对于网络控制应用程序层的接口</li>
+</ul>
+</li>
+<li>OpenFlow协议运行在TCP之上，使用6653的默认端口号</li>
+</ul>
+<hr>
+<h1 id="6-链路层和局域网"><a class="markdownIt-Anchor" href="#6-链路层和局域网"></a> 6 链路层和局域网</h1>
+<h2 id="61-链路层概述"><a class="markdownIt-Anchor" href="#61-链路层概述"></a> 6.1 链路层概述</h2>
+<ul>
+<li>将运行链路层协议的任何设备称为<strong>节点</strong></li>
+<li>沿通信路径相邻节点的通信信道称为<strong>链路</strong>
+<ul>
+<li>为了将一个数据报从源主机传输到目的主机，数据报必须通过沿端到端路径上的各段链路传输</li>
+<li>在通过特定的链路时，传输节点将数据报封装在链路层帧中，并将该帧传送到链路中</li>
+</ul>
+</li>
+</ul>
+<h3 id="611-链路层提供的服务"><a class="markdownIt-Anchor" href="#611-链路层提供的服务"></a> 6.1.1 链路层提供的服务</h3>
+<ul>
+<li>尽管任一链路层的基本服务都是将数据报通过单一通信链路从一个节点移动到相邻节点，但所提供的服务细节能够随着链路层协议的不同而变化</li>
+<li>链路层提供的服务
+<ul>
+<li>成帧</li>
+<li>链路接入
+<ul>
+<li>**媒体控制访问(MAC)**协议规定了帧在链路上传输的规则</li>
+</ul>
+</li>
+<li>可靠交付</li>
+<li>差错检测和纠正</li>
+</ul>
+</li>
+</ul>
+<h3 id="612-链路层在何处出现"><a class="markdownIt-Anchor" href="#612-链路层在何处出现"></a> 6.1.2 链路层在何处出现</h3>
+<ul>
+<li>链路层的主体部分是在网络适配器中实现的，网络适配器有时也称为网络接口卡
+<ul>
+<li>位于网络适配器核心的是链路层控制器，该控制器通常是一个实现了许多链路层服务的专用芯片</li>
+<li>在发送端，控制器取得了由协议栈较高层生成并存储在主机内存中的数据报，在链路层帧中封装该数据报，然后遵循链路接入协议将该帧传进通信链路中</li>
+<li>在接收端，控制器接受了整个帧，抽取出网络层数据报</li>
+<li>如果链路层执行差错检测，则需要发送控制器在该帧的首部设置差错检测比特，由接收控制器执行差错检测</li>
+</ul>
+</li>
+</ul>
+<h2 id="62-差错检测和纠正计数"><a class="markdownIt-Anchor" href="#62-差错检测和纠正计数"></a> 6.2 差错检测和纠正计数</h2>
+<ul>
+<li><strong>比特级差错检测和纠正</strong></li>
+<li>奇偶校验，检测和方法和循环冗余检测</li>
+</ul>
+<h3 id="621-奇偶校验"><a class="markdownIt-Anchor" href="#621-奇偶校验"></a> 6.2.1 奇偶校验</h3>
+<ul>
+<li><strong>单个奇偶校验位</strong>
+<ul>
+<li>在偶校验方案中，发送方只需包含一个附加的比特，选择它的值，使得这d+1比特中1的总数是偶数</li>
+</ul>
+</li>
+<li><strong>二维奇偶校验方案</strong>
+<ul>
+<li>D中的d个比特被划分为i行j列。对每行和每列计算奇偶值。产生的i+j+1奇偶比特构成链路层帧的差错检测比特</li>
+<li>包含比特值改变的列和行的校验值都将会出现差错</li>
+<li>接收方不仅可以检测到出现了单个比特差错的事实，而且能利用差错的索引来实际识别发生差错的比特并纠正</li>
+</ul>
+</li>
+</ul>
+<h3 id="622-检验和方法"><a class="markdownIt-Anchor" href="#622-检验和方法"></a> 6.2.2 检验和方法</h3>
+<ul>
+<li>将k比特整数加起来，并且用得到的和作为差错检测比特
+<ul>
+<li>接收方通过对接收的数据的和取反码，并且检测其结果是否全1比特来检测检验和</li>
+</ul>
+</li>
+<li><mark>为什么运输层使用检验和而链路层使用CRC</mark>
+<ul>
+<li>运输层通常是在主机中作为用户操作系统的一部分用软件实现的</li>
+<li>运输层差错检测用软件实现，采用简单而快速如检验和方案是重要的</li>
+<li>链路层的差错检测在适配器中用专用的硬件实现，能够快速执行更复杂的CRC操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="623-循环冗余检测"><a class="markdownIt-Anchor" href="#623-循环冗余检测"></a> 6.2.3 循环冗余检测</h3>
+<ul>
+<li>基于<strong>循环冗余检测(CRC)编码</strong>,也称为多项式编码
+<ul>
+<li>该编码能够将要发送的比特串看作系数是0和1的一个多项式，对比特串的操作被解释为多项式算术</li>
+</ul>
+</li>
+<li>考虑d比特的数据D，发送节点要将它发送给接收节点
+<ul>
+<li>发送方和接收方首先必须协商一个r+1比特模式，称为生成多项式</li>
+<li>要求G的最高有效位的比特(最左边)是1</li>
+</ul>
+</li>
+<li>CRC编码的关键思想
+<ul>
+<li>对于一个给定的数据段D，发送方要选择r个附加比特R，并将它们附加到D上，使得得到的d+r比特模式用模2算数恰好能被G整除</li>
+<li>进行差错检测的过程:接收方用G去除接收到的d+r比特。如果余数非零，则出现了差错；否则认为数据正确而被接收</li>
+</ul>
+</li>
+<li>CRC计算采用模2运算，在加法中不进位，在减法中不借位
+<ul>
+<li><mark>等价与按位异或操作</mark></li>
+</ul>
+</li>
+<li>求R公式<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo>×</mo><msup><mn>2</mn><mi>r</mi></msup><mi>X</mi><mi>O</mi><mi>R</mi><mi>R</mi><mo>=</mo><mi>n</mi><mi>G</mi><mo>⇒</mo><mi>R</mi><mo>=</mo><mi>r</mi><mi>e</mi><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi><mfrac><mrow><mi>D</mi><mo>×</mo><msup><mn>2</mn><mi>r</mi></msup></mrow><mi>G</mi></mfrac><mo separator="true">,</mo><mi>r</mi><mi>e</mi><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">取</mi><mi mathvariant="normal">余</mi><mi mathvariant="normal">数</mi></mrow><annotation encoding="application/x-tex">D \times 2^r XOR R = nG \Rightarrow R=remainder\frac{D \times 2^r}{G},remainder为取余数</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">G</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.25598em;vertical-align:-0.345em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.91098em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">G</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="mbin mtight">×</span><span class="mord mtight"><span class="mord mtight">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7385428571428572em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">取</span><span class="mord cjk_fallback">余</span><span class="mord cjk_fallback">数</span></span></span></span></li>
+</ul>
+<h2 id="63-多路访问链路和协议"><a class="markdownIt-Anchor" href="#63-多路访问链路和协议"></a> 6.3 多路访问链路和协议</h2>
+<ul>
+<li>两种类型的网络链路
+<ul>
+<li><strong>点对点链路</strong>:由链路一端的单个发送方和链路另一端的单个接收方组成</li>
+<li><strong>广播链路</strong>:能让多个发送和接收节点都连接相同的，单一的共享的广播信道上</li>
+</ul>
+</li>
+<li>所有的节点都能够传输帧，所以多个节点可能会同时传输帧
+<ul>
+<li>发生这种情况时，所有节点同时接到多个帧</li>
+<li>传输的帧在所有的接收方处发生碰撞</li>
+<li>碰撞发生时，没有一个接收节点能够有效地获得任何传输的帧</li>
+</ul>
+</li>
+<li>多路访问协议划分为3种类型:信道划分协议,随机接入协议和轮流协议</li>
+</ul>
+<h3 id="631-信道划分协议"><a class="markdownIt-Anchor" href="#631-信道划分协议"></a> 6.3.1 信道划分协议</h3>
+<ul>
+<li>时分多路复用(TDM)</li>
+<li>频分多路复用(FDM)</li>
+<li>码分多址(CDMA)</li>
+</ul>
+<h3 id="632-随机接入协议"><a class="markdownIt-Anchor" href="#632-随机接入协议"></a> 6.3.2 随机接入协议</h3>
+<ul>
+<li>时隙ALOHA</li>
+<li>ALOHA</li>
+<li>载波侦听多路访问(CSMA)</li>
+<li>具有碰撞检测的载波侦听多路访问(CSMA/CD)</li>
+</ul>
+<h3 id="633-轮流协议"><a class="markdownIt-Anchor" href="#633-轮流协议"></a> 6.3.3 轮流协议</h3>
+<ul>
+<li>两种轮流协议
+<ul>
+<li>轮询协议
+<ul>
+<li>要求节点之一被指定为主节点，主节点以循环的方式轮询每个节点</li>
+<li>主节点首先向节点1发送一个报文，告诉它能够传输帧的最多数量</li>
+<li>在节点1传输率某些帧后，主节点告诉节点2能够传输的帧的最多数量</li>
+</ul>
+</li>
+<li>轮询协议消除了碰撞和空时隙，提高了效率
+<ul>
+<li>但引入轮询时延</li>
+<li>若主节点有故障，整个信道变得不可操作</li>
+</ul>
+</li>
+<li>令牌传输协议
+<ul>
+<li>没有主节点，一个称为令牌的小的特殊帧在节点之间以某种固定的次序进行交换</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="64-交换因特网"><a class="markdownIt-Anchor" href="#64-交换因特网"></a> 6.4 交换因特网</h2>
 
     </div>
 
@@ -1787,7 +2569,7 @@ s-65,47,-65,47z M834 80H400000v40H845z"/></svg></span></span></span><span class=
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">2.</span> <span class="nav-text"> 1. 计算机网络和因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.1 什么是因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#111-%E5%85%B7%E4%BD%93%E6%9E%84%E6%88%90%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 1.1.1 具体构成描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#112-%E6%9C%8D%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 1.1.2 服务描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#113-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 1.1.3 什么是协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98"><span class="nav-number">2.2.</span> <span class="nav-text"> 1.2 网络边缘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83"><span class="nav-number">2.3.</span> <span class="nav-text"> 1.3 网络核心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#131-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.3.1.</span> <span class="nav-text"> 1.3.1 分组交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#132-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text"> 1.3.2 电路交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#133-%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="nav-number">2.3.3.</span> <span class="nav-text"> 1.3.3 网络的网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E7%BD%91%E4%B8%AD%E7%9A%84%E6%97%B6%E5%BB%B6%E4%B8%A2%E5%8C%85%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">2.4.</span> <span class="nav-text"> 1.4 分组交换网中的时延,丢包和吞吐量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#141-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E7%BD%91%E4%B8%AD%E7%9A%84%E6%97%B6%E5%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">2.4.1.</span> <span class="nav-text"> 1.4.1 分组交换网中的时延概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#142-%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6%E5%92%8C%E4%B8%A2%E5%8C%85"><span class="nav-number">2.4.2.</span> <span class="nav-text"> 1.4.2 排队时延和丢包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#143-%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%97%B6%E5%BB%B6"><span class="nav-number">2.4.3.</span> <span class="nav-text"> 1.4.3 端到端时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#144-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">2.4.4.</span> <span class="nav-text"> 1.4.4 计算机网络中的吞吐量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.5.</span> <span class="nav-text"> 1.5 协议层次及其服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#151-%E5%88%86%E5%B1%82%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.5.1.</span> <span class="nav-text"> 1.5.1 分层的体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#152-%E5%B0%81%E8%A3%85"><span class="nav-number">2.5.2.</span> <span class="nav-text"> 1.5.2 封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E9%9D%A2%E5%AF%B9%E6%94%BB%E5%87%BB%E7%BD%91%E7%BB%9C"><span class="nav-number">2.6.</span> <span class="nav-text"> 1.6 面对攻击网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text"> 2 应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 应用层协议原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#211-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 2.1.1 网络应用程序体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#212-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 2.1.2 进程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#213-%E5%8F%AF%E4%BE%9B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 2.1.3 可供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#214-%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.4.</span> <span class="nav-text"> 2.1.4 因特网提供的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#215-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.5.</span> <span class="nav-text"> 2.1.5 应用层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-web%E5%92%8Chttp"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#221-http%E6%A6%82%E5%86%B5"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 2.2.1 HTTP概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#222-%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 2.2.2 非持续连接和持续连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#223-http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 2.2.3 HTTP报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#224-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BA%A4%E4%BA%92cookie"><span class="nav-number">3.2.4.</span> <span class="nav-text"> 2.2.4 用户与服务器的交互:cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#225-web%E7%BC%93%E5%AD%98"><span class="nav-number">3.2.5.</span> <span class="nav-text"> 2.2.5 Web缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#226-%E6%9D%A1%E4%BB%B6get%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.6.</span> <span class="nav-text"> 2.2.6 条件GET方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text"> 2.3 因特网中的电子邮件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-dns%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.4.</span> <span class="nav-text"> 2.4 DNS:因特网的目录服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#241-dns%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.4.1.</span> <span class="nav-text"> 2.4.1 DNS提供的服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#242-dns%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-number">3.4.2.</span> <span class="nav-text"> 2.4.2 DNS工作机理概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#243-dns%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="nav-number">3.4.3.</span> <span class="nav-text"> 2.4.3 DNS记录和报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-p2p%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91"><span class="nav-number">3.5.</span> <span class="nav-text"> 2.5 P2P文件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">3.6.</span> <span class="nav-text"> 2.6 视频流和内容分发网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#262-http%E6%B5%81%E5%92%8Cdash"><span class="nav-number">3.6.1.</span> <span class="nav-text"> 2.6.2 HTTP流和DASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#263-%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">3.6.2.</span> <span class="nav-text"> 2.6.3 内容分发网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8"><span class="nav-number">3.7.</span> <span class="nav-text"> 2.7 套接字编程:生成网络应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%BF%90%E8%BE%93%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text"> 3 运输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E6%A6%82%E8%BF%B0%E5%92%8C%E8%BF%90%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 概述和运输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#311-%E8%BF%90%E8%BE%93%E5%B1%82%E5%92%8C%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 3.1.1 运输层和网络层的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#312-%E5%9B%A0%E7%89%B9%E7%BD%91%E8%BF%90%E8%BE%93%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 3.1.2 因特网运输层概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 多路复用与多路分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1udp"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 无连接服务:UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#332-udp%E6%A3%80%E9%AA%8C%E5%92%8C"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 3.3.2 UDP检验和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86"><span class="nav-number">4.4.</span> <span class="nav-text"> 3.4 可靠数据传输原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#341-%E6%9E%84%E9%80%A0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.4.1.</span> <span class="nav-text"> 3.4.1 构造可靠数据传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#342-%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.4.2.</span> <span class="nav-text"> 3.4.2 流水线可靠数据传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#343-%E5%9B%9E%E9%80%80n%E6%AD%A5"><span class="nav-number">4.4.3.</span> <span class="nav-text"> 3.4.3 回退N步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#344-%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0"><span class="nav-number">4.4.4.</span> <span class="nav-text"> 3.4.4 选择重传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%90%E8%BE%93tcp"><span class="nav-number">4.5.</span> <span class="nav-text"> 3.5 面向连接的运输:TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#351-tcp%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.5.1.</span> <span class="nav-text"> 3.5.1 TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#352-tcp%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84"><span class="nav-number">4.5.2.</span> <span class="nav-text"> 3.5.2 TCP报文段结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#353-%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%E7%9A%84%E4%BC%B0%E8%AE%A1%E4%B8%8E%E8%B6%85%E6%97%B6"><span class="nav-number">4.5.3.</span> <span class="nav-text"> 3.5.3 往返时间的估计与超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#354-%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">4.5.4.</span> <span class="nav-text"> 3.5.4 可靠数据传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#355-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">4.5.5.</span> <span class="nav-text"> 3.5.5 流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#356-tcp%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="nav-number">4.5.6.</span> <span class="nav-text"> 3.5.6 TCP连接管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">4.6.</span> <span class="nav-text"> 3.6 拥塞控制机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#361-%E6%8B%A5%E5%A1%9E%E5%8E%9F%E5%9B%A0%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="nav-number">4.6.1.</span> <span class="nav-text"> 3.6.1 拥塞原因与代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#362-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">4.6.2.</span> <span class="nav-text"> 3.6.2 拥塞控制方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37-tcp%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">4.7.</span> <span class="nav-text"> 3.7 TCP拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#371-%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="nav-number">4.7.1.</span> <span class="nav-text"> 3.7.1 公平性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="nav-number">5.</span> <span class="nav-text"> 4 网络层:数据平面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 网络层概述</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">2.</span> <span class="nav-text"> 1. 计算机网络和因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.1 什么是因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#111-%E5%85%B7%E4%BD%93%E6%9E%84%E6%88%90%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 1.1.1 具体构成描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#112-%E6%9C%8D%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 1.1.2 服务描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#113-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 1.1.3 什么是协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98"><span class="nav-number">2.2.</span> <span class="nav-text"> 1.2 网络边缘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83"><span class="nav-number">2.3.</span> <span class="nav-text"> 1.3 网络核心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#131-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.3.1.</span> <span class="nav-text"> 1.3.1 分组交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#132-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text"> 1.3.2 电路交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#133-%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="nav-number">2.3.3.</span> <span class="nav-text"> 1.3.3 网络的网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E7%BD%91%E4%B8%AD%E7%9A%84%E6%97%B6%E5%BB%B6%E4%B8%A2%E5%8C%85%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">2.4.</span> <span class="nav-text"> 1.4 分组交换网中的时延,丢包和吞吐量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#141-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E7%BD%91%E4%B8%AD%E7%9A%84%E6%97%B6%E5%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">2.4.1.</span> <span class="nav-text"> 1.4.1 分组交换网中的时延概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#142-%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6%E5%92%8C%E4%B8%A2%E5%8C%85"><span class="nav-number">2.4.2.</span> <span class="nav-text"> 1.4.2 排队时延和丢包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#143-%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%97%B6%E5%BB%B6"><span class="nav-number">2.4.3.</span> <span class="nav-text"> 1.4.3 端到端时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#144-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">2.4.4.</span> <span class="nav-text"> 1.4.4 计算机网络中的吞吐量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.5.</span> <span class="nav-text"> 1.5 协议层次及其服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#151-%E5%88%86%E5%B1%82%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.5.1.</span> <span class="nav-text"> 1.5.1 分层的体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#152-%E5%B0%81%E8%A3%85"><span class="nav-number">2.5.2.</span> <span class="nav-text"> 1.5.2 封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E9%9D%A2%E5%AF%B9%E6%94%BB%E5%87%BB%E7%BD%91%E7%BB%9C"><span class="nav-number">2.6.</span> <span class="nav-text"> 1.6 面对攻击网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text"> 2 应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 应用层协议原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#211-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 2.1.1 网络应用程序体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#212-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 2.1.2 进程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#213-%E5%8F%AF%E4%BE%9B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 2.1.3 可供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#214-%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.4.</span> <span class="nav-text"> 2.1.4 因特网提供的运输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#215-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.5.</span> <span class="nav-text"> 2.1.5 应用层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-web%E5%92%8Chttp"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#221-http%E6%A6%82%E5%86%B5"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 2.2.1 HTTP概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#222-%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 2.2.2 非持续连接和持续连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#223-http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 2.2.3 HTTP报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#224-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BA%A4%E4%BA%92cookie"><span class="nav-number">3.2.4.</span> <span class="nav-text"> 2.2.4 用户与服务器的交互:cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#225-web%E7%BC%93%E5%AD%98"><span class="nav-number">3.2.5.</span> <span class="nav-text"> 2.2.5 Web缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#226-%E6%9D%A1%E4%BB%B6get%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.6.</span> <span class="nav-text"> 2.2.6 条件GET方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text"> 2.3 因特网中的电子邮件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-dns%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.4.</span> <span class="nav-text"> 2.4 DNS:因特网的目录服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#241-dns%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.4.1.</span> <span class="nav-text"> 2.4.1 DNS提供的服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#242-dns%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-number">3.4.2.</span> <span class="nav-text"> 2.4.2 DNS工作机理概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#243-dns%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="nav-number">3.4.3.</span> <span class="nav-text"> 2.4.3 DNS记录和报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-p2p%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91"><span class="nav-number">3.5.</span> <span class="nav-text"> 2.5 P2P文件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">3.6.</span> <span class="nav-text"> 2.6 视频流和内容分发网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#262-http%E6%B5%81%E5%92%8Cdash"><span class="nav-number">3.6.1.</span> <span class="nav-text"> 2.6.2 HTTP流和DASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#263-%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91"><span class="nav-number">3.6.2.</span> <span class="nav-text"> 2.6.3 内容分发网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8"><span class="nav-number">3.7.</span> <span class="nav-text"> 2.7 套接字编程:生成网络应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%BF%90%E8%BE%93%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text"> 3 运输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E6%A6%82%E8%BF%B0%E5%92%8C%E8%BF%90%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 概述和运输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#311-%E8%BF%90%E8%BE%93%E5%B1%82%E5%92%8C%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 3.1.1 运输层和网络层的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#312-%E5%9B%A0%E7%89%B9%E7%BD%91%E8%BF%90%E8%BE%93%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 3.1.2 因特网运输层概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 多路复用与多路分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1udp"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 无连接服务:UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#332-udp%E6%A3%80%E9%AA%8C%E5%92%8C"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 3.3.2 UDP检验和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86"><span class="nav-number">4.4.</span> <span class="nav-text"> 3.4 可靠数据传输原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#341-%E6%9E%84%E9%80%A0%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.4.1.</span> <span class="nav-text"> 3.4.1 构造可靠数据传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#342-%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.4.2.</span> <span class="nav-text"> 3.4.2 流水线可靠数据传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#343-%E5%9B%9E%E9%80%80n%E6%AD%A5"><span class="nav-number">4.4.3.</span> <span class="nav-text"> 3.4.3 回退N步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#344-%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0"><span class="nav-number">4.4.4.</span> <span class="nav-text"> 3.4.4 选择重传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%90%E8%BE%93tcp"><span class="nav-number">4.5.</span> <span class="nav-text"> 3.5 面向连接的运输:TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#351-tcp%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.5.1.</span> <span class="nav-text"> 3.5.1 TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#352-tcp%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84"><span class="nav-number">4.5.2.</span> <span class="nav-text"> 3.5.2 TCP报文段结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#353-%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%E7%9A%84%E4%BC%B0%E8%AE%A1%E4%B8%8E%E8%B6%85%E6%97%B6"><span class="nav-number">4.5.3.</span> <span class="nav-text"> 3.5.3 往返时间的估计与超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#354-%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">4.5.4.</span> <span class="nav-text"> 3.5.4 可靠数据传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#355-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">4.5.5.</span> <span class="nav-text"> 3.5.5 流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#356-tcp%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="nav-number">4.5.6.</span> <span class="nav-text"> 3.5.6 TCP连接管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">4.6.</span> <span class="nav-text"> 3.6 拥塞控制机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#361-%E6%8B%A5%E5%A1%9E%E5%8E%9F%E5%9B%A0%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="nav-number">4.6.1.</span> <span class="nav-text"> 3.6.1 拥塞原因与代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#362-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">4.6.2.</span> <span class="nav-text"> 3.6.2 拥塞控制方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37-tcp%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">4.7.</span> <span class="nav-text"> 3.7 TCP拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#371-%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="nav-number">4.7.1.</span> <span class="nav-text"> 3.7.1 公平性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="nav-number">5.</span> <span class="nav-text"> 4 网络层:数据平面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 网络层概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#411-%E8%BD%AC%E5%8F%91%E5%92%8C%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E5%92%8C%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">5.1.1.</span> <span class="nav-text"> 4.1.1 转发和路由选择:数据平面和控制平面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#412-%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.2.</span> <span class="nav-text"> 4.1.2 网络服务模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">5.2.</span> <span class="nav-text"> 4.2 路由器工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#421-%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86%E5%92%8C%E5%9F%BA%E4%BA%8E%E7%9B%AE%E7%9A%84%E5%9C%B0%E8%BD%AC%E5%8F%91"><span class="nav-number">5.2.1.</span> <span class="nav-text"> 4.2.1 输入端口处理和基于目的地转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#422-%E4%BA%A4%E6%8D%A2"><span class="nav-number">5.2.2.</span> <span class="nav-text"> 4.2.2 交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#424-%E4%BD%95%E6%97%B6%E5%87%BA%E7%8E%B0%E6%8E%92%E9%98%9F"><span class="nav-number">5.2.3.</span> <span class="nav-text"> 4.2.4 何时出现排队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#425-%E5%88%86%E7%BB%84%E8%B0%83%E5%BA%A6"><span class="nav-number">5.2.4.</span> <span class="nav-text"> 4.2.5 分组调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AEipv4%E5%AF%BB%E5%9D%80ipv6%E5%8F%8A%E5%85%B6%E4%BB%96"><span class="nav-number">5.3.</span> <span class="nav-text"> 4.3 网络协议:IPv4,寻址,IPV6及其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#431-ipv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.3.1.</span> <span class="nav-text"> 4.3.1 IPv4数据报格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#432-ipv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%88%86%E7%89%87"><span class="nav-number">5.3.2.</span> <span class="nav-text"> 4.3.2 IPv4数据报分片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#433-ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">5.3.3.</span> <span class="nav-text"> 4.3.3 IPv4编址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#434-%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.3.4.</span> <span class="nav-text"> 4.3.4 网络地址转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#435-ipv6"><span class="nav-number">5.3.5.</span> <span class="nav-text"> 4.3.5 IPv6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#44-%E9%80%9A%E7%94%A8%E8%BD%AC%E5%8F%91%E5%92%8Csdn"><span class="nav-number">5.4.</span> <span class="nav-text"> 4.4 通用转发和SDN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#441-%E5%8C%B9%E9%85%8D"><span class="nav-number">5.4.1.</span> <span class="nav-text"> 4.4.1 匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#442-%E5%8A%A8%E4%BD%9C"><span class="nav-number">5.4.2.</span> <span class="nav-text"> 4.4.2 动作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text"> 5 网络层:控制平面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#52-%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text"> 5.2 路由选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#521-%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.1.</span> <span class="nav-text"> 5.2.1 链路状态路由选择算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#522-%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.2.</span> <span class="nav-text"> 5.2.2 距离向量路由选择算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#53-%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9ospf"><span class="nav-number">6.2.</span> <span class="nav-text"> 5.3 因特网中自治系统内部的路由选择:OSPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#54-isp%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9bgp"><span class="nav-number">6.3.</span> <span class="nav-text"> 5.4 ISP之间的路由选择:BGP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#541-bgp%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">6.3.1.</span> <span class="nav-text"> 5.4.1 BGP的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#542-%E9%80%9A%E8%BF%87bgp%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF"><span class="nav-number">6.3.2.</span> <span class="nav-text"> 5.4.2 通过BGP路由信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#543-%E7%A1%AE%E8%AE%A4%E6%9C%80%E5%A5%BD%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="nav-number">6.3.3.</span> <span class="nav-text"> 5.4.3 确认最好的路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#544-ip%E4%BB%BB%E6%92%AD"><span class="nav-number">6.3.4.</span> <span class="nav-text"> 5.4.4 IP任播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-sdn%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">6.4.</span> <span class="nav-text"> 5.5 SDN控制平面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">7.</span> <span class="nav-text"> 6 链路层和局域网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#61-%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">7.1.</span> <span class="nav-text"> 6.1 链路层概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#611-%E9%93%BE%E8%B7%AF%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">7.1.1.</span> <span class="nav-text"> 6.1.1 链路层提供的服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#612-%E9%93%BE%E8%B7%AF%E5%B1%82%E5%9C%A8%E4%BD%95%E5%A4%84%E5%87%BA%E7%8E%B0"><span class="nav-number">7.1.2.</span> <span class="nav-text"> 6.1.2 链路层在何处出现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3%E8%AE%A1%E6%95%B0"><span class="nav-number">7.2.</span> <span class="nav-text"> 6.2 差错检测和纠正计数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#621-%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="nav-number">7.2.1.</span> <span class="nav-text"> 6.2.1 奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#622-%E6%A3%80%E9%AA%8C%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">7.2.2.</span> <span class="nav-text"> 6.2.2 检验和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#623-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A3%80%E6%B5%8B"><span class="nav-number">7.2.3.</span> <span class="nav-text"> 6.2.3 循环冗余检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#63-%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.3.</span> <span class="nav-text"> 6.3 多路访问链路和协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#631-%E4%BF%A1%E9%81%93%E5%88%92%E5%88%86%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.3.1.</span> <span class="nav-text"> 6.3.1 信道划分协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#632-%E9%9A%8F%E6%9C%BA%E6%8E%A5%E5%85%A5%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.3.2.</span> <span class="nav-text"> 6.3.2 随机接入协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#633-%E8%BD%AE%E6%B5%81%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.3.3.</span> <span class="nav-text"> 6.3.3 轮流协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-%E4%BA%A4%E6%8D%A2%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">7.4.</span> <span class="nav-text"> 6.4 交换因特网</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
