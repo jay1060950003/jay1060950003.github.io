@@ -40,8 +40,15 @@
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-15-56-25.png">
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-15-57-16.png">
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-15-55-37.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-17-09-57.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-10-51-57.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-20-17-07.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-20-40-59.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-32-54.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-33-18.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-54-40.png">
 <meta property="article:published_time" content="2022-05-05T07:53:37.000Z">
-<meta property="article:modified_time" content="2022-05-05T07:59:30.528Z">
+<meta property="article:modified_time" content="2022-05-06T13:58:04.191Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="Basic">
 <meta name="twitter:card" content="summary">
@@ -223,10 +230,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-05-05 15:53:37 / 修改时间：15:59:30" itemprop="dateCreated datePublished" datetime="2022-05-05T15:53:37+08:00">2022-05-05</time>
+              <time title="创建时间：2022-05-05 15:53:37" itemprop="dateCreated datePublished" datetime="2022-05-05T15:53:37+08:00">2022-05-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-06 21:58:04" itemprop="dateModified" datetime="2022-05-06T21:58:04+08:00">2022-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -261,6 +274,252 @@
 <p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-15-57-16.png" alt="操作系统核心子部门"><br>
 <img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-15-55-37.png" alt="操作系统知识体系图"></p>
 <hr>
+<h1 id="1-从hello到另一个hello"><a class="markdownIt-Anchor" href="#1-从hello到另一个hello"></a> 1 从hello到另一个hello</h1>
+<h2 id="11-程序的运行过程从代码到机器运行"><a class="markdownIt-Anchor" href="#11-程序的运行过程从代码到机器运行"></a> 1.1 程序的运行过程:从代码到机器运行</h2>
+<h3 id="程序编译过程"><a class="markdownIt-Anchor" href="#程序编译过程"></a> 程序编译过程</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HelloWorld.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;studio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">gcc HelloWorld.c -o HelloWorld</span><br><span class="line"><span class="comment">// 运行</span></span><br><span class="line">./HelloWorld</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>使用命令编译:gcc HelloWorld.c -o HelloWorld</p>
+<ul>
+<li>gcc只是完成编译工作的驱动程序,根据编译流程分别调用预处理程序,编译程序,汇编程序,链接程序来完成具体工作</li>
+<li>手动控制编译流程
+<ul>
+<li>gcc -E HelloWorld.c -o HelloWorld.i预处理,加入头文件,替换宏</li>
+<li>gcc -S HelloWorld.i -o HelloWorld.s编译,包含预处理,将C转换成汇编程序</li>
+<li>gcc -c HelloWorld.s -o HelloWorld.o汇编,包含预处理和编译,将汇编程序转换成可链接的二进制程序</li>
+<li>gcc HelloWorld.o -o HelloWorld…链接,包含以上所有操作,将可链接的二进制程序和其他库链接形成可执行的程序文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-05-17-09-57.png" alt="编译流程"></p>
+</li>
+</ul>
+<h3 id="程序装载执行"><a class="markdownIt-Anchor" href="#程序装载执行"></a> 程序装载执行</h3>
+<ul>
+<li>冯诺依曼体系计算机结构
+<ul>
+<li>输入设备</li>
+<li>存储器</li>
+<li>运算器</li>
+<li>控制器</li>
+<li>输出设备</li>
+</ul>
+</li>
+</ul>
+<h3 id="更形象地将helloworld程序装入原型计算机"><a class="markdownIt-Anchor" href="#更形象地将helloworld程序装入原型计算机"></a> 更形象地将HelloWorld程序装入原型计算机</h3>
+<ul>
+<li>使用gcc -Og -S HelloWorld可得到汇编代码
+<ul>
+<li>使用objdump -d HelloWorld,得到/lesson01/HelloWorld.dump,其中含有库代码</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-实现一个最简单的内核"><a class="markdownIt-Anchor" href="#12-实现一个最简单的内核"></a> 1.2 实现一个最简单的内核</h2>
+<h3 id="pc机的引导流程"><a class="markdownIt-Anchor" href="#pc机的引导流程"></a> PC机的引导流程</h3>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-10-51-57.png" alt="Hello OS的引导流程"></p>
+<ul>
+<li>PC上电后,执行BIOS固件程序,<mark>负责检测和初始化CPU,内存及主板平台</mark>,然后加载引导设备的第一个扇区数据,到0x7c00地址开始的内存空间,再跳转到0x7c00处执行指令</li>
+</ul>
+<h3 id="hello-os引导汇编代码"><a class="markdownIt-Anchor" href="#hello-os引导汇编代码"></a> Hello OS引导汇编代码</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">MBT_HDR_FLAGS EQU <span class="number">0x00010003</span></span><br><span class="line">MBT_HDR_MAGIC EQU <span class="number">0x1BADB002</span> ;多引导协议头魔数</span><br><span class="line">MBT_HDR2_MAGIC EQU <span class="number">0xe85250d6</span> ;第二版多引导协议头魔数</span><br><span class="line">global _start ;导出_start符号</span><br><span class="line"><span class="keyword">extern</span> main ;导入外部的main函数符号</span><br><span class="line">[section .start.text] ;定义.start.text代码节</span><br><span class="line">[bits <span class="number">32</span>] ;汇编成<span class="number">32</span>位代码</span><br><span class="line">_start:</span><br><span class="line">jmp _entry</span><br><span class="line">ALIGN <span class="number">8</span></span><br><span class="line">mbt_hdr:</span><br><span class="line">dd MBT_HDR_MAGIC</span><br><span class="line">dd MBT_HDR_FLAGS</span><br><span class="line">dd -(MBT_HDR_MAGIC+MBT_HDR_FLAGS)</span><br><span class="line">dd mbt_hdr</span><br><span class="line">dd _start</span><br><span class="line">dd <span class="number">0</span></span><br><span class="line">dd <span class="number">0</span></span><br><span class="line">dd _entry</span><br><span class="line">;以上是GRUB所需要的头</span><br><span class="line">ALIGN <span class="number">8</span></span><br><span class="line">mbt2_hdr:</span><br><span class="line">DD MBT_HDR2_MAGIC</span><br><span class="line">DD <span class="number">0</span></span><br><span class="line">DD mbt2_hdr_end - mbt2_hdr</span><br><span class="line">DD -(MBT_HDR2_MAGIC + <span class="number">0</span> + (mbt2_hdr_end - mbt2_hdr))</span><br><span class="line">DW <span class="number">2</span>, <span class="number">0</span></span><br><span class="line">DD <span class="number">24</span></span><br><span class="line">DD mbt2_hdr</span><br><span class="line">DD _start</span><br><span class="line">DD <span class="number">0</span></span><br><span class="line">DD <span class="number">0</span></span><br><span class="line">DW <span class="number">3</span>, <span class="number">0</span></span><br><span class="line">DD <span class="number">12</span></span><br><span class="line">DD _entry</span><br><span class="line">DD <span class="number">0</span></span><br><span class="line">DW <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">DD <span class="number">8</span></span><br><span class="line">mbt2_hdr_end:</span><br><span class="line">;以上是GRUB2所需要的头</span><br><span class="line">;包含两个头是为了同时兼容GRUB、GRUB2</span><br><span class="line">ALIGN <span class="number">8</span></span><br><span class="line">_entry:</span><br><span class="line">;关中断</span><br><span class="line">cli</span><br><span class="line">;关不可屏蔽中断</span><br><span class="line">in al, <span class="number">0x70</span></span><br><span class="line">or al, <span class="number">0x80</span></span><br><span class="line">out <span class="number">0x70</span>,al</span><br><span class="line">;重新加载GDT</span><br><span class="line">lgdt [GDT_PTR]</span><br><span class="line">jmp dword <span class="number">0x8</span> :_32bits_mode</span><br><span class="line">_32bits_mode:</span><br><span class="line">;下面初始化C语言可能会用到的寄存器</span><br><span class="line">mov ax, <span class="number">0x10</span></span><br><span class="line">mov ds, ax</span><br><span class="line">mov ss, ax</span><br><span class="line">mov es, ax</span><br><span class="line">mov fs, ax</span><br><span class="line">mov gs, ax</span><br><span class="line">xor eax,eax</span><br><span class="line">xor ebx,ebx</span><br><span class="line">xor ecx,ecx</span><br><span class="line">xor edx,edx</span><br><span class="line">xor edi,edi</span><br><span class="line">xor esi,esi</span><br><span class="line">xor ebp,ebp</span><br><span class="line">xor esp,esp</span><br><span class="line">;初始化栈,C语言需要栈才能工作</span><br><span class="line">mov esp,<span class="number">0x9000</span></span><br><span class="line">;调用C语言函数main</span><br><span class="line">call main</span><br><span class="line">;让CPU停止执行指令</span><br><span class="line">halt_step:</span><br><span class="line">halt</span><br><span class="line">jmp halt_step</span><br><span class="line">GDT_START:</span><br><span class="line">knull_dsc: dq <span class="number">0</span></span><br><span class="line">kcode_dsc: dq <span class="number">0x00cf9e000000ffff</span></span><br><span class="line">kdata_dsc: dq <span class="number">0x00cf92000000ffff</span></span><br><span class="line">k16cd_dsc: dq <span class="number">0x00009e000000ffff</span></span><br><span class="line">k16da_dsc: dq <span class="number">0x000092000000ffff</span></span><br><span class="line">GDT_END:</span><br><span class="line">GDT_PTR:</span><br><span class="line">GDTLEN dw GDT_END-GDT_START<span class="number">-1</span></span><br><span class="line">GDTBASE dd GDT_START</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代码分为4个部分
+<ul>
+<li>1-40行:汇编定义GRUB多引导协议头</li>
+<li>44-52行:关闭中断,设定CPU的工作模式</li>
+<li>54-73行:初始化CPU寄存器和C语言的运行环境</li>
+<li>78-87行,GDT_START开始的,是CPU工作模式需要的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="hello-os的主函数"><a class="markdownIt-Anchor" href="#hello-os的主函数"></a> Hello OS的主函数</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;vgastr.h&quot;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Hello OS!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><mark>需要自己实现printf函数(在vgastr.h中)</mark></li>
+</ul>
+<h3 id="控制计算机屏幕"><a class="markdownIt-Anchor" href="#控制计算机屏幕"></a> 控制计算机屏幕</h3>
+<ul>
+<li><strong>显卡支持VESA标准</strong>
+<ul>
+<li>该标准具有两种工作模式:字符模式和图形模式</li>
+<li><strong>显卡为了兼容这种标准,需要提供VGABIOS固件程序</strong></li>
+</ul>
+</li>
+<li>字符模式的工作细节
+<ul>
+<li>将屏幕分成24行,每行80个字节,将24*80个位置映射到以0xb8000地址开始的内存中,每两个字节对应一个字符,其中一个字节是字符的ASCII码,另一个字节为字符的颜色值</li>
+</ul>
+</li>
+<li><mark>C语言是UTF8编码,对ASCII编码兼容,英文字符的ASCII编码和UTF8编码相等</mark></li>
+</ul>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-20-17-07.png" alt="计算机显卡文本模式"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> _strwrite(<span class="type">char</span>* <span class="built_in">string</span>)&#123;</span><br><span class="line">  <span class="type">char</span>* p_strdst = (<span class="type">char</span>*)(<span class="number">0xb8000</span>);</span><br><span class="line">  <span class="keyword">while</span>(*<span class="built_in">string</span>)&#123;</span><br><span class="line">    *p_strdst = *<span class="built_in">string</span>++;</span><br><span class="line">    p_strdst +=<span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printf</span><span class="params">(<span class="type">char</span>* fmt,...)</span>&#123;</span><br><span class="line">  _strwrite(fmt);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编译和安装hello-os"><a class="markdownIt-Anchor" href="#编译和安装hello-os"></a> 编译和安装Hello OS</h3>
+<ul>
+<li>编译使用四条命令完成 <a href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B">跳转至命令</a></li>
+</ul>
+<h3 id="make工具"><a class="markdownIt-Anchor" href="#make工具"></a> make工具</h3>
+<ul>
+<li>使用make工具程序,读取makefile文件,该文件写好了构建软件的程序,根据规则自动化构建程序</li>
+<li>makefile文件的规则
+<ul>
+<li>首先由一个或者多个构建目标称为target</li>
+<li>目标后面紧跟着用于构建该目标所需要的文件,目标下面是构建该目标所需要的命令及参数</li>
+</ul>
+</li>
+<li>第一次构建目标后,下一次执行make时,会根据该目标所依赖的文件是否更新决定是否编译该目标
+<ul>
+<li><mark>若依赖文件没有更新,则不构建目标</mark></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc <span class="comment">#定义一个宏CC 等于gcc</span></span><br><span class="line">CFLAGS = -c <span class="comment">#定义一个宏 CFLAGS 等于-c</span></span><br><span class="line">OBJS_FILE = <span class="keyword">file</span>.c file1.c file2.c file3.c file4.c <span class="comment">#定义一个宏</span></span><br><span class="line">.PHONY : all everything <span class="comment">#定义两个伪目标all、everything</span></span><br><span class="line">all:everything <span class="comment">#伪目标all依赖于伪目标everything</span></span><br><span class="line">everything :$( OBJS_FILE) <span class="comment">#伪目标everything依赖于OBJS_FILE,而OBJS_FILE是宏会被</span></span><br><span class="line"><span class="comment">#替换成file.c file1.c file2.c file3.c file4.c</span></span><br><span class="line">%.o : %.c</span><br><span class="line">$(CC) $(CFLAGS) -o $@ $&lt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代码解释
+<ul>
+<li>make规定#后面为注释</li>
+<li>makefile定义宏
+<ul>
+<li>字符串后面跟一个=或:=</li>
+<li><strong>引用宏时使用$(宏名)</strong>,宏最终会在宏出现的地方替换成相应的字符串</li>
+</ul>
+</li>
+<li>.PHONY表示定义伪目标
+<ul>
+<li>伪目标不代表一个真正的文件名,在执行 make 时可以指定这个目标来执行其所在规则定义的命令。但是伪目标可以依赖于另一个伪目标或者文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="编译"><a class="markdownIt-Anchor" href="#编译"></a> 编译</h3>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-20-40-59.png" alt="编译过程"></p>
+<h3 id="安装hello-os"><a class="markdownIt-Anchor" href="#安装hello-os"></a> 安装Hello OS</h3>
+<ul>
+<li>得到Hello OS.bin,在计算机启动时加载该文件,该过程称为<strong>安装</strong></li>
+<li>GRUB在启动时加载一个grub.cfg的文本文件,根据其中的内容执行相应的操作,<strong>其中包含启动项</strong>
+<ul>
+<li>将启动代码插入到/boot/grub/grub.cfg文件中,然后将Hello OS.bin复制到/boot/目录下,最终可启动Hello OS</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menuentry <span class="string">&#x27;HelloOS&#x27;</span> &#123;</span><br><span class="line">insmod part_msdos #GRUB加载分区模块识别分区</span><br><span class="line">insmod ext2 #GRUB加载ext文件系统模块识别ext文件系统</span><br><span class="line"><span class="built_in">set</span> root=<span class="string">&#x27;hd0,msdos4&#x27;</span> #注意boot目录挂载的分区,这是我机器上的情况</span><br><span class="line">multiboot2 /boot/HelloOS.bin #GRUB以multiboot2协议加载HelloOS.bin</span><br><span class="line">boot #GRUB启动HelloOS.bin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-设计"><a class="markdownIt-Anchor" href="#2-设计"></a> 2 设计</h1>
+<h2 id="21-内核结构与设计"><a class="markdownIt-Anchor" href="#21-内核结构与设计"></a> 2.1 内核结构与设计</h2>
+<ul>
+<li>内核是计算机资源的管理者
+<ul>
+<li>计算机资源分为<strong>硬件资源</strong>和<strong>软件资源</strong></li>
+<li>硬件资源包括,总线,CPU,内存,硬盘,网卡,显卡和各种IO</li>
+<li>软件资源表示为计算机中的各种形式的数据</li>
+</ul>
+</li>
+<li>内核作为硬件资源和软件资源的管理者,内部组成在逻辑上大致为
+<ul>
+<li><strong>管理CPU</strong>,由于CPU是执行程序的,而内核把运行时的程序抽象成进程,为<strong>进程管理</strong></li>
+<li><strong>管理内存</strong>,分配释放内存</li>
+<li><strong>管理磁盘</strong>,合理组织文件形成文件系统</li>
+<li><strong>管理显卡</strong>,负责显示信息</li>
+<li><strong>管理网卡</strong>,完成网络通信,在内核中形成网络协议栈(网络组件)</li>
+<li><strong>管理各种IO设备</strong></li>
+</ul>
+</li>
+<li><strong>驱动程序</strong>:内核管理和控制硬件编写的对应与不同计算机的代码</li>
+<li><strong>宏内核结构</strong>
+<ul>
+<li>宏内核把管理进程的代码,管理内存的代码,管理各种IO设备的代码,文件系统的代码,图形系统代码以及其他功能模块的代码经过编译,最后链接在一起,形成一个大的可执行程序</li>
+<li>该程序向用户应用软件提供一些接口(系统API函数)</li>
+<li><mark>该大程序在系统的特权模式下运行,该模式称为宏内核模式</mark></li>
+<li>宏内核提供内存分配功能的服务过程
+<ul>
+<li>应用程序调用内存分配的API函数</li>
+<li>处理器切换到特权模式,开始运行内核代码</li>
+<li>内核里的内存管理代码按照特定的算法,分配一块内存</li>
+<li>把分配的内存块的首地址,返回给内存分配的API函数</li>
+<li>内存分配的API函数返回,处理器开始运行用户模式下的应用程序,应用程序得到内存的首地址,使用这块内存</li>
+</ul>
+</li>
+<li><strong>优点</strong>:性能极高,<mark>但目前没有人使用</mark></li>
+<li><strong>缺点:没有模块化,没有扩展性,没有移植性,高度耦合,一旦一个组件有漏洞,内核的所有组件都可能出现问题</strong></li>
+</ul>
+</li>
+<li><strong>微内核结构</strong>
+<ul>
+<li>微内核架构<strong>内核功能尽可能少</strong>,只有进度调度,处理中断,内存空间映射,进程间通信等功能(不完成实际的功能)</li>
+<li>实际的进程管理,内存管理,设备管理,文件管理等服务功能做成服务进程(<strong>实现宏内核提供的功能</strong>)</li>
+<li>微内核定义了良好的进程间通信的机制：<strong>消息机制</strong>
+<ul>
+<li>应用程序请求相关服务,就向微内核发送一条与此服务对应的消息,微内核再将消息转发给相关的服务进程,服务进程完成相应的服务</li>
+<li><mark>服务进程的编程模式就是循环处理来自其他进程的消息,完成相关的服务功能</mark></li>
+</ul>
+</li>
+<li>微内核提供内存分配功能的服务过程
+<ul>
+<li>应用程序发送内存分配的消息</li>
+<li>处理器切换到特权模式,开始运行内核代码</li>
+<li>微内核代码让当前进程停止运行,并根据消息包中的数据,确定消息发送给谁,分配内存的消息发送给内存管理进程</li>
+<li>内存管理服务进程收到消息,分配一块内存</li>
+<li>内存管理服务进程通过消息的形式返回分配内存块的地址给内核,等待下一条消息</li>
+<li>微内核把包含内存地址的消息返回给发送内存分配消息的应用程序</li>
+<li>处理器开始运行用户模式下的应用程序</li>
+</ul>
+</li>
+<li><strong>优点</strong>:系统结构清晰利于协作开发,移植性好,代码量少,伸缩性好,扩展性好</li>
+<li><strong>缺点</strong>:性能较差</li>
+</ul>
+</li>
+<li>分离硬件的相关性
+<ul>
+<li>windows内核的HAL层,Linux内核的arch层是系统内核的一个分层</li>
+<li><mark>分层的目的和好处:屏蔽底层细节,使上层开发更加简单</mark></li>
+<li>分层的基本方法是增加一个<strong>抽象层</strong>,从而使得抽象层的上下两层地理发展
+<ul>
+<li><strong>软件抽象层</strong>,分离硬件的相关性,将操作硬件和处理硬件功能差异的代码抽离,对外提供相应的接口,方便上层开发</li>
+</ul>
+</li>
+<li><strong>进程调度模块(例子)</strong>
+<ul>
+<li>进程,操作系统为实现多任务而提出的能让每个进程在CPU上运行一小段时间,实现多任务同时运行的家乡</li>
+<li>进程调度:从众多进程中选择一个将要运行的进程,轮转算法,优先级算法</li>
+<li>进程切换:停止当前进程,运行新的进程,主要动作是保存当前进程上机器上下文,装载新进程的机器上下文</li>
+<li>对于ARM硬件或x86硬件,进程切换相关的代码因为硬件平台的机器上下文不同而不同,故将进程切换放在一个独立的层中实现(硬件平台相关层),不同硬件平台只需要修改硬件相关层的代码即可,提高<strong>移植性</strong></li>
+</ul>
+</li>
+<li><mark>分离硬件相关性,将所有硬件平台相关的代码抽离放在独立硬件相关层中实现定义相关调用接口,在此层之上开发内核的其他代码,移植性增强</mark></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-32-54.png" alt="宏内核结构图"><br>
+<img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-33-18.png" alt="微内核结构图"></p>
+<ul>
+<li><strong>混合内核结构</strong>
+<ul>
+<li>分为3个层:内核接口层,内核功能层,内核硬件层</li>
+<li>内核接口层,定义了一系列的接口</li>
+<li>内核功能层,主要完成各种实际功能的各种模块
+<ul>
+<li>进程管理：主要是实现进程的创建、销毁、调度进程,设计几套数据结构用于表示进程和组织进程,实现进程调度算法</li>
+<li>内存管理:在内核功能层中只有内存池管理,分两种内存池：页面内存池和任意大小的内存池</li>
+<li>中断管理:中断回调函数安插到相关的数据结构中,发生中断就调用该函数</li>
+<li>设备管理:用数据结构表示驱动程序模块、驱动程序本身、驱动程序创建的设备,最后把它们组织在一起,还要实现创建设备、销毁设备、访问设备的代码,这些代码最终会调用设备驱动程序,达到操作设备的目的</li>
+</ul>
+</li>
+<li>内核硬件层,具体硬件平台相关的代码</li>
+</ul>
+</li>
+<li>区别
+<ul>
+<li>操作系统内核没有任何设备驱动程序,甚至没有文件系统和网络组件,内核所实现的功能很少。吸取了微内核的优势,内核小出问题的可能性就少,扩展性就越强</li>
+<li>同时,把文件系统、网络组件、其它功能组件作为虚拟设备交由设备管理,比如需要文件系统时就写一个文件系统虚拟设备的驱动,完成文件系统的功能,需要网络时就开发一个网络虚拟设备的驱动,完成网络功能</li>
+<li>驱动一旦被装载,就是内核的一部分了,并不是像微内核一样作为服务进程运行。吸取了宏内核的优势,代码高度耦合,性能强劲</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-54-40.png" alt="混合内核结构"></p>
+<h2 id="22-业界成熟的内核架构"><a class="markdownIt-Anchor" href="#22-业界成熟的内核架构"></a> 2.2 业界成熟的内核架构</h2>
 
     </div>
 
@@ -341,7 +600,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%8Ehello%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAhello"><span class="nav-number">2.</span> <span class="nav-text"> 1 从hello到另一个hello</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%BA%E5%99%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.1 程序的运行过程:从代码到机器运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 程序编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD%E6%89%A7%E8%A1%8C"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 程序装载执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BD%A2%E8%B1%A1%E5%9C%B0%E5%B0%86helloworld%E7%A8%8B%E5%BA%8F%E8%A3%85%E5%85%A5%E5%8E%9F%E5%9E%8B%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 更形象地将HelloWorld程序装入原型计算机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8"><span class="nav-number">2.2.</span> <span class="nav-text"> 1.2 实现一个最简单的内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E6%9C%BA%E7%9A%84%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text"> PC机的引导流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E5%BC%95%E5%AF%BC%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.2.</span> <span class="nav-text"> Hello OS引导汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E7%9A%84%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text"> Hello OS的主函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B1%8F%E5%B9%95"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 控制计算机屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.5.</span> <span class="nav-text"> 编译和安装Hello OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.6.</span> <span class="nav-text"> make工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.7.</span> <span class="nav-text"> 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.8.</span> <span class="nav-text"> 安装Hello OS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text"> 2 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 内核结构与设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E4%B8%9A%E7%95%8C%E6%88%90%E7%86%9F%E7%9A%84%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 业界成熟的内核架构</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
