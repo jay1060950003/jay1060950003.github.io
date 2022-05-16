@@ -77,8 +77,11 @@
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-15-13-03-05.png">
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-15-15-35-56.png">
 <meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-15-16-49-37.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-18-03-05.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-22-10-50.png">
+<meta property="og:image" content="http://jay1060950003.github.io/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-22-21-49.png">
 <meta property="article:published_time" content="2022-05-05T07:53:37.000Z">
-<meta property="article:modified_time" content="2022-05-15T11:39:52.854Z">
+<meta property="article:modified_time" content="2022-05-16T14:22:41.044Z">
 <meta property="article:author" content="jay1060950003">
 <meta property="article:tag" content="Basic">
 <meta name="twitter:card" content="summary">
@@ -268,7 +271,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-15 19:39:52" itemprop="dateModified" datetime="2022-05-15T19:39:52+08:00">2022-05-15</time>
+                <time title="修改时间：2022-05-16 22:22:41" itemprop="dateModified" datetime="2022-05-16T22:22:41+08:00">2022-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -552,9 +555,9 @@
 <p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-06-21-54-40.png" alt="混合内核结构"></p>
 <h2 id="22-业界成熟的内核架构"><a class="markdownIt-Anchor" href="#22-业界成熟的内核架构"></a> 2.2 业界成熟的内核架构</h2>
 <ul>
-<li>Linux,全称GNU/Linux,支持类UNIX,POSIX标准接口，也支持多用户，多进程，多线程可以在多CPU的机器上运行
+<li>Linux,全称GNU/Linux,支持类UNIX,POSIX标准接口,也支持多用户,多进程,多线程可以在多CPU的机器上运行
 <ul>
-<li>基本思想是,一起都是文件，每个文件都有确定的用途，包括用户数据，命令，配置参数，硬件设备等对于操作系统内核而言都被视为各种类型的文件</li>
+<li>基本思想是,一起都是文件,每个文件都有确定的用途,包括用户数据,命令,配置参数,硬件设备等对于操作系统内核而言都被视为各种类型的文件</li>
 </ul>
 </li>
 <li>Linux系统的五大重要组件
@@ -576,19 +579,19 @@
 <ul>
 <li>两套内核的原因:
 <ul>
-<li>单纯的Mach内核出现性能瓶颈,为了兼容之前Mach开发的应用和设备驱动，保留了Mach内核，同时加入了BSD内核</li>
-<li>Mach内核提供十分简单的进程,县城,IPC通信，虚拟内存设备驱动相关的功能服务</li>
-<li>BSD内核提供强大的安全特性，完善的网络服务，各种文件系统的支持，同时对Mach的进程，线程，IPC，虚拟内核组件进行细化，扩展延伸</li>
+<li>单纯的Mach内核出现性能瓶颈,为了兼容之前Mach开发的应用和设备驱动,保留了Mach内核,同时加入了BSD内核</li>
+<li>Mach内核提供十分简单的进程,县城,IPC通信,虚拟内存设备驱动相关的功能服务</li>
+<li>BSD内核提供强大的安全特性,完善的网络服务,各种文件系统的支持,同时对Mach的进程,线程,IPC,虚拟内核组件进行细化,扩展延伸</li>
 </ul>
 </li>
-<li><mark>使用Darwin系统的服务,应用会同感用户层的框架和库来请求Darwin系统的服务，调用Darwin系统的API</mark>
+<li><mark>使用Darwin系统的服务,应用会同感用户层的框架和库来请求Darwin系统的服务,调用Darwin系统的API</mark>
 <ul>
-<li>在调用Darwin系统API时，传入一个API号，索引Mach陷入中断服务表中的函数，若API号小于0,则请求的是Mach内核的服务，若大于0表示请求的是BSD内核的服务，提供了一套完整的POSIX接口</li>
+<li>在调用Darwin系统API时,传入一个API号,索引Mach陷入中断服务表中的函数,若API号小于0,则请求的是Mach内核的服务,若大于0表示请求的是BSD内核的服务,提供了一套完整的POSIX接口</li>
 </ul>
 </li>
-<li>组件Linkern库，提供底层的操作函数，同时支持C++运行环境
+<li>组件Linkern库,提供底层的操作函数,同时支持C++运行环境
 <ul>
-<li>IOKit依赖此库，管理所有的设备驱动和内核功能扩展模块，驱动程序可以使用C++开发驱动</li>
+<li>IOKit依赖此库,管理所有的设备驱动和内核功能扩展模块,驱动程序可以使用C++开发驱动</li>
 </ul>
 </li>
 </ul>
@@ -600,15 +603,15 @@
 <ul>
 <li>Windows NT内核
 <ul>
-<li>NT内核在设计上清晰明了，各组件之间界限耦合程度很低</li>
-<li>在HAL层上定义一个小内核，小内核之下是硬件抽象层HAL
+<li>NT内核在设计上清晰明了,各组件之间界限耦合程度很低</li>
+<li>在HAL层上定义一个小内核,小内核之下是硬件抽象层HAL
 <ul>
-<li>HAL存在，不同的硬件平台只要提供对应的HAL就可以移植系统</li>
+<li>HAL存在,不同的硬件平台只要提供对应的HAL就可以移植系统</li>
 </ul>
 </li>
-<li>小内核之上是各种内核组件，为内核执行体，其互相独立，只对外提供相应的接口，其执行体要通过内核模式可调用接口和其他执行体通信完成相应的功能服务</li>
-<li>所有的设备驱动和文件系统都有IO管理器统一管理，驱动程序堆叠形成IO驱动栈，功能请求封装成IO包</li>
-<li><mark>属于微内核结构，但从权限角度看为宏内核,属于混合内核</mark></li>
+<li>小内核之上是各种内核组件,为内核执行体,其互相独立,只对外提供相应的接口,其执行体要通过内核模式可调用接口和其他执行体通信完成相应的功能服务</li>
+<li>所有的设备驱动和文件系统都有IO管理器统一管理,驱动程序堆叠形成IO驱动栈,功能请求封装成IO包</li>
+<li><mark>属于微内核结构,但从权限角度看为宏内核,属于混合内核</mark></li>
 </ul>
 </li>
 </ul>
@@ -619,7 +622,7 @@
 <ul>
 <li>CPU的工作模式
 <ul>
-<li>按x86_CPU功能升级迭代的顺序，工作模式分为<strong>实模式</strong>，<strong>保护模式</strong>，<strong>长模式</strong></li>
+<li>按x86_CPU功能升级迭代的顺序,工作模式分为<strong>实模式</strong>,<strong>保护模式</strong>,<strong>长模式</strong></li>
 </ul>
 </li>
 </ul>
@@ -627,11 +630,11 @@
 <ul>
 <li><strong>从一段死循环的代码说起</strong>
 <ul>
-<li>上述代码关闭CPU中断，进入死循环，最后从内存0地址开始写入0</li>
-<li><mark>锁住CPU，清空内存</mark></li>
-<li><strong>在实模式下，代码可正常运行</strong>
+<li>上述代码关闭CPU中断,进入死循环,最后从内存0地址开始写入0</li>
+<li><mark>锁住CPU,清空内存</mark></li>
+<li><strong>在实模式下,代码可正常运行</strong>
 <ul>
-<li>计算机资源太少，单道程序运行，没有操作系统的概念</li>
+<li>计算机资源太少,单道程序运行,没有操作系统的概念</li>
 </ul>
 </li>
 </ul>
@@ -641,7 +644,7 @@
 <ul>
 <li><strong>实模式</strong>
 <ul>
-<li>实地址模式，运行真实的指令，对指令的动作不做区分，直接执行指令的真实功能；发往内存的地址是真实的，对任何地址不加限制</li>
+<li>实地址模式,运行真实的指令,对指令的动作不做区分,直接执行指令的真实功能;发往内存的地址是真实的,对任何地址不加限制</li>
 </ul>
 </li>
 <li><strong>实模式寄存器</strong>,表中的每个寄存器都是16位的</li>
@@ -656,11 +659,11 @@
 <tbody>
 <tr>
 <td>AX,BX,CX,DX,DI,SI,BP</td>
-<td>通用寄存器，可以存放数据，地址，参与运算</td>
+<td>通用寄存器,可以存放数据,地址,参与运算</td>
 </tr>
 <tr>
 <td>IP</td>
-<td>程序指针寄存器，始终指向下一条指针的地址</td>
+<td>程序指针寄存器,始终指向下一条指针的地址</td>
 </tr>
 <tr>
 <td>SP</td>
@@ -668,21 +671,21 @@
 </tr>
 <tr>
 <td>CS,DS,ES,SS</td>
-<td>段寄存器，里面存放一个内存段的基地址</td>
+<td>段寄存器,里面存放一个内存段的基地址</td>
 </tr>
 <tr>
 <td>FLAGS</td>
-<td>CPU标志寄存器，里面存放CPU执行运算指令产生的状态位</td>
+<td>CPU标志寄存器,里面存放CPU执行运算指令产生的状态位</td>
 </tr>
 </tbody>
 </table>
 <ul>
 <li><strong>实模式下访问内存</strong>
 <ul>
-<li>需要把数据装载进寄存器中才能操作，还要有获取指令的动作，都要访问内存</li>
-<li><strong>分段内存管理模型</strong>:所有的内存地址都是由段寄存器左移4位，再加上一个通用寄存器中的值或者常数形式形成地址，然后由这个地址去访问内存
+<li>需要把数据装载进寄存器中才能操作,还要有获取指令的动作,都要访问内存</li>
+<li><strong>分段内存管理模型</strong>:所有的内存地址都是由段寄存器左移4位,再加上一个通用寄存器中的值或者常数形式形成地址,然后由这个地址去访问内存
 <ul>
-<li>代码段是由CS和IP确定的，而栈段是由SS和SP确定的</li>
+<li>代码段是由CS和IP确定的,而栈段是由SS和SP确定的</li>
 </ul>
 </li>
 </ul>
@@ -693,30 +696,30 @@
 <ul>
 <li><strong>实模式中断</strong>
 <ul>
-<li>中断即中止执行当前程序，转而跳转到另一个特定的地址上，运行特定的代码</li>
-<li>在实模式下，实现过程是先保存CS和IP寄存器，然后装载新的CS和IP寄存器</li>
+<li>中断即中止执行当前程序,转而跳转到另一个特定的地址上,运行特定的代码</li>
+<li>在实模式下,实现过程是先保存CS和IP寄存器,然后装载新的CS和IP寄存器</li>
 <li>中断分为:<strong>硬件中断</strong>和<strong>软件中断</strong>
 <ul>
-<li>硬件中断是中断控制器给CPU发送电子信号，CPU对中断信号作出应答，随后中断控制器将中断号发给CPU</li>
-<li>软件中断是CPU执行INT指令，该指令跟随软中断号</li>
+<li>硬件中断是中断控制器给CPU发送电子信号,CPU对中断信号作出应答,随后中断控制器将中断号发给CPU</li>
+<li>软件中断是CPU执行INT指令,该指令跟随软中断号</li>
 </ul>
 </li>
-<li>为了实现中断，需要在内存中存放一个中断向量表，该表的地址和长度由CPU的特定寄存器IDTR指向
+<li>为了实现中断,需要在内存中存放一个中断向量表,该表的地址和长度由CPU的特定寄存器IDTR指向
 <ul>
-<li><mark>实模式下，表中的一个条目由代码段地址和段内偏移组成</mark></li>
+<li><mark>实模式下,表中的一个条目由代码段地址和段内偏移组成</mark></li>
 </ul>
 </li>
-<li>利用中断号，CPU根据IDTR寄存器中的信息，计算出中断向量的条目，装载CS,IP寄存器，最终响应中断</li>
+<li>利用中断号,CPU根据IDTR寄存器中的信息,计算出中断向量的条目,装载CS,IP寄存器,最终响应中断</li>
 </ul>
 </li>
 </ul>
 <p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-14-20-04-15.png" alt="实模式中断表"></p>
 <h3 id="312-保护模式"><a class="markdownIt-Anchor" href="#312-保护模式"></a> 3.1.2 保护模式</h3>
 <ul>
-<li>CPU保护模式，将CPU寄存器和运算单元扩展成32位，<strong>解决了寻址问题</strong>，并且解决了实模式下，CPU对任何指令不加区分执行，对访问内存不加限制的问题</li>
+<li>CPU保护模式,将CPU寄存器和运算单元扩展成32位,<strong>解决了寻址问题</strong>,并且解决了实模式下,CPU对任何指令不加区分执行,对访问内存不加限制的问题</li>
 <li><strong>保护模式寄存器</strong>
 <ul>
-<li>增加了控制寄存器和段寄存器，扩展通用寄存器的位宽，所有的通用寄存器都是32位寄存器</li>
+<li>增加了控制寄存器和段寄存器,扩展通用寄存器的位宽,所有的通用寄存器都是32位寄存器</li>
 </ul>
 </li>
 </ul>
@@ -730,11 +733,11 @@
 <tbody>
 <tr>
 <td>EAX,EBX,ECX,EDX,EDI,ESI,EBP</td>
-<td>32位通用寄存器，可以存放数据，地址，参与运算</td>
+<td>32位通用寄存器,可以存放数据,地址,参与运算</td>
 </tr>
 <tr>
 <td>EIP</td>
-<td>32位程序指针寄存器，始终指向下一条指针的地址</td>
+<td>32位程序指针寄存器,始终指向下一条指针的地址</td>
 </tr>
 <tr>
 <td>ESP</td>
@@ -742,26 +745,26 @@
 </tr>
 <tr>
 <td>CS,DS,ES,SS,FS,GS</td>
-<td>16位段寄存器，里面存放一个内存段的描述符索引</td>
+<td>16位段寄存器,里面存放一个内存段的描述符索引</td>
 </tr>
 <tr>
 <td>EFLAGS</td>
-<td>32位CPU标志寄存器，里面存放CPU执行运算指令产生的状态位</td>
+<td>32位CPU标志寄存器,里面存放CPU执行运算指令产生的状态位</td>
 </tr>
 <tr>
 <td>CR0,CR1,CR2,CR3</td>
-<td>32位CPU控制寄存器，控制CPU的功能控制特性</td>
+<td>32位CPU控制寄存器,控制CPU的功能控制特性</td>
 </tr>
 </tbody>
 </table>
 <ul>
 <li><strong>保护模式特权级</strong>
 <ul>
-<li>为了区分指令和资源可以被访问，CPU实现了特权级</li>
+<li>为了区分指令和资源可以被访问,CPU实现了特权级</li>
 <li>特权级分为4级,R0~R3,每个特权级执行指令的数量不同
 <ul>
 <li>R0可以执行所有指令</li>
-<li>R1,R2,R3依次递减，只能执行上一次指令数量的自己</li>
+<li>R1,R2,R3依次递减,只能执行上一次指令数量的自己</li>
 <li><mark>内存的访问是靠段描述符和特权级相互配合实现</mark></li>
 </ul>
 </li>
@@ -769,12 +772,12 @@
 </li>
 <li><strong>保护模式段描述符</strong>
 <ul>
-<li>内存目前位分段模型，要对内存进行保护即对段进行保护</li>
-<li>由于CPU扩展导致32位段基地址和段内偏移，16位段寄存器放不下，<strong>将描述段的信息封装成特定格式的段描述符放在内存中</strong></li>
-<li>段描述符由64位8字节数据，包含了段基地址，段长度，段权限，段类型，段是否可读写，可执行等信息</li>
-<li>多个段描述符在内存中形成<strong>全局段描述符表</strong>，该表的基地址和长度由CPU和GDTR寄存器指示
+<li>内存目前位分段模型,要对内存进行保护即对段进行保护</li>
+<li>由于CPU扩展导致32位段基地址和段内偏移,16位段寄存器放不下,<strong>将描述段的信息封装成特定格式的段描述符放在内存中</strong></li>
+<li>段描述符由64位8字节数据,包含了段基地址,段长度,段权限,段类型,段是否可读写,可执行等信息</li>
+<li>多个段描述符在内存中形成<strong>全局段描述符表</strong>,该表的基地址和长度由CPU和GDTR寄存器指示
 <ul>
-<li>段寄存器不存放段基地址，存放<strong>具体段描述符的索引</strong>，访问一个内存地址时，段寄存器中索引首先会结合GDTR寄存器找到内存中的段描述符，再根据其中段信息判断是否能访问成功</li>
+<li>段寄存器不存放段基地址,存放<strong>具体段描述符的索引</strong>,访问一个内存地址时,段寄存器中索引首先会结合GDTR寄存器找到内存中的段描述符,再根据其中段信息判断是否能访问成功</li>
 </ul>
 </li>
 </ul>
@@ -786,11 +789,11 @@
 <ul>
 <li><strong>保护模式段选择子</strong>
 <ul>
-<li>CS,DS,ES,SS,FS,GS段寄存器，由影子寄存器，段描述符索引，描述符表索引，权限级别组成</li>
-<li>影子寄存器靠硬件操作，对系统程序员不可见，高性能(64位8字节)</li>
+<li>CS,DS,ES,SS,FS,GS段寄存器,由影子寄存器,段描述符索引,描述符表索引,权限级别组成</li>
+<li>影子寄存器靠硬件操作,对系统程序员不可见,高性能(64位8字节)</li>
 <li>CS和SS中RPL组成CPL(当前权限级别),常常是RPL=CPL
 <ul>
-<li>CPL表示发起访问者以什么权限访问目标段，当CPL大于目标段DPL时，CPU禁止访问</li>
+<li>CPL表示发起访问者以什么权限访问目标段,当CPL大于目标段DPL时,CPU禁止访问</li>
 </ul>
 </li>
 </ul>
@@ -799,36 +802,36 @@
 <ul>
 <li>分段模型存在很多缺陷,现代使用<strong>分页模型</strong>
 <ul>
-<li>X86CPU不能直接使用分页模型，需要在分段的前提下根据决定是否开启分页</li>
+<li>X86CPU不能直接使用分页模型,需要在分段的前提下根据决定是否开启分页</li>
 </ul>
 </li>
 <li><strong>保护模式的平坦模型,使分段成为虚设</strong></li>
-<li>CPU 32位的寄存器最多只能产生4GB大小的地址，而一段长度只能是4GB，所以把所有段的基地址设为0,段的长度设为0xFFFFF，段长度的粒度设为4KB，这样所有段都指向同一个字节大小的地址空间</li>
+<li>CPU 32位的寄存器最多只能产生4GB大小的地址,而一段长度只能是4GB,所以把所有段的基地址设为0,段的长度设为0xFFFFF,段长度的粒度设为4KB,这样所有段都指向同一个字节大小的地址空间</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GDT_START:</span><br><span class="line">knull_dsc: dq <span class="number">0</span></span><br><span class="line">;第一个段描述符CPU硬件规定必须为<span class="number">0</span></span><br><span class="line">kcode_dsc: dq <span class="number">0x00cf9e000000ffff</span></span><br><span class="line">;段基地址=<span class="number">0</span>，段长度=<span class="number">0xfffff</span></span><br><span class="line">;G=<span class="number">1</span>,D/B=<span class="number">1</span>,L=<span class="number">0</span>,AVL=<span class="number">0</span></span><br><span class="line">;P=<span class="number">1</span>,DPL=<span class="number">0</span>,S=<span class="number">1</span></span><br><span class="line">;T=<span class="number">1</span>,C=<span class="number">1</span>,R=<span class="number">1</span>,A=<span class="number">0</span></span><br><span class="line">kdata_dsc: dq <span class="number">0x00cf92000000ffff</span></span><br><span class="line">;段基地址=<span class="number">0</span>，段长度=<span class="number">0xfffff</span></span><br><span class="line">;G=<span class="number">1</span>,D/B=<span class="number">1</span>,L=<span class="number">0</span>,AVL=<span class="number">0</span></span><br><span class="line">;P=<span class="number">1</span>,DPL=<span class="number">0</span>,S=<span class="number">1</span></span><br><span class="line">;T=<span class="number">0</span>,C=<span class="number">0</span>,R=<span class="number">1</span>,A=<span class="number">0</span></span><br><span class="line">GDT_END:</span><br><span class="line"></span><br><span class="line">GDT_PTR:</span><br><span class="line">GDTLEN dw GDT_END-GDT_START<span class="number">-1</span></span><br><span class="line">GDTBASE dd GDT_START</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GDT_START:</span><br><span class="line">knull_dsc: dq <span class="number">0</span></span><br><span class="line">;第一个段描述符CPU硬件规定必须为<span class="number">0</span></span><br><span class="line">kcode_dsc: dq <span class="number">0x00cf9e000000ffff</span></span><br><span class="line">;段基地址=<span class="number">0</span>,段长度=<span class="number">0xfffff</span></span><br><span class="line">;G=<span class="number">1</span>,D/B=<span class="number">1</span>,L=<span class="number">0</span>,AVL=<span class="number">0</span></span><br><span class="line">;P=<span class="number">1</span>,DPL=<span class="number">0</span>,S=<span class="number">1</span></span><br><span class="line">;T=<span class="number">1</span>,C=<span class="number">1</span>,R=<span class="number">1</span>,A=<span class="number">0</span></span><br><span class="line">kdata_dsc: dq <span class="number">0x00cf92000000ffff</span></span><br><span class="line">;段基地址=<span class="number">0</span>,段长度=<span class="number">0xfffff</span></span><br><span class="line">;G=<span class="number">1</span>,D/B=<span class="number">1</span>,L=<span class="number">0</span>,AVL=<span class="number">0</span></span><br><span class="line">;P=<span class="number">1</span>,DPL=<span class="number">0</span>,S=<span class="number">1</span></span><br><span class="line">;T=<span class="number">0</span>,C=<span class="number">0</span>,R=<span class="number">1</span>,A=<span class="number">0</span></span><br><span class="line">GDT_END:</span><br><span class="line"></span><br><span class="line">GDT_PTR:</span><br><span class="line">GDTLEN dw GDT_END-GDT_START<span class="number">-1</span></span><br><span class="line">GDTBASE dd GDT_START</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>段长度需要和G位配合，若G位为1，则段长度等于0xfffff个4KB</p>
+<p>段长度需要和G位配合,若G位为1,则段长度等于0xfffff个4KB</p>
 <ul>
-<li>上面段描述符的DPL=0，说明需要最高权限即CPL=0才能访问</li>
+<li>上面段描述符的DPL=0,说明需要最高权限即CPL=0才能访问</li>
 </ul>
 </li>
 <li>
 <p><strong>保护模式中断</strong></p>
 <ul>
-<li>保护模式下的中断要权限检查，特权级切换，需要扩展中断向量表的信息，即每个中断用一个中断门描述符表示</li>
-<li>保护模式要实现中断，在内存中有中断向量表，由IDTR寄存器指示，只不过中断向量表中的条目变成了中断门描述符
+<li>保护模式下的中断要权限检查,特权级切换,需要扩展中断向量表的信息,即每个中断用一个中断门描述符表示</li>
+<li>保护模式要实现中断,在内存中有中断向量表,由IDTR寄存器指示,只不过中断向量表中的条目变成了中断门描述符
 <ul>
-<li>产生中断后，CPU会检查中断号是否大于最后一个中断门描述符，x86CPU支持256个中断源，然后检查描述符类型，是否为系统描述符，是不是存在于内存中</li>
+<li>产生中断后,CPU会检查中断号是否大于最后一个中断门描述符,x86CPU支持256个中断源,然后检查描述符类型,是否为系统描述符,是不是存在于内存中</li>
 <li>检查中断门描述符中的段选择子指向的段描述符</li>
-<li>最后，<strong>权限检查</strong>，若CPL小于等于中断门的DPL并且CPL大于等于中断门中的段选择子，就指向段描述符的DPL
+<li>最后,<strong>权限检查</strong>,若CPL小于等于中断门的DPL并且CPL大于等于中断门中的段选择子,就指向段描述符的DPL
 <ul>
-<li>CPL等于中断门中的DPL，则为同级权限不进行栈切换，若进行栈切换，还需要从TSS中加载具体权限的SS，ESP</li>
+<li>CPL等于中断门中的DPL,则为同级权限不进行栈切换,若进行栈切换,还需要从TSS中加载具体权限的SS,ESP</li>
 </ul>
 </li>
-<li>做完检查之后，CPU才会加载中断门描述符中目标代码段选择子到CS寄存器中，把目标代码段偏移加载道EIP寄存器中</li>
+<li>做完检查之后,CPU才会加载中断门描述符中目标代码段选择子到CS寄存器中,把目标代码段偏移加载道EIP寄存器中</li>
 </ul>
 </li>
 </ul>
@@ -839,19 +842,19 @@
 <ul>
 <li><strong>切换到保护模式</strong>
 <ul>
-<li>x86CPU在第一次加电和每次reset后，都会自动进入实模式，要想进入保护模式，就需要切换到保护模式
+<li>x86CPU在第一次加电和每次reset后,都会自动进入实模式,要想进入保护模式,就需要切换到保护模式
 <ul>
-<li>第一步，准备全局段描述符表</li>
-<li>第二步，加载设置GDTR寄存器，使之指向全局段描述符表</li>
-<li>第三步，设置CR0寄存器，开启保护模式</li>
-<li>第四步，进行长跳转，加载CS段寄存器，即段选择子</li>
+<li>第一步,准备全局段描述符表</li>
+<li>第二步,加载设置GDTR寄存器,使之指向全局段描述符表</li>
+<li>第三步,设置CR0寄存器,开启保护模式</li>
+<li>第四步,进行长跳转,加载CS段寄存器,即段选择子</li>
 </ul>
 </li>
 <li><strong>长跳转的原因</strong>
 <ul>
-<li>因为无法直接或间接mov一个数据到CS寄存器中，因为刚刚开启保护模式，CS的影子寄存器还是实模式下的指，故需要告诉CPU加载新的段信息</li>
-<li>CPU发现CR0寄存器第0位的值是1,就会按GDTR的指示找到全局描述符表，然后根据索引指8,将新的段描述符信息加载到CS影子寄存器</li>
-<li>到此为止CPU进入保护模式，可以处理32位</li>
+<li>因为无法直接或间接mov一个数据到CS寄存器中,因为刚刚开启保护模式,CS的影子寄存器还是实模式下的指,故需要告诉CPU加载新的段信息</li>
+<li>CPU发现CR0寄存器第0位的值是1,就会按GDTR的指示找到全局描述符表,然后根据索引指8,将新的段描述符信息加载到CS影子寄存器</li>
+<li>到此为止CPU进入保护模式,可以处理32位</li>
 </ul>
 </li>
 </ul>
@@ -859,10 +862,10 @@
 </ul>
 <h3 id="313-长模式"><a class="markdownIt-Anchor" href="#313-长模式"></a> 3.1.3 长模式</h3>
 <ul>
-<li><strong>长模式</strong>，完成64位的数据运算，也能寻址64位的地址空间</li>
+<li><strong>长模式</strong>,完成64位的数据运算,也能寻址64位的地址空间</li>
 <li><strong>长模式寄存器</strong>
 <ul>
-<li>相比于保护模式，增加了一些通用寄存器，并扩宽通用寄存器的位宽</li>
+<li>相比于保护模式,增加了一些通用寄存器,并扩宽通用寄存器的位宽</li>
 </ul>
 </li>
 </ul>
@@ -876,11 +879,11 @@
 <tbody>
 <tr>
 <td>RAX,RBX,RCX,RDX,RDI,RSI,RBP,R8~R15</td>
-<td>64位通用寄存器，可以存放数据，地址，参与运算</td>
+<td>64位通用寄存器,可以存放数据,地址,参与运算</td>
 </tr>
 <tr>
 <td>RIP</td>
-<td>64位程序指针寄存器，始终指向下一条指针的地址</td>
+<td>64位程序指针寄存器,始终指向下一条指针的地址</td>
 </tr>
 <tr>
 <td>RSP</td>
@@ -888,23 +891,23 @@
 </tr>
 <tr>
 <td>CS,DS,ES,SS,FS,GS</td>
-<td>16位段寄存器，里面存放一个内存段的描述符索引</td>
+<td>16位段寄存器,里面存放一个内存段的描述符索引</td>
 </tr>
 <tr>
 <td>RFLAGS</td>
-<td>64位CPU标志寄存器，里面存放CPU执行运算指令产生的状态位</td>
+<td>64位CPU标志寄存器,里面存放CPU执行运算指令产生的状态位</td>
 </tr>
 <tr>
 <td>CR0,CR1,CR2,CR3</td>
-<td>CR0为32位CPU控制寄存器，控制CPU的功能控制特性，其他的都是64位寄存器</td>
+<td>CR0为32位CPU控制寄存器,控制CPU的功能控制特性,其他的都是64位寄存器</td>
 </tr>
 </tbody>
 </table>
 <ul>
 <li><strong>长模式段描述符</strong>
 <ul>
-<li>长模式下，CPU不再对段基址和段长度进行检查，支队DPL进行相关检查</li>
-<li>当描述符中L=1,D/B=0时，就是64位代码段,DPL还是0～3特权级，多个段描述在内存中形成一个全局段描述符表，同样由CPU的GDTR寄存器指向</li>
+<li>长模式下,CPU不再对段基址和段长度进行检查,支队DPL进行相关检查</li>
+<li>当描述符中L=1,D/B=0时,就是64位代码段,DPL还是0～3特权级,多个段描述在内存中形成一个全局段描述符表,同样由CPU的GDTR寄存器指向</li>
 </ul>
 </li>
 </ul>
@@ -912,15 +915,15 @@
 <ul>
 <li><strong>长模式中断</strong>
 <ul>
-<li>长模式支持64位内存寻址，中断门描述符进行了修改和扩展</li>
+<li>长模式支持64位内存寻址,中断门描述符进行了修改和扩展</li>
 <li><strong>长模式下中断门描述符的格式变化</strong>
 <ul>
-<li>为支持64位寻址中断门描述符在原有基础上增加8字节，用于存放目标段偏移的高32位值</li>
-<li>其次，目标代码段选择子对应的代码段描述符必须是64位的代码段</li>
-<li>其中的IST是64位TSS中的IST指针(不使用该特性，不做详细介绍)</li>
+<li>为支持64位寻址中断门描述符在原有基础上增加8字节,用于存放目标段偏移的高32位值</li>
+<li>其次,目标代码段选择子对应的代码段描述符必须是64位的代码段</li>
+<li>其中的IST是64位TSS中的IST指针(不使用该特性,不做详细介绍)</li>
 </ul>
 </li>
-<li><mark>长模式的中断门描述符表，表中的条目为16字节，最多支持256个中断源</mark></li>
+<li><mark>长模式的中断门描述符表,表中的条目为16字节,最多支持256个中断源</mark></li>
 </ul>
 </li>
 </ul>
@@ -928,19 +931,19 @@
 <ul>
 <li><strong>切换到长模式</strong>
 <ul>
-<li>第一步，准备长模式全局段描述符表</li>
-<li>第二步，准备长模式下MMU(内存管理单元)页表(为了开启分页模式，切换到长模式必须要开启分页)
+<li>第一步,准备长模式全局段描述符表</li>
+<li>第二步,准备长模式下MMU(内存管理单元)页表(为了开启分页模式,切换到长模式必须要开启分页)
 <ul>
-<li>长模式下不对段基址和段长度进行检查，在长模式下内存地址空间的保护交给MMU，MMU依赖页表对地址进行转换，页表有特定的格式存放在内存中，其地址由CPU的CR3寄存器指向</li>
+<li>长模式下不对段基址和段长度进行检查,在长模式下内存地址空间的保护交给MMU,MMU依赖页表对地址进行转换,页表有特定的格式存放在内存中,其地址由CPU的CR3寄存器指向</li>
 </ul>
 </li>
-<li>第三步，加载GDTR寄存器，使之指向全局段描述表</li>
-<li>第四步，开启长模式，同时开启保护模式和分页模式
+<li>第三步,加载GDTR寄存器,使之指向全局段描述表</li>
+<li>第四步,开启长模式,同时开启保护模式和分页模式
 <ul>
-<li>在实现长模式时定义了MSR寄存器，需要用专用的指令 rdmsr、wrmsr 进行读写，IA32_EFER 寄存器的地址为0xC0000080，它的第8位决定了是否开启长模式</li>
+<li>在实现长模式时定义了MSR寄存器,需要用专用的指令 rdmsr、wrmsr 进行读写,IA32_EFER 寄存器的地址为0xC0000080,它的第8位决定了是否开启长模式</li>
 </ul>
 </li>
-<li>第五步，进行跳转，加载CS寄存器，刷新其影子寄存器</li>
+<li>第五步,进行跳转,加载CS寄存器,刷新其影子寄存器</li>
 </ul>
 </li>
 </ul>
@@ -954,35 +957,35 @@
 <li><strong>虚拟地址</strong>
 <ul>
 <li>虚拟地址是逻辑上存在的一个数据值</li>
-<li>虚拟地址是链接器产生的，在开发软件经过编译步骤后，需要链接成可执行文件才可以运行
+<li>虚拟地址是链接器产生的,在开发软件经过编译步骤后,需要链接成可执行文件才可以运行
 <ul>
-<li><strong>链接器</strong>的主要工作就是把多个代码模块组装在一起，解决模块之间的引用，即处理程序代码间的地址引用，形成程序运行的静态内存空间视图</li>
+<li><strong>链接器</strong>的主要工作就是把多个代码模块组装在一起,解决模块之间的引用,即处理程序代码间的地址引用,形成程序运行的静态内存空间视图</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>物理地址
 <ul>
-<li>物理地址在逻辑上也是一个数据，不过数据被地址译码器等电子器件变成电子信号，放在地址总线上</li>
+<li>物理地址在逻辑上也是一个数据,不过数据被地址译码器等电子器件变成电子信号,放在地址总线上</li>
 <li>地址总线电子信号的各种组合可以选择到内存的储存单元
 <ul>
-<li>但地址总线上的信号，也可以选择到别的设备的储存单元</li>
+<li>但地址总线上的信号,也可以选择到别的设备的储存单元</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>虚拟地址到物理地址的转换</strong>
 <ul>
-<li>转换机制相当于函数p=f(v),输入虚拟地址v，输出物理地址p</li>
-<li><strong>采用软硬件结合的方式实现，即MMU(内存管理单元)</strong>
+<li>转换机制相当于函数p=f(v),输入虚拟地址v,输出物理地址p</li>
+<li><strong>采用软硬件结合的方式实现,即MMU(内存管理单元)</strong>
 <ul>
-<li>MMU可以接收软件给出的地址对应关系数据，进行地址转换</li>
+<li>MMU可以接收软件给出的地址对应关系数据,进行地址转换</li>
 </ul>
 </li>
-<li>32位地址空间下，4GB虚拟地址的地址关系转换表把整个32位物理地址空间用完，显然不行，<strong>采用把虚拟地址空间和物理地址空间都分成同等大小的块，称为页，按照虚拟页和物理页进行转换(分页模型)</strong>
+<li>32位地址空间下,4GB虚拟地址的地址关系转换表把整个32位物理地址空间用完,显然不行,<strong>采用把虚拟地址空间和物理地址空间都分成同等大小的块,称为页,按照虚拟页和物理页进行转换(分页模型)</strong>
 <ul>
 <li>页的大小可以设置为4KB,2MB,4MB,1GB</li>
-<li>一个虚拟页对应一个物理页，由于页大小一经配置就是固定的，所以<strong>只要存放虚拟页地址对应的物理页地址</strong></li>
+<li>一个虚拟页对应一个物理页,由于页大小一经配置就是固定的,所以<strong>只要存放虚拟页地址对应的物理页地址</strong></li>
 </ul>
 </li>
 </ul>
@@ -993,15 +996,15 @@
 <ul>
 <li><strong>MMU</strong>
 <ul>
-<li>MMU即内存管理单元，是用硬件电路逻辑实现的一个地址转换器件，负责接受虚拟地址和地址关系转换表，以及输出物理地址</li>
-<li>使用保护模式的平坦模式，绕过了分段模式</li>
+<li>MMU即内存管理单元,是用硬件电路逻辑实现的一个地址转换器件,负责接受虚拟地址和地址关系转换表,以及输出物理地址</li>
+<li>使用保护模式的平坦模式,绕过了分段模式</li>
 <li><strong>地址产生过程</strong>
 <ul>
-<li>程序代码中的虚拟地址，经过CPU的分段机制产生了线性地址，平坦模式和长模式下线性地址和虚拟地址相等</li>
+<li>程序代码中的虚拟地址,经过CPU的分段机制产生了线性地址,平坦模式和长模式下线性地址和虚拟地址相等</li>
 </ul>
 </li>
-<li>不开启MMU，在保护模式下可以关闭MMU，线性地址就是物理地址</li>
-<li>长模式下的分段弱化了地址空间的隔离，故<strong>必须开启MMU</strong></li>
+<li>不开启MMU,在保护模式下可以关闭MMU,线性地址就是物理地址</li>
+<li>长模式下的分段弱化了地址空间的隔离,故<strong>必须开启MMU</strong></li>
 </ul>
 </li>
 </ul>
@@ -1010,9 +1013,9 @@
 <li><strong>MMU页表</strong>
 <ul>
 <li><strong>页表(地址关系转换表)</strong>,描述了虚拟地址到物理地址的转换关系</li>
-<li>页表不存放虚拟地址和物理地址的对应关系，只存放物理页面的地址，MMU以虚拟地址为索引去查表返回物理页面地址</li>
-<li>页表是分级的，分为三个部分:一个顶级页目录，多个中级页目录，最后才是页表</li>
-<li>第一个位段索引顶级目录中的一个项，该项指向一个中级页目录，然后用第二个位段去索引中级页目录中的一个项，该项指向一个页目录，再用第三个位段去索引页目录中的项，该项指向一个物理页地址，最后用第四个位段作为该物理页的偏移去访问物理内存</li>
+<li>页表不存放虚拟地址和物理地址的对应关系,只存放物理页面的地址,MMU以虚拟地址为索引去查表返回物理页面地址</li>
+<li>页表是分级的,分为三个部分:一个顶级页目录,多个中级页目录,最后才是页表</li>
+<li>第一个位段索引顶级目录中的一个项,该项指向一个中级页目录,然后用第二个位段去索引中级页目录中的一个项,该项指向一个页目录,再用第三个位段去索引页目录中的项,该项指向一个物理页地址,最后用第四个位段作为该物理页的偏移去访问物理内存</li>
 </ul>
 </li>
 </ul>
@@ -1020,10 +1023,10 @@
 <ul>
 <li><strong>保护模式下的分页——4KB页</strong>
 <ul>
-<li>保护模式下只有32位地址空间，32位虚拟地址经过分段机制后得到线性地址，使用平坦模式，所以线性地址和虚拟地址相同</li>
-<li>保护模式下分页大小通常为4KB或4MB，分页大小的不同会导致虚拟地址位段的分隔和页目录的层级不同，但虚拟页和物理页的大小始终是等同的
+<li>保护模式下只有32位地址空间,32位虚拟地址经过分段机制后得到线性地址,使用平坦模式,所以线性地址和虚拟地址相同</li>
+<li>保护模式下分页大小通常为4KB或4MB,分页大小的不同会导致虚拟地址位段的分隔和页目录的层级不同,但虚拟页和物理页的大小始终是等同的
 <ul>
-<li>CR3是CPU中的一个32位寄存器，MMU根据该寄存器找到页目录</li>
+<li>CR3是CPU中的一个32位寄存器,MMU根据该寄存器找到页目录</li>
 </ul>
 </li>
 </ul>
@@ -1034,11 +1037,11 @@
 <ul>
 <li><strong>保护模式下的分页——4MB</strong>
 <ul>
-<li>32位虚拟地址被分为两个位段:<strong>页表索引</strong>，<strong>页内偏移</strong></li>
-<li>只有一级页目录，其中包含1024个条目，其中一个条目指向一个物理页，每个物理页4MB
+<li>32位虚拟地址被分为两个位段:<strong>页表索引</strong>,<strong>页内偏移</strong></li>
+<li>只有一级页目录,其中包含1024个条目,其中一个条目指向一个物理页,每个物理页4MB
 <ul>
-<li>CR3还是32位寄存器，但不再指向顶级页目录，指向一个4KB大小的页表，该页表要4KB地址对齐，其中包含1024个页表项</li>
-<li>4MB大小的页面下，页表项还是4字节32位，但只需要用高10位来保存物理页面的基地址就可以，但每个物理页面都是4MB，故低22位始终为0(为了兼容4MB页表低8位和4KB页表项，但第七位变成了PS位,且必须位1，PAT位移动到了12位)</li>
+<li>CR3还是32位寄存器,但不再指向顶级页目录,指向一个4KB大小的页表,该页表要4KB地址对齐,其中包含1024个页表项</li>
+<li>4MB大小的页面下,页表项还是4字节32位,但只需要用高10位来保存物理页面的基地址就可以,但每个物理页面都是4MB,故低22位始终为0(为了兼容4MB页表低8位和4KB页表项,但第七位变成了PS位,且必须位1,PAT位移动到了12位)</li>
 </ul>
 </li>
 </ul>
@@ -1049,23 +1052,23 @@
 <ul>
 <li><strong>长模式下的分页</strong>
 <ul>
-<li><strong>开启了长模式</strong>就必须开启<strong>分页模式</strong>，长模式扩宽了CPU的位宽，使得CPU能使用64位的超大内存地址空间，故长模式下的虚拟地址必须等于线性地址且为64位</li>
+<li><strong>开启了长模式</strong>就必须开启<strong>分页模式</strong>,长模式扩宽了CPU的位宽,使得CPU能使用64位的超大内存地址空间,故长模式下的虚拟地址必须等于线性地址且为64位</li>
 <li>长模式下的分页大小有4KB和2MB大小的页</li>
 </ul>
 </li>
 <li><strong>长模式下的分页——4KB页</strong>
 <ul>
-<li>该分页方式下，64位虚拟地址被分为6个位段，分别是保留位段，顶级页目录索引，页目录指针索引，页目录索引，页表索引，页内偏移，顶级页目录，页目录指针，页目录，页表各占有4KB大小，其中含有512个条目，每个条目8字节64位大小</li>
-<li>CR3是64位CPU寄存器，指向一个顶级页目录，里面的顶级页目项指向页目录指针</li>
-<li><mark>虚拟地址48到63这6位是根据第47位来决定的，47位为1，就为0，否则为0</mark>
+<li>该分页方式下,64位虚拟地址被分为6个位段,分别是保留位段,顶级页目录索引,页目录指针索引,页目录索引,页表索引,页内偏移,顶级页目录,页目录指针,页目录,页表各占有4KB大小,其中含有512个条目,每个条目8字节64位大小</li>
+<li>CR3是64位CPU寄存器,指向一个顶级页目录,里面的顶级页目项指向页目录指针</li>
+<li><mark>虚拟地址48到63这6位是根据第47位来决定的,47位为1,就为0,否则为0</mark>
 <ul>
-<li>x86CPU并没有实现全64位的地址总线，而是只实现了48位，但是CPU的寄存器却是64位的</li>
+<li>x86CPU并没有实现全64位的地址总线,而是只实现了48位,但是CPU的寄存器却是64位的</li>
 </ul>
 </li>
-<li>长模式下4KB分页下，由一个顶级目录，二级中间层目录和一层页表组成了64位地址翻译过程
+<li>长模式下4KB分页下,由一个顶级目录,二级中间层目录和一层页表组成了64位地址翻译过程
 <ul>
-<li>顶级页目录项指向页目录指针页，页目录指针项指向页目录页，页目录项指向页表页，页表项指向一个4KB大小的物理页，各级页目录项中和页表项中仍然存在各种属性位</li>
-<li>XD位，可以控制代码页面是否能够运行</li>
+<li>顶级页目录项指向页目录指针页,页目录指针项指向页目录页,页目录项指向页表页,页表项指向一个4KB大小的物理页,各级页目录项中和页表项中仍然存在各种属性位</li>
+<li>XD位,可以控制代码页面是否能够运行</li>
 </ul>
 </li>
 </ul>
@@ -1076,8 +1079,8 @@
 <ul>
 <li><strong>长模式下的分页——2MB页</strong>
 <ul>
-<li>64位虚拟地址被分为5个位段：保留位段，顶级页目录索引，页目录指针索引，页目录索引，页内偏移，顶级页目录，页目录指针</li>
-<li>2MB分页下是页目录项直接指向了2MB大小的物理页面，<strong>放弃了页表项</strong>，然后把虚拟地址的低21位作为页内偏移，21位正好索引2MB大小的地址空间</li>
+<li>64位虚拟地址被分为5个位段：保留位段,顶级页目录索引,页目录指针索引,页目录索引,页内偏移,顶级页目录,页目录指针</li>
+<li>2MB分页下是页目录项直接指向了2MB大小的物理页面,<strong>放弃了页表项</strong>,然后把虚拟地址的低21位作为页内偏移,21位正好索引2MB大小的地址空间</li>
 </ul>
 </li>
 </ul>
@@ -1087,17 +1090,17 @@
 <li><strong>开启MMU</strong>
 <ul>
 <li><mark>使CPU进入保护模式或长模式(前提)</mark></li>
-<li>准备好页表数据，这包含顶级页目录，中间层页目录，页表</li>
+<li>准备好页表数据,这包含顶级页目录,中间层页目录,页表</li>
 <li>把顶级页目录的物理内存地址赋值给CR3寄存器</li>
-<li>设置CPU的CR0的PE位为1，这样就开启了MMU</li>
+<li>设置CPU的CR0的PE位为1,这样就开启了MMU</li>
 </ul>
 </li>
 <li><strong>MMU地址转换失败执行的操作</strong>
 <ul>
 <li>MMU停止转换地址</li>
 <li>MMU把转换失败的虚拟地址写入CPU的CR2寄存器</li>
-<li>MMU触发CPU的14号中断，使CPU停止执行当前指令</li>
-<li>CPU开始执行14号中断的处理代码，代码会检查原因，处理好页表数据返回</li>
+<li>MMU触发CPU的14号中断,使CPU停止执行当前指令</li>
+<li>CPU开始执行14号中断的处理代码,代码会检查原因,处理好页表数据返回</li>
 <li>CPU中断返回继续执行MMU地址转换失败时的指令</li>
 </ul>
 </li>
@@ -1110,18 +1113,18 @@
 <ul>
 <li><strong>从经典代码看局部性原理</strong>
 <ul>
-<li><strong>程序局部性原理</strong>，CPU在大多数时间在执行相同的指令或者与此相邻的指令</li>
+<li><strong>程序局部性原理</strong>,CPU在大多数时间在执行相同的指令或者与此相邻的指令</li>
 </ul>
 </li>
 <li><strong>内存</strong>
 <ul>
-<li>内存为DRAM，即动态随机存储器
+<li>内存为DRAM,即动态随机存储器
 <ul>
-<li>内存储存颗粒芯片中的存储单元是由电容和相关原件组成的，电容存储电荷的多少代表数字信号0和1</li>
-<li>由于电容存在漏电现象，会导致电荷不同，故DRAM需要周期性刷新以保持电荷状态</li>
+<li>内存储存颗粒芯片中的存储单元是由电容和相关原件组成的,电容存储电荷的多少代表数字信号0和1</li>
+<li>由于电容存在漏电现象,会导致电荷不同,故DRAM需要周期性刷新以保持电荷状态</li>
 </ul>
 </li>
-<li>控制内存刷新和内存读写的是<strong>内存控制器</strong>，其集中在<strong>北桥芯片</strong>，现集成在CPU芯片中</li>
+<li>控制内存刷新和内存读写的是<strong>内存控制器</strong>,其集中在<strong>北桥芯片</strong>,现集成在CPU芯片中</li>
 </ul>
 </li>
 </ul>
@@ -1129,24 +1132,24 @@
 <ul>
 <li><strong>CPU到内存的性能瓶颈</strong>
 <ul>
-<li>CPU和内存条的数据吞吐量天差地别，且多核心CPU同时访问内存会导致总线争用问题，数据吞吐量会进一步下降</li>
+<li>CPU和内存条的数据吞吐量天差地别,且多核心CPU同时访问内存会导致总线争用问题,数据吞吐量会进一步下降</li>
 <li><strong>内存是决定系统整体性能的关键</strong></li>
 </ul>
 </li>
 <li><strong>Cache</strong>
 <ul>
-<li>CPU大多数时间在访问相同或者与之相邻的地址，那么立马就可以想到用一块小而快的储存器放在CPU和内存之间，可以利用程序的局部性原理来缓解CPU和内存之间的性能瓶颈,<strong>小而快的储存器就是Cache,即高速缓存</strong></li>
-<li>Cache中存放了内存中的一部分数据，CPU在访问内存时要先访问Cache，若Cache中有需要的数据就直接从Cache中取出，若没有则需要从内存中读取数据，并同时把这块数据放入Cache中；但由于程序的局部性原理，在一段时间内，CPU总能从Cache中读取到自己想要的数据</li>
-<li>Cache可目前主要集中在X86CPU内部，主要由高速的静态储存器，地址转换模块和Cache行替换模块组成
+<li>CPU大多数时间在访问相同或者与之相邻的地址,那么立马就可以想到用一块小而快的储存器放在CPU和内存之间,可以利用程序的局部性原理来缓解CPU和内存之间的性能瓶颈,<strong>小而快的储存器就是Cache,即高速缓存</strong></li>
+<li>Cache中存放了内存中的一部分数据,CPU在访问内存时要先访问Cache,若Cache中有需要的数据就直接从Cache中取出,若没有则需要从内存中读取数据,并同时把这块数据放入Cache中;但由于程序的局部性原理,在一段时间内,CPU总能从Cache中读取到自己想要的数据</li>
+<li>Cache可目前主要集中在X86CPU内部,主要由高速的静态储存器,地址转换模块和Cache行替换模块组成
 <ul>
-<li>Cache把高速静态储存器和内存分成大小相同的行(<strong>Cahce和内存交换数据的最小单位</strong>)，一行大小通常为32字节或64字节</li>
+<li>Cache把高速静态储存器和内存分成大小相同的行(<strong>Cahce和内存交换数据的最小单位</strong>),一行大小通常为32字节或64字节</li>
 </ul>
 </li>
 <li><strong>Cache的逻辑工作流程</strong>
 <ul>
-<li>CPU发出的地址由Cache的地址转换模块分为3段：组号，行号，行内偏移</li>
-<li>Cache会根据组号，行号查找高速静态储存器中对应的行</li>
-<li>若没有新行，就进入行替换逻辑，即找出一个Cache行写回内存，腾出空间，替换行有相关算法(<strong>替换算法为了让替换的代价最小化</strong>)</li>
+<li>CPU发出的地址由Cache的地址转换模块分为3段：组号,行号,行内偏移</li>
+<li>Cache会根据组号,行号查找高速静态储存器中对应的行</li>
+<li>若没有新行,就进入行替换逻辑,即找出一个Cache行写回内存,腾出空间,替换行有相关算法(<strong>替换算法为了让替换的代价最小化</strong>)</li>
 </ul>
 </li>
 </ul>
@@ -1156,7 +1159,7 @@
 <ul>
 <li><strong>Cache带来的问题,数据一致性问题</strong>
 <ul>
-<li>三级Cache，第一级Cache是指令和数据分开的,第二级Cache是独立于CPU核心的，第三级Cache是所有CPU核心共享的</li>
+<li>三级Cache,第一级Cache是指令和数据分开的,第二级Cache是独立于CPU核心的,第三级Cache是所有CPU核心共享的</li>
 <li><strong>一致性问题的三个方面</strong>
 <ul>
 <li>一个CPU核心中的指令Cache和数据Cache的一致性问题</li>
@@ -1174,22 +1177,22 @@
 <ul>
 <li>MESI协议定义了4种基本状态:M(修改),E(独占),S(共享),I(无效)
 <ul>
-<li>M修改:当前Cache的内容有效，数据已经被修改而且与内存中的数据不一致，数据只有在当前Cache里存在</li>
-<li>E独占:当前Cache中的内容有效，数据与内存中的数据一致，数据只在当前Cache里存在</li>
-<li>S共享:当前Cache中的内容有效,Cache中的数据与内存中的数据一致，数据在多个CPU核心的Cache里面存在</li>
+<li>M修改:当前Cache的内容有效,数据已经被修改而且与内存中的数据不一致,数据只有在当前Cache里存在</li>
+<li>E独占:当前Cache中的内容有效,数据与内存中的数据一致,数据只在当前Cache里存在</li>
+<li>S共享:当前Cache中的内容有效,Cache中的数据与内存中的数据一致,数据在多个CPU核心的Cache里面存在</li>
 <li>I无效:当前Cache无效</li>
 </ul>
 </li>
-<li>Cache硬件会监控所有CPU上Cache的操作，根据相应的操作使得Cache里的数据行在状态之间切换
+<li>Cache硬件会监控所有CPU上Cache的操作,根据相应的操作使得Cache里的数据行在状态之间切换
 <ul>
-<li>Cache虽提升了系统性能，但带来了很多问题，问题硬件自动完成，对软件而言透明的，但在程序设计时需要规避这些问题，否则会导致程序运行的效能大大下降</li>
+<li>Cache虽提升了系统性能,但带来了很多问题,问题硬件自动完成,对软件而言透明的,但在程序设计时需要规避这些问题,否则会导致程序运行的效能大大下降</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>开启Cache</strong>
 <ul>
-<li>x86CPU上默认是关闭Cache的，需要在初始化时将其开启</li>
+<li>x86CPU上默认是关闭Cache的,需要在初始化时将其开启</li>
 <li>需要将CR0寄存器中CD,NW位同时清0即可
 <ul>
 <li>CD=1表示Cache关闭</li>
@@ -1205,12 +1208,12 @@
 <li><strong>获取内存视图</strong>
 <ul>
 <li><strong>关键是获取哪些物理地址空间是可以读写的内存</strong>,获取内存有多大没用</li>
-<li>物理地址空间是由北桥芯片控制管理的，在x86平台上利用BIOS提供的实模式下中断服务(int指令后跟着一个常数的形式)</li>
-<li>由于PC机上电后由BIOS执行硬件初始化,中断向量表是由BIOS设置的，故执行中断自然执行BIOS服务</li>
+<li>物理地址空间是由北桥芯片控制管理的,在x86平台上利用BIOS提供的实模式下中断服务(int指令后跟着一个常数的形式)</li>
+<li>由于PC机上电后由BIOS执行硬件初始化,中断向量表是由BIOS设置的,故执行中断自然执行BIOS服务</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断服务是int 15h</span></span><br><span class="line"><span class="comment">// 但在执行int 15h之前需要对特定寄存器设置一些值</span></span><br><span class="line">_getmemmap:</span><br><span class="line">xor ebx,ebx ;ebx设为<span class="number">0</span></span><br><span class="line">mov edi,E80MAP_ADR ;edi设为存放输出结果的<span class="number">1</span>MB内的物理内存地址</span><br><span class="line">loop:</span><br><span class="line">mov eax,<span class="number">0e820</span>h ;eax必须为<span class="number">0e820</span>h</span><br><span class="line">mov ecx,<span class="number">20</span> ;输出结果数据项的大小为<span class="number">20</span>字节：<span class="number">8</span>字节内存基地址，<span class="number">8</span>字节内存长度，<span class="number">4</span>字节内存类型</span><br><span class="line">mov edx,<span class="number">0534</span>d4150h ;edx必须为<span class="number">0534</span>d4150h</span><br><span class="line"><span class="type">int</span> <span class="number">15</span>h ;执行中断</span><br><span class="line">jc error ;如果flags寄存器的C位置<span class="number">1</span>，则表示出错</span><br><span class="line">add edi,<span class="number">20</span>;更新下一次输出结果的地址</span><br><span class="line">cmp ebx,<span class="number">0</span> ;如ebx为<span class="number">0</span>，则表示循环迭代结束</span><br><span class="line">jne loop ;还有结果项，继续迭代</span><br><span class="line">ret</span><br><span class="line">error:;出错处理</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在迭代中执行中断，每次中断都输出一个20字节大小的数据项，最终形成一个该数据项的数组</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_USABLE 1 <span class="comment">//可用内存</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_RESERV 2 <span class="comment">//保留内存不可使用</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_ACPIREC 3 <span class="comment">//ACPI表相关的</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_ACPINVS 4 <span class="comment">//ACPI NVS空间</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_AREACON 5 <span class="comment">//包含坏内存</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_e820</span>&#123;</span></span><br><span class="line">  <span class="type">u64_t</span> saddr; <span class="comment">/* 内存开始地址 */</span></span><br><span class="line">  <span class="type">u64_t</span> lsize; <span class="comment">/* 内存大小 */</span></span><br><span class="line">  <span class="type">u32_t</span> type; <span class="comment">/* 内存类型 */</span></span><br><span class="line">&#125;<span class="type">e820map_t</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中断服务是int 15h</span></span><br><span class="line"><span class="comment">// 但在执行int 15h之前需要对特定寄存器设置一些值</span></span><br><span class="line">_getmemmap:</span><br><span class="line">xor ebx,ebx ;ebx设为<span class="number">0</span></span><br><span class="line">mov edi,E80MAP_ADR ;edi设为存放输出结果的<span class="number">1</span>MB内的物理内存地址</span><br><span class="line">loop:</span><br><span class="line">mov eax,<span class="number">0e820</span>h ;eax必须为<span class="number">0e820</span>h</span><br><span class="line">mov ecx,<span class="number">20</span> ;输出结果数据项的大小为<span class="number">20</span>字节：<span class="number">8</span>字节内存基地址,<span class="number">8</span>字节内存长度,<span class="number">4</span>字节内存类型</span><br><span class="line">mov edx,<span class="number">0534</span>d4150h ;edx必须为<span class="number">0534</span>d4150h</span><br><span class="line"><span class="type">int</span> <span class="number">15</span>h ;执行中断</span><br><span class="line">jc error ;如果flags寄存器的C位置<span class="number">1</span>,则表示出错</span><br><span class="line">add edi,<span class="number">20</span>;更新下一次输出结果的地址</span><br><span class="line">cmp ebx,<span class="number">0</span> ;如ebx为<span class="number">0</span>,则表示循环迭代结束</span><br><span class="line">jne loop ;还有结果项,继续迭代</span><br><span class="line">ret</span><br><span class="line">error:;出错处理</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在迭代中执行中断,每次中断都输出一个20字节大小的数据项,最终形成一个该数据项的数组</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_USABLE 1 <span class="comment">//可用内存</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_RESERV 2 <span class="comment">//保留内存不可使用</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_ACPIREC 3 <span class="comment">//ACPI表相关的</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_ACPINVS 4 <span class="comment">//ACPI NVS空间</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RAM_AREACON 5 <span class="comment">//包含坏内存</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_e820</span>&#123;</span></span><br><span class="line">  <span class="type">u64_t</span> saddr; <span class="comment">/* 内存开始地址 */</span></span><br><span class="line">  <span class="type">u64_t</span> lsize; <span class="comment">/* 内存大小 */</span></span><br><span class="line">  <span class="type">u32_t</span> type; <span class="comment">/* 内存类型 */</span></span><br><span class="line">&#125;<span class="type">e820map_t</span>;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>系统地认识了硬件模型</li>
 </ul>
@@ -1219,28 +1222,28 @@
 <h1 id="4-基本法同步原语"><a class="markdownIt-Anchor" href="#4-基本法同步原语"></a> 4 基本法:同步原语</h1>
 <h2 id="41-锁并发操作中解决数据同步的四种方法"><a class="markdownIt-Anchor" href="#41-锁并发操作中解决数据同步的四种方法"></a> 4.1 锁:并发操作中,解决数据同步的四种方法</h2>
 <ul>
-<li>几种常见的锁:原子变量，关中断，信号量，自旋锁</li>
+<li>几种常见的锁:原子变量,关中断,信号量,自旋锁</li>
 </ul>
 <h3 id="411-方法1原子操作-拿下单体变量"><a class="markdownIt-Anchor" href="#411-方法1原子操作-拿下单体变量"></a> 4.1.1 方法1:原子操作 拿下单体变量</h3>
 <ul>
-<li><strong>将a++变成原子操作</strong>，原子时不可分隔的，即a++操作不可分隔,要么不执行，要么一口气执行完</li>
-<li>编译器不能自动生成原子操作，在x86平台支持很多原子指令，只需要应用指令即可
+<li><strong>将a++变成原子操作</strong>,原子时不可分隔的,即a++操作不可分隔,要么不执行,要么一口气执行完</li>
+<li>编译器不能自动生成原子操作,在x86平台支持很多原子指令,只需要应用指令即可
 <ul>
-<li>现代C语言支持嵌入汇编代码，可以在C语言中按照特定的方式嵌入汇编代码</li>
+<li>现代C语言支持嵌入汇编代码,可以在C语言中按照特定的方式嵌入汇编代码</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个原子类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_ATOMIC</span>&#123;</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">s32_t</span> a_count; <span class="comment">//在变量前加上volatile，是为了禁止编译器优化，使其每次都从</span></span><br><span class="line">&#125;<span class="type">atomic_t</span>;</span><br><span class="line"><span class="comment">//原子读</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">s32_t</span> <span class="title function_">atomic_read</span><span class="params">(<span class="type">const</span> <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//x86平台取地址处是原子</span></span><br><span class="line"><span class="keyword">return</span> (*(<span class="keyword">volatile</span> <span class="type">u32_t</span>*)&amp;(v)-&gt;a_count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子写</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_write</span><span class="params">(<span class="type">atomic_t</span> *v, <span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//x86平台把一个值写入一个地址处也是原子的</span></span><br><span class="line">v-&gt;a_count = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加上一个整数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_add</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;addl %1,%0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count)</span><br><span class="line">: <span class="string">&quot;ir&quot;</span> (i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减去一个整数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_sub</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;subl %1,%0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count)</span><br><span class="line">: <span class="string">&quot;ir&quot;</span> (i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加1</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_inc</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;incl %0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减1</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_dec</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;decl %0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加上lock前缀的指令都是原子操作</span></span><br><span class="line"><span class="comment">// lock前缀表示锁定总线</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个原子类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_ATOMIC</span>&#123;</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">s32_t</span> a_count; <span class="comment">//在变量前加上volatile,是为了禁止编译器优化,使其每次都从</span></span><br><span class="line">&#125;<span class="type">atomic_t</span>;</span><br><span class="line"><span class="comment">//原子读</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">s32_t</span> <span class="title function_">atomic_read</span><span class="params">(<span class="type">const</span> <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//x86平台取地址处是原子</span></span><br><span class="line"><span class="keyword">return</span> (*(<span class="keyword">volatile</span> <span class="type">u32_t</span>*)&amp;(v)-&gt;a_count);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子写</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_write</span><span class="params">(<span class="type">atomic_t</span> *v, <span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//x86平台把一个值写入一个地址处也是原子的</span></span><br><span class="line">v-&gt;a_count = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加上一个整数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_add</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;addl %1,%0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count)</span><br><span class="line">: <span class="string">&quot;ir&quot;</span> (i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减去一个整数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_sub</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;subl %1,%0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count)</span><br><span class="line">: <span class="string">&quot;ir&quot;</span> (i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加1</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_inc</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;incl %0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减1</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_dec</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">__asm__ __volatile__(<span class="string">&quot;lock;&quot;</span> <span class="string">&quot;decl %0&quot;</span></span><br><span class="line">: <span class="string">&quot;+m&quot;</span> (v-&gt;a_count));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加上lock前缀的指令都是原子操作</span></span><br><span class="line"><span class="comment">// lock前缀表示锁定总线</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>GCC支持嵌入汇编代码的模板:规定了汇编代码嵌入的形式和嵌入汇编代码需要由几部分构成
 <ul>
 <li>代码模板从_<em>asm__开始,紧跟着_<em>volatile</em></em>,然后是跟着一对括号,最后以分号结束</li>
 <li>括号内的4部分
 <ul>
-<li>汇编代码部分，实际嵌入的汇编代码</li>
-<li>输出列表部分，让GCC能够处理C语言左值表达式与汇编代码的结合</li>
-<li>输入列表部分，让GCC能够处理C语言表达式,变量，常量，让它们能够输入到汇编代码中去</li>
-<li>损坏列表部分,告诉GCC汇编代码用到了哪些寄存器，以便GCC在汇编代码运算前，生成保存的代码,在生成的汇编代码运行后恢复寄存器的代码</li>
+<li>汇编代码部分,实际嵌入的汇编代码</li>
+<li>输出列表部分,让GCC能够处理C语言左值表达式与汇编代码的结合</li>
+<li>输入列表部分,让GCC能够处理C语言表达式,变量,常量,让它们能够输入到汇编代码中去</li>
+<li>损坏列表部分,告诉GCC汇编代码用到了哪些寄存器,以便GCC在汇编代码运算前,生成保存的代码,在生成的汇编代码运行后恢复寄存器的代码</li>
 </ul>
 </li>
 </ul>
@@ -1254,7 +1257,7 @@
 <ul>
 <li><strong>原子操作只适用于单体变量</strong>
 <ul>
-<li>x86CPU上关闭,开启中断有专门的指令，即cli,sti指令
+<li>x86CPU上关闭,开启中断有专门的指令,即cli,sti指令
 <ul>
 <li>主要对CPU的eflags寄存器的IF位(第9位)进行清除和设置,CPU通过该位来相应中断信号</li>
 <li>两条指令只能Ring0权限才能执行</li>
@@ -1263,63 +1266,197 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关闭中断</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">hal_cli</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(<span class="string">&quot;cli&quot;</span>: : :<span class="string">&quot;memory&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//开启中断</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">hal_sti</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(<span class="string">&quot;sti&quot;</span>: : :<span class="string">&quot;memory&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用场景</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">bar</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hal_cli,hal_sti无法嵌套使用</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据第一步……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">bar</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  foo();</span><br><span class="line">  <span class="comment">//操作数据第二步……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// bar函数在关中断的情况下调用foo函数,foo函数中先关掉中断，处理好数据然后开启中断，回到bar函数中，bar函数以为中断是关闭的，接着处理数据，以为不会被中断抢占</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改:在关闭中断函数中先保存 eflags 寄存器，然后执行 cli 指令，在开启中断函数中直接恢复之前保存的 eflags 寄存器就行了</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">u32_t</span> <span class="type">cpuflg_t</span>;</span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">hal_save_flags_cli</span><span class="params">(<span class="type">cpuflg_t</span>* flags)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;pushfl \t\n&quot;</span> <span class="comment">//把eflags寄存器压入当前栈顶</span></span><br><span class="line">    <span class="string">&quot;cli \t\n&quot;</span> <span class="comment">//关闭中断</span></span><br><span class="line">    <span class="string">&quot;popl %0 \t\n&quot;</span><span class="comment">//把当前栈顶弹出到flags为地址的内存中</span></span><br><span class="line">    : <span class="string">&quot;=m&quot;</span>(*flags)</span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;memory&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">hal_restore_flags_sti</span><span class="params">(<span class="type">cpuflg_t</span>* flags)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;pushl %0 \t\n&quot;</span><span class="comment">//把flags为地址处的值寄存器压入当前栈顶</span></span><br><span class="line">    <span class="string">&quot;popfl \t\n&quot;</span> <span class="comment">//把当前栈顶弹出到flags寄存器中</span></span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;m&quot;</span>(*flags)</span><br><span class="line">    : <span class="string">&quot;memory&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// pushfl指令把eflags寄存器压入当前栈顶，popfl把当前栈顶的数据弹出到eflags寄存器中</span></span><br><span class="line"><span class="comment">// hal_restore_flags_sti() 函数的执行,是否开启中断完全取决于上一次 eflags 寄存器中的值，并且 popfl 指令只会影响 eflags 寄存器中的 IF 位</span></span><br></pre></td></tr></table></figure>
-<h3 id="413-方法3自旋锁协调多核心cpu"><a class="markdownIt-Anchor" href="#413-方法3自旋锁协调多核心cpu"></a> 4.1.3 方法3:自旋锁，协调多核心CPU</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关闭中断</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">hal_cli</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(<span class="string">&quot;cli&quot;</span>: : :<span class="string">&quot;memory&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//开启中断</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">hal_sti</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(<span class="string">&quot;sti&quot;</span>: : :<span class="string">&quot;memory&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用场景</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">bar</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hal_cli,hal_sti无法嵌套使用</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  <span class="comment">//操作数据第一步……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">bar</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  hal_cli();</span><br><span class="line">  foo();</span><br><span class="line">  <span class="comment">//操作数据第二步……</span></span><br><span class="line">  hal_sti();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// bar函数在关中断的情况下调用foo函数,foo函数中先关掉中断,处理好数据然后开启中断,回到bar函数中,bar函数以为中断是关闭的,接着处理数据,以为不会被中断抢占</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改:在关闭中断函数中先保存 eflags 寄存器,然后执行 cli 指令,在开启中断函数中直接恢复之前保存的 eflags 寄存器就行了</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">u32_t</span> <span class="type">cpuflg_t</span>;</span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">hal_save_flags_cli</span><span class="params">(<span class="type">cpuflg_t</span>* flags)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;pushfl \t\n&quot;</span> <span class="comment">//把eflags寄存器压入当前栈顶</span></span><br><span class="line">    <span class="string">&quot;cli \t\n&quot;</span> <span class="comment">//关闭中断</span></span><br><span class="line">    <span class="string">&quot;popl %0 \t\n&quot;</span><span class="comment">//把当前栈顶弹出到flags为地址的内存中</span></span><br><span class="line">    : <span class="string">&quot;=m&quot;</span>(*flags)</span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;memory&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">hal_restore_flags_sti</span><span class="params">(<span class="type">cpuflg_t</span>* flags)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;pushl %0 \t\n&quot;</span><span class="comment">//把flags为地址处的值寄存器压入当前栈顶</span></span><br><span class="line">    <span class="string">&quot;popfl \t\n&quot;</span> <span class="comment">//把当前栈顶弹出到flags寄存器中</span></span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;m&quot;</span>(*flags)</span><br><span class="line">    : <span class="string">&quot;memory&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// pushfl指令把eflags寄存器压入当前栈顶,popfl把当前栈顶的数据弹出到eflags寄存器中</span></span><br><span class="line"><span class="comment">// hal_restore_flags_sti() 函数的执行,是否开启中断完全取决于上一次 eflags 寄存器中的值,并且 popfl 指令只会影响 eflags 寄存器中的 IF 位</span></span><br></pre></td></tr></table></figure>
+<h3 id="413-方法3自旋锁协调多核心cpu"><a class="markdownIt-Anchor" href="#413-方法3自旋锁协调多核心cpu"></a> 4.1.3 方法3:自旋锁,协调多核心CPU</h3>
 <ul>
-<li>多核心CPU系统中存在多条代码执行流，控制中断只能控制本地CPU的中断，无法控制其他CPU核心的中断</li>
+<li>多核心CPU系统中存在多条代码执行流,控制中断只能控制本地CPU的中断,无法控制其他CPU核心的中断</li>
 <li><strong>自旋锁的原理</strong>
 <ul>
-<li>首先读取锁变量，判断其值是否已经加锁</li>
-<li>如果未加锁则执行加锁，然后返回表示加锁成功</li>
-<li>如果已经加锁，就要返回第一步继续执行后续步骤，因而得名自旋锁</li>
+<li>首先读取锁变量,判断其值是否已经加锁</li>
+<li>如果未加锁则执行加锁,然后返回表示加锁成功</li>
+<li>如果已经加锁,就要返回第一步继续执行后续步骤,因而得名自旋锁</li>
 </ul>
 </li>
-<li><mark>要想正确执行，需要保证读取锁变量和判断并加锁的原子操作是原子执行的</mark>
+<li><mark>要想正确执行,需要保证读取锁变量和判断并加锁的原子操作是原子执行的</mark>
 <ul>
-<li>否则，CPU0在读取锁变量之后，CPU1读取锁变量判断未加锁执行加锁，然后CPU0也判断未加锁执行加锁，发现两个CPU都加锁成功，因此算法出错</li>
-<li><mark>需要硬件解决方案</mark>，X86CPU提供原子交换指令xchg可以让寄存器里的一个值跟内存空间中的一个值交换</li>
+<li>否则,CPU0在读取锁变量之后,CPU1读取锁变量判断未加锁执行加锁,然后CPU0也判断未加锁执行加锁,发现两个CPU都加锁成功,因此算法出错</li>
+<li><mark>需要硬件解决方案</mark>,X86CPU提供原子交换指令xchg可以让寄存器里的一个值跟内存空间中的一个值交换</li>
 </ul>
 </li>
 <li><strong>使用自旋锁时需要注意中断</strong>
 <ul>
-<li>要写的自旋锁函数必须适应这样的中断环境，也就是说，它需要在处理中断的过程中也能使用</li>
+<li>要写的自旋锁函数必须适应这样的中断环境,也就是说,它需要在处理中断的过程中也能使用</li>
 </ul>
 </li>
 </ul>
 <p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-15-16-49-37.png" alt="自旋锁原理示意图"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现自旋锁</span></span><br><span class="line"><span class="comment">//自旋锁结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">volatile</span> <span class="type">u32_t</span> lock;<span class="comment">//volatile可以防止编译器优化，保证其它代码始终从内存加载lock变</span></span><br><span class="line">&#125; <span class="type">spinlock_t</span>;</span><br><span class="line"><span class="comment">//锁初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock_init</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  lock-&gt;lock = <span class="number">0</span>;<span class="comment">//锁值初始化为0是未加锁状态</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//加锁函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__ (</span><br><span class="line">    <span class="string">&quot;1: \n&quot;</span></span><br><span class="line">    <span class="string">&quot;lock; xchg %0, %1 \n&quot;</span><span class="comment">//把值为1的寄存器和lock内存中的值进行交换</span></span><br><span class="line">    <span class="string">&quot;cmpl $0, %0 \n&quot;</span> <span class="comment">//用0和交换回来的值进行比较</span></span><br><span class="line">    <span class="string">&quot;jnz 2f \n&quot;</span> <span class="comment">//不等于0则跳转后面2标号处运行</span></span><br><span class="line">    <span class="string">&quot;jmp 3f \n&quot;</span> <span class="comment">//若等于0则跳转后面3标号处返回</span></span><br><span class="line">    <span class="string">&quot;2: \n&quot;</span></span><br><span class="line">    <span class="string">&quot;cmpl $0, %1 \n&quot;</span><span class="comment">//用0和lock内存中的值进行比较</span></span><br><span class="line">    <span class="string">&quot;jne 2b \n&quot;</span><span class="comment">//若不等于0则跳转到前面2标号处运行继续比较</span></span><br><span class="line">    <span class="string">&quot;jmp 1b \n&quot;</span><span class="comment">//若等于0则跳转到前面1标号处运行，交换并加锁</span></span><br><span class="line">    <span class="string">&quot;3: \n&quot;</span> :</span><br><span class="line">    : <span class="string">&quot;r&quot;</span>(<span class="number">1</span>), <span class="string">&quot;m&quot;</span>(*lock));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解锁函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_unlock</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;movl $0, %0\n&quot;</span><span class="comment">//解锁把lock内存中的值设为0就行</span></span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;m&quot;</span>(*lock));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现了关中断下获取自旋锁，以及恢复中断状态释放自旋锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock_disable_irq</span><span class="params">(<span class="type">spinlock_t</span> * lock,<span class="type">cpuflg_t</span>* flags</span></span><br><span class="line"><span class="params">&#123;</span></span><br><span class="line"><span class="params">  __asm__ __volatile__(</span></span><br><span class="line"><span class="params">    <span class="string">&quot;pushfq \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cli \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;popq %0 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;1: \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;lock; xchg %1, %2 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cmpl $0,%1 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jnz 2f \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jmp 3f \n&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;2: \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cmpl $0,%2 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jne 2b \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jmp 1b \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;3: \n&quot;</span></span></span><br><span class="line"><span class="params">    :<span class="string">&quot;=m&quot;</span>(*flags)</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;r&quot;</span>(<span class="number">1</span>), <span class="string">&quot;m&quot;</span>(*lock));</span></span><br><span class="line"><span class="params">&#125;</span></span><br><span class="line"><span class="params"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> x86_spin_unlock_enabled_irq(<span class="type">spinlock_t</span>* lock,<span class="type">cpuflg_t</span>* flag</span></span><br><span class="line"><span class="params">&#123;</span></span><br><span class="line"><span class="params">  __asm__ __volatile__(</span></span><br><span class="line"><span class="params">    <span class="string">&quot;movl $0, %0\n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;pushq %1 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;popfq \n\t&quot;</span></span></span><br><span class="line"><span class="params">    :</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;m&quot;</span>(*lock), <span class="string">&quot;m&quot;</span>(*flags));</span></span><br><span class="line"><span class="params">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现自旋锁</span></span><br><span class="line"><span class="comment">//自旋锁结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">volatile</span> <span class="type">u32_t</span> lock;<span class="comment">//volatile可以防止编译器优化,保证其它代码始终从内存加载lock变</span></span><br><span class="line">&#125; <span class="type">spinlock_t</span>;</span><br><span class="line"><span class="comment">//锁初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock_init</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  lock-&gt;lock = <span class="number">0</span>;<span class="comment">//锁值初始化为0是未加锁状态</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//加锁函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__ (</span><br><span class="line">    <span class="string">&quot;1: \n&quot;</span></span><br><span class="line">    <span class="string">&quot;lock; xchg %0, %1 \n&quot;</span><span class="comment">//把值为1的寄存器和lock内存中的值进行交换</span></span><br><span class="line">    <span class="string">&quot;cmpl $0, %0 \n&quot;</span> <span class="comment">//用0和交换回来的值进行比较</span></span><br><span class="line">    <span class="string">&quot;jnz 2f \n&quot;</span> <span class="comment">//不等于0则跳转后面2标号处运行</span></span><br><span class="line">    <span class="string">&quot;jmp 3f \n&quot;</span> <span class="comment">//若等于0则跳转后面3标号处返回</span></span><br><span class="line">    <span class="string">&quot;2: \n&quot;</span></span><br><span class="line">    <span class="string">&quot;cmpl $0, %1 \n&quot;</span><span class="comment">//用0和lock内存中的值进行比较</span></span><br><span class="line">    <span class="string">&quot;jne 2b \n&quot;</span><span class="comment">//若不等于0则跳转到前面2标号处运行继续比较</span></span><br><span class="line">    <span class="string">&quot;jmp 1b \n&quot;</span><span class="comment">//若等于0则跳转到前面1标号处运行,交换并加锁</span></span><br><span class="line">    <span class="string">&quot;3: \n&quot;</span> :</span><br><span class="line">    : <span class="string">&quot;r&quot;</span>(<span class="number">1</span>), <span class="string">&quot;m&quot;</span>(*lock));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解锁函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_unlock</span><span class="params">(<span class="type">spinlock_t</span> * lock)</span></span><br><span class="line">&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;movl $0, %0\n&quot;</span><span class="comment">//解锁把lock内存中的值设为0就行</span></span><br><span class="line">    :</span><br><span class="line">    : <span class="string">&quot;m&quot;</span>(*lock));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现了关中断下获取自旋锁,以及恢复中断状态释放自旋锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">x86_spin_lock_disable_irq</span><span class="params">(<span class="type">spinlock_t</span> * lock,<span class="type">cpuflg_t</span>* flags</span></span><br><span class="line"><span class="params">&#123;</span></span><br><span class="line"><span class="params">  __asm__ __volatile__(</span></span><br><span class="line"><span class="params">    <span class="string">&quot;pushfq \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cli \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;popq %0 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;1: \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;lock; xchg %1, %2 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cmpl $0,%1 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jnz 2f \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jmp 3f \n&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;2: \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cmpl $0,%2 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jne 2b \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jmp 1b \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;3: \n&quot;</span></span></span><br><span class="line"><span class="params">    :<span class="string">&quot;=m&quot;</span>(*flags)</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;r&quot;</span>(<span class="number">1</span>), <span class="string">&quot;m&quot;</span>(*lock));</span></span><br><span class="line"><span class="params">&#125;</span></span><br><span class="line"><span class="params"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> x86_spin_unlock_enabled_irq(<span class="type">spinlock_t</span>* lock,<span class="type">cpuflg_t</span>* flag</span></span><br><span class="line"><span class="params">&#123;</span></span><br><span class="line"><span class="params">  __asm__ __volatile__(</span></span><br><span class="line"><span class="params">    <span class="string">&quot;movl $0, %0\n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;pushq %1 \n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;popfq \n\t&quot;</span></span></span><br><span class="line"><span class="params">    :</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;m&quot;</span>(*lock), <span class="string">&quot;m&quot;</span>(*flags));</span></span><br><span class="line"><span class="params">&#125;</span></span><br></pre></td></tr></table></figure>
 <h3 id="414-方法4信号量-cpu时间管理大师"><a class="markdownIt-Anchor" href="#414-方法4信号量-cpu时间管理大师"></a> 4.1.4 方法4:信号量 CPU时间管理大师</h3>
 <ul>
-<li>原子操作和自旋锁不适合长时间等待的操作，因为很多资源有一定的时间性，使用自旋锁访问这种资源对CPU时间是巨大的浪费</li>
+<li>原子操作和自旋锁不适合长时间等待的操作,因为很多资源有一定的时间性,使用自旋锁访问这种资源对CPU时间是巨大的浪费</li>
 <li>使用信号量解决等待,互斥,唤醒(即重新激活等待的代码执行流)问题
 <ul>
-<li>需要一种全新的数据结构来解决这些问题，该数据结构至少需要一个变量来表示互斥，比如大于 0 则代码执行流可以继续运行，等于 0 则让代码执行流进入等待状态。还需要一个等待链，用于保存等待的代码执行流</li>
+<li>需要一种全新的数据结构来解决这些问题,该数据结构至少需要一个变量来表示互斥,比如大于 0 则代码执行流可以继续运行,等于 0 则让代码执行流进入等待状态。还需要一个等待链,用于保存等待的代码执行流</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据结构的实现代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_FLG_MUTEX 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_FLG_MULTI 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_MUTEX_ONE_LOCK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_MULTI_LOCK 0</span></span><br><span class="line"><span class="comment">//等待链数据结构，用于挂载等待代码执行流（线程）的结构，里面有用于挂载代码执行流的链表和计数器</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_KWLST</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">spinlock_t</span> wl_lock;</span><br><span class="line">  <span class="type">uint_t</span> wl_tdnr;</span><br><span class="line">  <span class="type">list_h_t</span> wl_list;</span><br><span class="line">&#125;<span class="type">kwlst_t</span>;</span><br><span class="line"><span class="comment">//信号量数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_SEM</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">spinlock_t</span> sem_lock;<span class="comment">//维护sem_t自身数据的自旋锁</span></span><br><span class="line">  <span class="type">uint_t</span> sem_flg;<span class="comment">//信号量相关的标志</span></span><br><span class="line">  <span class="type">sint_t</span> sem_count;<span class="comment">//信号量计数值</span></span><br><span class="line">  <span class="type">kwlst_t</span> sem_waitlst;<span class="comment">//用于挂载等待代码执行流（线程）结构</span></span><br><span class="line">&#125;<span class="type">sem_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意信号量在使用之前需要先进行初始化</span></span><br><span class="line"><span class="comment">// 这里假定信号量数据结构中的 sem_count 初始化为 1，sem_waitlst 等待链初始化为空</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据结构的实现代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_FLG_MUTEX 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_FLG_MULTI 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_MUTEX_ONE_LOCK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SEM_MULTI_LOCK 0</span></span><br><span class="line"><span class="comment">//等待链数据结构,用于挂载等待代码执行流（线程）的结构,里面有用于挂载代码执行流的链表和计数器</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_KWLST</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">spinlock_t</span> wl_lock;</span><br><span class="line">  <span class="type">uint_t</span> wl_tdnr;</span><br><span class="line">  <span class="type">list_h_t</span> wl_list;</span><br><span class="line">&#125;<span class="type">kwlst_t</span>;</span><br><span class="line"><span class="comment">//信号量数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">s_SEM</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">spinlock_t</span> sem_lock;<span class="comment">//维护sem_t自身数据的自旋锁</span></span><br><span class="line">  <span class="type">uint_t</span> sem_flg;<span class="comment">//信号量相关的标志</span></span><br><span class="line">  <span class="type">sint_t</span> sem_count;<span class="comment">//信号量计数值</span></span><br><span class="line">  <span class="type">kwlst_t</span> sem_waitlst;<span class="comment">//用于挂载等待代码执行流（线程）结构</span></span><br><span class="line">&#125;<span class="type">sem_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意信号量在使用之前需要先进行初始化</span></span><br><span class="line"><span class="comment">// 这里假定信号量数据结构中的 sem_count 初始化为 1,sem_waitlst 等待链初始化为空</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>使用信号量的步骤</strong>
 <ul>
 <li>第一步,获取信号量
 <ul>
 <li>首先对用于保护信号量自身的自旋锁sem_lock进行加锁</li>
-<li>对信号值sem_count执行“减1”操作，并检查其值是否小于0</li>
-<li>检查sem_count如果小于0，进程进入等待状态并将其挂入sem_waitlst中,然后调度其它进程运行;否则表示获取信号量成功,最后需要对自旋锁sem_lock进行解锁</li>
+<li>对信号值sem_count执行“减1”操作,并检查其值是否小于0</li>
+<li>检查sem_count如果小于0,进程进入等待状态并将其挂入sem_waitlst中,然后调度其它进程运行;否则表示获取信号量成功,最后需要对自旋锁sem_lock进行解锁</li>
 </ul>
 </li>
-<li>第二步，代码执行流开始执行相关操作</li>
+<li>第二步,代码执行流开始执行相关操作</li>
 <li>第三步,释放信号量
 <ul>
 <li>首先对用于保护信号量自身的自旋锁sem_lock进行加锁</li>
-<li>对信号值sem_count执行“加1”操作，并检查其值是否大于0</li>
-<li>上步中检查sem_count值如果大于0，就执行唤醒sem_waitlst中进程的操作，并且需要调度进程时就执行进程调度操作，不管sem_count是否大于0(通常会大于0)都标记信号量释放成功。最后对自旋锁sem_lock进行解锁</li>
+<li>对信号值sem_count执行“加1”操作,并检查其值是否大于0</li>
+<li>上步中检查sem_count值如果大于0,就执行唤醒sem_waitlst中进程的操作,并且需要调度进程时就执行进程调度操作,不管sem_count是否大于0(通常会大于0)都标记信号量释放成功。最后对自旋锁sem_lock进行解锁</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 信号量的两个操作,down, up</span></span><br><span class="line"><span class="comment">//获取信号量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">krlsem_down</span><span class="params">(<span class="type">sem_t</span>* sem)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">cpuflg_t</span> cpufg;</span><br><span class="line">  start_step:</span><br><span class="line">  krlspinlock_cli(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  <span class="keyword">if</span>(sem-&gt;sem_count&lt;<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//如果信号量值小于1,则让代码执行流（线程）睡眠</span></span><br><span class="line">    krlwlst_wait(&amp;sem-&gt;sem_waitlst);</span><br><span class="line">    krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">    krlschedul();<span class="comment">//切换代码执行流，下次恢复执行时依然从下一行开始执行，所以要goto开始</span></span><br><span class="line">    <span class="keyword">goto</span> start_step;</span><br><span class="line">  &#125;</span><br><span class="line">  sem-&gt;sem_count--;<span class="comment">//信号量值减1,表示成功获取信号量</span></span><br><span class="line">  krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//释放信号量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">krlsem_up</span><span class="params">(<span class="type">sem_t</span>* sem)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">cpuflg_t</span> cpufg;</span><br><span class="line">  krlspinlock_cli(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  sem-&gt;sem_count++;<span class="comment">//释放信号量</span></span><br><span class="line">  <span class="keyword">if</span>(sem-&gt;sem_count&lt;<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//如果小于1,则说数据结构出错了，挂起系统</span></span><br><span class="line">    krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">    hal_sysdie(<span class="string">&quot;sem up err&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">//唤醒该信号量上所有等待的代码执行流（线程）</span></span><br><span class="line">  krlwlst_allup(&amp;sem-&gt;sem_waitlst);</span><br><span class="line">  krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  krlsched_set_schedflgs();</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 信号量的两个操作,down, up</span></span><br><span class="line"><span class="comment">//获取信号量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">krlsem_down</span><span class="params">(<span class="type">sem_t</span>* sem)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">cpuflg_t</span> cpufg;</span><br><span class="line">  start_step:</span><br><span class="line">  krlspinlock_cli(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  <span class="keyword">if</span>(sem-&gt;sem_count&lt;<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//如果信号量值小于1,则让代码执行流（线程）睡眠</span></span><br><span class="line">    krlwlst_wait(&amp;sem-&gt;sem_waitlst);</span><br><span class="line">    krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">    krlschedul();<span class="comment">//切换代码执行流,下次恢复执行时依然从下一行开始执行,所以要goto开始</span></span><br><span class="line">    <span class="keyword">goto</span> start_step;</span><br><span class="line">  &#125;</span><br><span class="line">  sem-&gt;sem_count--;<span class="comment">//信号量值减1,表示成功获取信号量</span></span><br><span class="line">  krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//释放信号量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">krlsem_up</span><span class="params">(<span class="type">sem_t</span>* sem)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">cpuflg_t</span> cpufg;</span><br><span class="line">  krlspinlock_cli(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  sem-&gt;sem_count++;<span class="comment">//释放信号量</span></span><br><span class="line">  <span class="keyword">if</span>(sem-&gt;sem_count&lt;<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//如果小于1,则说数据结构出错了,挂起系统</span></span><br><span class="line">    krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">    hal_sysdie(<span class="string">&quot;sem up err&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">//唤醒该信号量上所有等待的代码执行流（线程）</span></span><br><span class="line">  krlwlst_allup(&amp;sem-&gt;sem_waitlst);</span><br><span class="line">  krlspinunlock_sti(&amp;sem-&gt;sem_lock,&amp;cpufg);</span><br><span class="line">  krlsched_set_schedflgs();</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="42-linux的自旋锁和信号量如何实现"><a class="markdownIt-Anchor" href="#42-linux的自旋锁和信号量如何实现"></a> 4.2 Linux的自旋锁和信号量如何实现</h2>
+<h2 id="421-linux的原子变量"><a class="markdownIt-Anchor" href="#421-linux的原子变量"></a> 4.2.1 Linux的原子变量</h2>
+<ul>
+<li>在文件描述符中,需要包含一个简单的计数器,表示有多少个应用程序打开了文件
+<ul>
+<li>在文件系统的open函数中将计数器变量加1;close函数中将计数器变量减1</li>
+<li>多个进程同时打开或关闭文件,会导致计数器变量容易出现错误</li>
+<li><strong>使用原子类型变量atomic_t</strong></li>
+</ul>
+</li>
+<li>Linux的实现采用了X86CPU的原子指令
+<ul>
+<li>LOCK_PREFIX为一个宏,根据需要展开成&quot;lock&quot;或空串
+<ul>
+<li><mark>单核心CPU是不需要lock前缀的,只要在多核心CPU下才需要加上lock前缀</mark></li>
+</ul>
+</li>
+<li>__READ_ONCE,__WRITE_ONCE两个宏,是对代码封装并利用GCC特性对代码进行检查,显现错误在编译阶段
+<ul>
+<li>volatile int* 是为了提醒编译器,是对内存地址读写,不要有优化动作,每次都必须强制写入内存或从内存读取</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原子类型变量atomic_t</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> counter;</span><br><span class="line">&#125; <span class="type">atomic_t</span>;<span class="comment">//常用的32位的原子变量类型</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_64BIT</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  s64 counter;</span><br><span class="line">&#125; <span class="type">atomic64_t</span>;<span class="comment">//64位的原子变量类型</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Linux提供的基本的接口函数</span></span><br><span class="line"><span class="comment">//原子读取变量中的值</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">int</span> <span class="title function_">arch_atomic_read</span><span class="params">(<span class="type">const</span> <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> __READ_ONCE((v)-&gt;counter);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子写入一个具体的值</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_atomic_set</span><span class="params">(<span class="type">atomic_t</span> *v, <span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">  __WRITE_ONCE(v-&gt;counter, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加上一个具体的值</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_atomic_add</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(LOCK_PREFIX <span class="string">&quot;addl %1,%0&quot;</span></span></span><br><span class="line"><span class="params">    : <span class="string">&quot;+m&quot;</span> (v-&gt;counter)</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;ir&quot;</span> (i) : <span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减去一个具体的值</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_atomic_sub</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(LOCK_PREFIX <span class="string">&quot;subl %1,%0&quot;</span></span></span><br><span class="line"><span class="params">    : <span class="string">&quot;+m&quot;</span> (v-&gt;counter)</span></span><br><span class="line"><span class="params">    : <span class="string">&quot;ir&quot;</span> (i) : <span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子加1</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_atomic_inc</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(LOCK_PREFIX <span class="string">&quot;incl %0&quot;</span></span></span><br><span class="line"><span class="params">    : <span class="string">&quot;+m&quot;</span> (v-&gt;counter) :: <span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子减1</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_atomic_dec</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(LOCK_PREFIX <span class="string">&quot;decl %0&quot;</span></span></span><br><span class="line"><span class="params">    : <span class="string">&quot;+m&quot;</span> (v-&gt;counter) :: <span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// __READ_ONCE,__WRITE_ONCE两个宏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __READ_ONCE(x) \</span></span><br><span class="line"><span class="meta">  (*(const volatile __unqual_scalar_typeof(x) *)&amp;(x))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __WRITE_ONCE(x, val) \</span></span><br><span class="line"><span class="meta">  do &#123;*(volatile typeof(x) *)&amp;(x) = (val);&#125; while (0)</span></span><br><span class="line"><span class="comment">//__unqual_scalar_typeof表示声明一个非限定的标量类型,非标量类型保持不变。即返回x</span></span><br><span class="line"><span class="comment">//如果 x 是int类型则返回“int”</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __READ_ONCE(x) \</span></span><br><span class="line"><span class="meta">  (*(const volatile int *)&amp;(x))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __WRITE_ONCE(x, val) \</span></span><br><span class="line"><span class="meta">  do &#123;*(volatile int *)&amp;(x) = (val);&#125; while (0)</span></span><br></pre></td></tr></table></figure>
+<h2 id="422-linux控制中断"><a class="markdownIt-Anchor" href="#422-linux控制中断"></a> 4.2.2 Linux控制中断</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linux控制CPU响应中断的函数</span></span><br><span class="line"><span class="comment">//实际保存eflags寄存器</span></span><br><span class="line"><span class="keyword">extern</span> __always_inline <span class="type">unsigned</span> <span class="type">long</span> <span class="title function_">native_save_fl</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> flags;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;# __raw_save_flags\n\t&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;pushf ; pop %0&quot;</span>:<span class="string">&quot;=rm&quot;</span>(flags)::<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">    <span class="keyword">return</span> flags;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实际恢复eflags寄存器</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">native_restore_fl</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> flags)</span>&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;push %0 ; popf&quot;</span>::<span class="string">&quot;g&quot;</span>(flags):<span class="string">&quot;memory&quot;</span>,<span class="string">&quot;cc&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实际关中断</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">native_irq_disable</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;cli&quot;</span>:::<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实际开启中断</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">native_irq_enable</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;sti&quot;</span>:::<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//arch层关中断</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_local_irq_disable</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  native_irq_disable();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//arch层开启中断</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_local_irq_enable</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  native_irq_enable();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//arch层保存eflags寄存器</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">unsigned</span> <span class="type">long</span> <span class="title function_">arch_local_save_flags</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> native_save_fl();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//arch层恢复eflags寄存器</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">void</span> <span class="title function_">arch_local_irq_restore</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> flags)</span>&#123;</span><br><span class="line">  native_restore_fl(flags);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实际保存eflags寄存器并关中断</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="type">unsigned</span> <span class="type">long</span> <span class="title function_">arch_local_irq_save</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> flags = arch_local_save_flags();</span><br><span class="line">  arch_local_irq_disable();</span><br><span class="line">  <span class="keyword">return</span> flags;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//raw层关闭开启中断宏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> raw_local_irq_disable() arch_local_irq_disable()</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> raw_local_irq_enable() arch_local_irq_enable()</span></span><br><span class="line"><span class="comment">//raw层保存恢复eflags寄存器宏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> raw_local_irq_save(flags) \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  typecheck(unsigned long, flags); \</span></span><br><span class="line"><span class="meta">  flags = arch_local_irq_save(); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> raw_local_irq_restore(flags) \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  typecheck(unsigned long, flags); \</span></span><br><span class="line"><span class="meta">arch_local_irq_restore(flags); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> raw_local_save_flags(flags) \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">typecheck(unsigned long, flags); \</span></span><br><span class="line"><span class="meta">flags = arch_local_save_flags(); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//通用层接口宏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> local_irq_enable() \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  raw_local_irq_enable(); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> local_irq_disable() \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  raw_local_irq_disable(); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> local_irq_save(flags) \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  raw_local_irq_save(flags); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> local_irq_restore(flags) \</span></span><br><span class="line"><span class="meta">do &#123; \</span></span><br><span class="line"><span class="meta">  raw_local_irq_restore(flags); \</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Linux通过定义的方式对一些底层函数进行包装</li>
+<li>编译Linux代码时,编译器对宏进行展开</li>
+</ul>
+<h2 id="422-linux自旋锁"><a class="markdownIt-Anchor" href="#422-linux自旋锁"></a> 4.2.2 Linux自旋锁</h2>
+<ul>
+<li>Linux需要自旋锁来对系统中的共享资源进行保护,同一时刻,获取了锁的进程才能使用共享资源</li>
+<li>自旋锁不会引起加锁进程睡眠,如果自旋锁已经被别的进程持有,加锁进程需要一直循环,查看是否该自旋锁的持有者已经释放锁</li>
+<li>Linux有多种自旋锁,重点介绍<strong>原始自旋锁</strong>和<strong>排队自旋锁</strong></li>
+<li><strong>Linux原始自旋锁</strong>
+<ul>
+<li>Linux原始自旋锁本质上用一个整数表示,值1表示锁未被占用,值0或负数表示未被占用
+<ul>
+<li>当某个CPU核心执行进程请求加锁时,若锁是未加锁状态,则加锁,然后操作共享资源,最后释放锁</li>
+<li>若锁已被加锁,则进程不会转入睡眠状态,而是循环等待该锁,一旦锁被释放,则第一个感知此信息的进程获得锁</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-18-03-05.png" alt="自旋锁原理示意图"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linux底层的自旋锁数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">  <span class="keyword">volatile</span> <span class="type">unsigned</span> <span class="type">long</span> lock;  <span class="comment">//真正的锁值变量</span></span><br><span class="line">  <span class="comment">// Linux原始自旋锁数据结构封装一个unsigned long类型变量</span></span><br><span class="line">&#125;<span class="type">spinlock_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自旋锁接口</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> spin_unlock_string \</span></span><br><span class="line"><span class="meta">  <span class="string">&quot;movb $1,%0&quot;</span> \ <span class="comment">//写入1表示解锁</span></span></span><br><span class="line">  :<span class="string">&quot;=m&quot;</span> (lock-&gt;lock) : : <span class="string">&quot;memory&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> spin_lock_string \</span></span><br><span class="line"><span class="meta">  <span class="string">&quot;\n1:\t&quot;</span> \</span></span><br><span class="line"><span class="meta">    <span class="string">&quot;lock ; decb %0\n\t&quot;</span> \ <span class="comment">//原子减1</span></span></span><br><span class="line">  <span class="string">&quot;js 2f\n&quot;</span> \ <span class="comment">//当结果小于0则跳转到标号2处,表示加锁失败</span></span><br><span class="line">    <span class="string">&quot;.section .text.lock,\&quot;ax\&quot;\n&quot;</span> \ <span class="comment">//重新定义一个代码段,这是优化技术,避免后面的代码</span></span><br><span class="line">  <span class="string">&quot;2:\t&quot;</span> \</span><br><span class="line">    <span class="string">&quot;cmpb $0,%0\n\t&quot;</span> \ <span class="comment">//和0比较</span></span><br><span class="line">    <span class="string">&quot;rep;nop\n\t&quot;</span> \ <span class="comment">//空指令</span></span><br><span class="line">    <span class="string">&quot;jle 2b\n\t&quot;</span> \ <span class="comment">//小于或等于0跳转到标号2</span></span><br><span class="line">    <span class="string">&quot;jmp 1b\n&quot;</span> \ <span class="comment">//跳转到标号1</span></span><br><span class="line">    <span class="string">&quot;.previous&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取自旋锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">spin_lock</span><span class="params">(<span class="type">spinlock_t</span>*lock)</span>&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    spin_lock_string</span><br><span class="line">    :<span class="string">&quot;=m&quot;</span>(lock-&gt;lock)::<span class="string">&quot;memory&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//释放自旋锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">spin_unlock</span><span class="params">(<span class="type">spinlock_t</span>*lock)</span>&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    spin_unlock_string</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// spin_lock_string、spin_unlock_string 两个宏,定义了获取、释放自旋锁的汇编指令</span></span><br><span class="line"><span class="comment">// spin_unlock_string 只是简单将锁值变量设置成 1,表示释放自旋锁</span></span><br><span class="line"><span class="comment">// spin_lock_string 中并没有像Cosmos一样使用xchg指令,而是使用了decb指令,这条指令也能原子地执行减1操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始锁值变量为 1 时,执行 decb 指令就变成了 0,0 就表示加锁成功</span></span><br><span class="line"><span class="comment">// 如果小于 0,则表示有其它进程已经加锁了,就会导致循环比较</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Linux排队自旋锁</strong>
+<ul>
+<li>在多个进程获取自旋锁时,必须等待,该获取次序依赖哪个CPU核心能最先访问内存,哪个CPU核心可以访问内存是由<strong>总线仲裁协议</strong>决定的</li>
+<li>为了<strong>解决排队公平性问题</strong>,开发了<strong>排队自旋锁</strong>,通过保存进程申请获得锁的先后次序,就能公平地调度进程</li>
+</ul>
+</li>
+<li>slock域被分成两部分:<strong>锁持有者</strong>和<strong>未来锁申请者</strong>
+<ul>
+<li>只有next域与owner域相等时,才表示自旋锁处于未使用的状态</li>
+<li>在排队自旋锁初始化时,slock被置为0,即next和owner被置为0,Linux进程执行申请自旋锁时,原子地将next域加0,并将原值返回作为自己的序号</li>
+<li>如果返回的序号等于申请时的owner值,说明自旋锁处于未使用的状态,则进程直接获得锁；否则,该进程循环检查owner域是否等于自己持有的序号,一旦相等,则表明锁轮到自己获取</li>
+<li>进程释放自旋锁时,原子地将owner域加1即可,下一个进程将会从循环状态中退出.进程将严格地按照申请顺序依次获取排队自旋锁</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//RAW层的自旋锁数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">raw_spinlock</span>&#123;</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> slock;<span class="comment">//真正的锁值变量</span></span><br><span class="line">&#125;<span class="type">raw_spinlock_t</span>;</span><br><span class="line"><span class="comment">//最上层的自旋锁数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">raw_spinlock</span> <span class="title">rlock</span>;</span></span><br><span class="line">&#125;<span class="type">spinlock_t</span>;</span><br><span class="line"><span class="comment">//Linux没有这样的结构,这只是为了描述方便</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">raw_spinlock</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> slock;<span class="comment">//真正的锁值变量</span></span><br><span class="line">    u16 owner;</span><br><span class="line">    u16 next;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;<span class="type">raw_spinlock_t</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> __raw_spin_lock(<span class="type">raw_spinlock_t</span>*lock)&#123;</span><br><span class="line">  <span class="type">int</span> inc = <span class="number">0x00010000</span>;</span><br><span class="line">  <span class="type">int</span> tmp;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    <span class="string">&quot;lock ; xaddl %0, %1\n&quot;</span> <span class="comment">//将inc和slock交换,然后 inc=inc+slock</span></span><br><span class="line">    <span class="comment">//相当于原子读取next和owner并对next+1</span></span><br><span class="line">    <span class="string">&quot;movzwl %w0, %2\n\t&quot;</span><span class="comment">//将inc的低16位做0扩展后送tmp tmp=(u16)inc</span></span><br><span class="line">    <span class="string">&quot;shrl $16, %0\n\t&quot;</span> <span class="comment">//将inc右移16位 inc=inc&gt;&gt;16</span></span><br><span class="line">    <span class="string">&quot;1:\t&quot;</span></span><br><span class="line">    <span class="string">&quot;cmpl %0, %2\n\t&quot;</span> <span class="comment">//比较inc和tmp,即比较next和owner</span></span><br><span class="line">    <span class="string">&quot;je 2f\n\t&quot;</span> <span class="comment">//相等则跳转到标号2处返回</span></span><br><span class="line">    <span class="string">&quot;rep ; nop\n\t&quot;</span> <span class="comment">//空指令</span></span><br><span class="line">    <span class="string">&quot;movzwl %1, %2\n\t&quot;</span> <span class="comment">//将slock的低16位做0扩展后送tmp 即tmp=owner</span></span><br><span class="line">    <span class="string">&quot;jmp 1b\n&quot;</span> <span class="comment">//跳转到标号1处继续比较</span></span><br><span class="line">    <span class="string">&quot;2:&quot;</span></span><br><span class="line">    :<span class="string">&quot;+Q&quot;</span>(inc),<span class="string">&quot;+m&quot;</span>(lock-&gt;slock),<span class="string">&quot;=r&quot;</span>(tmp)</span><br><span class="line">    ::<span class="string">&quot;memory&quot;</span>,<span class="string">&quot;cc&quot;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UNLOCK_LOCK_PREFIX LOCK_PREFIX</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> __raw_spin_unlock(<span class="type">raw_spinlock_t</span>*lock)&#123;</span><br><span class="line">  __asm__ __volatile__(</span><br><span class="line">    UNLOCK_LOCK_PREFIX<span class="string">&quot;incw %0&quot;</span><span class="comment">//将slock的低16位加1 即owner+1</span></span><br><span class="line">    :<span class="string">&quot;+m&quot;</span>(lock-&gt;slock)</span><br><span class="line">    ::<span class="string">&quot;memory&quot;</span>,<span class="string">&quot;cc&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Linux为了避免差异性,在spinlock_t结构体中包含了raw_spinlock_t,而在raw_spinlock_t结构体中并没使用next和owner字段,而是在代码中直接操作slock的高16位和低16位来实现的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当一个进程发现另一个进程已经拥有自己所请求地自旋锁时,就自愿放弃,转而做其他的工作,不循环等待浪费时间</span></span><br><span class="line"><span class="comment">// Linux提供的自旋锁接口</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> __raw_spin_trylock(<span class="type">raw_spinlock_t</span>*lock)&#123;</span><br><span class="line">  <span class="type">int</span> tmp;</span><br><span class="line">  <span class="type">int</span> new;</span><br><span class="line">  <span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(</span></span><br><span class="line"><span class="params">    <span class="string">&quot;movl %2,%0\n\t&quot;</span><span class="comment">//tmp=slock</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;movl %0,%1\n\t&quot;</span><span class="comment">//new=tmp</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;roll $16, %0\n\t&quot;</span><span class="comment">//tmp循环左移16位,即next和owner交换了</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;cmpl %0,%1\n\t&quot;</span><span class="comment">//比较tmp和new即（owner、next）？=（next、owner）</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;jne 1f\n\t&quot;</span> <span class="comment">//不等则跳转到标号1处</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;addl $0x00010000, %1\n\t&quot;</span><span class="comment">//相当于next+1</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;lock ; cmpxchgl %1,%2\n\t&quot;</span><span class="comment">//new和slock交换比较</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;1:&quot;</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;sete %b1\n\t&quot;</span> <span class="comment">//new = eflags.ZF位,ZF取决于前面的判断是否相等</span></span></span><br><span class="line"><span class="params">    <span class="string">&quot;movzbl %b1,%0\n\t&quot;</span> <span class="comment">//tmp = new</span></span></span><br><span class="line"><span class="params">    :<span class="string">&quot;=&amp;a&quot;</span>(tmp),<span class="string">&quot;=Q&quot;</span>(new),<span class="string">&quot;+m&quot;</span>(lock-&gt;slock)</span></span><br><span class="line"><span class="params">    ::<span class="string">&quot;memory&quot;</span>,<span class="string">&quot;cc&quot;</span>)</span>;</span><br><span class="line">  <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// _spin_trylock 返回1表示尝试加锁成功,可以安全的地问共享资源了</span></span><br><span class="line"><span class="comment">// 返回值为 0 则表示尝试加锁失败,不能操作共享资源,应该等一段时间,再次尝试加锁</span></span><br><span class="line"><span class="type">int</span> __lockfunc _spin_trylock(<span class="type">spinlock_t</span>*lock)&#123;</span><br><span class="line">  preempt_disable();</span><br><span class="line">  <span class="keyword">if</span>(_raw_spin_trylock(lock))&#123;</span><br><span class="line">    spin_acquire(&amp;lock-&gt;dep_map,<span class="number">0</span>,<span class="number">1</span>,_RET_IP_);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  preempt_enable();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// _cond_lock 只用代码静态检查工作</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> spin_trylock(lock) __cond_lock(lock, _spin_trylock(lock))</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Linux信号量</strong>
+<ul>
+<li>Linux信号量被用来保护共享资源,能保证资源在一个时刻只有一个进程使用,是单值信号量,也可以用来作为资源计数器,为多值信号量</li>
+<li>信号量的值为正时,所申请的进程可以锁定使用它</li>
+<li>若为0表示被其他进程占用,申请的进程要进入睡眠队列中,等待被唤醒</li>
+<li>信号量的最大优势:<mark>既可以使申请失败的进程睡眠,还可以作为资源计数器使用</mark></li>
+<li>在Linux源代码的kernel/printk.c中,使用宏DEFINE_SEMAPHORE声明了一个单值信号量console_sem,也可以说是互斥锁,用于保护console驱动列表console_drivers以及同步对整个console驱动的访问
+<ul>
+<li>其中定义了宏down_console_sem()来获得信号量console_sem</li>
+<li>定义了宏up_console_sem()来释放信号量console_sem</li>
+<li>console_lock 和 console_unlock 函数是用于互斥访问 console 驱动的,核心操作就是调用前面定义两个宏</li>
+</ul>
+</li>
+<li>代码描述了信号量的工作原理,详见代码
+<ul>
+<li>一个进程进入了__down 函数中,设置了一个不可中断的等待状态,然后执行了schedule_timeout函数。这个执行了进程的调度器,就直接调度到别的进程运行了</li>
+<li>这时,这个进程就不会返回了,直到下一次它被up函数唤醒。执行了wake_up_process函数以后,重新调度它就会回到schedule_timeout函数下一行代码,沿着调用路经返回,最后从__down函数中出来,即进程睡醒</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linux实习信号量的数据结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">semaphore</span>&#123;</span></span><br><span class="line">  <span class="type">raw_spinlock_t</span> lock;<span class="comment">//保护信号量自身的自旋锁</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> count;<span class="comment">//信号量值</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">wait_list</span>;</span><span class="comment">//挂载睡眠等待进程的链表</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Linux信号量接口函数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> down_console_sem() do &#123; \</span></span><br><span class="line"><span class="meta">  down(&amp;console_sem);\</span></span><br><span class="line"><span class="meta">&#125; while (0)</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __up_console_sem(<span class="type">unsigned</span> <span class="type">long</span> ip) &#123;</span><br><span class="line">  up(&amp;console_sem);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> up_console_sem() __up_console_sem(_RET_IP_)</span></span><br><span class="line"><span class="comment">//加锁console</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">console_lock</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  might_sleep();</span><br><span class="line">  down_console_sem();<span class="comment">//获取信号量console_sem</span></span><br><span class="line">  <span class="keyword">if</span> (console_suspended)</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">  console_locked = <span class="number">1</span>;</span><br><span class="line">  console_may_schedule = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解锁console</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">console_unlock</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">static</span> <span class="type">char</span> ext_text[CONSOLE_EXT_LOG_MAX];</span><br><span class="line">  <span class="type">static</span> <span class="type">char</span> text[LOG_LINE_MAX + PREFIX_MAX];</span><br><span class="line">  <span class="comment">//……删除了很多代码</span></span><br><span class="line">  up_console_sem();<span class="comment">//释放信号量console_sem</span></span><br><span class="line">  raw_spin_lock(&amp;logbuf_lock);</span><br><span class="line">  <span class="comment">//……删除了很多代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// down_console_sem() 和 up_console_sem() 宏的核心主要是调用了信号量的接口函数 down、up 函数,完成获取、释放信号量的核心操作</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> __sched __down_common(<span class="keyword">struct</span> semaphore *sem, <span class="type">long</span> state,<span class="type">long</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">struct</span> semaphore_waiter waiter;</span><br><span class="line"><span class="comment">//把waiter加入sem-&gt;wait_list的头部</span></span><br><span class="line">list_add_tail(&amp;waiter.<span class="built_in">list</span>, &amp;sem-&gt;wait_list);</span><br><span class="line">waiter.task = current;<span class="comment">//current表示当前进程,即调用该函数的进程</span></span><br><span class="line">waiter.up = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line"><span class="keyword">if</span> (signal_pending_state(state, current))</span><br><span class="line"><span class="keyword">goto</span> interrupted;</span><br><span class="line"><span class="keyword">if</span> (unlikely(timeout &lt;= <span class="number">0</span>))</span><br><span class="line"><span class="keyword">goto</span> timed_out;</span><br><span class="line">__set_current_state(state);<span class="comment">//设置当前进程的状态,进程睡眠,即先前__down函数中</span></span><br><span class="line">raw_spin_unlock_irq(&amp;sem-&gt;lock);<span class="comment">//释放在down函数中加的锁</span></span><br><span class="line">timeout = schedule_timeout(timeout);<span class="comment">//真正进入睡眠</span></span><br><span class="line">raw_spin_lock_irq(&amp;sem-&gt;lock);<span class="comment">//进程下次运行会回到这里,所以要加锁</span></span><br><span class="line"><span class="keyword">if</span> (waiter.up)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">timed_out:</span><br><span class="line">list_del(&amp;waiter.<span class="built_in">list</span>);</span><br><span class="line"><span class="keyword">return</span> -ETIME;</span><br><span class="line">interrupted:</span><br><span class="line">list_del(&amp;waiter.<span class="built_in">list</span>);</span><br><span class="line"><span class="keyword">return</span> -EINTR;</span><br><span class="line"><span class="comment">//为了简单起见处理进程信号（signal）和超时的逻辑代码我已经删除</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//进入睡眠等待</span></span><br><span class="line"><span class="type">static</span> noinline <span class="type">void</span> __sched __down(<span class="keyword">struct</span> semaphore *sem)</span><br><span class="line">&#123;</span><br><span class="line">__down_common(sem, TASK_UNINTERRUPTIBLE, MAX_SCHEDULE_TIMEOUT);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取信号量</span></span><br><span class="line"><span class="type">void</span> down(<span class="keyword">struct</span> semaphore *sem)</span><br><span class="line">&#123;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> flags;</span><br><span class="line"><span class="comment">//对信号量本身加锁并关中断,必须另一段代码也在操作该信号量</span></span><br><span class="line">raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);</span><br><span class="line"><span class="keyword">if</span> (likely(sem-&gt;count &gt; <span class="number">0</span>))</span><br><span class="line">sem-&gt;count--;<span class="comment">//如果信号量值大于0,则对其减1</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">__down(sem);<span class="comment">//否则让当前进程进入睡眠</span></span><br><span class="line">raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实际唤醒进程</span></span><br><span class="line"><span class="type">static</span> noinline <span class="type">void</span> __sched __up(<span class="keyword">struct</span> semaphore *sem)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">struct</span> semaphore_waiter *waiter = list_first_entry(&amp;sem-&gt;wait_list, <span class="keyword">struct</span></span><br><span class="line"><span class="comment">//获取信号量等待链表中的第一个数据结构semaphore_waiter,它里面保存着睡眠进程的指针</span></span><br><span class="line">list_del(&amp;waiter-&gt;<span class="built_in">list</span>);</span><br><span class="line">waiter-&gt;up = <span class="literal">true</span>;</span><br><span class="line">wake_up_process(waiter-&gt;task);<span class="comment">//唤醒进程重新加入调度队列</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//释放信号量</span></span><br><span class="line"><span class="type">void</span> up(<span class="keyword">struct</span> semaphore *sem)</span><br><span class="line">&#123;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> flags;</span><br><span class="line"><span class="comment">//对信号量本身加锁并关中断,必须另一段代码也在操作该信号量</span></span><br><span class="line">raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);</span><br><span class="line"><span class="keyword">if</span> (likely(list_empty(&amp;sem-&gt;wait_list)))</span><br><span class="line">sem-&gt;count++;<span class="comment">//如果信号量等待链表中为空,则对信号量值加1</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">__up(sem);<span class="comment">//否则执行唤醒进程相关的操作</span></span><br><span class="line">raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Linux读写锁</strong>
+<ul>
+<li>在操作系统中,读取共享数据时,加锁会大大浪费时间,降低进程的运行效率,<mark>可共享访问解决</mark>；在写时,加锁解锁,大量进程等待,降低系统性能</li>
+<li><strong>读写锁(共享-独占)</strong>,当读写锁用读取模式加锁时,以共享模式上锁,写入修改模式加锁时,以独占模式上锁(互斥)
+<ul>
+<li><mark>非常适用于读取数据的频率远大于修改数据的频率的场景</mark>,</li>
+<li><mark>读写锁读取时不能写入,写入时不能读取,而且读取和写入竞争锁时,写会优先得到锁</mark></li>
+</ul>
+</li>
+<li><strong>步骤</strong>
+<ol>
+<li>当共享数据没有锁的时候,读取的加锁操作和写入的加锁操作都可以满足</li>
+<li>当共享数据有读锁的时候,所有的读取加锁操作都可以满足,写入的加锁操作不能满足,读写是互斥的</li>
+<li>当共享数据有写锁的时候,所有的读取的加锁操作都不能满足,所有的写入的加锁操作也不能满足,读与写之间是互斥的,写与写之间也是互斥的</li>
+</ol>
+</li>
+<li><strong>Linux中读写锁本质上时自旋锁的变种</strong></li>
+<li><strong>Linux读写锁的原理本质上时基于计数器</strong>,初始值为0x01000000
+<ul>
+<li>获取读锁时对其减1,结果不小于0表示读锁成功,获取写锁时直接减去0x01000000
+<ul>
+<li>**减初值的原因:**只有当锁值为初始值时,减去初始值结果才可以是 0,这是唯一没有进程持有任何锁的情况,这样才能保证获取写锁时是互斥的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读写锁其实是带计数的特殊自旋锁,能同时被多个读取数据的进程占有或一个修改数据的进程占有,但不能同时被读取数据的进程和修改数据的进程占有</li>
+</ul>
+</li>
+<li>获取,释放读写锁的流程
+<ol>
+<li>获取读锁时,锁值变量 lock 计数减去 1,判断结果的符号位是否为 1。若结果符号位为0 时,获取读锁成功,即表示 lock 大于 0</li>
+<li>获取读锁时,锁值变量 lock 计数减去 1,判断结果的符号位是否为 1。若结果符号位为1 时,获取读锁失败,表示此时读写锁被修改数据的进程占有,此时调用__read_lock_failed 失败处理函数,循环测试 lock+1 的值,直到结果的值大于等于 1</li>
+<li>获取写锁时,锁值变量 lock 计数减去 RW_LOCK_BIAS_STR,即 lock-0x01000000,判断结果是否为 0。若结果为 0 时,表示获取写锁成功</li>
+<li>获取写锁时,锁值变量 lock 计数减去 RW_LOCK_BIAS_STR,即 lock-0x01000000,判断结果是否为 0。若结果不为 0 时,获取写锁失败,表示此时有读取数据的进程占有读锁或有修改数据的进程占有写锁,此时调用 __write_lock_failed 失败处理函数,循环测试lock+0x01000000,直到结果的值等于 0x01000000</li>
+</ol>
+</li>
+</ul>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-22-10-50.png" alt="读写锁的步骤"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读写锁初始化锁值</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RW_LOCK_BIAS 0x01000000</span></span><br><span class="line"><span class="comment">//读写锁的底层数据结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> lock;</span><br><span class="line">&#125;<span class="type">arch_rwlock_t</span>;</span><br><span class="line"><span class="comment">//释放读锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">arch_read_unlock</span><span class="params">(<span class="type">arch_rwlock_t</span>*rw)</span>&#123;</span><br><span class="line"><span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(</span></span><br><span class="line"><span class="params">LOCK_PREFIX<span class="string">&quot;incl %0&quot;</span> <span class="comment">//原子对lock加1</span></span></span><br><span class="line"><span class="params">:<span class="string">&quot;+m&quot;</span>(rw-&gt;lock)::<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//释放写锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">arch_write_unlock</span><span class="params">(<span class="type">arch_rwlock_t</span>*rw)</span>&#123;</span><br><span class="line"><span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(</span></span><br><span class="line"><span class="params">LOCK_PREFIX<span class="string">&quot;addl %1, %0&quot;</span><span class="comment">//原子对lock加上RW_LOCK_BIAS</span></span></span><br><span class="line"><span class="params">:<span class="string">&quot;+m&quot;</span>(rw-&gt;lock):<span class="string">&quot;i&quot;</span>(RW_LOCK_BIAS):<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取写锁失败时调用</span></span><br><span class="line">ENTRY(__write_lock_failed)</span><br><span class="line"><span class="comment">//(%eax)表示由eax指向的内存空间是调用者传进来的</span></span><br><span class="line"><span class="number">2</span>:LOCK_PREFIX addl $ RW_LOCK_BIAS,(%eax)</span><br><span class="line"><span class="number">1</span>:rep;nop<span class="comment">//空指令</span></span><br><span class="line">cmpl $RW_LOCK_BIAS,(%eax)</span><br><span class="line"><span class="comment">//不等于初始值则循环比较,相等则表示有进程释放了写锁</span></span><br><span class="line">jne <span class="number">1b</span></span><br><span class="line"><span class="comment">//执行加写锁</span></span><br><span class="line">LOCK_PREFIX subl $ RW_LOCK_BIAS,(%eax)</span><br><span class="line">jnz <span class="number">2b</span> <span class="comment">//不为0则继续测试,为0则表示加写锁成功</span></span><br><span class="line">ret <span class="comment">//返回</span></span><br><span class="line">ENDPROC(__write_lock_failed)</span><br><span class="line"><span class="comment">//获取读锁失败时调用</span></span><br><span class="line">ENTRY(__read_lock_failed)</span><br><span class="line"><span class="comment">//(%eax)表示由eax指向的内存空间是调用者传进来的</span></span><br><span class="line"><span class="number">2</span>:LOCK_PREFIX <span class="title function_">incl</span><span class="params">(%eax)</span><span class="comment">//原子加1</span></span><br><span class="line">1: rep; nop<span class="comment">//空指令</span></span><br><span class="line">cmpl $<span class="number">1</span>,(%eax) <span class="comment">//和1比较 小于0则</span></span><br><span class="line">js <span class="number">1b</span> <span class="comment">//为负则继续循环比较</span></span><br><span class="line">LOCK_PREFIX <span class="title function_">decl</span><span class="params">(%eax)</span> <span class="comment">//加读锁</span></span><br><span class="line">js 2b <span class="comment">//为负则继续加1并比较,否则返回</span></span><br><span class="line">ret <span class="comment">//返回</span></span><br><span class="line"><span class="title function_">ENDPROC</span><span class="params">(__read_lock_failed)</span></span><br><span class="line"><span class="comment">//获取读锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">arch_read_lock</span><span class="params">(<span class="type">arch_rwlock_t</span>*rw)</span>&#123;</span><br><span class="line"><span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(</span></span><br><span class="line"><span class="params">LOCK_PREFIX<span class="string">&quot; subl $1,(%0)\n\t&quot;</span><span class="comment">//原子对lock减1</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;jns 1f\n&quot;</span><span class="comment">//不为小于0则跳转标号1处,表示获取读锁成功</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;call __read_lock_failed\n\t&quot;</span><span class="comment">//调用__read_lock_failed</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;1:\n&quot;</span></span></span><br><span class="line"><span class="params">::LOCK_PTR_REG(rw):<span class="string">&quot;memory&quot;</span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取写锁</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">arch_write_lock</span><span class="params">(<span class="type">arch_rwlock_t</span>*rw)</span>&#123;</span><br><span class="line"><span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(</span></span><br><span class="line"><span class="params">LOCK_PREFIX<span class="string">&quot;subl %1,(%0)\n\t&quot;</span><span class="comment">//原子对lock减去RW_LOCK_BIAS</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;jz 1f\n&quot;</span><span class="comment">//为0则跳转标号1处</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;call __write_lock_failed\n\t&quot;</span><span class="comment">//调用__write_lock_failed</span></span></span><br><span class="line"><span class="params"><span class="string">&quot;1:\n&quot;</span></span></span><br><span class="line"><span class="params">::LOCK_PTR_REG(rw),<span class="string">&quot;i&quot;</span>(RW_LOCK_BIAS):<span class="string">&quot;memory&quot;</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/05/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/2022-05-16-22-21-49.png" alt="Linux的自旋锁与信号量"></p>
+<hr>
 
     </div>
 
@@ -1400,7 +1537,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%8Ehello%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAhello"><span class="nav-number">2.</span> <span class="nav-text"> 1 从hello到另一个hello</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%BA%E5%99%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.1 程序的运行过程:从代码到机器运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 程序编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD%E6%89%A7%E8%A1%8C"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 程序装载执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BD%A2%E8%B1%A1%E5%9C%B0%E5%B0%86helloworld%E7%A8%8B%E5%BA%8F%E8%A3%85%E5%85%A5%E5%8E%9F%E5%9E%8B%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 更形象地将HelloWorld程序装入原型计算机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8"><span class="nav-number">2.2.</span> <span class="nav-text"> 1.2 实现一个最简单的内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E6%9C%BA%E7%9A%84%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text"> PC机的引导流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E5%BC%95%E5%AF%BC%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.2.</span> <span class="nav-text"> Hello OS引导汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E7%9A%84%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text"> Hello OS的主函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B1%8F%E5%B9%95"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 控制计算机屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.5.</span> <span class="nav-text"> 编译和安装Hello OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.6.</span> <span class="nav-text"> make工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.7.</span> <span class="nav-text"> 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.8.</span> <span class="nav-text"> 安装Hello OS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text"> 2 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 内核结构与设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E4%B8%9A%E7%95%8C%E6%88%90%E7%86%9F%E7%9A%84%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 业界成熟的内核架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text"> 3 硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 执行程序的三种模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#311-%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 3.1.1 实模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#312-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 3.1.2 保护模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#313-%E9%95%BF%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 3.1.3 长模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 程序中的地址如何转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-cache%E4%B8%8E%E5%86%85%E5%AD%98%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%9C%A8%E5%93%AA%E5%84%BF"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 Cache与内存:程序放在哪儿</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%9F%BA%E6%9C%AC%E6%B3%95%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text"> 4 基本法:同步原语</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E9%94%81%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C%E4%B8%AD%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 锁:并发操作中,解决数据同步的四种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#411-%E6%96%B9%E6%B3%951%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C-%E6%8B%BF%E4%B8%8B%E5%8D%95%E4%BD%93%E5%8F%98%E9%87%8F"><span class="nav-number">5.1.1.</span> <span class="nav-text"> 4.1.1 方法1:原子操作 拿下单体变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#412-%E6%96%B9%E6%B3%952%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6-%E6%90%9E%E5%AE%9A%E5%A4%8D%E6%9D%82%E5%8F%98%E9%87%8F"><span class="nav-number">5.1.2.</span> <span class="nav-text"> 4.1.2 方法2:中断控制 搞定复杂变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#413-%E6%96%B9%E6%B3%953%E8%87%AA%E6%97%8B%E9%94%81%E5%8D%8F%E8%B0%83%E5%A4%9A%E6%A0%B8%E5%BF%83cpu"><span class="nav-number">5.1.3.</span> <span class="nav-text"> 4.1.3 方法3:自旋锁，协调多核心CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#414-%E6%96%B9%E6%B3%954%E4%BF%A1%E5%8F%B7%E9%87%8F-cpu%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86%E5%A4%A7%E5%B8%88"><span class="nav-number">5.1.4.</span> <span class="nav-text"> 4.1.4 方法4:信号量 CPU时间管理大师</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%8Ehello%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAhello"><span class="nav-number">2.</span> <span class="nav-text"> 1 从hello到另一个hello</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%BA%E5%99%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text"> 1.1 程序的运行过程:从代码到机器运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 程序编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%A3%85%E8%BD%BD%E6%89%A7%E8%A1%8C"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 程序装载执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BD%A2%E8%B1%A1%E5%9C%B0%E5%B0%86helloworld%E7%A8%8B%E5%BA%8F%E8%A3%85%E5%85%A5%E5%8E%9F%E5%9E%8B%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 更形象地将HelloWorld程序装入原型计算机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8"><span class="nav-number">2.2.</span> <span class="nav-text"> 1.2 实现一个最简单的内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E6%9C%BA%E7%9A%84%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text"> PC机的引导流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E5%BC%95%E5%AF%BC%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.2.</span> <span class="nav-text"> Hello OS引导汇编代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello-os%E7%9A%84%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text"> Hello OS的主函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B1%8F%E5%B9%95"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 控制计算机屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.5.</span> <span class="nav-text"> 编译和安装Hello OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.6.</span> <span class="nav-text"> make工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.7.</span> <span class="nav-text"> 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hello-os"><span class="nav-number">2.2.8.</span> <span class="nav-text"> 安装Hello OS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text"> 2 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text"> 2.1 内核结构与设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E4%B8%9A%E7%95%8C%E6%88%90%E7%86%9F%E7%9A%84%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text"> 2.2 业界成熟的内核架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text"> 3 硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text"> 3.1 执行程序的三种模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#311-%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 3.1.1 实模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#312-%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 3.1.2 保护模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#313-%E9%95%BF%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 3.1.3 长模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.2.</span> <span class="nav-text"> 3.2 程序中的地址如何转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-cache%E4%B8%8E%E5%86%85%E5%AD%98%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%9C%A8%E5%93%AA%E5%84%BF"><span class="nav-number">4.3.</span> <span class="nav-text"> 3.3 Cache与内存:程序放在哪儿</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%9F%BA%E6%9C%AC%E6%B3%95%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text"> 4 基本法:同步原语</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#41-%E9%94%81%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C%E4%B8%AD%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text"> 4.1 锁:并发操作中,解决数据同步的四种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#411-%E6%96%B9%E6%B3%951%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C-%E6%8B%BF%E4%B8%8B%E5%8D%95%E4%BD%93%E5%8F%98%E9%87%8F"><span class="nav-number">5.1.1.</span> <span class="nav-text"> 4.1.1 方法1:原子操作 拿下单体变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#412-%E6%96%B9%E6%B3%952%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6-%E6%90%9E%E5%AE%9A%E5%A4%8D%E6%9D%82%E5%8F%98%E9%87%8F"><span class="nav-number">5.1.2.</span> <span class="nav-text"> 4.1.2 方法2:中断控制 搞定复杂变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#413-%E6%96%B9%E6%B3%953%E8%87%AA%E6%97%8B%E9%94%81%E5%8D%8F%E8%B0%83%E5%A4%9A%E6%A0%B8%E5%BF%83cpu"><span class="nav-number">5.1.3.</span> <span class="nav-text"> 4.1.3 方法3:自旋锁,协调多核心CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#414-%E6%96%B9%E6%B3%954%E4%BF%A1%E5%8F%B7%E9%87%8F-cpu%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86%E5%A4%A7%E5%B8%88"><span class="nav-number">5.1.4.</span> <span class="nav-text"> 4.1.4 方法4:信号量 CPU时间管理大师</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-linux%E7%9A%84%E8%87%AA%E6%97%8B%E9%94%81%E5%92%8C%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.2.</span> <span class="nav-text"> 4.2 Linux的自旋锁和信号量如何实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#421-linux%E7%9A%84%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F"><span class="nav-number">5.3.</span> <span class="nav-text"> 4.2.1 Linux的原子变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#422-linux%E6%8E%A7%E5%88%B6%E4%B8%AD%E6%96%AD"><span class="nav-number">5.4.</span> <span class="nav-text"> 4.2.2 Linux控制中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#422-linux%E8%87%AA%E6%97%8B%E9%94%81"><span class="nav-number">5.5.</span> <span class="nav-text"> 4.2.2 Linux自旋锁</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
